@@ -19,7 +19,7 @@ export const favoriteMovieSlice = createSlice({
   name: "favoriteMovie",
   initialState,
   reducers: {
-    addContact: (state, { payload }) => {
+    addMovie: (state, { payload }) => {
       const isExisted = state.favMovies.find((item) => item.id === payload.id);
       if (isExisted) {
         return state;
@@ -29,11 +29,11 @@ export const favoriteMovieSlice = createSlice({
       
       Cookies.set(STORAGE_KEY, JSON.stringify(state.favMovies));
     },
-    removeContact: (state, { payload }) => {
+    removeMovie: (state, { payload }) => {
       state.favMovies = state.favMovies.filter((item) => item.id !== payload.id);
       
     },
-    clearContact: (state) => {
+    clearMovie: (state) => {
       state.favMovies = [];
       return state;
     },
@@ -46,7 +46,7 @@ export const favoriteMovieSlice = createSlice({
   },
 });
 
-export const { addContact, removeContact, clearContact ,addFavoriteContacts ,setSearchFavoriteContact } =
+export const { addMovie, removeMovie, clearMovie ,addFavoriteContacts ,setSearchFavoriteContact } =
   favoriteMovieSlice.actions;
 
 export default favoriteMovieSlice.reducer;
