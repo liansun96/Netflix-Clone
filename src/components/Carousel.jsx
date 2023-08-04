@@ -24,7 +24,7 @@ const Carousel = () => {
   return (
     <div className="group">
       <div className="flex flex-col gap-2">
-        <div className="dots mt-10 opacity-0 group-hover:opacity-100 duration-300">
+        <div className="dots mt-10 opacity-0 group-hover:opacity-100">
           {[...Array(6)].map((_, index) => (
             <span
               key={index}
@@ -36,21 +36,28 @@ const Carousel = () => {
         <div className="carousel-container">
           <div className="carousel ">
             <div
-              className="slides duration-500 flex items-center gap-5"
+              className="slides duration-500 flex items-start gap-5"
               style={{
-                transform: `translateX(-${currentSlide * 300}px)`,
+                transform: `translateX(-${currentSlide * 160}px)`,
               }}
             >
               {data?.results?.map((result, index) => (
                 <div key={result?.id} className="slide">
-                  <div className="slide-inner w-[300px]">
-                    <img
-                      src={
-                        "https://image.tmdb.org/t/p/w300" +
-                        result?.backdrop_path
-                      }
-                      alt=""
-                    />
+                  <div>
+                    <div className="group/item flex flex-col slide-inner w-[200px] hover:scale-150 hover:z-10 duration-300 hover:delay-500 rounded-lg">
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/w300" +
+                          result?.backdrop_path
+                        }
+                        alt=""
+                      />
+                      <div className="group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full p-5 bg-gray-800 h-[2px]">
+                        <h1 className="text-[10px] text-white">
+                          {result?.title}
+                        </h1>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
