@@ -1,11 +1,73 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useGetPopularQuery } from "../redux/api/movieApi";
+import "./Carousel.css";
+import {
+  MdOutlineArrowForwardIos,
+  MdOutlineArrowBackIos,
+} from "react-icons/md";
 
 const Carousel = () => {
-  return (
-    <div>
-      <h1 className='text-9xl'>Carousel</h1>
-    </div>
-  )
-}
+  const { data } = useGetPopularQuery();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-export default Carousel
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide(
+      (prevSlide) =>
+        (prevSlide - 1 + data?.results?.length) % data?.results?.length
+    );
+  };
+
+  return (
+    <div className="group">
+      <div className="flex flex-col gap-2">
+        <div className="dots mt-10 opacity-0 group-hover:opacity-100 duration-300">
+          {[...Array(6)].map((_, index) => (
+            <span
+              key={index}
+              className={`dot ${index === currentSlide % 6 ? "active" : ""}`}
+              onClick={() => setCurrentSlide(index)}
+            ></span>
+          ))}
+        </div>
+        <div className="carousel-container">
+          <div className="carousel ">
+            <div
+              className="slides duration-500 flex items-center gap-5"
+              style={{
+                transform: `translateX(-${currentSlide * 300}px)`,
+              }}
+            >
+              {data?.results?.map((result, index) => (
+                <div key={result?.id} className="slide">
+                  <div className="slide-inner w-[300px]">
+                    <img
+                      src={
+                        "https://image.tmdb.org/t/p/w300" +
+                        result?.backdrop_path
+                      }
+                      alt=""
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <MdOutlineArrowBackIos
+            className="prev-btn text-red-600 opacity-0 group-hover:opacity-100 duration-300"
+            onClick={handlePrevSlide}
+          />
+          <MdOutlineArrowForwardIos
+            className="next-btn text-red-600 opacity-0 group-hover:opacity-100 duration-300"
+            onClick={handleNextSlide}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Carousel;
