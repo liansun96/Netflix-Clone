@@ -11,7 +11,7 @@
 }
 
 .slide {
-  width: 200px;
+  width: 220px;
 }
 
 .slide-inner {
@@ -23,26 +23,6 @@
   height: auto;
 }
 
-.prev-btn,
-.next-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.prev-btn {
-  left: 0;
-}
-
-.next-btn {
-  right: 0;
-}
 
 .dots {
   display: flex;
@@ -62,4 +42,9 @@
 
 .dot.active {
   background-color: red;
+}
+
+.plus:hover .plus-children{
+    display: block;
+    transition: 5s;
 }
