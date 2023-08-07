@@ -12,7 +12,7 @@ const Test = () => {
     console.log(topRated?.results);
 
     const {data:upcoming} = useGetUpcomingQuery();
-    console.log(upcoming?.results);
+    console.log(upcoming); 
 
 
   return (
