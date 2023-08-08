@@ -12,8 +12,7 @@ export const movieApi = createApi({
       providesTags: ["movieApi"],
     }),
     getMovieGeners: builder.query({
-      query: () =>
-        "/genre/movie/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
+      query: () => "/genre/movie/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
       providesTags: ["movieApi"],
     }),
     getTv: builder.query({
@@ -33,7 +32,7 @@ export const movieApi = createApi({
     }),
     getPopular: builder.query({
       query: () =>
-        "/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
+        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1`,
       providesTags: ["movieApi"],
     }),
     getTopRated: builder.query({
@@ -44,6 +43,11 @@ export const movieApi = createApi({
     getUpcoming: builder.query({
       query: () =>
         "/movie/upcoming?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2",
+      providesTags: ["movieApi"],
+    }),
+    getMovieDetail: builder.query({
+        query: ({id}) => 
+          `/movie/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US`,
       providesTags: ["movieApi"],
     }),
   }),
@@ -57,5 +61,6 @@ export const {
   useGetNowPlayingQuery,
   useGetPopularQuery,
   useGetTopRatedQuery,
-  useGetUpcomingQuery
+  useGetUpcomingQuery,
+  useGetMovieDetailQuery,
 } = movieApi;
