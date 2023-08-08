@@ -12,9 +12,11 @@ import {
   BsInfoCircle,
 } from "react-icons/bs";
 import { HiOutlinePlus } from "react-icons/hi";
+import { useNavigate } from "react-router";
 
 const Carousel = () => {
   const [movie, setMovie] = useState([]);
+  const navigate = useNavigate();
   const { data } = useGetPopularQuery();
   const [currentSlide, setCurrentSlide] = useState(0);
   console.log(data?.results);
@@ -68,55 +70,37 @@ const Carousel = () => {
             </button>
           </div>
         </div>
-      </header>
-      <div className="group h-[200px] overflow-hidden">
-        <div className="flex flex-col gap-2">
-          <div className="dots mt-10 opacity-0 group-hover:opacity-100">
-            {[...Array(6)].map((_, index) => (
-              <span
-                key={index}
-                className={`dot ${index === currentSlide % 6 ? "active" : ""}`}
-                onClick={() => setCurrentSlide(index)}
-              ></span>
-            ))}
-          </div>
-          <div className="carousel-container">
-            <div className="carousel ">
-              <div
-                className="slides duration-500 flex items-start gap-1 px-3"
-                style={{
-                  transform: `translateX(-${currentSlide * 158}px)`,
-                }}
-              >
-                {data?.results?.map((result, index) => (
-                  <div key={result?.id} className="slide">
-                    <div>
-                      <div className="group/item flex flex-col slide-inner hover:scale-150  hover:z-10 duration-300 hover:delay-500 rounded-lg">
-                        <img
-                          className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
-                          src={
-                            "https://image.tmdb.org/t/p/w300" +
-                            result?.backdrop_path
-                          }
-                          alt=""
-                        />
-                        <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
-                          <div className="flex flex-col gap-3 items-start">
-                            <div className="flex justify-between items-center w-full">
-                              <div className="flex items-center gap-2">
-                                <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 duration-300">
-                                  <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
-                                </div>
-                                <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300 group/detail">
-                                  <HiOutlinePlus className="text-sm text-gray-200" />
-                                  <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
-                                    <p className="text-xs font-semibold">
-                                      Add to My List
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-500">
-                                  <BsHandThumbsUp className="text-sm text-gray-200" />
+        <div className="carousel-container">
+          <div className="carousel ">
+            <div
+              className="slides duration-500 flex items-start gap-5"
+              style={{
+                transform: `translateX(-${currentSlide * 172}px)`,
+              }}
+            >
+              {data?.results?.map((result, index) => (
+                <div onClick={()=>navigate(`/movie/${result?.id}`)} key={result?.id} className="slide">
+                  <div>
+                    <div className="group/item flex flex-col slide-inner hover:scale-150  hover:z-10 duration-300 hover:delay-500 rounded-lg">
+                      <img
+                        className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                        src={
+                          "https://image.tmdb.org/t/p/w300" +
+                          result?.backdrop_path
+                        }
+                        alt=""
+                      />
+                      <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full p-3 bg-gray-800 h-[0px]">
+                        <div className="flex flex-col gap-3 items-start">
+                          <div className="flex justify-between items-center w-full">
+                            <div className="flex items-center gap-2">
+                              <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 duration-300">
+                                <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
+                              </div>
+                              <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300 group/detail">
+                                <HiOutlinePlus className="text-sm text-gray-200" />
+                                <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
+                                  <p className="text-xs font-semibold">Add to My List</p>
                                 </div>
                               </div>
                               <div className="">
