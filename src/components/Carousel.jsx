@@ -46,7 +46,7 @@ const Carousel = () => {
           backgroundPosition: "center center",
         }}
       >
-        <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-5 pl-5">
+        <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-5 pl-">
           {/* <h1 className="text-white text-3xl font-semibold">
             {movie?.title || movie?.name || movie?.original_name}
           </h1> */}
