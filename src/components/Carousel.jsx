@@ -27,7 +27,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="group">
+    <div className="group w-[90%] mx-auto">
       <div className="flex flex-col gap-2">
         <div className="dots mt-10 opacity-0 group-hover:opacity-100">
           {[...Array(6)].map((_, index) => (
@@ -58,7 +58,7 @@ const Carousel = () => {
                         }
                         alt=""
                       />
-                      <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full p-3 bg-gray-800 h-[0px]">
+                      <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
                         <div className="flex flex-col gap-3 items-start">
                           <div className="flex justify-between items-center w-full">
                             <div className="flex items-center gap-2">
