@@ -6,7 +6,6 @@ import MovieDetail from "./components/MovieDetail";
 
 const App = () => {
   return (
-
     <Routes>
       <Route path="/" element={<Carousel />} />
       <Route path="/movie/:id" element={<MovieDetail />} />
