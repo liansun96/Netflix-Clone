@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-black mt-20 h-[500px]">
+    <footer className="bg-[#141414] h-full py-5">
       <div className="flex flex-col gap-3 w-[75%] mx-auto pt-10">
         <div className="flex items-center justify-start gap-5 w-full">
           <BiLogoFacebook className="text-white text-3xl cursor-pointer" />

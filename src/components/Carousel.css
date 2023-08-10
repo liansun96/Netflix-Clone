@@ -23,17 +23,13 @@
   height: auto;
 }
 
-
 .dots {
   display: flex;
-  justify-content: end;
-  margin-top: 10px;
-  margin-right: 30px;
 }
 
 .dot {
-  width: 15px;
-  height: 3px;
+  width: 10px;
+  height: 2px;
   background-color: gray;
   border-radius: 10px;
   margin: 0 1px;
@@ -41,12 +37,10 @@
 }
 
 .dot.active {
-  background-color: red;
+  background-color: white;
 }
 
-.plus:hover .plus-children{
-    display: block;
-    transition: 5s;
+.plus:hover .plus-children {
+  display: block;
+  transition: 5s;
 }
-
-
