@@ -30,12 +30,12 @@ const NavBar = () => {
               <img src={Logo} className="h-[45px]" alt="" />
             </div>
             <div className="flex items-center gap-5">
-              <p className="text-sm text-gray-300">Home</p>
-              <p className="text-sm text-gray-300">Tv Shows</p>
-              <p className="text-sm text-gray-300">Movies</p>
-              <p className="text-sm text-gray-300">Latest</p>
-              <p className="text-sm text-gray-300">My List</p>
-              <p className="text-sm text-gray-300">Browse by Languages</p>
+              <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">Home</p>
+              <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">Tv Shows</p>
+              <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">Movies</p>
+              <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">Latest</p>
+              <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">My List</p>
+              <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">Browse by Languages</p>
             </div>
           </div>
           <div className="flex items-center gap-5">
