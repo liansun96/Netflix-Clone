@@ -41,7 +41,7 @@ const Carousel = () => {
   return (
     <div className="">
       <NavBar />
-      <div className="flex flex-col gap-5 overflow-hidden">
+      <div className="overflow-hidden">
         <header
           className="h-screen w-full"
           style={{
@@ -141,15 +141,15 @@ const Carousel = () => {
                     </div>
                   ))}
                 </div>
+                <MdOutlineArrowBackIos
+                  className="absolute left-0 top-[50px] text-3xl text-red-600 opacity-0 group-hover:opacity-100 duration-300"
+                  onClick={handlePrevSlide}
+                />
+                <MdOutlineArrowForwardIos
+                  className="absolute right-0 top-[50px] text-3xl text-red-600 opacity-0 group-hover:opacity-100 duration-300"
+                  onClick={handleNextSlide}
+                />
               </div>
-              <MdOutlineArrowBackIos
-                className="absolute left-0 top-[50px] text-3xl text-red-600 opacity-0 group-hover:opacity-100 duration-300"
-                onClick={handlePrevSlide}
-              />
-              <MdOutlineArrowForwardIos
-                className="absolute right-0 top-[50px] text-3xl text-red-600 opacity-0 group-hover:opacity-100 duration-300"
-                onClick={handleNextSlide}
-              />
             </div>
           </div>
         </div>
