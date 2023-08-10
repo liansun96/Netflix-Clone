@@ -24,7 +24,7 @@ const NavBar = () => {
   return (
     <div className="fixed top-0 w-full z-30">
       <div className="">
-        <div className="flex items-center justify-between px-12 py-2 bg-[#0e0e0e]">
+        <div className="flex items-center justify-between px-10 py-2 bg-[#141414]">
           <div className="flex items-center gap-5">
             <div>
               <img src={Logo} className="h-[45px]" alt="" />
@@ -45,11 +45,11 @@ const NavBar = () => {
         </div>
         <div
           className={`${
-            scrollHeight > 100 ? "bg-[#0e0e0e]" : "bg-transparent"
-          } absolute text-white text-3xl w-full px-14 py-1 flex items-center justify-between duration-300`}
+            scrollHeight > 100 ? "bg-[#141414]" : "bg-transparent"
+          } absolute text-white text-3xl w-full pl-12 pr-10 py-2 flex items-center justify-between duration-300`}
         >
           <div className="flex items-center gap-10">
-            <h1 className="text-4xl text-gray-50 font-bold">Movies</h1>
+            <h1 className="text-3xl text-gray-50 font-bold">Movies</h1>
             <button className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1">
               Genres
               <span>
@@ -58,10 +58,10 @@ const NavBar = () => {
             </button>
           </div>
           <div className="flex items-center">
-            <div className="px-3 py-1 border">
+            <div className="px-3 py-1.5 border">
               <HiOutlineMenuAlt1 className="text-gray-300 text-sm" />
             </div>
-            <div className="px-3 py-1 border">
+            <div className="px-3 py-1.5 border">
               <RiLayoutGridFill className="text-gray-300 text-sm" />
             </div>
           </div>
