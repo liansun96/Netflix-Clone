@@ -6,7 +6,6 @@ import Header from "../components/Header";
 const Home = () => {
   return (
     <div className="">
-      <NavBar />
       <div className="overflow-hidden">
         <Header />
         <Categories />

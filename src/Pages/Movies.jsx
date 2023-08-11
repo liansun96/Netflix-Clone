@@ -20,7 +20,6 @@ const Movies = () => {
 
   return (
     <div className="">
-      <NavBar />
       <div className="overflow-hidden">
         <header
           className="h-screen w-full shadow-inner"
