@@ -1,5 +1,5 @@
 import React from "react";
-import Tv from "./image/Tv";
+import Tv from "./Tv";
 import Popular from "./Popular";
 import './Carousel.css'
 import Movie from "./Movie";

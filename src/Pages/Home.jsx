@@ -1,7 +1,7 @@
-import Footer from "./Footer";
-import NavBar from "./NavBar";
-import Categories from "./Categories";
-import Header from "./Header";
+import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
+import Categories from "../components/Categories";
+import Header from "../components/Header";
 
 const Home = () => {
   return (

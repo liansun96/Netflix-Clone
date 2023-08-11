@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useGetMovieQuery, useGetPopularQuery } from "../redux/api/movieApi";
+import { useGetMovieQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 
 const Header = () => {

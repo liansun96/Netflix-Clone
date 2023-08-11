@@ -5,7 +5,7 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetTvQuery } from "../../redux/api/movieApi";
+import { useGetTvQuery } from "../redux/api/movieApi";
 
 const Tv = () => {
   const { data } = useGetTvQuery();
