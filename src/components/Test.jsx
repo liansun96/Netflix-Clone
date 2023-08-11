@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import { useGetNowPlayingQuery, useGetPopularQuery, useGetTopRatedQuery, useGetUpcomingQuery,  } from '../redux/api/movieApi'
 
