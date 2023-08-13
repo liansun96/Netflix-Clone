@@ -19,6 +19,7 @@ const Latest = () => {
 
   return (
     <div className="">
+        
       <div className="overflow-hidden">
         <header
           className="h-screen w-full shadow-inner"
