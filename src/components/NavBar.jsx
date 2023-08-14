@@ -166,23 +166,23 @@ const NavBar = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <div className="px-3 py-1.5 border border-gray-400 hover:border-gray-50 cursor-pointer">
-              <HiOutlineMenuAlt1
-                onClick={handleSHowMenuClose}
-                className="text-gray-300 text-sm"
-              />
+            <div
+              onClick={handleSHowMenuClose}
+              className="px-3 py-1.5 border border-gray-400 hover:border-gray-50 cursor-pointer"
+            >
+              <HiOutlineMenuAlt1 className="text-gray-300 text-lg" />
             </div>
             <div
               onClick={handleShowMenuOpen}
               className="flex items-center gap-4 px-3 py-1.5 border  border-gray-400 hover:border-gray-50 cursor-pointer"
             >
-              <RiLayoutGridFill className="text-gray-300 text-sm" />
+              <RiLayoutGridFill className="text-gray-300 text-lg" />
               <div className={`${showMenu ? "block" : "hidden"}`}>
                 <div className="flex items-center gap-20">
                   <h1 className="text-xs font-semibold text-gray-50">
                     suggest for you
                   </h1>
-                  <MdArrowDropDown className="text-xs text-gray-50" />
+                  <MdArrowDropDown className="text-lg text-gray-50" />
                 </div>
               </div>
             </div>
