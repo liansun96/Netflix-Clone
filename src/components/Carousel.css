@@ -15,7 +15,7 @@
 }
 
 .slide-inner {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .slide img {
@@ -44,5 +44,4 @@
   display: block;
   transition: 5s;
 }
-
 
