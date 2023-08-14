@@ -10,9 +10,18 @@ import { NavLink } from "react-router-dom";
 const NavBar = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleShow = () => {
     setShow(!show);
+  };
+
+  const handleShowMenuOpen = () => {
+    setShowMenu(true);
+  };
+
+  const handleSHowMenuClose = () => {
+    setShowMenu(false);
   };
 
   useEffect(() => {
@@ -28,7 +37,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 w-full z-30">
+    <div className="fixed top-0 w-full z-50">
       <div className="">
         <div className="flex items-center justify-between px-10 py-2 bg-[#141414]">
           <div className="flex items-center gap-5">
@@ -157,11 +166,25 @@ const NavBar = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <div className="px-3 py-1.5 border">
-              <HiOutlineMenuAlt1 className="text-gray-300 text-sm" />
+            <div className="px-3 py-1.5 border border-gray-400 hover:border-gray-50 cursor-pointer">
+              <HiOutlineMenuAlt1
+                onClick={handleSHowMenuClose}
+                className="text-gray-300 text-sm"
+              />
             </div>
-            <div className="px-3 py-1.5 border">
+            <div
+              onClick={handleShowMenuOpen}
+              className="flex items-center gap-4 px-3 py-1.5 border  border-gray-400 hover:border-gray-50 cursor-pointer"
+            >
               <RiLayoutGridFill className="text-gray-300 text-sm" />
+              <div className={`${showMenu ? "block" : "hidden"}`}>
+                <div className="flex items-center gap-20">
+                  <h1 className="text-xs font-semibold text-gray-50">
+                    suggest for you
+                  </h1>
+                  <MdArrowDropDown className="text-xs text-gray-50" />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -6,6 +6,8 @@ import {
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { useGetPopularQuery } from "../redux/api/movieApi";
+import {RiArrowDropRightLine} from 'react-icons/ri'
+
 
 const Popular = () => {
   const { data } = useGetPopularQuery();
@@ -27,9 +29,19 @@ const Popular = () => {
     <div className="group h-[200px]">
       <div className="flex flex-col gap-2 px-3">
         <div className="flex items-end justify-between w-full">
-          <h1 className="text-xl font-semibold text-gray-50">
-            Popular on Netflix
-          </h1>
+          <div className="flex items-center gap-1  group/exp cursor-pointer">
+            <h1 className="text-xl font-semibold text-gray-50">
+              Popular on Netflix
+            </h1>
+            <div className="flex items-center mt-1.5">
+              <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
+                <p className="text-[11px] font-semibold text-blue-300">
+                  Explore All
+                </p>
+              </div>
+              <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
+            </div>
+          </div>
           <div className="dots opacity-0 group-hover:opacity-100">
             {[...Array(6)].map((_, index) => (
               <span
