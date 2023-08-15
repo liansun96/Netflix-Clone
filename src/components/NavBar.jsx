@@ -11,6 +11,11 @@ const NavBar = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showSuggest, setShowSuggest] = useState(false);
+
+  const handleShowSuggest = () => {
+    setShowSuggest(!showSuggest);
+  };
 
   const handleShow = () => {
     setShow(!show);
@@ -180,9 +185,36 @@ const NavBar = () => {
               <div className={`${showMenu ? "block" : "hidden"}`}>
                 <div className="flex items-center gap-20">
                   <h1 className="text-xs font-semibold text-gray-50">
-                    suggest for you
+                    Suggest for you
                   </h1>
-                  <MdArrowDropDown className="text-lg text-gray-50" />
+                  <div className="flex relative">
+                    <MdArrowDropDown
+                      onClick={handleShowSuggest}
+                      className="text-lg text-gray-50"
+                    />
+                    <div
+                      className={`${
+                        showSuggest ? "block" : "hidden"
+                      } w-[210px] absolute border border-gray-50 bg-black bg-opacity-80 -left-44 top-5`}
+                    >
+                      <div className="py-1 px-2">
+                        <div className="flex flex-col gap-1">
+                          <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
+                            Suggestions for you
+                          </p>
+                          <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
+                            Year Released
+                          </p>
+                          <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
+                            A-Z
+                          </p>
+                          <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
+                            Z-A
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
