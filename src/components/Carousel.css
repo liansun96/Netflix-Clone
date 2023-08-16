@@ -1,3 +1,7 @@
+.home-bg {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .carousel-container {
   display: flex;
   align-items: center;
@@ -12,10 +16,6 @@
 
 .slide {
   width: 220px;
-}
-
-.slide-inner {
-  /* overflow: hidden; */
 }
 
 .slide img {
@@ -44,4 +44,3 @@
   display: block;
   transition: 5s;
 }
-

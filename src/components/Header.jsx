@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useGetMovieQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 
@@ -14,7 +14,7 @@ const Header = () => {
   }, [data]);
   return (
     <header
-      className="h-screen w-full shadow-inner"
+      className="h-screen w-full shadow-inner hidden lg:block"
       style={{
         backgroundSize: "cover",
         backgroundImage: `url("https:/image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,

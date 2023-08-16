@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useGetPopularQuery } from "../redux/api/movieApi";
 import "./Carousel.css";
 import {
@@ -91,7 +91,7 @@ const Carousel = () => {
                     transform: `translateX(-${currentSlide * 166}px)`,
                   }}
                 >
-                  {data?.results?.map((result, index) => (
+                  {data?.results?.map((result) => (
                     <div key={result?.id} className="w-[220px]">
                       <div>
                         <div className="group/item flex flex-col slide-inner hover:scale-150 duration-300 hover:delay-500 rounded-lg">
