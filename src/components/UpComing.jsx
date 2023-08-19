@@ -62,7 +62,7 @@ const UpComing = () => {
               {data?.results?.map((result) => (
                 <div key={result?.id} className="w-[220px]">
                   <div>
-                    <div className="group/item flex flex-col slide-inner hover:scale-150 duration-300 hover:delay-500 rounded-lg">
+                    <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
                       <img
                         className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
                         src={

@@ -119,6 +119,7 @@ const Movie = () => {
                                   <div className="cursor-pointer flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300">
                                     <BsChevronDown className="text-sm text-gray-200" />
                                   </div>
+
                                 </div>
                               </div>
                               <h1 className="text-xs text-white">

@@ -1,4 +1,3 @@
-import React from "react";
 import Tv from "./Tv";
 import Popular from "./Popular";
 import './Carousel.css'
@@ -9,7 +8,7 @@ import TopRated from "./TopRated";
 
 const Categories = () => {
   return (
-    <div className="bg-[#141414] py-10">
+    <div className="bg-[#141414] pt-20 pb-10 lg:pt-10 lg:pb-10">
       <div className="w-[95%] mx-auto">
         <Movie/>
         <NowPlaying/>
