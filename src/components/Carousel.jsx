@@ -14,12 +14,23 @@ import {
 import { HiOutlinePlus } from "react-icons/hi";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
+import { useNavigate } from "react-router";
+import MovieDetail from "./MovieDetail";
+import { Link } from "react-router-dom";
 
 const Carousel = () => {
   const [movie, setMovie] = useState([]);
   const { data } = useGetPopularQuery();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => {
+    setModal(!modal);
+  };
+
   console.log(data?.results);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setMovie(
@@ -91,55 +102,62 @@ const Carousel = () => {
                     transform: `translateX(-${currentSlide * 166}px)`,
                   }}
                 >
-                  {data?.results?.map((result, index) => (
-                    <div key={result?.id} className="w-[220px]">
-                      <div>
-                        <div className="group/item flex flex-col slide-inner hover:scale-150 duration-300 hover:delay-500 rounded-lg">
-                          <img
-                            className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
-                            src={
-                              "https://image.tmdb.org/t/p/w300" +
-                              result?.backdrop_path
-                            }
-                            alt=""
-                          />
-                          <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
-                            <div className="flex flex-col gap-3 items-start">
-                              <div className="flex justify-between items-center w-full">
-                                <div className="flex items-center gap-2">
-                                  <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 duration-300">
-                                    <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
-                                  </div>
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300 group/detail">
-                                    <HiOutlinePlus className="text-sm text-gray-200" />
-                                    <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
-                                      <p className="text-xs font-semibold">
-                                        Add to My List
-                                      </p>
+                  {data?.results?.map((result, index) => {
+                    const handelDetail = () => {
+                      navigate(`/movie-detail/${result?.id}`)
+                      toggle
+                      console.log('testing');
+                    }
+                    return (
+                      <div key={result?.id} className="w-[220px]">
+                        <div>
+                          <div className="group/item flex flex-col slide-inner hover:scale-150 duration-300 hover:delay-500 rounded-lg">
+                            <img
+                              className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                              src={
+                                "https://image.tmdb.org/t/p/w300" +
+                                result?.backdrop_path
+                              }
+                              alt=""
+                            />
+                            <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                              <div className="flex flex-col gap-3 items-start">
+                                <div className="flex justify-between items-center w-full">
+                                  <div className="flex items-center gap-2">
+                                    <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 duration-300">
+                                      <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
+                                    </div>
+                                    <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300 group/detail">
+                                      <HiOutlinePlus className="text-sm text-gray-200" />
+                                      <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
+                                        <p className="text-xs font-semibold">
+                                          Add to My List
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-500">
+                                      <BsHandThumbsUp className="text-sm text-gray-200" />
                                     </div>
                                   </div>
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-500">
-                                    <BsHandThumbsUp className="text-sm text-gray-200" />
+                                  <div onClick={handelDetail} className="">
+                                    <div  className="cursor-pointer flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300">
+                                      <BsChevronDown className="text-sm text-gray-200" />
+                                    </div>
                                   </div>
                                 </div>
-                                <div className="">
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300">
-                                    <BsChevronDown className="text-sm text-gray-200" />
-                                  </div>
-                                </div>
+                                <h1 className="text-xs text-white">
+                                  {result?.title}
+                                </h1>
+                                <h1 className="text-[10px] text-green-500 font-semibold">
+                                  {result?.vote_average * 10}% Match
+                                </h1>
                               </div>
-                              <h1 className="text-xs text-white">
-                                {result?.title}
-                              </h1>
-                              <h1 className="text-[10px] text-green-500 font-semibold">
-                                {result?.vote_average * 10}% Match
-                              </h1>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 <MdOutlineArrowBackIos
                   className="absolute left-0 top-[50px] text-3xl text-red-600 opacity-0 group-hover:opacity-100 duration-300"
@@ -153,6 +171,7 @@ const Carousel = () => {
             </div>
           </div>
         </div>
+        {modal && <MovieDetail toggle={toggle} />}
 
         <Footer />
       </div>
