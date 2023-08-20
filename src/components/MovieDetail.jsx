@@ -5,7 +5,7 @@ import { useGetMovieDetailQuery } from "../redux/api/movieApi";
 const MovieDetail = () => {
 
   const { toggleModal, modal, clickedId } = useContext(ToggleContext); 
-  const { data: detail } = useGetMovieDetailQuery({clickedId});
+  const { data: detail } = useGetMovieDetailQuery(clickedId);
   console.log(clickedId);
   console.log(detail);
   
