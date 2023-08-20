@@ -4,13 +4,18 @@ import { createContext } from "react";
 export const ToggleContext = createContext();
 
 const ToggleProvider = ({ children }) => {
-
-  //DetailModal 
+  //DetailModal
   const [modal, setModal] = useState(false);
+
+  const [sBar, setSBar] = useState(false);
+
+  const toggleSideBar = () => {
+    setSBar(!sBar)
+  };
 
   const toggleModal = () => {
     setModal(!modal);
-    console.log('u toggle');
+    console.log("u toggle");
   };
 
   //
@@ -20,7 +25,15 @@ const ToggleProvider = ({ children }) => {
     setClickedId(id);
   };
 
-  const value = { modal, toggleModal, clickedId , handleGetId};
+  const value = {
+    modal,
+    toggleModal,
+    clickedId,
+    handleGetId,
+    sBar,
+    setSBar,
+    toggleSideBar,
+  };
 
   return (
     <ToggleContext.Provider value={value}>{children}</ToggleContext.Provider>
