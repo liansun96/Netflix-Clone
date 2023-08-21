@@ -19,21 +19,15 @@ const ToggleProvider = ({ children }) => {
   };
 
   //
-  const [clickedId, setClickedId] = useState(null);
+  const [id, setClickedId] = useState(null);
   const handleGetId = (id) => {
     // Set the clicked ID in the state
     setClickedId(id);
   };
 
-  const value = {
-    modal,
-    toggleModal,
-    clickedId,
-    handleGetId,
-    sBar,
-    setSBar,
-    toggleSideBar,
-  };
+
+  const value = { modal, toggleModal, id , handleGetId};
+
 
   return (
     <ToggleContext.Provider value={value}>{children}</ToggleContext.Provider>

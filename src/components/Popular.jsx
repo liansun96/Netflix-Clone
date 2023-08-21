@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import  { useContext, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import {
   MdOutlineArrowForwardIos,
@@ -7,9 +7,13 @@ import {
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { useGetPopularQuery } from "../redux/api/movieApi";
 import {RiArrowDropRightLine} from 'react-icons/ri'
+import { ToggleContext } from "../Context/ToggleProvider";
 
 
 const Popular = () => {
+
+  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
+
   const { data } = useGetPopularQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -24,6 +28,12 @@ const Popular = () => {
         (prevSlide - 1 + data?.results?.length) % data?.results?.length
     );
   };
+
+  if (modal) {
+    document.body.classList.add("overflow-y-hidden");
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+  }
 
   return (
     <div className="group h-[200px]">
@@ -60,55 +70,61 @@ const Popular = () => {
                 transform: `translateX(-${currentSlide * 166}px)`,
               }}
             >
-              {data?.results?.map((result) => (
-                <div key={result?.id} className="w-[220px]">
-                  <div>
-                    <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
-                      <img
-                        className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
-                        src={
-                          "https://image.tmdb.org/t/p/w300" +
-                          result?.backdrop_path
-                        }
-                        alt=""
-                      />
-                      <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
-                        <div className="flex flex-col gap-3 items-start">
-                          <div className="flex justify-between items-center w-full">
-                          <div className="flex items-center gap-2">
-                              <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300">
-                                <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
-                              </div>
-                              <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail">
-                                <HiOutlinePlus className="text-sm text-gray-200" />
-                                <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
-                                  <p className="text-xs font-semibold">
-                                    Add to My List
-                                  </p>
+              {data?.results?.map((result, index) => {
+                  const handelDetail = () => {                    
+                    toggleModal();
+                    handleGetId(result?.id);                    
+                  };
+                  return (
+                    <div key={result?.id} className="w-[220px]">
+                      <div>
+                        <div className="group/item flex flex-col slide-inner hover:scale-150 duration-300 hover:delay-500 rounded-lg">
+                          <img
+                            className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                            src={
+                              "https://image.tmdb.org/t/p/w300" +
+                              result?.backdrop_path
+                            }
+                            alt=""
+                          />
+                          <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                            <div className="flex flex-col gap-3 items-start">
+                              <div className="flex justify-between items-center w-full">
+                                <div className="flex items-center gap-2">
+                                  <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 duration-300">
+                                    <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
+                                  </div>
+                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300 group/detail">
+                                    <HiOutlinePlus className="text-sm text-gray-200" />
+                                    <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
+                                      <p className="text-xs font-semibold">
+                                        Add to My List
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-500">
+                                    <BsHandThumbsUp className="text-sm text-gray-200" />
+                                  </div>
+                                </div>
+                                <div onClick={handelDetail} className="">
+                                  <div className="cursor-pointer flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300">
+                                    <BsChevronDown className="text-sm text-gray-200" />
+                                  </div>
                                 </div>
                               </div>
-                              <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
-                                <BsHandThumbsUp className="text-sm text-gray-200" />
-                              </div>
-                            </div>
-                            <div className="">
-                              <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
-                                <BsChevronDown className="text-sm text-gray-200" />
-                              </div>
+                              <h1 className="text-xs text-white">
+                                {result?.title}
+                              </h1>
+                              <h1 className="text-[10px] text-green-500 font-semibold">
+                                {result?.vote_average * 10}% Match
+                              </h1>
                             </div>
                           </div>
-                          <h1 className="text-xs text-white">
-                            {result?.title}
-                          </h1>
-                          <h1 className="text-[10px] text-green-500 font-semibold">
-                            {result?.vote_average * 10}% Match
-                          </h1>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  );
+                })}
             </div>
             <MdOutlineArrowBackIos
               className="absolute -left-7 top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
