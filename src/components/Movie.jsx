@@ -5,20 +5,21 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetMovieDetailQuery, useGetMovieQuery } from "../redux/api/movieApi";
+import {
+  useGetMovieDetailQuery,
+  useGetMovieQuery,
+} from "../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { useNavigate } from "react-router";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../Context/ToggleProvider";
 
-const Movie = () => {  
-
-  // const { detailData } = useGetMovieDetailQuery({ id });
-
+const Movie = () => {
   
   const navigate = useNavigate();
-  const { clickedId, handleGetId , modal, toggleModal } = useContext(ToggleContext);
-  console.log(clickedId);
+  const { clickedId, handleGetId, modal, toggleModal } =
+    useContext(ToggleContext);
+  
 
   const { data } = useGetMovieQuery();
   console.log(data?.results);
@@ -79,7 +80,7 @@ const Movie = () => {
               >
                 {data?.results?.map((result, index) => {
                   const handelDetail = () => {
-                    // navigate(`/${result?.id}`);
+                    // navigate(`${result?.id}`);
                     toggleModal();
                     handleGetId(result?.id);
                     console.log("testing");
@@ -119,7 +120,6 @@ const Movie = () => {
                                   <div className="cursor-pointer flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300">
                                     <BsChevronDown className="text-sm text-gray-200" />
                                   </div>
-
                                 </div>
                               </div>
                               <h1 className="text-xs text-white">
@@ -148,7 +148,7 @@ const Movie = () => {
           </div>
         </div>
       </div>
-      {modal && <MovieDetail toggleModal={toggleModal} />}
+      {modal && <MovieDetail/>}
     </>
   );
 };
