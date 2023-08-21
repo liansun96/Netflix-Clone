@@ -18,7 +18,7 @@ const MovieDetail = () => {
   console.log(id);
   console.log(data);
   console.log(recData?.results);
-  console.log(video?.results);
+  // console.log(video?.results);
 
   const lastRoom = video?.results[video?.results?.length - 1]?.key;
 
@@ -30,9 +30,8 @@ const MovieDetail = () => {
 
   const opts = {
     height: "455",
-    width: "850",
+    width: "880",
     playerVars: {
-      // https:"www.youtube.com/watch?v=74Ie5QZC3Mc" ,
       autoplay: 0,
     },
   };
@@ -44,10 +43,9 @@ const MovieDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[880px] min-h-full rounded-lg bg-white relative top-[230px] p-4 "
+        className="group w-[880px] min-h-full rounded-xl overflow-hidden bg-white relative top-[200px]"
       >
-        <p>Detail ID : {id}</p>
-
+        
         <YouTube videoId={trailer} opts={opts} />
 
         <p>
@@ -98,7 +96,7 @@ const MovieDetail = () => {
         </p>
         <button
           onClick={toggleModal}
-          className="w-10 h-10 rounded-full flex justify-center items-center absolute right-3 top-3 text-center bg-black bg-opacity-50 hover:bg-opacity-70 duration-150"
+          className="w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] -top-10 group-hover:top-5 text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
         >
           <RxCross1 className="text-white font-bold scale-150" />
         </button>

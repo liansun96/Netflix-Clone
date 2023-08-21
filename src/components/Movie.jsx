@@ -10,37 +10,34 @@ import {
   useGetMovieQuery,
 } from "../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
-import { useNavigate } from "react-router";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../Context/ToggleProvider";
 
 const Movie = () => {
   
-  const navigate = useNavigate();
-  const { clickedId, handleGetId, modal, toggleModal } =
-    useContext(ToggleContext);
+  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
   
-
+  
   const { data } = useGetMovieQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
   };
-
+  
   const handlePrevSlide = () => {
     setCurrentSlide(
       (prevSlide) =>
-        (prevSlide - 1 + data?.results?.length) % data?.results?.length
-    );
-  };
-
-  if (modal) {
-    document.body.classList.add("overflow-y-hidden");
-  } else {
-    document.body.classList.remove("overflow-y-hidden");
-  }
+      (prevSlide - 1 + data?.results?.length) % data?.results?.length
+      );
+    };
+    
+    if (modal) {
+      document.body.classList.add("overflow-y-hidden");
+    } else {
+      document.body.classList.remove("overflow-y-hidden");
+    }
 
   return (
     <>
@@ -79,11 +76,9 @@ const Movie = () => {
                 }}
               >
                 {data?.results?.map((result, index) => {
-                  const handelDetail = () => {
-                    // navigate(`${result?.id}`);
+                  const handelDetail = () => {                    
                     toggleModal();
-                    handleGetId(result?.id);
-                    console.log("testing");
+                    handleGetId(result?.id);                    
                   };
                   return (
                     <div key={result?.id} className="w-[220px]">

@@ -47,7 +47,12 @@ export const movieApi = createApi({
     }),
     getMovieDetail: builder.query({
       query: ({ id }) =>
-        `/movie/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US`,
+        `/movie/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&append_to_response=credits`,
+      providesTags: ["movieApi"],
+    }),
+    getDetailVideo: builder.query({
+      query: ({ id }) =>
+        `movie/${id}/videos?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
       providesTags: ["movieApi"],
     }),
     getDetailRecommendations: builder.query({
@@ -55,9 +60,9 @@ export const movieApi = createApi({
         `movie/${id}/recommendations?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
       providesTags: ["movieApi"],
     }),
-    getDetailVideo: builder.query({
-      query: ({id}) =>
-        `movie/${id}/videos?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+    getDetailSimilar: builder.query({
+      query: ({ id }) =>
+        `movie/${id}/similar?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
       providesTags: ["movieApi"],
     }),
   }),
@@ -73,6 +78,7 @@ export const {
   useGetTopRatedQuery,
   useGetUpcomingQuery,
   useGetMovieDetailQuery,
-  useGetDetailRecommendationsQuery,
   useGetDetailVideoQuery,
+  useGetDetailRecommendationsQuery,
+  useGetDetailSimilarQuery,
 } = movieApi;
