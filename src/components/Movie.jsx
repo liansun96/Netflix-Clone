@@ -14,10 +14,13 @@ import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../Context/ToggleProvider";
 
 const Movie = () => {
+
   
   const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
   
-  
+
+
+
   const { data } = useGetMovieQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -75,15 +78,18 @@ const Movie = () => {
                   transform: `translateX(-${currentSlide * 166}px)`,
                 }}
               >
+
                 {data?.results?.map((result, index) => {
                   const handelDetail = () => {                    
+
+
                     toggleModal();
                     handleGetId(result?.id);                    
                   };
                   return (
                     <div key={result?.id} className="w-[220px]">
                       <div>
-                        <div className="group/item flex flex-col slide-inner hover:scale-150 duration-300 hover:delay-500 rounded-lg">
+                        <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
                           <img
                             className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
                             src={
@@ -96,10 +102,10 @@ const Movie = () => {
                             <div className="flex flex-col gap-3 items-start">
                               <div className="flex justify-between items-center w-full">
                                 <div className="flex items-center gap-2">
-                                  <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 duration-300">
+                                  <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300">
                                     <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
                                   </div>
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300 group/detail">
+                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail">
                                     <HiOutlinePlus className="text-sm text-gray-200" />
                                     <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
                                       <p className="text-xs font-semibold">
@@ -107,12 +113,12 @@ const Movie = () => {
                                       </p>
                                     </div>
                                   </div>
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-500">
+                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
                                     <BsHandThumbsUp className="text-sm text-gray-200" />
                                   </div>
                                 </div>
                                 <div onClick={handelDetail} className="">
-                                  <div className="cursor-pointer flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white duration-300">
+                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
                                     <BsChevronDown className="text-sm text-gray-200" />
                                   </div>
                                 </div>
