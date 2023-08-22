@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Logo from "./image/Logo.svg";
 import { BsSearch } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -7,12 +7,14 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiLayoutGridFill } from "react-icons/ri";
 import { MdArrowDropDown } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { ToggleContext } from "../Context/ToggleProvider";
 
 const NavBar = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
+  const { toggleSideBar } = useContext(ToggleContext);
 
   const handleShowSuggest = () => {
     setShowSuggest(!showSuggest);
@@ -45,10 +47,13 @@ const NavBar = () => {
   return (
     <div className="fixed top-0 w-full z-50">
       <div className="">
-        <div className="flex items-center justify-between px-3 lg:px-10 py-2 home-bg lg:bg-[#141414]">
+        <div className="flex items-start lg:items-center justify-between px-3 lg:px-10 py-2 home-bg lg:bg-[#141414]">
           <div className="flex items-center gap-1 lg:gap-5">
             <div className="block lg:hidden">
-              <IoMenu className="text-gray-50 text-4xl" />
+              <IoMenu
+                onClick={toggleSideBar}
+                className="text-gray-50 text-4xl"
+              />
             </div>
             <div>
               <img src={Logo} className="h-[45px]" alt="" />

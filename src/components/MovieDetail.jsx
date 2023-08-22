@@ -11,6 +11,7 @@ import YouTube from "react-youtube";
 const MovieDetail = () => {
   const [trailer, setTrailer] = useState([]);
 
+
   const { toggleModal, modal, id } = useContext(ToggleContext);
   const { data } = useGetMovieDetailQuery({ id });
   const { data: recData } = useGetDetailRecommendationsQuery({ id });
@@ -35,6 +36,7 @@ const MovieDetail = () => {
       autoplay: 0,
     },
   };
+
 
   return (
     <div
