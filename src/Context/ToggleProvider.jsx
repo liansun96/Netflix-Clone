@@ -13,6 +13,14 @@ const ToggleProvider = ({ children }) => {
     console.log('u toggle');
   };
 
+  //TvDetailModal 
+  const [tvModal, setTvModal] = useState(false);
+
+  const toggleTvModal = () => {
+    setTvModal(!tvModal);
+    console.log('u toggle');
+  };
+
   //
   const [id, setClickedId] = useState(null);
   const handleGetId = (id) => {
@@ -20,7 +28,7 @@ const ToggleProvider = ({ children }) => {
     setClickedId(id);
   };
 
-  const value = { modal, toggleModal, id , handleGetId};
+  const value = { modal, toggleModal, tvModal, toggleTvModal, id , handleGetId};
 
   return (
     <ToggleContext.Provider value={value}>{children}</ToggleContext.Provider>
