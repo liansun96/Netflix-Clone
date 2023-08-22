@@ -13,13 +13,10 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../Context/ToggleProvider";
 
-const Movie = () => {
+const Movie = () => {  
 
+  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);  
   
-  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
-  
-
-
 
   const { data } = useGetMovieQuery();
   console.log(data?.results);

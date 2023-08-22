@@ -1,4 +1,4 @@
-import  { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import {
   MdOutlineArrowForwardIos,
@@ -6,13 +6,12 @@ import {
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { useGetTvQuery } from "../redux/api/movieApi";
-import {RiArrowDropRightLine} from 'react-icons/ri'
+import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../Context/ToggleProvider";
-
+import TvDetail from "./TvDetail";
 
 const Tv = () => {
-  
-  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
+  const { handleGetId, tvModal, toggleTvModal } = useContext(ToggleContext);
 
   const { data } = useGetTvQuery();
   console.log(data?.results);
@@ -29,51 +28,52 @@ const Tv = () => {
     );
   };
 
-  if (modal) {
+  if (tvModal) {
     document.body.classList.add("overflow-y-hidden");
   } else {
     document.body.classList.remove("overflow-y-hidden");
   }
 
   return (
-    <div className="group h-[200px]">
-      <div className="flex flex-col gap-2 px-3">
-        <div className="flex items-end justify-between w-full">
-          <div className="flex items-center gap-1  group/exp cursor-pointer">
-            <h1 className="text-xl font-semibold text-gray-50">
-               Tv Shows
-            </h1>
-            <div className="flex items-center mt-1.5">
-              <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
-                <p className="text-[11px] font-semibold text-blue-300">
-                  Explore All
-                </p>
+    <>
+      <div className="group h-[200px]">
+        <div className="flex flex-col gap-2 px-3">
+          <div className="flex items-end justify-between w-full">
+            <div className="flex items-center gap-1  group/exp cursor-pointer">
+              <h1 className="text-xl font-semibold text-gray-50">Tv Shows</h1>
+              <div className="flex items-center mt-1.5">
+                <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
+                  <p className="text-[11px] font-semibold text-blue-300">
+                    Explore All
+                  </p>
+                </div>
+                <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
               </div>
-              <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
+            </div>
+            <div className="dots opacity-0 group-hover:opacity-100">
+              {[...Array(6)].map((_, index) => (
+                <span
+                  key={index}
+                  className={`dot ${
+                    index === currentSlide % 6 ? "active" : ""
+                  }`}
+                  onClick={() => setCurrentSlide(index)}
+                ></span>
+              ))}
             </div>
           </div>
-          <div className="dots opacity-0 group-hover:opacity-100">
-            {[...Array(6)].map((_, index) => (
-              <span
-                key={index}
-                className={`dot ${index === currentSlide % 6 ? "active" : ""}`}
-                onClick={() => setCurrentSlide(index)}
-              ></span>
-            ))}
-          </div>
-        </div>
-        <div className="carousel-container hover:z-30">
-          <div className="carousel">
-            <div
-              className="slides duration-500 flex items-start gap-1 "
-              style={{
-                transform: `translateX(-${currentSlide * 166}px)`,
-              }}
-            >
-              {data?.results?.map((result, index) => {
-                  const handelDetail = () => {                    
-                    toggleModal();
-                    handleGetId(result?.id);                    
+          <div className="carousel-container hover:z-30">
+            <div className="carousel">
+              <div
+                className="slides duration-500 flex items-start gap-1 "
+                style={{
+                  transform: `translateX(-${currentSlide * 166}px)`,
+                }}
+              >
+                {data?.results?.map((result, index) => {
+                  const handelDetail = () => {
+                    toggleTvModal();
+                    handleGetId(result?.id);
                   };
                   return (
                     <div key={result?.id} className="w-[220px]">
@@ -125,19 +125,21 @@ const Tv = () => {
                     </div>
                   );
                 })}
+              </div>
+              <MdOutlineArrowBackIos
+                className="absolute -left-7 top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
+                onClick={handlePrevSlide}
+              />
+              <MdOutlineArrowForwardIos
+                className="absolute -right-7 top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
+                onClick={handleNextSlide}
+              />
             </div>
-            <MdOutlineArrowBackIos
-              className="absolute -left-7 top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
-              onClick={handlePrevSlide}
-            />
-            <MdOutlineArrowForwardIos
-              className="absolute -right-7 top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
-              onClick={handleNextSlide}
-            />
           </div>
         </div>
       </div>
-    </div>
+      {tvModal && <TvDetail/>}
+    </>
   );
 };
 
