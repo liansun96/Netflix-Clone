@@ -6,6 +6,7 @@ import Movies from "./Pages/Movies";
 import TvShows from "./Pages/TvShows";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
+import MyList from "./Pages/MyList";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/tvshows" element={<TvShows />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/latest" element={<Latest />} />
+        <Route path="/mylist" element={<MyList />} />
         <Route path=":id" element={<MovieDetail />} />
       </Routes>
       <SideBar />
