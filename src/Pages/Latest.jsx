@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavBar from "../components/Navbar";
 import { useGetMovieQuery, useGetNowPlayingQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import NowPlaying from "../components/NowPlaying";
 import TopRated from "../components/TopRated";
+import { ToggleContext } from "../Context/ToggleProvider";
+import MovieDetail from "../components/MovieDetail";
 
 const Latest = () => {
+  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
+
   const [movie, setMovie] = useState([]);
   const { data } = useGetNowPlayingQuery();
   console.log(data?.results);
@@ -17,9 +21,13 @@ const Latest = () => {
     );
   }, [data]);
 
+  const handelDetail = () => {
+    toggleModal();
+    handleGetId(movie?.id);
+  };
+
   return (
     <div className="">
-        
       <div className="overflow-hidden">
         <header
           className="h-screen w-full shadow-inner"
@@ -40,7 +48,11 @@ const Latest = () => {
                 </span>
                 Play
               </button>
-              <button className="flex items-center gap-2 px-5 py-2 bg-gray-500 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold">
+
+              <button
+                onClick={handelDetail}
+                className="flex items-center gap-2 px-5 py-2 bg-gray-500 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold"
+              >
                 <span className="">
                   <BsInfoCircle className="text-2xl" />
                 </span>
@@ -48,6 +60,7 @@ const Latest = () => {
               </button>
             </div>
           </div>
+          {modal && <MovieDetail />}
         </header>
         <div className="bg-[#141414] py-10">
           <div className="w-[95%] mx-auto">

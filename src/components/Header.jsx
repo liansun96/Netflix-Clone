@@ -1,8 +1,12 @@
-import  { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGetMovieQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
+import { ToggleContext } from "../Context/ToggleProvider";
+import MovieDetail from "./MovieDetail";
 
 const Header = () => {
+  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
+
   const [movie, setMovie] = useState([]);
   const { data } = useGetMovieQuery();
   console.log(data?.results);
@@ -12,6 +16,12 @@ const Header = () => {
       data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
     );
   }, [data]);
+
+  const handelDetail = () => {
+    toggleModal();
+    handleGetId(movie?.id);
+  };
+
   return (
     <header
       className="h-screen w-full shadow-inner hidden lg:block"
@@ -32,7 +42,10 @@ const Header = () => {
             </span>
             Play
           </button>
-          <button className="flex items-center gap-2 px-5 py-2 bg-gray-500 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold">
+          <button
+            onClick={handelDetail}
+            className="flex items-center gap-2 px-5 py-2 bg-gray-500 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold"
+          >
             <span className="">
               <BsInfoCircle className="text-2xl" />
             </span>
@@ -40,6 +53,7 @@ const Header = () => {
           </button>
         </div>
       </div>
+      {modal && <MovieDetail/>}
     </header>
   );
 };
