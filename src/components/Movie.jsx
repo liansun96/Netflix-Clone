@@ -73,7 +73,7 @@ const Movie = () => {
           <div className="carousel-container hover:z-30">
             <div className="carousel">
               <div
-                className="slides duration-500 flex items-start gap-1 px-3"
+                className="slides duration-500 flex items-start gap-1"
                 style={{
                   transform: `translateX(-${currentSlide * 166}px)`,
                 }}
