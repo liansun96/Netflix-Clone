@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavBar from "../components/Navbar";
 import { useGetTvQuery } from "../redux/api/movieApi";
@@ -6,8 +6,12 @@ import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import Tv from "../components/Tv";
 import Popular from "../components/Popular";
 import UpComing from "../components/UpComing";
+import { ToggleContext } from "../Context/ToggleProvider";
+import TvDetail from "../components/TvDetail";
 
 const TvShows = () => {
+  const { handleGetId, tvModal, toggleTvModal } = useContext(ToggleContext);
+
   const [movie, setMovie] = useState([]);
   const { data } = useGetTvQuery();
   console.log(data?.results);
@@ -17,6 +21,11 @@ const TvShows = () => {
       data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
     );
   }, [data]);
+
+  const handelDetail = () => {
+    toggleTvModal();
+    handleGetId(movie?.id);
+  };
 
   return (
     <div className="">
@@ -40,7 +49,11 @@ const TvShows = () => {
                 </span>
                 Play
               </button>
-              <button className="flex items-center gap-2 px-5 py-2 bg-gray-500 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold">
+
+              <button
+                onClick={handelDetail}
+                className="flex items-center gap-2 px-5 py-2 bg-gray-500 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold"
+              >
                 <span className="">
                   <BsInfoCircle className="text-2xl" />
                 </span>
@@ -48,6 +61,7 @@ const TvShows = () => {
               </button>
             </div>
           </div>
+          {tvModal && <TvDetail />}
         </header>
         <div className="bg-[#141414] py-10">
           <div className="w-[95%] mx-auto">
