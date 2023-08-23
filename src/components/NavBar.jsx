@@ -8,7 +8,6 @@ import { RiLayoutGridFill } from "react-icons/ri";
 import { MdArrowDropDown } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { ToggleContext } from "../Context/ToggleProvider";
-import "./Nav.css";
 
 const NavBar = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
