@@ -65,6 +65,26 @@ export const movieApi = createApi({
         `movie/${id}/similar?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
       providesTags: ["movieApi"],
     }),
+    getTvDetail: builder.query({
+      query: ({ id }) =>
+        `/tv/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US`,
+      providesTags: ["movieApi"],
+    }),
+    getTvDetailVideo: builder.query({
+      query: ({ id }) =>
+        `tv/${id}/videos?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"],
+    }),
+    getTvDetailRecommendations: builder.query({
+      query: ({ id }) =>
+        `tv/${id}/recommendations?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"],
+    }),
+    getTvDetailSimilar: builder.query({
+      query: ({ id }) =>
+        `tv/${id}/similar?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"],
+    }),
   }),
 });
 
@@ -81,4 +101,8 @@ export const {
   useGetDetailVideoQuery,
   useGetDetailRecommendationsQuery,
   useGetDetailSimilarQuery,
+  useGetTvDetailQuery,
+  useGetTvDetailVideoQuery,
+  useGetTvDetailRecommendationsQuery,
+  useGetTvDetailSimilarQuery,
 } = movieApi;
