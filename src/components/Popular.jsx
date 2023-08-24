@@ -8,6 +8,7 @@ import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { useGetPopularQuery } from "../redux/api/movieApi";
 import {RiArrowDropRightLine} from 'react-icons/ri'
 import { ToggleContext } from "../Context/ToggleProvider";
+import MovieDetail from "./MovieDetail";
 
 
 const Popular = () => {
@@ -137,6 +138,7 @@ const Popular = () => {
           </div>
         </div>
       </div>
+      {modal && <MovieDetail/>}
     </div>
   );
 };

@@ -11,7 +11,7 @@ export const movieApi = createApi({
         "/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
       providesTags: ["movieApi"],
     }),
-    getMovieGeners: builder.query({
+    getMovieGenres: builder.query({
       query: () => "/genre/movie/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
       providesTags: ["movieApi"],
     }),
@@ -20,7 +20,7 @@ export const movieApi = createApi({
         "/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=3",
       providesTags: ["movieApi"],
     }),
-    getTvGeners: builder.query({
+    getTvGenres: builder.query({
       query: () =>
         "/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=3",
       providesTags: ["movieApi"],
@@ -67,7 +67,7 @@ export const movieApi = createApi({
     }),
     getTvDetail: builder.query({
       query: ({ id }) =>
-        `/tv/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US`,
+        `/tv/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&append_to_response=credits`,
       providesTags: ["movieApi"],
     }),
     getTvDetailVideo: builder.query({
@@ -90,9 +90,9 @@ export const movieApi = createApi({
 
 export const {
   useGetMovieQuery,
-  useGetMovieGenersQuery,
+  useGetMovieGenresQuery,
   useGetTvQuery,
-  useGetTvGenersQuery,
+  useGetTvGenresQuery,
   useGetNowPlayingQuery,
   useGetPopularQuery,
   useGetTopRatedQuery,

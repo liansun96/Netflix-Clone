@@ -1,0 +1,4 @@
+.video-bg{
+    background: linear-gradient(0deg,#181818,transparent 50%);
+    z-index: 1007;
+}
