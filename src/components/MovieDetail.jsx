@@ -21,7 +21,7 @@ const MovieDetail = () => {
   console.log(id);
   console.log(data);
   console.log(recData?.results);
-  
+
   const lastRoom = video?.results[video?.results?.length - 1]?.key;
 
   useEffect(() => {
@@ -118,9 +118,9 @@ const MovieDetail = () => {
   console.log(languageName);
 
   const scrollToRef = (ref) => {
-    ref.current.scrollIntoView({ behavior: 'smooth' });
+    ref.current.scrollIntoView({ behavior: "smooth" });
   };
-  const castRef = useRef(null);  
+  const castRef = useRef(null);
 
   return (
     <div
@@ -131,7 +131,7 @@ const MovieDetail = () => {
         onClick={(e) => e.stopPropagation()}
         className="group/item w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-10"
       >
-        <div className="video-bg">
+        <div className="video-bg group">
           <YouTube className="z-[1006]" videoId={trailer} opts={opts} />
         </div>
 
@@ -160,7 +160,12 @@ const MovieDetail = () => {
                   {name} ,{" "}
                 </p>
               ))}
-              <i onClick={() => scrollToRef(castRef)} className="font-bold cursor-pointer">more</i>
+              <i
+                onClick={() => scrollToRef(castRef)}
+                className="font-bold cursor-pointer"
+              >
+                more
+              </i>
             </div>
             <br />
             <div>
@@ -199,7 +204,6 @@ const MovieDetail = () => {
               </span>{" "}
               : {data?.status}
             </p>
-            
           </div>
         </div>
 
@@ -260,6 +264,19 @@ const MovieDetail = () => {
                 {index !== genresName.length - 1 && (
                   <span className="text-white">, </span>
                 )}
+              </>
+            ))}
+          </div>
+          <div>
+            <span className="text-sm font-semibold text-[#747474]">
+              Spoken Languages :
+            </span>{" "}
+            {languageName.map((name, index) => (
+              <>
+                <p key={index} className="inline text-sm text-white">
+                  {name}
+                </p>
+                {index !== languageName.length - 1 && <span>, </span>}
               </>
             ))}
           </div>

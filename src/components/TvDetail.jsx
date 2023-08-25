@@ -142,8 +142,18 @@ const TvDetail = () => {
               <p className="font-bold text-green-500">
                 <span>{data?.vote_average?.toFixed(1) * 10}%</span> Match
               </p>
-              <p>First Released : {data?.first_air_date}</p>
-              <p>Last Released {data?.last_air_date}</p>
+              <p>
+                <span className="text-sm font-semibold text-gray-500">
+                  First Released
+                </span>{" "}
+                : {data?.first_air_date}
+              </p>
+              <p>
+                <span className="text-sm font-semibold text-gray-500">
+                  Last Released
+                </span>{" "}
+                : {data?.last_air_date}
+              </p>
             </div>
             <br />
             <p>{data?.overview}</p>
@@ -267,6 +277,19 @@ const TvDetail = () => {
                 {index !== genresName.length - 1 && (
                   <span className="text-white">, </span>
                 )}
+              </>
+            ))}
+          </div>
+          <div>
+            <span className="text-sm font-semibold text-[#747474]">
+              Spoken Languages :
+            </span>{" "}
+            {languageName.map((name, index) => (
+              <>
+                <p key={index} className="inline text-sm text-white">
+                  {name}
+                </p>
+                {index !== languageName.length - 1 && <span>, </span>}
               </>
             ))}
           </div>
