@@ -27,6 +27,12 @@ const TvShows = () => {
     handleGetId(movie?.id);
   };
 
+  if (tvModal) {
+    document.body.classList.add("overflow-y-hidden");
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+  }
+
   return (
     <div className="">
       <div className="overflow-hidden">
@@ -60,8 +66,7 @@ const TvShows = () => {
                 More Info
               </button>
             </div>
-          </div>
-          {tvModal && <TvDetail />}
+          </div>          
         </header>
         <div className="bg-[#141414] py-10">
           <div className="w-[95%] mx-auto">
@@ -72,6 +77,7 @@ const TvShows = () => {
         </div>
         <Footer />
       </div>
+      {/* {tvModal && <TvDetail />} */}
     </div>
   );
 };
