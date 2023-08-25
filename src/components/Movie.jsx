@@ -13,31 +13,29 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../Context/ToggleProvider";
 
-const Movie = () => {  
-
-  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);  
-  
+const Movie = () => {
+  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
 
   const { data } = useGetMovieQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
   };
-  
+
   const handlePrevSlide = () => {
     setCurrentSlide(
       (prevSlide) =>
-      (prevSlide - 1 + data?.results?.length) % data?.results?.length
-      );
-    };
-    
-    if (modal) {
-      document.body.classList.add("overflow-y-hidden");
-    } else {
-      document.body.classList.remove("overflow-y-hidden");
-    }
+        (prevSlide - 1 + data?.results?.length) % data?.results?.length
+    );
+  };
+
+  if (modal) {
+    document.body.classList.add("overflow-y-hidden");
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+  }
 
   return (
     <>
@@ -75,13 +73,10 @@ const Movie = () => {
                   transform: `translateX(-${currentSlide * 166}px)`,
                 }}
               >
-
                 {data?.results?.map((result, index) => {
-                  const handelDetail = () => {                    
-
-
+                  const handelDetail = () => {
                     toggleModal();
-                    handleGetId(result?.id);                    
+                    handleGetId(result?.id);
                   };
                   return (
                     <div key={result?.id} className="w-[220px]">
@@ -146,7 +141,7 @@ const Movie = () => {
           </div>
         </div>
       </div>
-      {modal && <MovieDetail/>}
+      {modal && <MovieDetail />}
     </>
   );
 };

@@ -48,7 +48,7 @@ const MovieDetail = () => {
         className="group w-[880px] min-h-full rounded-xl overflow-hidden bg-white relative top-[200px]"
       >
         
-        <YouTube videoId={trailer} opts={opts} />
+        <YouTube videoId={trailer} opts={opts}/>
 
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
