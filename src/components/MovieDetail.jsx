@@ -131,10 +131,6 @@ const MovieDetail = () => {
         onClick={(e) => e.stopPropagation()}
         className="group/item w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-10"
       >
-<<<<<<< HEAD
-        
-        <YouTube videoId={trailer} opts={opts}/>
-=======
         <div className="video-bg group">
           <YouTube className="z-[1006]" videoId={trailer} opts={opts} />
         </div>
@@ -329,7 +325,6 @@ const MovieDetail = () => {
             ))}
           </div>
         </div>
->>>>>>> 8b9969d479580e75cfa19fd5ad30d748e04dca68
 
         <button
           onClick={toggleModal}
