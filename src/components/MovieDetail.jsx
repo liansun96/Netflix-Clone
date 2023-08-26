@@ -40,7 +40,7 @@ const MovieDetail = () => {
   const castLength = data?.credits?.cast.length - 1;
   // console.log(castLength);
   const castNameSm = [];
-  for (let i = 0; i <= 4; i++) {
+  for (let i = 0; i <= 3; i++) {
     if (data?.credits?.cast) {
       castNameSm.push(data?.credits?.cast[`${i}`]?.name);
     } else {

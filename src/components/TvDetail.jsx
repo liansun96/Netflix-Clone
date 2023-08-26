@@ -41,7 +41,7 @@ const TvDetail = () => {
   const castLength = data?.credits?.cast.length - 1;
   // console.log(castLength);
   const castNameSm = [];
-  for (let i = 0; i <= 4; i++) {
+  for (let i = 0; i <= 3; i++) {
     if (data?.credits?.cast) {
       castNameSm.push(data?.credits?.cast[`${i}`]?.name);
     } else {
@@ -57,7 +57,8 @@ const TvDetail = () => {
       break;
     }
   }
-  // console.log(castName);
+  console.log(castName);
+  console.log(castNameSm);
 
   const genresLength = data?.genres.length - 1;
   const genresName = [];
@@ -165,9 +166,9 @@ const TvDetail = () => {
                   Cast
                 </span>{" "}
                 :
-                {castName.length < 2
-                  ? castName
-                  : castNameSm.map((name, index) => (
+                {castName.length <= 4
+                  ? castNameSm
+                  : castName.map((name, index) => (
                       <p key={index} className="inline">
                         {name} ,{" "}
                       </p>
