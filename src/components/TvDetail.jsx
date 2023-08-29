@@ -167,8 +167,8 @@ const TvDetail = () => {
                 </span>{" "}
                 :
                 {castName.length <= 4
-                  ? castNameSm
-                  : castName.map((name, index) => (
+                  ? castName
+                  : castNameSm.map((name, index) => (
                       <p key={index} className="inline">
                         {name} ,{" "}
                       </p>

@@ -36,7 +36,7 @@ const MovieDetail = () => {
       autoplay: 0,
     },
   };
-
+  
   const castLength = data?.credits?.cast.length - 1;
   // console.log(castLength);
   const castNameSm = [];
