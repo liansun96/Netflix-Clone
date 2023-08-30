@@ -44,3 +44,8 @@
   display: block;
   transition: 5s;
 }
+
+.active p{
+  @apply text-white 
+}
+
