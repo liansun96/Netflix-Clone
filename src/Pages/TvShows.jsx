@@ -8,9 +8,10 @@ import Popular from "../components/Popular";
 import UpComing from "../components/UpComing";
 import { ToggleContext } from "../Context/ToggleProvider";
 import TvDetail from "../components/TvDetail";
+import PlayTv from "../components/PlayTv";
 
 const TvShows = () => {
-  const { handleGetId, tvModal, toggleTvModal } = useContext(ToggleContext);
+  const { handleGetId, tvModal, toggleTvModal ,playTvModal ,togglePlayTvModal } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
   const { data } = useGetTvQuery();
@@ -21,6 +22,11 @@ const TvShows = () => {
       data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
     );
   }, [data]);
+
+  const handelPlay = () => {
+    togglePlayTvModal();
+    handleGetId(movie?.id);
+  };
 
   const handelDetail = () => {
     toggleTvModal();
@@ -49,7 +55,7 @@ const TvShows = () => {
               {movie?.overview}
             </h1>
             <div className="flex items-center gap-3">
-              <button className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold">
+              <button onClick={handelPlay} className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold">
                 <span className="">
                   <BsPlayFill className="text-4xl" />
                 </span>
@@ -77,7 +83,8 @@ const TvShows = () => {
         </div>
         <Footer />
       </div>
-      {/* {tvModal && <TvDetail />} */}
+      {tvModal && <TvDetail />}
+      {playTvModal && <PlayTv/>}
     </div>
   );
 };

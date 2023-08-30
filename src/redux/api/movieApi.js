@@ -30,14 +30,29 @@ export const movieApi = createApi({
         "/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
       providesTags: ["movieApi"],
     }),
+    getNowPlayingTv: builder.query({
+      query: () =>
+        "/tv/on_the_air?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
+      providesTags: ["movieApi"],
+    }),
     getPopular: builder.query({
       query: () =>
         `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1`,
       providesTags: ["movieApi"],
     }),
+    getPopularTv: builder.query({
+      query: () =>
+        `/tv/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"],
+    }),
     getTopRated: builder.query({
       query: () =>
         "/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
+      providesTags: ["movieApi"],
+    }),
+    getTopRatedTv: builder.query({
+      query: () =>
+        "/tv/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
       providesTags: ["movieApi"],
     }),
     getUpcoming: builder.query({
@@ -94,8 +109,11 @@ export const {
   useGetTvQuery,
   useGetTvGenresQuery,
   useGetNowPlayingQuery,
+  useGetNowPlayingTvQuery,
   useGetPopularQuery,
+  useGetPopularTvQuery,
   useGetTopRatedQuery,
+  useGetTopRatedTvQuery,
   useGetUpcomingQuery,
   useGetMovieDetailQuery,
   useGetDetailVideoQuery,

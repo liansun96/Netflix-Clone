@@ -9,9 +9,10 @@ import { useGetTvQuery } from "../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../Context/ToggleProvider";
 import TvDetail from "./TvDetail";
+import PlayTv from "./PlayTv";
 
 const Tv = () => {
-  const { handleGetId, tvModal, toggleTvModal } = useContext(ToggleContext);
+  const { handleGetId, tvModal, toggleTvModal , playTvModal ,togglePlayTvModal } = useContext(ToggleContext);
 
   const { data } = useGetTvQuery();
   console.log(data?.results);
@@ -71,58 +72,66 @@ const Tv = () => {
                 }}
               >
                 {data?.results?.map((result, index) => {
+                  const handelPlay = () => {
+                    togglePlayTvModal();
+                    handleGetId(result?.id);
+                  };
                   const handelDetail = () => {
                     toggleTvModal();
                     handleGetId(result?.id);
                   };
                   return (
                     <div key={result?.id} className="w-[220px]">
-                    <div>
-                      <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
-                        <img
-                          className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500 cursor-pointer"
-                          src={
-                            "https://image.tmdb.org/t/p/w300" +
-                            result?.backdrop_path
-                          }
-                          alt=""
-                        />
-                        <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
-                          <div className="flex flex-col gap-3 items-start">
-                            <div className="flex justify-between items-center w-full">
-                              <div className="flex items-center gap-2">
-                                <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300 cursor-pointer">
-                                  <BsPlayFill className="text-xl text-gray-700 ms-0.5 " />
+                      <div>
+                        <div className="group/item flex flex-col slide-inner hover:scale-150 duration-300 hover:delay-500 rounded-lg">
+                          <img
+                            className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                            src={
+                              "https://image.tmdb.org/t/p/w300" +
+                              result?.backdrop_path
+                            }
+                            alt=""
+                          />
+                          <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                            <div className="flex flex-col gap-3 items-start">
+                              <div className="flex justify-between items-center w-full">
+                                <div className="flex items-center gap-2">
+                                  <button
+                                    onClick={handelPlay}
+                                    className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300"
+                                  >
+                                    <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
+                                  </button>
+                                  <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail">
+                                    <HiOutlinePlus className="text-sm text-gray-200" />
+                                    <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
+                                      <p className="text-xs font-semibold">
+                                        Add to My List
+                                      </p>
+                                    </div>
+                                  </button>
+                                  <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+                                    <BsHandThumbsUp className="text-sm text-gray-200" />
+                                  </button>
                                 </div>
-                                <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail cursor-pointer">
-                                  <HiOutlinePlus className="text-sm text-gray-200" />
-                                  <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
-                                    <p className="text-xs font-semibold">
-                                      Add to My List
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 cursor-pointer">
-                                  <BsHandThumbsUp className="text-sm text-gray-200" />
-                                </div>
+                                <button
+                                  onClick={handelDetail}
+                                  className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300"
+                                >
+                                  <BsChevronDown className="text-sm text-gray-200" />
+                                </button>
                               </div>
-                              <div onClick={handelDetail} className="">
-                                <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 cursor-pointer">
-                                  <BsChevronDown className="text-sm text-gray-200 " />
-                                </div>
-                              </div>
+                              <h1 className="text-xs text-white">
+                                {result?.title}
+                              </h1>
+                              <h1 className="text-[10px] text-green-500 font-semibold">
+                                {result?.vote_average * 10}% Match
+                              </h1>
                             </div>
-                            <h1 className="text-xs text-white">
-                              {result?.title}
-                            </h1>
-                            <h1 className="text-[10px] text-green-500 font-semibold">
-                              {result?.vote_average * 10}% Match
-                            </h1>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                   );
                 })}
               </div>
@@ -138,7 +147,8 @@ const Tv = () => {
           </div>
         </div>
       </div>
-      {tvModal && <TvDetail/>}
+      {tvModal && <TvDetail />}
+      {playTvModal && <PlayTv />}
     </>
   );
 };

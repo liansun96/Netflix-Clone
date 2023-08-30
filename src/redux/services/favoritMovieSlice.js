@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const initialState = {
   favMovies: [],
-  searchFavContact : ''
+  searchFavMovie : ''
 };
 
 const STORAGE_KEY = "favMovies";
@@ -37,16 +37,16 @@ export const favoriteMovieSlice = createSlice({
       state.favMovies = [];
       return state;
     },
-    addFavoriteContacts : (state, {payload}) => {
-        state.contacts = payload
+    addFavoriteMovie : (state, {payload}) => {
+        state.favMovies = payload
     },
-    setSearchFavoriteContact : (state , {payload}) => {
-        state.searchFavContact = payload
+    setSearchFavoriteMovie : (state , {payload}) => {
+        state.searchFavMovie = payload
     }
   },
 });
 
-export const { addMovie, removeMovie, clearMovie ,addFavoriteContacts ,setSearchFavoriteContact } =
+export const { addMovie, removeMovie, clearMovie ,addFavoriteMovie ,setSearchFavoriteMovie } =
   favoriteMovieSlice.actions;
 
 export default favoriteMovieSlice.reducer;

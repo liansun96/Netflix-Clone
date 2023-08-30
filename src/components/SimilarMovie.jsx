@@ -1,6 +1,6 @@
 import React from "react";
 import { HiOutlinePlus } from "react-icons/hi";
-import { FaPlay } from "react-icons/fa"
+import { IoPlaySharp } from "react-icons/io5";
 
 const SimilarMovie = ({ result }) => {
   return (
@@ -12,7 +12,7 @@ const SimilarMovie = ({ result }) => {
           alt=""
         />
         <div className="scale-0 group-hover/edit:scale-100 duration-75 w-[50px] h-[50px] absolute top-[40%] left-[40%] rounded-full border-2 bg-black bg-opacity-50 border-white flex justify-center items-center cursor-pointer">
-          <FaPlay className="text-white text-lg translate-x-[2px]"/>
+          <IoPlaySharp className="text-white text-lg translate-x-[2px]"/>
         </div>
       </div>
       <p className="text-sm text-white font-bold px-3">
@@ -32,9 +32,9 @@ const SimilarMovie = ({ result }) => {
         </div>
         <div className="flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
           <HiOutlinePlus className="text-2xl text-gray-200" />
-          <div className="invisible group-hover/edit:visible absolute -top-[60px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+          <div className="invisible group-hover/edit:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
             <p className="text-lg font-semibold">Add to My List</p>
-            <FaPlay className="text-white text-lg translate-x-[50px] -translate-y-1 absolute rotate-90"/>
+            <IoPlaySharp className="text-white text-xl translate-x-[50px] translate-y-0 absolute rotate-90"/>
           </div>
         </div>
       </div>
