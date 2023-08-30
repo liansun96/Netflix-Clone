@@ -65,6 +65,11 @@ export const movieApi = createApi({
         `/movie/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&append_to_response=credits`,
       providesTags: ["movieApi"],
     }),
+    getMovieImage: builder.query({
+      query: ({ id }) =>
+        `/movie/${id}/images?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_image_language=null,en,fr,pt,de`,
+      providesTags: ["movieApi"],
+    }),
     getDetailVideo: builder.query({
       query: ({ id }) =>
         `movie/${id}/videos?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
@@ -83,6 +88,11 @@ export const movieApi = createApi({
     getTvDetail: builder.query({
       query: ({ id }) =>
         `/tv/${id}?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&append_to_response=credits`,
+      providesTags: ["movieApi"],
+    }),
+    getTvImage: builder.query({
+      query: ({ id }) =>
+        `/tv/${id}/images?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_image_language=null,en,fr,pt,de`,
       providesTags: ["movieApi"],
     }),
     getTvDetailVideo: builder.query({
@@ -116,10 +126,12 @@ export const {
   useGetTopRatedTvQuery,
   useGetUpcomingQuery,
   useGetMovieDetailQuery,
+  useGetMovieImageQuery,
   useGetDetailVideoQuery,
   useGetDetailRecommendationsQuery,
   useGetDetailSimilarQuery,
   useGetTvDetailQuery,
+  useGetTvImageQuery,
   useGetTvDetailVideoQuery,
   useGetTvDetailRecommendationsQuery,
   useGetTvDetailSimilarQuery,

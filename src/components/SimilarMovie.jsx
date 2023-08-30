@@ -6,13 +6,21 @@ const SimilarMovie = ({ result }) => {
   return (
     <div className="w-[250px] h-[300px] bg-[#2F2F2F] rounded">
       <div className="group/edit relative">
-        <img
-          src={"https://image.tmdb.org/t/p/w300" + result?.backdrop_path}
-          className="rounded"
-          alt=""
-        />
+        {result?.backdrop_path == null ? (
+          <img
+            src={"https://image.tmdb.org/t/p/w300" + result?.poster_path}
+            className="rounded object-cover bg-top h-[142px] w-full"
+            alt=""
+          />
+        ) : (
+          <img
+            src={"https://image.tmdb.org/t/p/w300" + result?.backdrop_path}
+            className="rounded"
+            alt=""
+          />
+        )}
         <div className="scale-0 group-hover/edit:scale-100 duration-75 w-[50px] h-[50px] absolute top-[40%] left-[40%] rounded-full border-2 bg-black bg-opacity-50 border-white flex justify-center items-center cursor-pointer">
-          <IoPlaySharp className="text-white text-lg translate-x-[2px]"/>
+          <IoPlaySharp className="text-white text-lg translate-x-[2px]" />
         </div>
       </div>
       <p className="text-sm text-white font-bold px-3">
@@ -34,7 +42,7 @@ const SimilarMovie = ({ result }) => {
           <HiOutlinePlus className="text-2xl text-gray-200" />
           <div className="invisible group-hover/edit:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
             <p className="text-lg font-semibold">Add to My List</p>
-            <IoPlaySharp className="text-white text-xl translate-x-[50px] translate-y-0 absolute rotate-90"/>
+            <IoPlaySharp className="text-white text-xl translate-x-[50px] translate-y-0 absolute rotate-90" />
           </div>
         </div>
       </div>
