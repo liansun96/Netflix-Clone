@@ -68,7 +68,9 @@ const TvShows = () => {
               alt=""
             />
             <h1 className="w-[600px] text-lg text-gray-200 font-semibold">
-              {movie?.overview}
+              {movie?.overview?.length > 400
+                ? `${movie?.overview?.substring(0, 400)} . . .`
+                : movie?.overview}
             </h1>
             <div className="flex items-center gap-3">
               <button

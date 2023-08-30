@@ -328,7 +328,7 @@ const MovieDetail = () => {
 
         <button
           onClick={toggleModal}
-          className="w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] -top-10 group-hover/item:top-5 text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
+          className="-top-10 group-hover/item:top-5 w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
         >
           <RxCross1 className="text-white font-bold scale-150" />
         </button>

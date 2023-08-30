@@ -25,10 +25,10 @@ const Header = () => {
 
   useEffect(() => {
     setMovie(
-      data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
+      data?.results[Math.floor(Math.random() * data?.results?.length)]
     );
   }, [data]);
-
+  
   const handelDetail = () => {
     toggleModal();
     handleGetId(movie?.id);

@@ -7,8 +7,8 @@ import {
 } from "../redux/api/movieApi";
 import { RxCross1 } from "react-icons/rx";
 import YouTube from "react-youtube";
-import SimilarMovie from "./SimilarMovie";
 import { Link } from "react-router-dom";
+import SimilarTv from "./SimilarTv";
 
 const TvDetail = () => {
   const [trailer, setTrailer] = useState([]);
@@ -228,7 +228,7 @@ const TvDetail = () => {
 
         <div className="flex gap-6 justify-start flex-wrap px-10">
           {recData?.results.map((result, index) => (
-            <SimilarMovie key={index} result={result} />
+            <SimilarTv key={index} result={result} />
           ))}
         </div>
         <div className="p-10 space-y-3" ref={castRef}>
@@ -357,7 +357,7 @@ const TvDetail = () => {
         </div>
         <button
           onClick={toggleTvModal}
-          className="w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] -top-10 group-hover/item:top-5 text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
+          className="-top-10 group-hover/item:top-5 w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
         >
           <RxCross1 className="text-white font-bold scale-150" />
         </button>

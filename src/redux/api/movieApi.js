@@ -102,7 +102,7 @@ export const movieApi = createApi({
     }),
     getTvDetailRecommendations: builder.query({
       query: ({ id }) =>
-        `tv/${id}/recommendations?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+        `tv/${id}/recommendations?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&append_to_response=credits`,
       providesTags: ["movieApi"],
     }),
     getTvDetailSimilar: builder.query({
