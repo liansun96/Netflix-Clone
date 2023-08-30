@@ -13,31 +13,30 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../Context/ToggleProvider";
 
-const Movie = () => {  
-
-  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);  
-  
+const Movie = () => {
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+    useContext(ToggleContext);
 
   const { data } = useGetMovieQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
   };
-  
+
   const handlePrevSlide = () => {
     setCurrentSlide(
       (prevSlide) =>
-      (prevSlide - 1 + data?.results?.length) % data?.results?.length
-      );
-    };
-    
-    if (modal) {
-      document.body.classList.add("overflow-y-hidden");
-    } else {
-      document.body.classList.remove("overflow-y-hidden");
-    }
+        (prevSlide - 1 + data?.results?.length) % data?.results?.length
+    );
+  };
+
+  if (modal) {
+    document.body.classList.add("overflow-y-hidden");
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+  }
 
   return (
     <>
@@ -75,13 +74,14 @@ const Movie = () => {
                   transform: `translateX(-${currentSlide * 166}px)`,
                 }}
               >
-
                 {data?.results?.map((result, index) => {
-                  const handelDetail = () => {                    
-
-
+                  const handelPlay = () => {
+                    togglePlayMovieModal();
+                    handleGetId(result?.id);
+                  };
+                  const handelDetail = () => {
                     toggleModal();
-                    handleGetId(result?.id);                    
+                    handleGetId(result?.id);
                   };
                   return (
                     <div key={result?.id} className="w-[220px]">
@@ -99,26 +99,30 @@ const Movie = () => {
                             <div className="flex flex-col gap-3 items-start">
                               <div className="flex justify-between items-center w-full">
                                 <div className="flex items-center gap-2">
-                                  <div className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300">
+                                  <button
+                                    onClick={handelPlay}
+                                    className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300"
+                                  >
                                     <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
-                                  </div>
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail">
+                                  </button>
+                                  <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail">
                                     <HiOutlinePlus className="text-sm text-gray-200" />
                                     <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
                                       <p className="text-xs font-semibold">
                                         Add to My List
                                       </p>
                                     </div>
-                                  </div>
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+                                  </button>
+                                  <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
                                     <BsHandThumbsUp className="text-sm text-gray-200" />
-                                  </div>
+                                  </button>
                                 </div>
-                                <div onClick={handelDetail} className="">
-                                  <div className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
-                                    <BsChevronDown className="text-sm text-gray-200" />
-                                  </div>
-                                </div>
+                                <button
+                                  onClick={handelDetail}
+                                  className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300"
+                                >
+                                  <BsChevronDown className="text-sm text-gray-200" />
+                                </button>
                               </div>
                               <h1 className="text-xs text-white">
                                 {result?.title}
@@ -146,7 +150,7 @@ const Movie = () => {
           </div>
         </div>
       </div>
-      {modal && <MovieDetail/>}
+      {modal && <MovieDetail />}
     </>
   );
 };

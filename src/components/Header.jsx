@@ -3,9 +3,10 @@ import { useGetMovieQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import { ToggleContext } from "../Context/ToggleProvider";
 import MovieDetail from "./MovieDetail";
+import PlayMovie from "./PlayMovie";
 
 const Header = () => {
-  const { handleGetId, modal, toggleModal } = useContext(ToggleContext);
+  const { handleGetId, modal, toggleModal , playMovieModal ,togglePlayMovieModal } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
   const { data } = useGetMovieQuery();
@@ -22,6 +23,17 @@ const Header = () => {
     handleGetId(movie?.id);
   };
 
+  const handelPlay = () => {
+    togglePlayMovieModal();
+    handleGetId(movie?.id);
+  };
+  
+  if (playMovieModal) {
+    document.body.classList.add("overflow-y-hidden");
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+  }
+
   return (
     <header
       className="h-screen w-full shadow-inner hidden lg:block"
@@ -36,7 +48,7 @@ const Header = () => {
           {movie?.overview}
         </h1>
         <div className="flex items-center gap-3">
-          <button className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold">
+          <button onClick={handelPlay} className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold">
             <span className="">
               <BsPlayFill className="text-4xl" />
             </span>
@@ -54,6 +66,7 @@ const Header = () => {
         </div>
       </div>
       {modal && <MovieDetail/>}
+      {playMovieModal && <PlayMovie/>}
     </header>
   );
 };
