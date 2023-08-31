@@ -72,7 +72,7 @@ const TvShows = () => {
                 src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
                 alt=""
               />
-              <h1 className="w-[600px] text-lg text-gray-200 font-semibold">
+              <h1 className="w-[600px] text-gray-200 font-semibold">
                 {movie?.overview?.length > 400
                   ? `${movie?.overview?.substring(0, 400)} . . .`
                   : movie?.overview}

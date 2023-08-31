@@ -1,9 +1,20 @@
+import { useRef } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 
 export const ToggleContext = createContext();
 
 const ToggleProvider = ({ children }) => {
+  //search input
+  const [search, setSearch] = useState("");
+
+  const [showInput, setShowInput] = useState(false);
+  const handleInput = () => {
+    setShowInput(!showInput);
+  };
+
+  const inputRef = useRef(null);
+
   //Sidebar
   const [sBar, setSBar] = useState(false);
   const toggleSideBar = () => {
@@ -46,6 +57,12 @@ const ToggleProvider = ({ children }) => {
   };
 
   const value = {
+    search,
+    setSearch,
+    showInput,
+    setShowInput,
+    handleInput,
+    inputRef,
     modal,
     toggleModal,
     tvModal,
