@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
+import { VscTriangleDown } from "react-icons/vsc";
 import {
   MdOutlineArrowForwardIos,
   MdOutlineArrowBackIos,
@@ -14,10 +15,8 @@ import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../Context/ToggleProvider";
 
 const Movie = () => {
-
   const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
     useContext(ToggleContext);
-
 
   const { data } = useGetMovieQuery();
   console.log(data?.results);
@@ -77,18 +76,21 @@ const Movie = () => {
                 }}
               >
                 {data?.results?.map((result, index) => {
-
                   const handelPlay = () => {
                     togglePlayMovieModal();
                     handleGetId(result?.id);
                   };
-
+                  const handelDetail = () => {
+                    toggleModal();
+                    handleGetId(result?.id);
+                  };
                   return (
                     <div key={result?.id} className="w-[220px]">
                       <div>
                         <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
                           <img
-                            className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500 cursor-pointer"
+                            onClick={handelDetail}
+                            className="cursor-pointer rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
                             src={
                               "https://image.tmdb.org/t/p/w300" +
                               result?.backdrop_path
@@ -99,33 +101,36 @@ const Movie = () => {
                             <div className="flex flex-col gap-3 items-start">
                               <div className="flex justify-between items-center w-full">
                                 <div className="flex items-center gap-2">
-
                                   <button
                                     onClick={handelPlay}
                                     className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300"
                                   >
                                     <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
                                   </button>
-                                  <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail">
-
+                                  <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
                                     <HiOutlinePlus className="text-sm text-gray-200" />
-                                    <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
+                                    <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
                                       <p className="text-xs font-semibold">
                                         Add to My List
                                       </p>
+                                      <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
                                     </div>
-
                                   </button>
                                   <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
                                     <BsHandThumbsUp className="text-sm text-gray-200" />
                                   </button>
-n
                                 </div>
                                 <button
                                   onClick={handelDetail}
-                                  className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300"
+                                  className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
                                 >
                                   <BsChevronDown className="text-sm text-gray-200" />
+                                  <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                    <p className="text-xs font-semibold">
+                                      More info
+                                    </p>
+                                    <VscTriangleDown className="text-white text-2xl translate-x-[15px] -translate-y-2 absolute" />
+                                  </div>
                                 </button>
                               </div>
                               <h1 className="text-xs text-white">

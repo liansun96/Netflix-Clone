@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import NavBar from "../components/Navbar";
-import { useGetTvQuery } from "../redux/api/movieApi";
+import { useGetTvImageQuery, useGetTvQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import Tv from "../components/Tv";
 import Popular from "../components/Popular";
@@ -9,13 +9,26 @@ import UpComing from "../components/UpComing";
 import { ToggleContext } from "../Context/ToggleProvider";
 import TvDetail from "../components/TvDetail";
 import PlayTv from "../components/PlayTv";
+import PlayMovie from "../components/PlayMovie";
 
 const TvShows = () => {
-  const { handleGetId, tvModal, toggleTvModal ,playTvModal ,togglePlayTvModal } = useContext(ToggleContext);
+  const {
+    handleGetId,
+    playMovieModal,
+    tvModal,
+    toggleTvModal,
+    playTvModal,
+    togglePlayTvModal,
+  } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
   const { data } = useGetTvQuery();
   console.log(data?.results);
+
+  const id = movie?.id;
+
+  const { data: detailImage } = useGetTvImageQuery({ id });
+  console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
     setMovie(
@@ -51,11 +64,21 @@ const TvShows = () => {
           }}
         >
           <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-20 pl-12">
+            <img
+              className="w-[350px]"
+              src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
+              alt=""
+            />
             <h1 className="w-[600px] text-lg text-gray-200 font-semibold">
-              {movie?.overview}
+              {movie?.overview?.length > 400
+                ? `${movie?.overview?.substring(0, 400)} . . .`
+                : movie?.overview}
             </h1>
             <div className="flex items-center gap-3">
-              <button onClick={handelPlay} className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold">
+              <button
+                onClick={handelPlay}
+                className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold"
+              >
                 <span className="">
                   <BsPlayFill className="text-4xl" />
                 </span>
@@ -72,7 +95,7 @@ const TvShows = () => {
                 More Info
               </button>
             </div>
-          </div>          
+          </div>
         </header>
         <div className="bg-[#141414] py-10">
           <div className="w-[95%] mx-auto">
@@ -84,7 +107,8 @@ const TvShows = () => {
         <Footer />
       </div>
       {tvModal && <TvDetail />}
-      {playTvModal && <PlayTv/>}
+      {playTvModal && <PlayTv />}
+      {playMovieModal && <PlayMovie />}
     </div>
   );
 };
