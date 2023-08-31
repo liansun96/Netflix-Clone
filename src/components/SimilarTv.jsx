@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { IoPlaySharp } from "react-icons/io5";
+import { ToggleContext } from "../Context/ToggleProvider";
 
 const SimilarTv = ({ result }) => {
+
+  const { toggleTvModal, togglePlayTvModal, handleGetId } =
+    useContext(ToggleContext);
+
+  const handelPlay = () => {
+    togglePlayTvModal();
+    toggleTvModal();
+    handleGetId(result?.id);
+  };
+
   return (
-    <div className="group/edit w-[250px] h-[350px] bg-[#2F2F2F] rounded">
+    <div onClick={handelPlay} className="group/edit w-[250px] h-[350px] bg-[#2F2F2F] rounded cursor-pointer">
       <div className="relative">
         {result?.backdrop_path == null ? (
           <img

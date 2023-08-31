@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { IoPlaySharp } from "react-icons/io5";
+import { ToggleContext } from "../Context/ToggleProvider";
 
 const SimilarMovie = ({ result }) => {
+  const { toggleModal, togglePlayMovieModal, handleGetId } =
+    useContext(ToggleContext);
+
+  const handelPlay = () => {
+    togglePlayMovieModal();
+    toggleModal();
+    handleGetId(result?.id);
+  };  
+
   return (
-    <div className="group/edit w-[250px] h-[350px] bg-[#2F2F2F] rounded">
+    <div
+      onClick={handelPlay}
+      className="group/edit w-[250px] h-[350px] bg-[#2F2F2F] rounded cursor-pointer"
+    >
       <div className="relative">
         {result?.backdrop_path == null ? (
           <img

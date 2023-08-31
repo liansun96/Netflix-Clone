@@ -9,10 +9,12 @@ import UpComing from "../components/UpComing";
 import { ToggleContext } from "../Context/ToggleProvider";
 import TvDetail from "../components/TvDetail";
 import PlayTv from "../components/PlayTv";
+import PlayMovie from "../components/PlayMovie";
 
 const TvShows = () => {
   const {
     handleGetId,
+    playMovieModal,
     tvModal,
     toggleTvModal,
     playTvModal,
@@ -106,6 +108,7 @@ const TvShows = () => {
       </div>
       {tvModal && <TvDetail />}
       {playTvModal && <PlayTv />}
+      {playMovieModal && <PlayMovie />}
     </div>
   );
 };

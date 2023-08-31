@@ -84,7 +84,8 @@ const Popular = () => {
                     <div>
                       <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
                         <img
-                          className="rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                          onClick={handelDetail} 
+                          className="cursor-pointer rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
                           src={
                             "https://image.tmdb.org/t/p/w300" +
                             result?.backdrop_path
