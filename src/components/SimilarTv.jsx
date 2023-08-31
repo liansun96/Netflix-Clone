@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { IoPlaySharp } from "react-icons/io5";
+import { VscTriangleDown } from "react-icons/vsc";
 import { ToggleContext } from "../Context/ToggleProvider";
 
 const SimilarTv = ({ result }) => {
@@ -20,7 +21,7 @@ const SimilarTv = ({ result }) => {
         {result?.backdrop_path == null ? (
           <img
             src={"https://image.tmdb.org/t/p/w300" + result?.poster_path}
-            className="rounded object-cover h-[142px] w-full"
+            className="rounded object-cover object-top h-[142px] w-full"
             alt=""
           />
         ) : (
@@ -56,7 +57,7 @@ const SimilarTv = ({ result }) => {
             <HiOutlinePlus className="text-2xl text-gray-200" />
             <div className="invisible group-hover/my-list:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
               <p className="text-lg font-semibold">Add to My List</p>
-              <IoPlaySharp className="text-white text-xl translate-x-[50px] translate-y-0 absolute rotate-90" />
+              <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
             </div>
           </div>
         </div>

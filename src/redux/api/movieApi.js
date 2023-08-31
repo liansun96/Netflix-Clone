@@ -110,6 +110,10 @@ export const movieApi = createApi({
         `tv/${id}/similar?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
       providesTags: ["movieApi"],
     }),
+    getSearch : builder.query({
+      query: ({search}) => `/search/multi?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_adult=false&query=${search}}`,
+      providesTags: ["movieApi"]
+    }),
   }),
 });
 
@@ -135,4 +139,5 @@ export const {
   useGetTvDetailVideoQuery,
   useGetTvDetailRecommendationsQuery,
   useGetTvDetailSimilarQuery,
+  useGetSearchQuery,
 } = movieApi;

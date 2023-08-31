@@ -4,9 +4,10 @@ import Home from "./Pages/Home";
 import Latest from "./Pages/Latest";
 import Movies from "./Pages/Movies";
 import TvShows from "./Pages/TvShows";
-import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import MyList from "./Pages/MyList";
+import NavBar from "./components/Navbar";
+import Search from "./components/Search";
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
         <Route path="/movies" element={<Movies />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/mylist" element={<MyList />} />
-        <Route path=":id" element={<MovieDetail />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
       <SideBar />
     </div>
