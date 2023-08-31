@@ -7,6 +7,7 @@ import Movie from "../components/Movie";
 import Popular from "../components/Popular";
 import NowPlaying from "../components/NowPlaying";
 import Header from "../components/Header";
+import MovieNav from "../components/MovieNav";
 
 const Movies = () => {
   const [movie, setMovie] = useState([]);
@@ -20,16 +21,19 @@ const Movies = () => {
   }, [data]);
 
   return (
-    <div className="">
-      <div className="overflow-hidden">
-        <Header/>
-        <div className="bg-[#141414] py-10">
-          <div className="w-[95%] mx-auto">
-            <Movie />
-            <NowPlaying />
+    <div>
+      <MovieNav />
+      <div className="">
+        <div className="overflow-hidden">
+          <Header />
+          <div className="bg-[#141414] py-10">
+            <div className="w-[95%] mx-auto">
+              <Movie />
+              <NowPlaying />
+            </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const Search = () => {
   console.log(data);
 
   return (
-    <div className="px-3 lg:px-10 bg-[#141414] min-h-screen">
+    <div className="px-3 lg:px-10 bg-[#141414] min-h-screen pb-20">
       <div className="p-20">
         <h1>Search by name</h1>
         <input
@@ -19,7 +19,7 @@ const Search = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <div className="flex flex-wrap gap-5">
+      <div className="flex flex-wrap justify-between gap-5 relative">
         {data?.results?.map((result, index) => {
           //   const handelPlay = () => {
           //     togglePlayMovieModal();
@@ -31,8 +31,8 @@ const Search = () => {
           //   };
           return (
             <div key={result?.id} className="w-[220px]">
-              <div>
-                <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
+              <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
+                <div className="group/item flex flex-col">
                   {/* <img
                     // onClick={handelDetail}
                     className="rounded-lg cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
@@ -46,7 +46,7 @@ const Search = () => {
                       src={
                         "https://image.tmdb.org/t/p/w300" + result?.poster_path
                       }
-                      className="rounded object-cover object-top h-[124px] w-full cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                      className="rounded object-cover object-top h-[124px] w-full cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
                       alt=""
                     />
                   ) : (
@@ -55,7 +55,7 @@ const Search = () => {
                         "https://image.tmdb.org/t/p/w300" +
                         result?.backdrop_path
                       }
-                      className="rounded cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                      className="w-[220px] rounded cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
                       alt=""
                     />
                   )}

@@ -6,13 +6,11 @@ import Movies from "./Pages/Movies";
 import TvShows from "./Pages/TvShows";
 import SideBar from "./components/SideBar";
 import MyList from "./Pages/MyList";
-import NavBar from "./components/Navbar";
 import Search from "./components/Search";
 
 const App = () => {
   return (
     <div className="relative">
-      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tvshows" element={<TvShows />} />
