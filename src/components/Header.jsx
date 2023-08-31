@@ -1,23 +1,34 @@
 import { useContext, useEffect, useState } from "react";
-import { useGetMovieQuery } from "../redux/api/movieApi";
+import { useGetMovieImageQuery, useGetMovieQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import { ToggleContext } from "../Context/ToggleProvider";
 import MovieDetail from "./MovieDetail";
 import PlayMovie from "./PlayMovie";
 
 const Header = () => {
-  const { handleGetId, modal, toggleModal , playMovieModal ,togglePlayMovieModal } = useContext(ToggleContext);
+  const {
+    handleGetId,
+    modal,
+    toggleModal,
+    playMovieModal,
+    togglePlayMovieModal,
+  } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
   const { data } = useGetMovieQuery();
   console.log(data?.results);
 
+  const id = movie?.id;
+
+  const { data: detailImage } = useGetMovieImageQuery({ id });
+  console.log(detailImage?.logos[0]?.file_path);
+
   useEffect(() => {
     setMovie(
-      data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
+      data?.results[Math.floor(Math.random() * data?.results?.length)]
     );
   }, [data]);
-
+  
   const handelDetail = () => {
     toggleModal();
     handleGetId(movie?.id);
@@ -27,7 +38,7 @@ const Header = () => {
     togglePlayMovieModal();
     handleGetId(movie?.id);
   };
-  
+
   if (playMovieModal) {
     document.body.classList.add("overflow-y-hidden");
   } else {
@@ -44,11 +55,19 @@ const Header = () => {
       }}
     >
       <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-20 pl-12">
-        <h1 className="w-[600px] text-lg text-gray-200 font-semibold">
+        <img
+          className="w-[350px]"
+          src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
+          alt=""
+        />
+        <h1 className="w-[600px] text-lg text-white drop-shadow-2xl font-semibold">
           {movie?.overview}
         </h1>
         <div className="flex items-center gap-3">
-          <button onClick={handelPlay} className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold">
+          <button
+            onClick={handelPlay}
+            className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold"
+          >
             <span className="">
               <BsPlayFill className="text-4xl" />
             </span>
@@ -65,8 +84,8 @@ const Header = () => {
           </button>
         </div>
       </div>
-      {modal && <MovieDetail/>}
-      {playMovieModal && <PlayMovie/>}
+      {modal && <MovieDetail />}
+      {playMovieModal && <PlayMovie />}
     </header>
   );
 };

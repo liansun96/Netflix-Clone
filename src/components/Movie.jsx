@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
+import { VscTriangleDown } from "react-icons/vsc";
 import {
   MdOutlineArrowForwardIos,
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import {
+  useGetMovieDetailQuery,
   useGetMovieQuery,
 } from "../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
@@ -73,7 +75,7 @@ const Movie = () => {
                   transform: `translateX(-${currentSlide * 166}px)`,
                 }}
               >
-                {data?.results?.map((result) => {
+                {data?.results?.map((result, index) => {
                   const handelPlay = () => {
                     togglePlayMovieModal();
                     handleGetId(result?.id);
@@ -105,12 +107,13 @@ const Movie = () => {
                                   >
                                     <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
                                   </button>
-                                  <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/detail">
+                                  <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
                                     <HiOutlinePlus className="text-sm text-gray-200" />
-                                    <div className="hidden group-hover/detail:block absolute -top-[23%] left-[5%] px-3 py-1 bg-white rounded">
+                                    <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
                                       <p className="text-xs font-semibold">
                                         Add to My List
                                       </p>
+                                      <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
                                     </div>
                                   </button>
                                   <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
@@ -119,9 +122,15 @@ const Movie = () => {
                                 </div>
                                 <button
                                   onClick={handelDetail}
-                                  className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300"
+                                  className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
                                 >
                                   <BsChevronDown className="text-sm text-gray-200" />
+                                  <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                    <p className="text-xs font-semibold">
+                                      More info
+                                    </p>
+                                    <VscTriangleDown className="text-white text-2xl translate-x-[15px] -translate-y-2 absolute" />
+                                  </div>
                                 </button>
                               </div>
                               <h1 className="text-xs text-white">
