@@ -46,7 +46,7 @@ const Search = () => {
                       src={
                         "https://image.tmdb.org/t/p/w300" + result?.poster_path
                       }
-                      className="rounded object-cover object-top h-[124px] w-full cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                      className="rounded object-cover object-top h-[124px] w-[220px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
                       alt=""
                     />
                   ) : (
