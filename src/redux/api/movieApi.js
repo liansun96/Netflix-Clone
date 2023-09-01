@@ -17,7 +17,7 @@ export const movieApi = createApi({
     }),
     getTv: builder.query({
       query: () =>
-        "/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=3",
+        "/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=5",
       providesTags: ["movieApi"],
     }),
     getTvGenres: builder.query({

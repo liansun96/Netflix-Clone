@@ -65,7 +65,7 @@ const TvShows = () => {
               backgroundPosition: "center center",
             }}
           >
-            <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-20 pl-12">
+            <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-28 pl-12">
               <img
                 className="w-[350px]"
                 src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
