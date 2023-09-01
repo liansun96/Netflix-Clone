@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import { useGetMovieQuery, useGetTvQuery } from "../redux/api/movieApi";
-import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import Movie from "../components/Movie/Movie";
-import Popular from "../components/Home/Popular";
-import NowPlaying from "../components/Home/NowPlaying";
 import Header from "../components/Header";
 import MovieNav from "../components/Movie/MovieNav";
+import NowPlayingMovie from "../components/Movie/NowPlayingMovie";
+import PopularMovie from "../components/Movie/PopularMovie";
+import TopRated from "../components/Home/TopRated";
 
 const Movies = () => {
   const [movie, setMovie] = useState([]);
@@ -28,7 +28,9 @@ const Movies = () => {
           <div className="bg-[#141414] pt-20 lg:pt-0">
             <div className="w-[95%] mx-auto lg:-translate-y-24">
               <Movie />
-              <NowPlaying />
+              <PopularMovie />
+              <NowPlayingMovie />
+              <TopRated />
             </div>
           </div>
           <Footer />

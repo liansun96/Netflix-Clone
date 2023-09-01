@@ -39,8 +39,13 @@ const Search = () => {
   return (
     <>
       <HomeNav />
+
       <div className="px-3 lg:px-10 bg-[#141414] min-h-screen pb-20">
-        <div className="flex flex-wrap justify-center gap-5 relative pt-28">
+        <h1 className="text-gray-50 text-lg font-semibold ps-12 pt-20">
+          Your are searching by name ....
+        </h1>
+
+        <div className="flex flex-wrap justify-center gap-5 relative pt-11">
           {data?.results?.map((result, index) => {
             const handelPlay = () => {
               togglePlayMovieModal();

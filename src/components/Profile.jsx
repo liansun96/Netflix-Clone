@@ -15,7 +15,7 @@ const Profile = () => {
 
   return (
     <div
-      className="flex relative"
+      className="flex relative z-40"
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
     >
@@ -36,38 +36,48 @@ const Profile = () => {
       >
         <div className=" p-3 bg-black">
           <div className="flex flex-col gap-3">
-            <p className="text-gray-50 text-xs flex gap-1 text-center">
+            <div className="flex gap-1 text-center">
               <span>
-                <RiEdit2Fill className="text-xl" />
+                <RiEdit2Fill className="text-xl text-gray-50" />
               </span>
-              Manage Profile
-            </p>
-            <p className="text-gray-50 text-xs flex gap-1 text-center">
-              <span className="text-xl">
+              <h1 className="text-xs text-gray-50 hover:text-gray-300 duration-300 cursor-pointer">
+                Manage Profile
+              </h1>
+            </div>
+            <div className="flex gap-1 text-center">
+              <span className="text-xl text-gray-50">
                 <BsBoxArrowUpRight />
               </span>
-              Exit Profile
-            </p>
-            <p className="text-gray-50 text-xs flex gap-1 text-center">
-              <span className="text-xl">
+              <h1 className="text-xs text-gray-50 hover:text-gray-300 duration-300 cursor-pointer">
+                Exit Profile
+              </h1>
+            </div>
+            <div className="flex gap-1 text-center">
+              <span className="text-xl text-gray-50">
                 <FaRegFaceSmileWink />
               </span>
-              Transfer Profile
-            </p>
-            <p className="text-gray-50 text-xs flex gap-1 text-center">
-              <span className="text-xl">
+              <h1 className="text-xs text-gray-50 hover:text-gray-300 duration-300 cursor-pointer">
+                Transfer Profile
+              </h1>
+            </div>
+            <div className=" flex gap-1 text-center">
+              <span className="text-xl text-gray-50">
                 <MdOutlineAccountCircle />
               </span>
-              Account
-            </p>
-            <p className="text-gray-50 text-xs flex gap-1 text-center">
-              <span className="text-xl">
+              <h1 className="text-xs text-gray-50 hover:text-gray-300 duration-300 cursor-pointer">
+                Account
+              </h1>
+            </div>
+            <div className="flex gap-1 text-center">
+              <span className="text-xl text-gray-50">
                 <AiFillQuestionCircle />
               </span>
-              Help Center
-            </p>
+              <h1 className="text-xs text-gray-50 hover:text-gray-300 duration-300 cursor-pointer">
+                Help Center
+              </h1>
+            </div>
             <p className="border border-x-0 border-t-0 border-gray-300"></p>
-            <p className="text-xs text-gray-50 text-center">
+            <p className="text-xs text-gray-50 hover:text-gray-300 font-semibold text-center cursor-pointer">
               Sign out of Netflix
             </p>
           </div>

@@ -30,6 +30,11 @@ export const movieApi = createApi({
         "/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
       providesTags: ["movieApi"],
     }),
+    getNowPlayingTwo: builder.query({
+      query: () =>
+        "/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2",
+      providesTags: ["movieApi"],
+    }),
     getNowPlayingTv: builder.query({
       query: () =>
         "/tv/on_the_air?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
@@ -40,6 +45,11 @@ export const movieApi = createApi({
         `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1`,
       providesTags: ["movieApi"],
     }),
+    getPopularTwo: builder.query({
+      query: () =>
+        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2`,
+      providesTags: ["movieApi"],
+    }),
     getPopularTv: builder.query({
       query: () =>
         `/tv/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
@@ -48,6 +58,11 @@ export const movieApi = createApi({
     getTopRated: builder.query({
       query: () =>
         "/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
+      providesTags: ["movieApi"],
+    }),
+    getTopRatedTwo: builder.query({
+      query: () =>
+        "/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2",
       providesTags: ["movieApi"],
     }),
     getTopRatedTv: builder.query({
@@ -140,4 +155,7 @@ export const {
   useGetTvDetailRecommendationsQuery,
   useGetTvDetailSimilarQuery,
   useGetSearchQuery,
+  useGetNowPlayingTwoQuery,
+  useGetTopRatedTwoQuery,
+  useGetPopularTwoQuery,
 } = movieApi;

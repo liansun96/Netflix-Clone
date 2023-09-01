@@ -3,7 +3,7 @@ import Logo from "../image/Logo.svg";
 import { BiSearch } from "react-icons/bi";
 import { IoMdNotificationsOutline, IoMdArrowDropdown } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import Profile from "../Profile";
 
@@ -33,11 +33,6 @@ const HomeNav = () => {
     };
   }, []);
 
-  useEffect(() => {
-    // When the component mounts, focus the input element
-    // inputRef.current.focus();
-  }, []);
-
   return (
     <div className="">
       <div className="fixed top-0 w-full z-50">
@@ -56,9 +51,9 @@ const HomeNav = () => {
                   className="text-gray-50 text-4xl"
                 />
               </div>
-              <div>
-                <img src={Logo} className="h-[45px]" alt="" />
-              </div>
+              <Link to={"/"}>
+                <img src={Logo} className="h-[45px] cursor-pointer" alt="" />
+              </Link>
               <div className="hidden lg:block">
                 <div className="flex items-center gap-5">
                   <NavLink to="/">
@@ -81,17 +76,24 @@ const HomeNav = () => {
                       Latest
                     </p>
                   </NavLink>
-                  <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
-                    My List
-                  </p>
-                  <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
-                    Browse by Languages
-                  </p>
+                  <NavLink to={"/mylist"}>
+                    <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
+                      My List
+                    </p>
+                  </NavLink>
+                  <NavLink to={"/bbl"}>
+                    <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
+                      Browse by Languages
+                    </p>
+                  </NavLink>
                 </div>
               </div>
             </div>
             <div className="block lg:hidden">
               <input
+                ref={inputRef}
+                value={search}
+                onChange={handleInputChange}
                 type="text"
                 className="px-2 py-1 bg-transparent border border-gray-400 text-xs text-gray-50 font-semibold w-[100px] outline-none placeholder:text-gray-500 focus:rounded focus:border-gray-50"
                 placeholder="Search"
