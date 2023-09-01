@@ -19,13 +19,13 @@ const ToggleProvider = ({ children }) => {
   const [sBar, setSBar] = useState(false);
   const toggleSideBar = () => {
     setSBar(!sBar);
+    console.log("hello");
   };
 
   //DetailModal
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
-    console.log("u toggle");
   };
 
   //PlayMovieModal
@@ -73,6 +73,8 @@ const ToggleProvider = ({ children }) => {
     togglePlayTvModal,
     id,
     handleGetId,
+    toggleSideBar,
+    sBar,
   };
 
   return (
