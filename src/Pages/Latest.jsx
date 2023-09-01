@@ -10,7 +10,9 @@ import TopRated from "../components/Home/TopRated";
 import { ToggleContext } from "../Context/ToggleProvider";
 import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
-import LatestNav from "../components/Latest/LatesNav";
+import LatestNav from "../components/Latest/LatestNav";
+import UpComing from "../components/Home/UpComing";
+import PopularMovie from "../components/Movie/PopularMovie";
 
 const Latest = () => {
   const {
@@ -95,6 +97,8 @@ const Latest = () => {
             <div className="w-[95%] mx-auto lg:-translate-y-24">
               <NowPlaying />
               <TopRated />
+              <UpComing />
+              <PopularMovie />
             </div>
           </div>
           <Footer />

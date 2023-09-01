@@ -6,6 +6,7 @@ import TvShows from "./Pages/TvShows";
 import SideBar from "./components/SideBar/SideBar";
 import MyList from "./Pages/MyList";
 import Search from "./Pages/Search";
+import Bbl from "./Pages/Bbl";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/movies" element={<Movies />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/mylist" element={<MyList />} />
+        <Route path="/bbl" element={<Bbl />} />
         <Route path="/search" element={<Search />} />
       </Routes>
       <SideBar />

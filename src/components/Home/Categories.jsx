@@ -5,6 +5,9 @@ import Movie from "../Movie/Movie";
 import UpComing from "./UpComing";
 import NowPlaying from "./NowPlaying";
 import TopRated from "./TopRated";
+import NowPlayingTv from "../Tv/NowPlayingTv";
+import PopularTv from "../Tv/PopularTv";
+import TopRatedTv from "../Tv/TopRatedTv";
 
 const Categories = () => {
   return (
@@ -16,6 +19,9 @@ const Categories = () => {
         <Popular />
         <Tv />
         <UpComing />
+        <NowPlayingTv />
+        <PopularTv />
+        <TopRatedTv />
       </div>
     </div>
   );

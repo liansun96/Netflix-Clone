@@ -1,20 +1,29 @@
 import { useContext, useEffect, useState } from "react";
 import Logo from "../image/Logo.svg";
-import { BsSearch } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiLayoutGridFill } from "react-icons/ri";
 import { MdArrowDropDown } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
+import { BiSearch } from "react-icons/bi";
+import Profile from "../Profile";
 
 const TvNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
-  const { toggleSideBar } = useContext(ToggleContext);
+  const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef } =
+    useContext(ToggleContext);
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    setSearch(e.target.value);
+    navigate("/search");
+  };
 
   const handleShowSuggest = () => {
     setShowSuggest(!showSuggest);
@@ -56,9 +65,9 @@ const TvNav = () => {
                   className="text-gray-50 text-4xl"
                 />
               </div>
-              <div>
-                <img src={Logo} className="h-[45px]" alt="" />
-              </div>
+              <Link to={"/"}>
+                <img src={Logo} className="h-[45px] cursor-pointer" alt="" />
+              </Link>
               <div className="hidden lg:block">
                 <div className="flex items-center gap-5">
                   <NavLink to="/">
@@ -81,17 +90,24 @@ const TvNav = () => {
                       Latest
                     </p>
                   </NavLink>
-                  <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
-                    My List
-                  </p>
-                  <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
-                    Browse by Languages
-                  </p>
+                  <NavLink to={"/mylist"}>
+                    <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
+                      My List
+                    </p>
+                  </NavLink>
+                  <NavLink to={"/bbl"}>
+                    <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
+                      Browse by Languages
+                    </p>
+                  </NavLink>
                 </div>
               </div>
             </div>
             <div className="block lg:hidden">
               <input
+                ref={inputRef}
+                value={search}
+                onChange={handleInputChange}
                 type="text"
                 className="px-2 py-1 bg-transparent border border-gray-400 text-xs text-gray-50 font-semibold w-[100px] outline-none placeholder:text-gray-500 focus:rounded focus:border-gray-50"
                 placeholder="Search"
@@ -99,8 +115,28 @@ const TvNav = () => {
             </div>
             <div className="hidden lg:block">
               <div className="flex items-center gap-5">
-                <BsSearch className="text-white text-lg" />
+                <form
+                  className={`flex gap-3 px-2 items-center ${
+                    showInput && "border"
+                  } border-white cursor-pointer`}
+                >
+                  <BiSearch
+                    onClick={handleInput}
+                    className="text-white text-xl"
+                  />
+                  <input
+                    ref={inputRef}
+                    value={search}
+                    onChange={handleInputChange}
+                    type="text"
+                    className={`${
+                      showInput ? "w-[220px]" : "w-0"
+                    } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
+                    placeholder="Search by name"
+                  />
+                </form>
                 <IoMdNotificationsOutline className="text-white text-2xl" />
+                <Profile />
               </div>
             </div>
           </div>
@@ -111,9 +147,7 @@ const TvNav = () => {
               } absolute text-white text-3xl w-full pl-12 pr-10 py-2 flex items-center justify-between duration-300`}
             >
               <div className="flex items-center gap-10 relative">
-                <h1 className="text-3xl text-gray-50 font-semibold">
-                  Tv Shows
-                </h1>
+                <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
                 <div className="relative">
                   <button className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1">
                     Genres
