@@ -10,8 +10,6 @@ const HomeNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
   const { toggleSideBar } = useContext(ToggleContext);
 
-
-
   useEffect(() => {
     const scrollFunc = () => {
       setScrollHeight(parseInt(window.scrollY));

@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import NavBar from "../components/Navbar";
 import {
   useGetMovieImageQuery,
-  useGetMovieQuery,
   useGetNowPlayingQuery,
 } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
