@@ -17,7 +17,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="hidden lg:block">
-        <div className="flex flex-col gap-3 w-[75%] mx-auto pt-10">
+        <div className="flex flex-col gap-3 w-[75%] mx-auto">
           <div className="flex items-center justify-start gap-5 w-full">
             <BiLogoFacebook className="text-white text-3xl cursor-pointer" />
             <BiLogoInstagram className="text-white text-3xl cursor-pointer" />

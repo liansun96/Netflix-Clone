@@ -6,7 +6,7 @@ import Movies from "./Pages/Movies";
 import TvShows from "./Pages/TvShows";
 import SideBar from "./components/SideBar";
 import MyList from "./Pages/MyList";
-import Search from "./components/Search";
+import Search from "./Pages/Search";
 
 const App = () => {
   return (

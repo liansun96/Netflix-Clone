@@ -1,14 +1,30 @@
 import { useContext, useEffect, useState } from "react";
 import Logo from "./image/Logo.svg";
-import { BsSearch } from "react-icons/bs";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { BiSearch } from "react-icons/bi";
+import { IoMdNotificationsOutline, IoMdArrowDropdown } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../Context/ToggleProvider";
 
 const HomeNav = () => {
+  const { search, setSearch, showInput, setShowInput, handleInput, inputRef } =
+    useContext(ToggleContext);
+
   const [scrollHeight, setScrollHeight] = useState(0);
   const { toggleSideBar } = useContext(ToggleContext);
+
+  const [hovered, setHovered] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleHover = () => {
+    setHovered(!hovered);
+  };
+
+  const handleInputChange = (e) => {
+    setSearch(e.target.value);
+    navigate("/search");
+  };
 
   useEffect(() => {
     const scrollFunc = () => {
@@ -22,13 +38,20 @@ const HomeNav = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // When the component mounts, focus the input element
+    // inputRef.current.focus();
+  }, []);
+
   return (
     <div className="">
       <div className="fixed top-0 w-full z-50">
         <div
           className={`${
-            scrollHeight > 100 ? "lg:bg-[#141414] lg:bg-opacity-90" : "bg-transparent"
-          } absolute w-full px-3 lg:px-10 py-2`}
+            scrollHeight > 100
+              ? "lg:bg-[#141414] lg:bg-opacity-90"
+              : "bg-transparent"
+          } absolute w-full px-3 lg:px-10 py-2 home-nav-bg`}
         >
           <div className="flex items-start lg:items-center justify-between">
             <div className="flex items-center gap-1 lg:gap-5">
@@ -79,10 +102,63 @@ const HomeNav = () => {
                 placeholder="Search"
               />
             </div>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block ">
               <div className="flex items-center gap-5">
-                <BsSearch className="text-white text-lg" />
+                <form
+                  className={`flex gap-3 px-2 items-center ${
+                    showInput && "border"
+                  } border-white cursor-pointer`}
+                >
+                  <BiSearch
+                    onClick={handleInput}
+                    className="text-white text-xl"
+                  />
+                  <input
+                    ref={inputRef}
+                    value={search}
+                    onChange={handleInputChange}
+                    type="text"
+                    className={`${
+                      showInput ? "w-[220px]" : "w-0"
+                    } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
+                    placeholder="Search by name"
+                  />
+                </form>
                 <IoMdNotificationsOutline className="text-white text-2xl" />
+                <div
+                  className="flex relative"
+                  onMouseEnter={handleHover}
+                  onMouseLeave={handleHover}
+                >
+                  <div className="flex items-center gap-1 ">
+                    <div className="h-[30px] w-[30px] bg-white rounded"></div>
+                    <div>
+                      <IoMdArrowDropdown
+                        className={`${
+                          hovered
+                            ? "rotate-180 duration-300"
+                            : "rotate-0 duration-300"
+                        } text-gray-50`}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={`${
+                      hovered
+                        ? "opacity-100  duration-300"
+                        : "opacity-0 duration-300"
+                    } w-[180px] absolute bg-black top-10 right-5 p-3`}
+                  >
+                    <div className="flex flex-col gap-1">
+                      <p className="text-gray-50 text-xs">Manage Profile</p>
+                      <p className="text-gray-50 text-xs">Exit Profile</p>
+                      <p className="text-gray-50 text-xs">Manage Profile</p>
+                      <p className="text-gray-50 text-xs">Transfer Profile</p>
+                      <p className="text-gray-50 text-xs">Account</p>
+                      <p className="text-gray-50 text-xs">Help Center</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

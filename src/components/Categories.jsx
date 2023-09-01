@@ -8,9 +8,9 @@ import TopRated from "./TopRated";
 
 const Categories = () => {
   return (
-    <div className="bg-[#141414] pt-20 pb-10 lg:pt-10 lg:pb-10">
+    <div className="category-bg pt-48 lg:pt-10 translate-y-[-140px] h-full">
       <div className="w-[95%] mx-auto">
-        <Movie/>
+        <Movie />
         <NowPlaying/>
         <TopRated/>
         <Popular />
