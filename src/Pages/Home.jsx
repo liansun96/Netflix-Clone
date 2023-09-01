@@ -5,7 +5,7 @@ import HomeNav from "../components/HomeNav";
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="bg-[#141414]">
       <HomeNav />
       <div className="">
         <div className="overflow-hidden">

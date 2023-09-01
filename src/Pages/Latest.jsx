@@ -10,7 +10,7 @@ import TopRated from "../components/TopRated";
 import { ToggleContext } from "../Context/ToggleProvider";
 import MovieDetail from "../components/MovieDetail";
 import PlayMovie from "../components/PlayMovie";
-import LatestNav from "../components/LatesNav";
+import HomeNav from "../components/HomeNav";
 
 const Latest = () => {
   const {
@@ -46,7 +46,7 @@ const Latest = () => {
 
   return (
     <div className="">
-      <LatestNav />
+      <HomeNav />
       <div className="">
         <div className="overflow-hidden">
           <header
@@ -64,7 +64,7 @@ const Latest = () => {
                 src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
                 alt=""
               />
-              <h1 className="w-[600px] text-lg text-white drop-shadow-2xl font-semibold">
+              <h1 className="w-[600px] text-white drop-shadow-2xl font-semibold">
                 {movie?.overview}
               </h1>
               <div className="flex items-center gap-3">
