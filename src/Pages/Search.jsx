@@ -5,10 +5,21 @@ import { HiOutlinePlus } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
 import HomeNav from "../components/HomeNav";
 import { ToggleContext } from "../Context/ToggleProvider";
+import { useNavigate } from "react-router";
+import MovieDetail from "../components/MovieDetail";
+import PlayMovie from "../components/PlayMovie";
 
 const Search = () => {
-  const { search, setSearch, showInput, setShowInput, inputRef } =
-    useContext(ToggleContext);
+  const {
+    search,
+    setShowInput,
+    inputRef,
+    handleGetId,
+    modal,
+    toggleModal,
+    playMovieModal,
+    togglePlayMovieModal,
+  } = useContext(ToggleContext);
 
   const { data } = useGetSearchQuery({ search });
   console.log(data);
@@ -20,34 +31,32 @@ const Search = () => {
     inputRef.current.focus();
   }, []);
 
+  const navigate = useNavigate();
+  if (search == "") {
+    navigate(-1);
+  }
+
   return (
     <>
       <HomeNav />
-      <div className="px-3 lg:px-10 bg-[#141414] h-auto pb-20">
+      <div className="px-3 lg:px-10 bg-[#141414] min-h-screen pb-20">
         <div className="flex flex-wrap justify-between gap-5 relative pt-28">
           {data?.results?.map((result, index) => {
-            //   const handelPlay = () => {
-            //     togglePlayMovieModal();
-            //     handleGetId(result?.id);
-            //   };
-            //   const handelDetail = () => {
-            //     toggleModal();
-            //     handleGetId(result?.id);
-            //   };
+            const handelPlay = () => {
+              togglePlayMovieModal();
+              handleGetId(result?.id);
+            };
+            const handelDetail = () => {
+              toggleModal();
+              handleGetId(result?.id);
+            };
             return (
               <div key={result?.id} className="w-[220px]">
                 <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
                   <div className="group/item flex flex-col">
-                    {/* <img
-                    // onClick={handelDetail}
-                    className="rounded-lg cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
-                    src={
-                      "https://image.tmdb.org/t/p/w300" + result?.backdrop_path
-                    }
-                    alt=""
-                  /> */}
                     {result?.backdrop_path == null ? (
                       <img
+                        onClick={handelDetail}
                         src={
                           "https://image.tmdb.org/t/p/w300" +
                           result?.poster_path
@@ -57,6 +66,7 @@ const Search = () => {
                       />
                     ) : (
                       <img
+                        onClick={handelDetail}
                         src={
                           "https://image.tmdb.org/t/p/w300" +
                           result?.backdrop_path
@@ -70,7 +80,7 @@ const Search = () => {
                         <div className="flex justify-between items-center w-full">
                           <div className="flex items-center gap-2">
                             <button
-                              // onClick={handelPlay}
+                              onClick={handelPlay}
                               className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300"
                             >
                               <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
@@ -89,7 +99,7 @@ const Search = () => {
                             </button>
                           </div>
                           <button
-                            // onClick={handelDetail}
+                            onClick={handelDetail}
                             className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
                           >
                             <BsChevronDown className="text-sm text-gray-200" />
@@ -99,9 +109,13 @@ const Search = () => {
                             </div>
                           </button>
                         </div>
-                        <h1 className="text-xs text-white">{result?.title}</h1>
+                        <h1 className="text-xs text-white">
+                          {result?.title == null
+                            ? result?.original_name
+                            : result?.title}
+                        </h1>
                         <h1 className="text-[10px] text-green-500 font-semibold">
-                          {result?.vote_average * 10}% Match
+                          {(result?.vote_average * 10).toFixed(1)}% Match
                         </h1>
                       </div>
                     </div>
@@ -112,6 +126,8 @@ const Search = () => {
           })}
         </div>
       </div>
+      {modal && <MovieDetail />}
+      {playMovieModal && <PlayMovie />}
     </>
   );
 };

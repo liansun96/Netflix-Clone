@@ -7,7 +7,6 @@ import {
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import {
-  useGetMovieDetailQuery,
   useGetMovieQuery,
 } from "../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
