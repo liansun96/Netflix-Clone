@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer/Footer";
 import {
   useGetMovieImageQuery,
   useGetNowPlayingQuery,
 } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
-import NowPlaying from "../components/NowPlaying";
-import TopRated from "../components/TopRated";
+import NowPlaying from "../components/Home/NowPlaying";
+import TopRated from "../components/Home/TopRated";
 import { ToggleContext } from "../Context/ToggleProvider";
-import MovieDetail from "../components/MovieDetail";
-import PlayMovie from "../components/PlayMovie";
-import HomeNav from "../components/HomeNav";
+import MovieDetail from "../components/Movie/MovieDetail";
+import PlayMovie from "../components/Movie/PlayMovie";
+import LatestNav from "../components/Latest/LatesNav";
 
 const Latest = () => {
   const {
@@ -46,11 +46,11 @@ const Latest = () => {
 
   return (
     <div className="">
-      <HomeNav />
+      <LatestNav />
       <div className="">
         <div className="overflow-hidden">
           <header
-            className="h-screen w-full shadow-inner"
+            className="h-screen w-full hidden lg:block"
             style={{
               paddingTop: "200px",
               backgroundSize: "cover",
@@ -58,7 +58,7 @@ const Latest = () => {
               backgroundPosition: "center center",
             }}
           >
-            <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-20 pl-12">
+            <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-28 pl-12">
               <img
                 className="w-[350px]"
                 src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
@@ -91,8 +91,8 @@ const Latest = () => {
             {modal && <MovieDetail />}
             {playMovieModal && <PlayMovie />}
           </header>
-          <div className="bg-[#141414] py-10">
-            <div className="w-[95%] mx-auto">
+          <div className="bg-[#141414] pt-20 lg:pt-0">
+            <div className="w-[95%] mx-auto lg:-translate-y-24">
               <NowPlaying />
               <TopRated />
             </div>

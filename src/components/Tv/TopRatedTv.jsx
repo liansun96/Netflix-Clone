@@ -6,15 +6,18 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetUpcomingQuery } from "../redux/api/movieApi";
+import {
+  useGetTopRatedQuery,
+} from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
+import MovieDetail from "../Movie/MovieDetail";
 
-const UpComing = () => {
+const TopRatedTv = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
     useContext(ToggleContext);
 
-  const { data } = useGetUpcomingQuery();
+  const { data } = useGetTopRatedQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -41,7 +44,7 @@ const UpComing = () => {
         <div className="flex items-end justify-between w-full">
           <div className="flex items-center gap-1  group/exp cursor-pointer">
             <h1 className="text-xl font-semibold text-gray-50">
-              Up Coming on Netflix
+              Top Rated
             </h1>
             <div className="flex items-center mt-1.5">
               <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
@@ -75,7 +78,6 @@ const UpComing = () => {
                   togglePlayMovieModal();
                   handleGetId(result?.id);
                 };
-
                 const handelDetail = () => {
                   toggleModal();
                   handleGetId(result?.id);
@@ -154,8 +156,9 @@ const UpComing = () => {
           </div>
         </div>
       </div>
+      {modal && <MovieDetail />}
     </div>
   );
 };
 
-export default UpComing;
+export default TopRatedTv;

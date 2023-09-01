@@ -2,21 +2,23 @@ import React, { useContext } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { IoPlaySharp } from "react-icons/io5";
 import { VscTriangleDown } from "react-icons/vsc";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 
-const SimilarTv = ({ result }) => {
-
-  const { toggleTvModal, togglePlayTvModal, handleGetId } =
+const SimilarMovie = ({ result }) => {
+  const { toggleModal, togglePlayMovieModal, handleGetId } =
     useContext(ToggleContext);
 
   const handelPlay = () => {
-    togglePlayTvModal();
-    toggleTvModal();
+    togglePlayMovieModal();
+    toggleModal();
     handleGetId(result?.id);
   };
 
   return (
-    <div onClick={handelPlay} className="group/edit w-[250px] h-[350px] bg-[#2F2F2F] rounded cursor-pointer">
+    <div
+      onClick={handelPlay}
+      className="group/edit w-[250px] h-[350px] bg-[#2F2F2F] rounded cursor-pointer"
+    >
       <div className="relative">
         {result?.backdrop_path == null ? (
           <img
@@ -37,20 +39,20 @@ const SimilarTv = ({ result }) => {
       </div>
       <div className="p-3 flex flex-col gap-3">
         <p className="text-sm text-white font-bold">
-          {result?.original_name?.length > 28
-            ? `${result?.original_name?.substring(0, 28)} . . .`
-            : result?.original_name}
+          {result?.title?.length > 27
+            ? `${result?.title?.substring(0, 27)} . . .`
+            : result?.title}
         </p>
         <div className="flex justify-between items-center">
           <div className="">
             <p className="font-bold text-green-500">
               <span>{result?.vote_average?.toFixed(1) * 10}%</span> Match
             </p>
-            <p className="text-white">
-              <span className="text-sm font-semibold text-gray-500">
-                Released
-              </span>{" "}
-              : {result?.first_air_date}
+            <p className="text-sm font-semibold text-[#747474]">
+              Release :{" "}
+              <span className="text-base text-white">
+                {result?.release_date}
+              </span>
             </p>
           </div>
           <div className="group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
@@ -71,4 +73,4 @@ const SimilarTv = ({ result }) => {
   );
 };
 
-export default SimilarTv;
+export default SimilarMovie;

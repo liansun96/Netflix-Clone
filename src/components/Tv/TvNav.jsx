@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import Logo from "./image/Logo.svg";
+import Logo from "../image/Logo.svg";
 import { BsSearch } from "react-icons/bs";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
@@ -7,9 +7,9 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiLayoutGridFill } from "react-icons/ri";
 import { MdArrowDropDown } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 
-const MovieNav = () => {
+const TvNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -45,7 +45,7 @@ const MovieNav = () => {
   }, []);
 
   return (
-    <div className="mb-5">
+    <div className="pb-0 lg:pb-5">
       <div className="fixed top-0 w-full z-50">
         <div className="">
           <div className="flex items-start lg:items-center justify-between px-3 lg:px-10 py-2 home-bg lg:bg-[#141414]">
@@ -111,7 +111,9 @@ const MovieNav = () => {
               } absolute text-white text-3xl w-full pl-12 pr-10 py-2 flex items-center justify-between duration-300`}
             >
               <div className="flex items-center gap-10 relative">
-                <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
+                <h1 className="text-3xl text-gray-50 font-semibold">
+                  Tv Shows
+                </h1>
                 <div className="relative">
                   <button className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1">
                     Genres
@@ -252,4 +254,4 @@ const MovieNav = () => {
   );
 };
 
-export default MovieNav;
+export default TvNav;

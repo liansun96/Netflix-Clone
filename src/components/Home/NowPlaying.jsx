@@ -6,9 +6,9 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetNowPlayingQuery } from "../redux/api/movieApi";
+import { useGetNowPlayingQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 
 const NowPlaying = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal } =

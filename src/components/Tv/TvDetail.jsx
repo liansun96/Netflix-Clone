@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 import {
   useGetTvDetailQuery,
   useGetTvDetailRecommendationsQuery,
   useGetTvDetailVideoQuery,
-} from "../redux/api/movieApi";
+} from "../../redux/api/movieApi";
 import { RxCross1 } from "react-icons/rx";
 import YouTube from "react-youtube";
 import { Link } from "react-router-dom";

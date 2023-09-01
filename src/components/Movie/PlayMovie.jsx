@@ -1,18 +1,18 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 import {
-  useGetTvDetailQuery,
-  useGetTvDetailVideoQuery,
-} from "../redux/api/movieApi";
+  useGetDetailVideoQuery,
+  useGetMovieDetailQuery,
+} from "../../redux/api/movieApi";
 import { RxCross1 } from "react-icons/rx";
 import YouTube from "react-youtube";
 
-const PlayTv = () => {
+const PlayMovie = () => {
   const [trailer, setTrailer] = useState([]);
 
-  const { togglePlayTvModal, id } = useContext(ToggleContext);
-  const { data } = useGetTvDetailQuery({ id });
-  const { data: video } = useGetTvDetailVideoQuery({ id });
+  const { togglePlayMovieModal, id } = useContext(ToggleContext);
+  const { data } = useGetMovieDetailQuery({ id });
+  const { data: video } = useGetDetailVideoQuery({ id });
   console.log(id);
   console.log(data);
 
@@ -56,7 +56,7 @@ const PlayTv = () => {
 
   return (
     <div
-      onClick={togglePlayTvModal}
+      onClick={togglePlayMovieModal}
       className="fixed inset-0 bg-black bg-opacity-5 transition-all backdrop-blur-sm flex justify-center items-center z-[1005]"
     >
       <div
@@ -68,7 +68,7 @@ const PlayTv = () => {
         </div>
 
         <button
-          onClick={togglePlayTvModal}
+          onClick={togglePlayMovieModal}
           className="w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] -top-10 group-hover:top-8  text-center bg-white bg-opacity-70 hover:bg-opacity-80 duration-150"
         >
           <RxCross1 className="text-black font-bold scale-150" />
@@ -78,4 +78,4 @@ const PlayTv = () => {
   );
 };
 
-export default PlayTv;
+export default PlayMovie;
