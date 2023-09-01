@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 
 const SideBar = () => {
   const { sBar, toggleSideBar } = useContext(ToggleContext);

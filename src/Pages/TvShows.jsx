@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer/Footer";
 import { useGetTvImageQuery, useGetTvQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
-import Tv from "../components/Tv";
-import Popular from "../components/Popular";
-import UpComing from "../components/UpComing";
+import Tv from "../components/Tv/Tv";
+import UpComing from "../components/Home/UpComing";
 import { ToggleContext } from "../Context/ToggleProvider";
-import TvDetail from "../components/TvDetail";
-import PlayTv from "../components/PlayTv";
-import PlayMovie from "../components/PlayMovie";
-import TvNav from "../components/TvNav";
+import TvDetail from "../components/Tv/TvDetail";
+import PlayTv from "../components/Tv/PlayTv";
+import PlayMovie from "../components/Movie/PlayMovie";
+import TvNav from "../components/Tv/TvNav";
+import PopularTv from "../components/Tv/PopularTv";
+import NowPlayingTv from "../components/Tv/NowPlayingTv";
+import TopRatedTv from "../components/Tv/TopRatedTv";
 
 const TvShows = () => {
   const {
@@ -58,7 +60,7 @@ const TvShows = () => {
       <div className="">
         <div className="overflow-hidden">
           <header
-            className="h-screen w-full shadow-inner"
+            className="h-screen w-full hidden lg:block"
             style={{
               backgroundSize: "cover",
               backgroundImage: `url("https:/image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
@@ -99,11 +101,12 @@ const TvShows = () => {
               </div>
             </div>
           </header>
-          <div className="bg-[#141414] py-10">
-            <div className="w-[95%] mx-auto">
+          <div className="bg-[#141414] pt-20 lg:pt-0">
+            <div className="w-[95%] mx-auto lg:-translate-y-24">
               <Tv />
-              <Popular />
-              <UpComing />
+              <PopularTv />
+              <NowPlayingTv />
+              <TopRatedTv />
             </div>
           </div>
           <Footer />

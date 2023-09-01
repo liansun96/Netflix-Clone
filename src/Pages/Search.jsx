@@ -3,11 +3,11 @@ import { useGetSearchQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { HiOutlinePlus } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
-import HomeNav from "../components/HomeNav";
+import HomeNav from "../components/Home/HomeNav";
 import { ToggleContext } from "../Context/ToggleProvider";
 import { useNavigate } from "react-router";
-import MovieDetail from "../components/MovieDetail";
-import PlayMovie from "../components/PlayMovie";
+import MovieDetail from "../components/Movie/MovieDetail";
+import PlayMovie from "../components/Movie/PlayMovie";
 
 const Search = () => {
   const {
@@ -40,7 +40,7 @@ const Search = () => {
     <>
       <HomeNav />
       <div className="px-3 lg:px-10 bg-[#141414] min-h-screen pb-20">
-        <div className="flex flex-wrap justify-between gap-5 relative pt-28">
+        <div className="flex flex-wrap justify-center gap-5 relative pt-28">
           {data?.results?.map((result, index) => {
             const handelPlay = () => {
               togglePlayMovieModal();

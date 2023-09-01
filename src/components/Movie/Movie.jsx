@@ -6,12 +6,10 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import {
-  useGetMovieQuery,
-} from "../redux/api/movieApi";
+import { useGetMovieQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 
 const Movie = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal } =

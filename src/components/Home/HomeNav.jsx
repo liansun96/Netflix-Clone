@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import Logo from "./image/Logo.svg";
+import Logo from "../image/Logo.svg";
 import { BiSearch } from "react-icons/bi";
 import { IoMdNotificationsOutline, IoMdArrowDropdown } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToggleContext } from "../Context/ToggleProvider";
-import Profile from "./Profile";
+import { ToggleContext } from "../../Context/ToggleProvider";
+import Profile from "../Profile";
 
 const HomeNav = () => {
   const { search, setSearch, showInput, setShowInput, handleInput, inputRef } =

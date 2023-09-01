@@ -2,17 +2,17 @@ import React, { useContext } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { IoPlaySharp } from "react-icons/io5";
 import { VscTriangleDown } from "react-icons/vsc";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 
-const SimilarMovie = ({ result }) => {
-  const { toggleModal, togglePlayMovieModal, handleGetId } =
+const SimilarTv = ({ result }) => {
+  const { toggleTvModal, togglePlayTvModal, handleGetId } =
     useContext(ToggleContext);
 
   const handelPlay = () => {
-    togglePlayMovieModal();
-    toggleModal();
+    togglePlayTvModal();
+    toggleTvModal();
     handleGetId(result?.id);
-  };  
+  };
 
   return (
     <div
@@ -39,20 +39,20 @@ const SimilarMovie = ({ result }) => {
       </div>
       <div className="p-3 flex flex-col gap-3">
         <p className="text-sm text-white font-bold">
-          {result?.title?.length > 27
-            ? `${result?.title?.substring(0, 27)} . . .`
-            : result?.title}
+          {result?.original_name?.length > 28
+            ? `${result?.original_name?.substring(0, 28)} . . .`
+            : result?.original_name}
         </p>
         <div className="flex justify-between items-center">
           <div className="">
             <p className="font-bold text-green-500">
               <span>{result?.vote_average?.toFixed(1) * 10}%</span> Match
             </p>
-            <p className="text-sm font-semibold text-[#747474]">
-              Release :{" "}
-              <span className="text-base text-white">
-                {result?.release_date}
-              </span>
+            <p className="text-white">
+              <span className="text-sm font-semibold text-gray-500">
+                Released
+              </span>{" "}
+              : {result?.first_air_date}
             </p>
           </div>
           <div className="group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
@@ -73,4 +73,4 @@ const SimilarMovie = ({ result }) => {
   );
 };
 
-export default SimilarMovie;
+export default SimilarTv;

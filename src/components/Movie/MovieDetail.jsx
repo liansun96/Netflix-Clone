@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { ToggleContext } from "../Context/ToggleProvider";
+import { ToggleContext } from "../../Context/ToggleProvider";
 import {
   useGetDetailRecommendationsQuery,
   useGetDetailVideoQuery,
   useGetMovieDetailQuery,
-} from "../redux/api/movieApi";
+} from "../../redux/api/movieApi";
 import { RxCross1 } from "react-icons/rx";
 import YouTube from "react-youtube";
 import "./MovieDetail.css";
@@ -36,7 +36,7 @@ const MovieDetail = () => {
       autoplay: 0,
     },
   };
-  
+
   const castLength = data?.credits?.cast.length - 1;
   // console.log(castLength);
   const castNameSm = [];

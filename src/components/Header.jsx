@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useGetMovieImageQuery, useGetMovieQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import { ToggleContext } from "../Context/ToggleProvider";
-import MovieDetail from "./MovieDetail";
-import PlayMovie from "./PlayMovie";
+import MovieDetail from "./Movie/MovieDetail";
+import PlayMovie from "./Movie/PlayMovie";
 
 const Header = () => {
   const {
@@ -24,11 +24,9 @@ const Header = () => {
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
-    setMovie(
-      data?.results[Math.floor(Math.random() * data?.results?.length)]
-    );
+    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
   }, [data]);
-  
+
   const handelDetail = () => {
     toggleModal();
     handleGetId(movie?.id);
@@ -54,7 +52,7 @@ const Header = () => {
         backgroundPosition: "center center",
       }}
     >
-      <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-48 pl-12">
+      <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-28 pl-12">
         <img
           className="w-[350px]"
           src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}

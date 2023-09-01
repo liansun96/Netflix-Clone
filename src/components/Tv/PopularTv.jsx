@@ -6,16 +6,18 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetPopularQuery } from "../redux/api/movieApi";
+import {
+  useGetPopularTvQuery,
+} from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
-import { ToggleContext } from "../Context/ToggleProvider";
-import MovieDetail from "./MovieDetail";
+import { ToggleContext } from "../../Context/ToggleProvider";
+import MovieDetail from "../Movie/MovieDetail";
 
-const Popular = () => {
+const PopularTv = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
     useContext(ToggleContext);
 
-  const { data } = useGetPopularQuery();
+  const { data } = useGetPopularTvQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -159,4 +161,4 @@ const Popular = () => {
   );
 };
 
-export default Popular;
+export default PopularTv;

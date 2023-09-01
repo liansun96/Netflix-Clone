@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router";
-import MovieDetail from "./components/MovieDetail";
 import Home from "./Pages/Home";
 import Latest from "./Pages/Latest";
 import Movies from "./Pages/Movies";
 import TvShows from "./Pages/TvShows";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/SideBar/SideBar";
 import MyList from "./Pages/MyList";
 import Search from "./Pages/Search";
 
