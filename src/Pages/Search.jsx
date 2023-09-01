@@ -23,7 +23,7 @@ const Search = () => {
   return (
     <>
       <HomeNav />
-      <div className="px-3 lg:px-10 bg-[#141414] min-h-screen pb-20">
+      <div className="px-3 lg:px-10 bg-[#141414] h-auto pb-20">
         <div className="flex flex-wrap justify-between gap-5 relative pt-28">
           {data?.results?.map((result, index) => {
             //   const handelPlay = () => {
