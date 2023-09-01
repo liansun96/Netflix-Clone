@@ -1,19 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import Logo from "./image/Logo.svg";
 import { BiSearch } from "react-icons/bi";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoMdNotificationsOutline, IoMdArrowDropdown } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../Context/ToggleProvider";
 
 const HomeNav = () => {
-  const { search, setSearch, showInput, setShowInput, handleInput ,inputRef } =
+  const { search, setSearch, showInput, setShowInput, handleInput, inputRef } =
     useContext(ToggleContext);
 
   const [scrollHeight, setScrollHeight] = useState(0);
   const { toggleSideBar } = useContext(ToggleContext);
 
+  const [hovered, setHovered] = useState(false);
+
   const navigate = useNavigate();
+
+  const handleHover = () => {
+    setHovered(!hovered);
+  };
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
@@ -32,11 +38,11 @@ const HomeNav = () => {
     };
   }, []);
 
-  useEffect(()=>{  
+  useEffect(() => {
     // When the component mounts, focus the input element
     // inputRef.current.focus();
-  },[])  
-  
+  }, []);
+
   return (
     <div className="">
       <div className="fixed top-0 w-full z-50">
@@ -119,6 +125,40 @@ const HomeNav = () => {
                   />
                 </form>
                 <IoMdNotificationsOutline className="text-white text-2xl" />
+                <div
+                  className="flex relative"
+                  onMouseEnter={handleHover}
+                  onMouseLeave={handleHover}
+                >
+                  <div className="flex items-center gap-1 ">
+                    <div className="h-[30px] w-[30px] bg-white rounded"></div>
+                    <div>
+                      <IoMdArrowDropdown
+                        className={`${
+                          hovered
+                            ? "rotate-180 duration-300"
+                            : "rotate-0 duration-300"
+                        } text-gray-50`}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={`${
+                      hovered
+                        ? "opacity-100  duration-300"
+                        : "opacity-0 duration-300"
+                    } w-[180px] absolute bg-black top-10 right-5 p-3`}
+                  >
+                    <div className="flex flex-col gap-1">
+                      <p className="text-gray-50 text-xs">Manage Profile</p>
+                      <p className="text-gray-50 text-xs">Exit Profile</p>
+                      <p className="text-gray-50 text-xs">Manage Profile</p>
+                      <p className="text-gray-50 text-xs">Transfer Profile</p>
+                      <p className="text-gray-50 text-xs">Account</p>
+                      <p className="text-gray-50 text-xs">Help Center</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
