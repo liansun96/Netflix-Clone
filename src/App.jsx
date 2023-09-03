@@ -7,12 +7,16 @@ import SideBar from "./components/SideBar/SideBar";
 import MyList from "./Pages/MyList";
 import Search from "./Pages/Search";
 import Bbl from "./Pages/Bbl";
+import SignUp from "./Pages/SignUp";
+import SignIn from "./Pages/SignIn";
 
 const App = () => {
   return (
     <div className="relative">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/tvshows" element={<TvShows />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/latest" element={<Latest />} />
