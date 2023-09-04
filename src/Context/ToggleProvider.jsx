@@ -16,6 +16,7 @@ const ToggleProvider = ({ children }) => {
   const handleInput = () => {
     setShowInput(!showInput);
   };
+
   const submitHandler = () => {
     setToken(!token);
     if (token === true) nav("/");
@@ -25,7 +26,6 @@ const ToggleProvider = ({ children }) => {
   const [sBar, setSBar] = useState(false);
   const toggleSideBar = () => {
     setSBar(!sBar);
-    console.log("hello");
   };
 
   //DetailModal

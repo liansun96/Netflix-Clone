@@ -10,9 +10,16 @@ const SideBar = () => {
         sBar ? "translate-x-0" : "-translate-x-96"
       } w-full h-screen bg-transparent fixed left-0 top-0 block lg:hidden duration-300`}
     >
-      <div className="w-[250px] h-screen absolute bg-black">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-[250px] h-screen absolute bg-black"
+      >
         <div className="h-[80px]"></div>
         <div className="flex flex-col gap-1 p-3">
+          <div className="flex items-center gap-1">
+            <div className="h-[30px] w-[30px] bg-gray-50 rounded"></div>
+            <p className="text-gray-50 font-semibold">Marcus</p>
+          </div>
           <p className="font-semibold text-gray-400">Account</p>
           <p className="font-semibold text-gray-400">Help Center</p>
           <p className="font-semibold text-gray-400">Sign Out of Netflix</p>

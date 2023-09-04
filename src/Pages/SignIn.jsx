@@ -3,24 +3,36 @@ import { AiFillFacebook } from "react-icons/ai";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../Context/ToggleProvider";
 import "./SignUp.css";
+import { ClapSpinner } from "react-spinners-kit";
 
 const SignIn = () => {
   const { setToken } = useContext(ToggleContext);
 
   const [email, setEmail] = useState("marcusjude.lian");
   const [password, setPassword] = useState("jokerxbox");
+  const [isLoading, setIsLoading] = useState(false);
 
   const nav = useNavigate();
 
   const handleSignIn = (e) => {
     e.preventDefault();
     if (email === "marcusjude.lian" && password === "jokerxbox") {
+      setIsLoading(true);
       setToken(true);
       setTimeout(() => {
+        setIsLoading(false);
         nav("/");
-      }, []);
+      }, 2000);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="h-screen w-full bg-black flex items-center justify-center">
+        <ClapSpinner size={30} backColor="#C30010" frontColor="#C30010" />
+      </div>
+    );
+  }
 
   return (
     <div className="signup-bg w-full h-screen">
