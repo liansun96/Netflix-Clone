@@ -8,11 +8,13 @@ import TopRated from "./TopRated";
 import NowPlayingTv from "../Tv/NowPlayingTv";
 import PopularTv from "../Tv/PopularTv";
 import TopRatedTv from "../Tv/TopRatedTv";
+import Test from "../Test/Test";
 
 const Categories = () => {
   return (
     <div className="category-bg pt-48 lg:pt-10 translate-y-[-140px] h-full">
       <div className="w-[95%] mx-auto">
+        <Test/>
         <Movie />
         <NowPlaying />
         <TopRated />

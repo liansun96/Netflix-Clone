@@ -129,6 +129,10 @@ export const movieApi = createApi({
       query: ({search}) => `/search/multi?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_adult=false&query=${search}}`,
       providesTags: ["movieApi"]
     }),
+    getGenreSearch : builder.query({
+      query: ({id}) => `discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&sort_by=release_date.desc&page=1&with_genres=${id}`,
+      providesTags: ["movieApi"],
+    })
   }),
 });
 
@@ -158,4 +162,5 @@ export const {
   useGetNowPlayingTwoQuery,
   useGetTopRatedTwoQuery,
   useGetPopularTwoQuery,
+  useGetGenreSearchQuery,
 } = movieApi;

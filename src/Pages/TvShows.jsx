@@ -101,7 +101,7 @@ const TvShows = () => {
               </div>
             </div>
           </header>
-          <div className="bg-[#141414] pt-20 lg:pt-0">
+          <div className="pt-20 lg:pt-0">
             <div className="w-[95%] mx-auto lg:-translate-y-24">
               <Tv />
               <PopularTv />
