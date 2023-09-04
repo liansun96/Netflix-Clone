@@ -8,18 +8,24 @@ const ToggleProvider = ({ children }) => {
   //search input
   const [search, setSearch] = useState("");
 
+  const [token, setToken] = useState(false);
+
+  const inputRef = useRef(null);
+
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {
     setShowInput(!showInput);
   };
 
-  const inputRef = useRef(null);
+  const submitHandler = () => {
+    setToken(!token);
+    if (token === true) nav("/");
+  };
 
   //Sidebar
   const [sBar, setSBar] = useState(false);
   const toggleSideBar = () => {
     setSBar(!sBar);
-    console.log("hello");
   };
 
   //DetailModal
@@ -75,6 +81,8 @@ const ToggleProvider = ({ children }) => {
     handleGetId,
     toggleSideBar,
     sBar,
+    setToken,
+    token,
   };
 
   return (
