@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { AiFillFacebook } from "react-icons/ai";
-import "./SignIn.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { ToggleContext } from "../Context/ToggleProvider";
+import "./SignUp.css";
 
 const SignIn = () => {
+  const { setToken } = useContext(ToggleContext);
+
+  const [email, setEmail] = useState("marcusjude.lian");
+  const [password, setPassword] = useState("jokerxbox");
+
+  const nav = useNavigate();
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    if (email === "marcusjude.lian" && password === "jokerxbox") {
+      setToken(true);
+      setTimeout(() => {
+        nav("/");
+      }, []);
+    }
+  };
+
   return (
     <div className="signup-bg w-full h-screen">
       <div className="flex items-center justify-center w-full h-full">
@@ -13,24 +31,29 @@ const SignIn = () => {
               <h1 className="text-lg text-gray-50">Sign In</h1>
               <div className="">
                 <input
-                  type="text"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={email}
+                  type="email"
                   className="p-2 w-full bg-gray-500 outline-none text-gray-50 text-sm  rounded placeholder:text-gray-200 placeholder:text-sm"
-                  placeholder="Email or phone number"
+                  placeholder="Email"
                 />
               </div>
               <div className="">
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   type="text"
                   className="p-2 w-full bg-gray-500 outline-none text-gray-50 text-sm rounded placeholder:text-gray-200 placeholder:text-sm"
                   placeholder="Password"
                 />
               </div>
               <div className="mt-7">
-                <Link to={"/home"}>
-                  <div className="text-xs font-semibold text-gray-50 text-center bg-red-600 rounded w-full p-2.5">
-                    Sign in
-                  </div>
-                </Link>
+                <div
+                  onClick={handleSignIn}
+                  className="text-xs font-semibold text-gray-50 text-center bg-red-600 rounded w-full p-2.5 cursor-pointer"
+                >
+                  Sign in
+                </div>
               </div>
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center">
@@ -47,7 +70,7 @@ const SignIn = () => {
               </div>
               <div className="flex items-center gap-1">
                 <p className="text-xs text-gray-300">New to Netflix?</p>
-                <Link to={'/signup'}>
+                <Link to={"/signup"}>
                   <p className="text-xs text-gray-50 cursor-pointer font-semibold">
                     Sign up now
                   </p>

@@ -14,9 +14,9 @@ const App = () => {
   return (
     <div className="relative">
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/tvshows" element={<TvShows />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/latest" element={<Latest />} />

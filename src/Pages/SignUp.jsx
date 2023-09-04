@@ -1,5 +1,5 @@
 import React from "react";
-import "./SignIn.css";
+import "./SignUp.css";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
@@ -12,30 +12,28 @@ const SignUp = () => {
               <h1 className="text-lg text-gray-50">Sign Up</h1>
               <div className="">
                 <form>
-                  <label htmlFor="name" className="text-sm text-gray-50">
-                    Your name
+                  <label htmlFor="email" className="text-sm text-gray-50">
+                    Your Email
                   </label>
                   <input
-                    type="text"
-                    name="name"
+                    type="email"
                     className="p-2 w-full bg-gray-500 outline-none text-gray-50 text-sm  rounded placeholder:text-gray-200 placeholder:text-sm"
-                    placeholder="Enter your name"
+                    placeholder="Enter your email"
                   />
                 </form>
               </div>
               <form>
-                <label htmlFor="email" className="text-sm text-gray-50">
-                  Your email
+                <label htmlFor="password" className="text-sm text-gray-50">
+                  Password
                 </label>
                 <input
-                  type="email"
-                  name="email"
+                  type="text"
                   className="p-2 w-full bg-gray-500 outline-none text-gray-50 text-sm  rounded placeholder:text-gray-200 placeholder:text-sm"
-                  placeholder="Enter your email"
+                  placeholder="password"
                 />
               </form>
               <div className="mt-10">
-                <Link to={"/"}>
+                <Link to={"/signin"}>
                   <div className="text-xs font-semibold text-gray-50 text-center bg-red-600 rounded w-full p-2.5">
                     Sign Up
                   </div>
