@@ -5,6 +5,7 @@ import { BsBoxArrowUpRight } from "react-icons/bs";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { FaRegFaceSmileWink } from "react-icons/fa6";
 import { AiFillQuestionCircle } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [hovered, setHovered] = useState(false);
@@ -36,6 +37,12 @@ const Profile = () => {
       >
         <div className=" p-3 bg-black">
           <div className="flex flex-col gap-3">
+            <div className="flex gap-1 items-center cursor-pointer">
+              <div className="h-[30px] w-[30px] bg-gray-50 rounded"></div>
+              <h1 className="text-sm font-semibold text-gray-50 hover:text-gray-400 duration-300">
+                Marcus
+              </h1>
+            </div>
             <div className="flex gap-1 text-center">
               <span>
                 <RiEdit2Fill className="text-xl text-gray-50" />
@@ -77,9 +84,11 @@ const Profile = () => {
               </h1>
             </div>
             <p className="border border-x-0 border-t-0 border-gray-300"></p>
-            <p className="text-xs text-gray-50 hover:text-gray-300 font-semibold text-center cursor-pointer">
-              Sign out of Netflix
-            </p>
+            <Link to={'/signin'}>
+              <p className="text-xs text-gray-50 hover:text-gray-300 font-semibold text-center cursor-pointer">
+                Sign out of Netflix
+              </p>
+            </Link>
           </div>
         </div>
       </div>
