@@ -1,14 +1,10 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React from "react";
+import { useSelector } from "react-redux";
 
 const MyList = () => {
-    const favMoives = useSelector(state=>state)
-    console.log(favMoives);
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const favMoive = useSelector((state) => state);
+  console.log(favMoive);
+  return <div></div>;
+};
 
-export default MyList
+export default MyList;
