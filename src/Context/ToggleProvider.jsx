@@ -62,6 +62,13 @@ const ToggleProvider = ({ children }) => {
     setClickedId(id);
   };
 
+  //Get Genres Id
+  const [genreId, setGenreId] = useState(null);
+  const handleGetGenreId = (genreId) => {
+    // Set the clicked ID in the state
+    setGenreId(genreId);
+  };
+
   const value = {
     search,
     setSearch,
@@ -77,6 +84,8 @@ const ToggleProvider = ({ children }) => {
     togglePlayMovieModal,
     playTvModal,
     togglePlayTvModal,
+    genreId,
+    handleGetGenreId,
     id,
     handleGetId,
     toggleSideBar,

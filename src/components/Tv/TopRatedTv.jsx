@@ -7,17 +7,17 @@ import {
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import {
-  useGetTopRatedQuery,
+  useGetTopRatedTvQuery,
 } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import MovieDetail from "../Movie/MovieDetail";
 
 const TopRatedTv = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal ,genreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetTopRatedQuery();
+  const { data } = useGetTopRatedTvQuery({genreId});
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 

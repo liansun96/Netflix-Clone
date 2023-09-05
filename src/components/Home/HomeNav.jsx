@@ -99,7 +99,7 @@ const HomeNav = () => {
                 placeholder="Search"
               />
             </div>
-            <div className="hidden lg:block ">
+            <div onClick={handleInput} className="hidden lg:block ">
               <div className="flex items-center gap-5">
                 <form
                   className={`flex gap-3 px-2 items-center ${

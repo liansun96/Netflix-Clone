@@ -6,7 +6,8 @@ import Header from "../components/Header";
 import MovieNav from "../components/Movie/MovieNav";
 import NowPlayingMovie from "../components/Movie/NowPlayingMovie";
 import PopularMovie from "../components/Movie/PopularMovie";
-import TopRated from "../components/Home/TopRated";
+import TopRatedMovie from "../components/Movie/TopRatedMovie";
+
 
 const Movies = () => {
   const [movie, setMovie] = useState([]);
@@ -30,7 +31,7 @@ const Movies = () => {
               <Movie />
               <PopularMovie />
               <NowPlayingMovie />
-              <TopRated />
+              <TopRatedMovie />
             </div>
           </div>
           <Footer />

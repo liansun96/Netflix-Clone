@@ -7,17 +7,17 @@ import {
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import {
-  useGetTopRatedTwoQuery,
+  useGetTopRatedQuery,
 } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
 
 const TopRatedMovie = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetTopRatedTwoQuery();
+  const { data } = useGetTopRatedQuery({genreId});
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -44,7 +44,7 @@ const TopRatedMovie = () => {
         <div className="flex flex-col gap-2 px-3">
           <div className="flex items-end justify-between w-full">
             <div className="flex items-center gap-1  group/exp cursor-pointer">
-              <h1 className="text-xl font-semibold text-gray-50">Popular</h1>
+              <h1 className="text-xl font-semibold text-gray-50">Top Rated</h1>
               <div className="flex items-center mt-1.5">
                 <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
                   <p className="text-[11px] font-semibold text-blue-300">
