@@ -69,6 +69,20 @@ const ToggleProvider = ({ children }) => {
     setGenreId(genreId);
   };
 
+  //Get Genres Name
+  const [genreName, setGenreName] = useState('Genres');
+  const handleGetGenreName = (genreName) => {
+    // Set the clicked ID in the state
+    setGenreName(genreName);
+  };
+
+  //Get Genres Name
+  const [tvGenreName, setTvGenreName] = useState('Genres');
+  const handleGetTvGenreName = (tvGenreName) => {
+    // Set the clicked ID in the state
+    setTvGenreName(tvGenreName);
+  };
+
   const value = {
     search,
     setSearch,
@@ -86,6 +100,10 @@ const ToggleProvider = ({ children }) => {
     togglePlayTvModal,
     genreId,
     handleGetGenreId,
+    genreName,
+    handleGetGenreName,
+    tvGenreName,
+    handleGetTvGenreName,
     id,
     handleGetId,
     toggleSideBar,
