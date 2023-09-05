@@ -16,12 +16,22 @@ const MovieNav = () => {
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
-  const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef ,handleGetId, grnreId , handleGetGenreId } =
-    useContext(ToggleContext);
+  const {
+    toggleSideBar,
+    search,
+    setSearch,
+    showInput,
+    handleInput,
+    inputRef,
+    grnreId,
+    handleGetGenreId,
+    genreName,
+    handleGetGenreName,
+  } = useContext(ToggleContext);
 
   const { data: movieGenres } = useGetMovieGenresQuery();
   console.log(movieGenres?.genres);
-  console.log( grnreId);
+  console.log(grnreId);
 
   const navigate = useNavigate();
 
@@ -154,25 +164,30 @@ const MovieNav = () => {
               <div className="flex items-center gap-10 relative">
                 <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
                 <div className="relative">
-                  <button className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1">
-                    Genres
+                  <button
+                    onClick={handleShow}
+                    className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1"
+                  >
+                    {genreName}
                     <span>
-                      <MdArrowDropDown
-                        onClick={handleShow}
-                        className="text-lg"
-                      />
+                      <MdArrowDropDown className="text-lg" />
                     </span>
                   </button>
                   <div
                     className={`${
                       show ? "block" : "hidden"
-                    } w-[400px] h-[220px] absolute bg-black bg-opacity-80`}
+                    } w-[400px] h-[220px] absolute bg-black bg-opacity-80 `}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
                       <div className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
-                            <p onClick={()=>handleGetGenreId(genre?.id)} className="text-sm w-[120px] cursor-pointer">
+                            <p
+                              onClick={() => (
+                                handleGetGenreId(genre?.id),handleGetGenreName(genre?.name), handleShow()
+                              )}
+                              className="text-sm w-[120px] cursor-pointer"
+                            >
                               {genre?.name}
                             </p>
                           </div>
@@ -180,7 +195,7 @@ const MovieNav = () => {
                       </div>
                     </div>
                   </div>
-                </div>                
+                </div>
               </div>
               <div className="flex items-center">
                 <div

@@ -16,10 +16,19 @@ const TvNav = () => {
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
-  const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef ,handleGetGenreId } =
-    useContext(ToggleContext);
+  const {
+    toggleSideBar,
+    search,
+    setSearch,
+    showInput,
+    handleInput,
+    inputRef,
+    handleGetGenreId,
+    tvGenreName,
+    handleGetTvGenreName,
+  } = useContext(ToggleContext);
 
-  const { data : TvGenres } = useGetTvGenresQuery();
+  const { data: TvGenres } = useGetTvGenresQuery();
   console.log(TvGenres?.genres);
 
   const navigate = useNavigate();
@@ -153,13 +162,13 @@ const TvNav = () => {
               <div className="flex items-center gap-10 relative">
                 <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
                 <div className="relative">
-                  <button className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1">
-                    Genres
+                  <button
+                    onClick={handleShow}
+                    className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1"
+                  >
+                    {tvGenreName}
                     <span>
-                      <MdArrowDropDown
-                        onClick={handleShow}
-                        className="text-lg"
-                      />
+                      <MdArrowDropDown className="text-lg" />
                     </span>
                   </button>
                   <div
@@ -172,7 +181,11 @@ const TvNav = () => {
                         {TvGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
                             <p
-                              onClick={() => handleGetGenreId(genre?.id)}
+                              onClick={() => (
+                                handleGetGenreId(genre?.id),
+                                handleGetTvGenreName(genre?.name),
+                                handleShow()
+                              )}
                               className="text-sm w-[135px] cursor-pointer"
                             >
                               {genre?.name}
