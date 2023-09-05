@@ -10,6 +10,10 @@ const ToggleProvider = ({ children }) => {
 
   const [token, setToken] = useState(false);
 
+  const [movieShow, setMovieShow] = useState(false);
+
+  const [tvShow, setTvShow] = useState(false);
+
   const inputRef = useRef(null);
 
   const [showInput, setShowInput] = useState(false);
@@ -26,6 +30,14 @@ const ToggleProvider = ({ children }) => {
   const [sBar, setSBar] = useState(false);
   const toggleSideBar = () => {
     setSBar(!sBar);
+  };
+
+  const toggleMovieShow = () => {
+    setMovieShow(!movieShow);
+  };
+
+  const toggleTvShow = () => {
+    setTvShow(!tvShow);
   };
 
   //DetailModal
@@ -92,6 +104,10 @@ const ToggleProvider = ({ children }) => {
     sBar,
     setToken,
     token,
+    movieShow,
+    toggleMovieShow,
+    tvShow,
+    toggleTvShow,
   };
 
   return (

@@ -172,7 +172,7 @@ const MovieNav = () => {
                       <div className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
-                            <p onClick={()=>handleGetGenreId(genre?.id)} className="text-sm w-[120px] cursor-pointer">
+                            <p onClick={()=>handleGetGenreId(genre?.id)} className="text-sm w-[120px] cursor-pointer hover:underline">
                               {genre?.name}
                             </p>
                           </div>
