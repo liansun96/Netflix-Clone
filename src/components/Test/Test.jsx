@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { HiOutlinePlus , HiCheck } from "react-icons/hi";
+import { HiOutlinePlus, HiCheck } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { VscTriangleDown } from "react-icons/vsc";
 import {
