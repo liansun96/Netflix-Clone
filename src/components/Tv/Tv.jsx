@@ -19,9 +19,10 @@ const Tv = () => {
     toggleTvModal,
     playTvModal,
     togglePlayTvModal,
+    genreId,
   } = useContext(ToggleContext);
 
-  const { data } = useGetTvQuery();
+  const { data } = useGetTvQuery({genreId});
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 
