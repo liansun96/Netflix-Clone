@@ -11,10 +11,10 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
 
 const TopRated = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, id } =
     useContext(ToggleContext);
 
-  const { data } = useGetTopRatedQuery();
+  const { data } = useGetTopRatedQuery({id});
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 

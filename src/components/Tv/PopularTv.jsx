@@ -14,10 +14,10 @@ import { ToggleContext } from "../../Context/ToggleProvider";
 import MovieDetail from "../Movie/MovieDetail";
 
 const PopularTv = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetPopularTvQuery();
+  const { data } = useGetPopularTvQuery({genreId});
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 

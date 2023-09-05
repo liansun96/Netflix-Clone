@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { HiOutlinePlus } from "react-icons/hi";
+import { HiOutlinePlus , HiCheck } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { VscTriangleDown } from "react-icons/vsc";
 import {
@@ -25,7 +25,7 @@ const Test = () => {
 
   const { data: item } = useGetMovieDetailQuery({ id }); // Note: Pass the id as a parameter here
 
-  const { data } = useGetMovieQuery();
+  const { data } = useGetMovieQuery(35);
   console.log(data?.results);
 
   const dispatch = useDispatch();
@@ -36,8 +36,6 @@ const Test = () => {
   const [cardToggles, setCardToggles] = useState(
     Array(data?.results?.length).fill(false)
   );
-
- 
 
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
@@ -108,7 +106,7 @@ const Test = () => {
                     newCardToggles[index] = !newCardToggles[index];
                     setCardToggles(newCardToggles);
                     if (cardToggles) {
-                      dispatch(addMovie(result))
+                      dispatch(addMovie(result));
                     } else {
                       dispatch(removeMovie(result));
                     }
@@ -139,6 +137,10 @@ const Test = () => {
                                   <div onClick={() => handleToggle(index)}>
                                     {/* Use the handleToggle function with the current index */}
                                     {cardToggles[index] ? (
+                                      <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+                                        <HiCheck className="text-sm text-gray-200" />
+                                      </button>
+                                    ) : (
                                       <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
                                         <HiOutlinePlus className="text-sm text-gray-200" />
                                         <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-center">
@@ -147,10 +149,6 @@ const Test = () => {
                                           </p>
                                           <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
                                         </div>
-                                      </button>
-                                    ) : (
-                                      <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
-                                        <BsHandThumbsUp className="text-sm text-gray-200" />
                                       </button>
                                     )}
                                   </div>

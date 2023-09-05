@@ -7,6 +7,8 @@ import PlayMovie from "./Movie/PlayMovie";
 
 const Header = () => {
   const {
+    id,
+    genreId,
     handleGetId,
     modal,
     toggleModal,
@@ -15,12 +17,12 @@ const Header = () => {
   } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
-  const { data } = useGetMovieQuery();
+  const { data } = useGetMovieQuery({genreId});
   console.log(data?.results);
 
-  const id = movie?.id;
+  const movieId = movie?.id;
 
-  const { data: detailImage } = useGetMovieImageQuery({ id });
+  const { data: detailImage } = useGetMovieImageQuery({ movieId });
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {

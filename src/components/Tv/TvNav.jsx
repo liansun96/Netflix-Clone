@@ -9,14 +9,18 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { BiSearch } from "react-icons/bi";
 import Profile from "../Profile";
+import { useGetTvGenresQuery } from "../../redux/api/movieApi";
 
 const TvNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
-  const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef } =
+  const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef ,handleGetGenreId } =
     useContext(ToggleContext);
+
+  const { data : TvGenres } = useGetTvGenresQuery();
+  console.log(TvGenres?.genres);
 
   const navigate = useNavigate();
 
@@ -161,71 +165,20 @@ const TvNav = () => {
                   <div
                     className={`${
                       show ? "block" : "hidden"
-                    } w-[400px] absolute bg-black bg-opacity-80`}
+                    } w-[450px] h-[200px] absolute bg-black bg-opacity-80`}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
-                      <div className="flex flex-col gap-3">
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Action
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Anime
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Asian
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          British
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Comedies
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Crime
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Docuseries
-                        </p>
-                      </div>
-                      <div className="flex flex-col gap-3">
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Dramas
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          European
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Horror
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Kids
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Reality & Talk
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Romance
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Sci-Fi & Fantasy
-                        </p>
-                      </div>
-                      <div className="flex flex-col gap-3">
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Science & Nature
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Teen
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          The World of The Nature
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Triller
-                        </p>
-                        <p className="hover:underline text-xs text-gray-50 transition cursor-pointer">
-                          Us
-                        </p>
+                      <div className="flex flex-wrap gap-3">
+                        {TvGenres?.genres?.map((genre) => (
+                          <div key={genre.id}>
+                            <p
+                              onClick={() => handleGetGenreId(genre?.id)}
+                              className="text-sm w-[135px] cursor-pointer"
+                            >
+                              {genre?.name}
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

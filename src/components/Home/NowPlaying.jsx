@@ -11,10 +11,10 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
 
 const NowPlaying = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal ,genreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetNowPlayingQuery();
+  const { data } = useGetNowPlayingQuery({genreId});
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 

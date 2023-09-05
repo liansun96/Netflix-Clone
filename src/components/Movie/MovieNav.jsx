@@ -16,12 +16,12 @@ const MovieNav = () => {
   const [show, setShow] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
-  const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef ,handleGetId,id } =
+  const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef ,handleGetId, grnreId , handleGetGenreId } =
     useContext(ToggleContext);
 
   const { data: movieGenres } = useGetMovieGenresQuery();
   console.log(movieGenres?.genres);
-  console.log(id);
+  console.log( grnreId);
 
   const navigate = useNavigate();
 
@@ -172,7 +172,7 @@ const MovieNav = () => {
                       <div className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
-                            <p onClick={()=>handleGetId(genre?.id)} className="text-sm w-[120px] cursor-pointer">
+                            <p onClick={()=>handleGetGenreId(genre?.id)} className="text-sm w-[120px] cursor-pointer">
                               {genre?.name}
                             </p>
                           </div>

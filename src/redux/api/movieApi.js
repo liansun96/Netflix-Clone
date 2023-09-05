@@ -7,8 +7,8 @@ export const movieApi = createApi({
   tagTypes: ["movieApi"],
   endpoints: (builder) => ({
     getMovie: builder.query({
-      query: () =>
-        "/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
+      query: ({genreId}) =>
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getMovieGenres: builder.query({
@@ -16,58 +16,58 @@ export const movieApi = createApi({
       providesTags: ["movieApi"],
     }),
     getTv: builder.query({
-      query: () =>
-        "/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=5",
+      query: ({genreId}) =>
+        `/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=5&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getTvGenres: builder.query({
       query: () =>
-        "/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
+        "genre/tv/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
       providesTags: ["movieApi"],
     }),
     getNowPlaying: builder.query({
-      query: () =>
-        "/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
+      query: ({genreId}) =>
+        `/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getNowPlayingTwo: builder.query({
-      query: () =>
-        "/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2",
+      query: ({genreId}) =>
+        `/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getNowPlayingTv: builder.query({
-      query: () =>
-        "/tv/on_the_air?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
+      query: ({genreId}) =>
+        `/tv/on_the_air?api_key=7fe0fbe72550cf27a1a5a738cabda3db&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getPopular: builder.query({
-      query: () =>
-        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1`,
+      query: ({genreId}) =>
+        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getPopularTwo: builder.query({
-      query: () =>
-        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2`,
+      query: ({genreId}) =>
+        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getPopularTv: builder.query({
-      query: () =>
-        `/tv/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      query: ({genreId}) =>
+        `/tv/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getTopRated: builder.query({
-      query: () =>
-        "/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
+      query: ({genreId}) =>
+        `/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getTopRatedTwo: builder.query({
-      query: () =>
-        "/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2",
+      query: ({genreId}) =>
+        `/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getTopRatedTv: builder.query({
-      query: () =>
-        "/tv/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
+      query: ({genreId}) =>
+        `/tv/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getUpcoming: builder.query({
@@ -81,8 +81,8 @@ export const movieApi = createApi({
       providesTags: ["movieApi"],
     }),
     getMovieImage: builder.query({
-      query: ({ id }) =>
-        `/movie/${id}/images?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_image_language=null,en,fr,pt,de`,
+      query: ({ movieId }) =>
+        `/movie/${movieId}/images?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_image_language=null,en,fr,pt,de`,
       providesTags: ["movieApi"],
     }),
     getDetailVideo: builder.query({
