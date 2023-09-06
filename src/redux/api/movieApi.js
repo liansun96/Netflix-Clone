@@ -106,8 +106,8 @@ export const movieApi = createApi({
       providesTags: ["movieApi"],
     }),
     getTvImage: builder.query({
-      query: ({ id }) =>
-        `/tv/${id}/images?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_image_language=null,en,fr,pt,de`,
+      query: ({ movieId }) =>
+        `/tv/${movieId}/images?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_image_language=null,en,fr,pt,de`,
       providesTags: ["movieApi"],
     }),
     getTvDetailVideo: builder.query({

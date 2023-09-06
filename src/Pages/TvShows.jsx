@@ -25,8 +25,10 @@ const TvShows = () => {
   } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
-  const { data } = useGetTvQuery({genreId});
+  const { data } = useGetTvQuery({ genreId });
   console.log(data?.results);
+
+  const [overview, setOverview] = useState("");
 
   const movieId = movie?.id;
 
@@ -34,11 +36,9 @@ const TvShows = () => {
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
-    setMovie(
-      data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
-    );
-  }, [data]);
-
+    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
+  }, [genreId]);
+  
   const handelPlay = () => {
     togglePlayTvModal();
     handleGetId(movie?.id);
@@ -75,8 +75,11 @@ const TvShows = () => {
                 alt=""
               />
               <h1 className="w-[600px] text-gray-200 font-semibold">
-                {movie?.overview?.length > 400
-                  ? `${movie?.overview?.substring(0, 400)} . . .`
+                {movie?.overview?.length > 200
+                  ? movie?.overview?.slice(
+                      0,
+                      movie?.overview?.indexOf(".", 200) + 1
+                    )
                   : movie?.overview}
               </h1>
               <div className="flex items-center gap-3">

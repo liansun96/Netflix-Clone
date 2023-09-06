@@ -21,15 +21,16 @@ const Latest = () => {
     toggleModal,
     playMovieModal,
     togglePlayMovieModal,
+    genreId,
   } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
-  const { data } = useGetNowPlayingQuery();
+  const { data } = useGetNowPlayingQuery({ genreId });
   console.log(data?.results);
 
-  const id = movie?.id;
+  const movieId = movie?.id;
 
-  const { data: detailImage } = useGetMovieImageQuery({ id });
+  const { data: detailImage } = useGetMovieImageQuery({ movieId });
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
@@ -67,7 +68,12 @@ const Latest = () => {
                 alt=""
               />
               <h1 className="w-[600px] text-white drop-shadow-2xl font-semibold">
-                {movie?.overview}
+                {movie?.overview?.length > 200
+                  ? movie?.overview?.slice(
+                      0,
+                      movie?.overview?.indexOf(".", 200) + 1
+                    )
+                  : movie?.overview}
               </h1>
               <div className="flex items-center gap-3">
                 <button
