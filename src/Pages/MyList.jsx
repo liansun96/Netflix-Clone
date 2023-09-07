@@ -20,7 +20,7 @@ const MyList = () => {
           </h1>
         </div>
         <div className="flex flex-wrap justify-center gap-5 relative pt-10">
-          {favMoives.map((favMovie, index) => {
+          {favMoives.map((favMovie) => {
             const handelPlay = () => {
               togglePlayMovieModal();
               handleGetId(favMovie?.id);
