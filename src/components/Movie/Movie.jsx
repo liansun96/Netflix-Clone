@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { HiOutlinePlus } from "react-icons/hi";
+import { useContext, useEffect, useState } from "react";
+import { HiOutlinePlus, HiCheck } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
 import {
   MdOutlineArrowForwardIos,
@@ -10,19 +10,32 @@ import { useGetMovieQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
+import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
+import { useDispatch} from "react-redux";
 
 const Movie = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetMovieQuery();
+  const { data } = useGetMovieQuery({ genreId });
   console.log(data?.results);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const dispatch = useDispatch();
+  // Initialize an array of boolean values to track the toggle state for each card
+  const [cardToggles, setCardToggles] = useState(
+    JSON.parse(localStorage.getItem("cardToggles")) ||
+      Array(data?.results?.length).fill(false)
+  );
+  console.log(cardToggles);
+  useEffect(() => {
+    // Save the cardToggles state to local storage whenever it changes
+    localStorage.setItem("cardToggles", JSON.stringify(cardToggles));
+  }, [cardToggles]);
 
+  const [currentSlide, setCurrentSlide] = useState(0);
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
   };
-
   const handlePrevSlide = () => {
     setCurrentSlide(
       (prevSlide) =>
@@ -81,6 +94,17 @@ const Movie = () => {
                     toggleModal();
                     handleGetId(result?.id);
                   };
+                  const handleToggle = (index) => {
+                    const newCardToggles = [...cardToggles];
+                    newCardToggles[index] = !newCardToggles[index];
+                    setCardToggles(newCardToggles);
+                    // Check the updated value and dispatch actions accordingly
+                    if (newCardToggles[index]) {
+                      dispatch(addMovie(result));
+                    } else {
+                      dispatch(removeMovie(result));
+                    }
+                  };
                   return (
                     <div key={result?.id} className="w-[220px]">
                       <div>
@@ -104,15 +128,30 @@ const Movie = () => {
                                   >
                                     <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
                                   </button>
-                                  <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
-                                    <HiOutlinePlus className="text-sm text-gray-200" />
-                                    <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-                                      <p className="text-xs font-semibold">
-                                        Add to My List
-                                      </p>
-                                      <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
-                                    </div>
-                                  </button>
+                                  <div onClick={() => handleToggle(index)}>                                    
+                                    {/* Use the handleToggle function with the current index */}
+                                    {cardToggles[index] ? (
+                                      <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
+                                        <HiCheck className="text-sm text-gray-200" />
+                                        <div className="invisible group-hover/my-list:visible absolute -right-12 -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-center">
+                                          <p className="text-xs font-semibold">
+                                            Remove from My List
+                                          </p>
+                                          <VscTriangleDown className="text-white text-2xl translate-x-[50px] -translate-y-2 absolute" />
+                                        </div>
+                                      </button>
+                                    ) : (
+                                      <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
+                                        <HiOutlinePlus className="text-sm text-gray-200" />
+                                        <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-center">
+                                          <p className="text-xs font-semibold">
+                                            Add to My List
+                                          </p>
+                                          <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
+                                        </div>
+                                      </button>
+                                    )}
+                                  </div>
                                   <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
                                     <BsHandThumbsUp className="text-sm text-gray-200" />
                                   </button>
