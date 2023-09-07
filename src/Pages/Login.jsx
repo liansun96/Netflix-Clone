@@ -18,7 +18,6 @@ const Login = () => {
     const { data } = await login(user);
     dispatch(addUser({ user: data?.user, token: data?.token }));
     if (data?.success) navigate("/");
-    // console.log(data);
   };
 
   return (

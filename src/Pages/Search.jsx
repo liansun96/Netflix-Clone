@@ -8,6 +8,7 @@ import { ToggleContext } from "../Context/ToggleProvider";
 import { useNavigate } from "react-router";
 import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
+import Footer from "../components/Footer/Footer";
 
 const Search = () => {
   const {
@@ -131,6 +132,7 @@ const Search = () => {
           })}
         </div>
       </div>
+      <Footer />
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}
     </>

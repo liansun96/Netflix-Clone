@@ -11,8 +11,13 @@ const Home = () => {
   const { token } = useContext(ToggleContext);
 
   useEffect(() => {
-    !token && nav("signin");
+    if (token) {
+      nav("/");
+    } else {
+      nav("/signin");
+    }
   }, []);
+
   return (
     <div className="bg-[#141414]">
       <HomeNav />
