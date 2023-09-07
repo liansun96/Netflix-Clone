@@ -11,10 +11,12 @@ const MyList = () => {
     <div className="bg-gray-900 h-screen w-full">
       <div className="w-[90%] mx-auto pt-5">
         <div className="">
-          <h1 className="text-2xl text-gray-50 font-semibold">Your favourite list</h1>
+          <h1 className="text-2xl text-gray-50 font-semibold">
+            Your favourite list
+          </h1>
         </div>
         <div className="flex flex-wrap justify-center gap-5 relative pt-10">
-          {favMoives.map((favMovie, index) => {
+          {favMoives.map((favMovie) => {
             const handelPlay = () => {
               togglePlayMovieModal();
               handleGetId(favMovie?.id);
