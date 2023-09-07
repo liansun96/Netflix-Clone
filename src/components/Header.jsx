@@ -17,7 +17,7 @@ const Header = () => {
   } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
-  const { data } = useGetMovieQuery({genreId});
+  const { data } = useGetMovieQuery({ genreId });
   console.log(data?.results);
 
   const movieId = movie?.id;
@@ -61,7 +61,9 @@ const Header = () => {
           alt=""
         />
         <h1 className="w-[600px] text-white drop-shadow-2xl font-semibold">
-          {movie?.overview}
+          {movie?.overview?.length > 200
+            ? movie?.overview?.slice(0, movie?.overview?.indexOf(".", 200) + 1)
+            : movie?.overview}
         </h1>
         <div className="flex items-center gap-3">
           <button

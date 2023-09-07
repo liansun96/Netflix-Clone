@@ -6,9 +6,7 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import {
-  useGetPopularTvQuery,
-} from "../../redux/api/movieApi";
+import { useGetPopularTvQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import MovieDetail from "../Movie/MovieDetail";
@@ -17,7 +15,7 @@ const PopularTv = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetPopularTvQuery({genreId});
+  const { data } = useGetPopularTvQuery({ genreId });
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -86,15 +84,27 @@ const PopularTv = () => {
                   <div key={result?.id} className="w-[220px]">
                     <div>
                       <div className="group/item flex flex-col slide-inner lg:hover:scale-150 duration-300 hover:delay-500 rounded-lg">
-                        <img
-                          onClick={handelDetail}
-                          className="cursor-pointer rounded-lg group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
-                          src={
-                            "https://image.tmdb.org/t/p/w300" +
-                            result?.backdrop_path
-                          }
-                          alt=""
-                        />
+                        {result?.backdrop_path == null ? (
+                          <img
+                            onClick={handelDetail}
+                            src={
+                              "https://image.tmdb.org/t/p/w300" +
+                              result?.poster_path
+                            }
+                            className="rounded object-cover object-top h-[124px] w-full"
+                            alt=""
+                          />
+                        ) : (
+                          <img
+                            onClick={handelDetail}
+                            src={
+                              "https://image.tmdb.org/t/p/w300" +
+                              result?.backdrop_path
+                            }
+                            className="rounded"
+                            alt=""
+                          />
+                        )}
                         <div className="relative group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
@@ -132,7 +142,7 @@ const PopularTv = () => {
                               </button>
                             </div>
                             <h1 className="text-xs text-white">
-                              {result?.title}
+                              {result?.name}
                             </h1>
                             <h1 className="text-[10px] text-green-500 font-semibold">
                               {result?.vote_average * 10}% Match

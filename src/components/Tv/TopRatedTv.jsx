@@ -132,7 +132,7 @@ const TopRatedTv = () => {
                               </button>
                             </div>
                             <h1 className="text-xs text-white">
-                              {result?.original_title}
+                              {result?.name}
                             </h1>
                             <h1 className="text-[10px] text-green-500 font-semibold">
                               {result?.vote_average * 10}% Match

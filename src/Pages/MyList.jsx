@@ -1,12 +1,16 @@
 import React from "react";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { HiOutlinePlus } from "react-icons/hi";
+import { HiCheck } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeMovie } from "../redux/services/favoritMovieSlice";
 
 const MyList = () => {
   const favMoives = useSelector((state) => state.favoriteMovieSlice.favMovies);
   console.log(favMoives);
+  const dispatch = useDispatch();
+
+  const removeFav = () => {};
   return (
     <div className="bg-gray-900 h-screen w-full">
       <div className="w-[90%] mx-auto pt-5">
@@ -60,13 +64,16 @@ const MyList = () => {
                             >
                               <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
                             </button>
-                            <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
-                              <HiOutlinePlus className="text-sm text-gray-200" />
-                              <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                            <button
+                              onClick={() => dispatch(removeMovie(favMovie))}
+                              className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
+                            >
+                              <HiCheck className="text-sm text-gray-200" />
+                              <div className="invisible group-hover/my-list:visible absolute -right-12 -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-center">
                                 <p className="text-xs font-semibold">
-                                  Add to My List
+                                  Remove from My List
                                 </p>
-                                <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
+                                <VscTriangleDown className="text-white text-2xl translate-x-[50px] -translate-y-2 absolute" />
                               </div>
                             </button>
                             <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
