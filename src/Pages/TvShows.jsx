@@ -28,15 +28,13 @@ const TvShows = () => {
   const { data } = useGetTvQuery({ genreId });
   console.log(data?.results);
 
-  const [overview, setOverview] = useState("");
-
-  const movieId = movie?.id;
+    const movieId = movie?.id;
 
   const { data: detailImage } = useGetTvImageQuery({ movieId });
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
-    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
+    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length -1)]);
   }, [genreId]);
   
   const handelPlay = () => {

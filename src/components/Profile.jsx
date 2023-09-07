@@ -21,7 +21,11 @@ const Profile = () => {
       onMouseLeave={handleHover}
     >
       <div className="flex items-center gap-1 cursor-pointer">
-        <div className="h-[30px] w-[30px] bg-white rounded"></div>
+        <img
+          className="rounded w-7"
+          src="https://occ-0-3494-64.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdYJV5wt63AcxNaDoqDXUhqZb55oN5Dxt1m-Zdn_z5rn_hIq9m8dA8JB2xdcPmrY3yXnlVWYKPXnOrbv2QN4aEVU28dESJg.png?r=1d4"
+          alt=""
+        />
         <div>
           <IoMdArrowDropdown
             className={`${
@@ -38,7 +42,11 @@ const Profile = () => {
         <div className=" p-3 bg-black">
           <div className="flex flex-col gap-3">
             <div className="flex gap-1 items-center cursor-pointer">
-              <div className="h-[30px] w-[30px] bg-gray-50 rounded"></div>
+              <img
+                className="rounded w-7"
+                src="https://occ-0-3494-64.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdYJV5wt63AcxNaDoqDXUhqZb55oN5Dxt1m-Zdn_z5rn_hIq9m8dA8JB2xdcPmrY3yXnlVWYKPXnOrbv2QN4aEVU28dESJg.png?r=1d4"
+                alt=""
+              />
               <h1 className="text-sm font-semibold text-gray-50 hover:text-gray-400 duration-300">
                 Marcus
               </h1>
@@ -84,7 +92,7 @@ const Profile = () => {
               </h1>
             </div>
             <p className="border border-x-0 border-t-0 border-gray-300"></p>
-            <Link to={'/signin'}>
+            <Link to={"/signin"}>
               <p className="text-xs text-gray-50 hover:text-gray-300 font-semibold text-center cursor-pointer">
                 Sign out of Netflix
               </p>

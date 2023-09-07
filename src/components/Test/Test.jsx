@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HiOutlinePlus, HiCheck } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { VscTriangleDown } from "react-icons/vsc";
@@ -14,33 +14,35 @@ import {
 import { RiArrowDropRightLine } from "react-icons/ri";
 
 import { ToggleContext } from "../../Context/ToggleProvider";
-import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import MovieDetail from "../Movie/MovieDetail";
+import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch } from "react-redux";
 
 const Test = () => {
-  const { id } = useParams();
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
+    const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
     useContext(ToggleContext);
-
-  const { data: item } = useGetMovieDetailQuery({ id }); // Note: Pass the id as a parameter here
 
   const { data } = useGetMovieQuery(35);
   console.log(data?.results);
 
   const dispatch = useDispatch();
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-
   // Initialize an array of boolean values to track the toggle state for each card
   const [cardToggles, setCardToggles] = useState(
+    JSON.parse(localStorage.getItem("cardToggles")) ||
     Array(data?.results?.length).fill(false)
-  );
-
+    );
+    console.log(cardToggles);
+    
+    useEffect(() => {
+      // Save the cardToggles state to local storage whenever it changes
+      localStorage.setItem("cardToggles", JSON.stringify(cardToggles));
+    }, [cardToggles]);
+    
+  const [currentSlide, setCurrentSlide] = useState(0);
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
   };
-
   const handlePrevSlide = () => {
     setCurrentSlide(
       (prevSlide) =>
@@ -101,16 +103,19 @@ const Test = () => {
                   };
 
                   const handleToggle = (index) => {
-                    // Create a copy of the cardToggles array and toggle the value at the specified index
                     const newCardToggles = [...cardToggles];
                     newCardToggles[index] = !newCardToggles[index];
                     setCardToggles(newCardToggles);
-                    if (cardToggles) {
+                    // Check the updated value and dispatch actions accordingly
+                    if (newCardToggles[index]) {
                       dispatch(addMovie(result));
                     } else {
                       dispatch(removeMovie(result));
                     }
+                    // Remove the local storage entry for the toggled card
+                    localStorage.removeItem(`cardToggles[${index}]`);
                   };
+
                   return (
                     <div key={result?.id} className="w-[220px]">
                       <div>
@@ -137,8 +142,14 @@ const Test = () => {
                                   <div onClick={() => handleToggle(index)}>
                                     {/* Use the handleToggle function with the current index */}
                                     {cardToggles[index] ? (
-                                      <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+                                      <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
                                         <HiCheck className="text-sm text-gray-200" />
+                                        <div className="invisible group-hover/my-list:visible absolute -right-12 -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-center">
+                                          <p className="text-xs font-semibold">
+                                            Remove from My List
+                                          </p>
+                                          <VscTriangleDown className="text-white text-2xl translate-x-[50px] -translate-y-2 absolute" />
+                                        </div>
                                       </button>
                                     ) : (
                                       <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
