@@ -4,12 +4,16 @@ import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
 import { ToggleContext } from "../Context/ToggleProvider";
 import MovieDetail from "./Movie/MovieDetail";
 import PlayMovie from "./Movie/PlayMovie";
+import TvDetail from "./Tv/TvDetail";
+import PlayTv from "./Tv/PlayTv";
 
 const Header = () => {
   const {
     id,
     genreId,
     handleGetId,
+    tvModal,
+    playTvModal,
     modal,
     toggleModal,
     playMovieModal,
@@ -32,11 +36,14 @@ const Header = () => {
   const handelDetail = () => {
     toggleModal();
     handleGetId(movie?.id);
+    console.log('detail');
   };
 
   const handelPlay = () => {
     togglePlayMovieModal();
     handleGetId(movie?.id);
+    console.log('play');
+
   };
 
   if (playMovieModal) {
@@ -88,6 +95,8 @@ const Header = () => {
       </div>
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}
+      {tvModal && <TvDetail />}
+      {playTvModal && <PlayTv />}
     </header>
   );
 };

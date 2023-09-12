@@ -7,7 +7,6 @@ import UpComing from "../components/Home/UpComing";
 import { ToggleContext } from "../Context/ToggleProvider";
 import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
-import PlayMovie from "../components/Movie/PlayMovie";
 import TvNav from "../components/Tv/TvNav";
 import PopularTv from "../components/Tv/PopularTv";
 import NowPlayingTv from "../components/Tv/NowPlayingTv";
@@ -17,7 +16,6 @@ const TvShows = () => {
   const {
     genreId,
     handleGetId,
-    playMovieModal,
     tvModal,
     toggleTvModal,
     playTvModal,
@@ -28,7 +26,7 @@ const TvShows = () => {
   const { data } = useGetTvQuery({ genreId });
   console.log(data?.results);
 
-    const movieId = movie?.id;
+  const movieId = movie?.id;
 
   const { data: detailImage } = useGetTvImageQuery({ movieId });
   console.log(detailImage?.logos[0]?.file_path);
@@ -36,7 +34,7 @@ const TvShows = () => {
   useEffect(() => {
     setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
   }, [genreId]);
-  
+
   const handelPlay = () => {
     togglePlayTvModal();
     handleGetId(movie?.id);
@@ -115,7 +113,6 @@ const TvShows = () => {
         </div>
         {tvModal && <TvDetail />}
         {playTvModal && <PlayTv />}
-        {playMovieModal && <PlayMovie />}
       </div>
     </div>
   );
