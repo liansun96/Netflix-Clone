@@ -34,7 +34,7 @@ const TvShows = () => {
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
-    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length -1)]);
+    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
   }, [genreId]);
   
   const handelPlay = () => {
