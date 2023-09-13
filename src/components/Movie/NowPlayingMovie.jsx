@@ -158,7 +158,6 @@ const NowPlayingMovie = () => {
           </div>
         </div>
       </div>
-      {modal && <MovieDetail />}
     </>
   );
 };

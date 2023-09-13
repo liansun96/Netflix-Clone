@@ -1,20 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { useGetMovieImageQuery, useGetMovieQuery } from "../redux/api/movieApi";
-import { BsPlayFill, BsInfoCircle } from "react-icons/bs";
+import { BsPlayFill } from "react-icons/bs";
+import { BiInfoCircle } from "react-icons/bi";
 import { ToggleContext } from "../Context/ToggleProvider";
-import MovieDetail from "./Movie/MovieDetail";
-import PlayMovie from "./Movie/PlayMovie";
-import TvDetail from "./Tv/TvDetail";
-import PlayTv from "./Tv/PlayTv";
 
 const Header = () => {
   const {
-    id,
     genreId,
     handleGetId,
-    tvModal,
-    playTvModal,
-    modal,
     toggleModal,
     playMovieModal,
     togglePlayMovieModal,
@@ -36,14 +29,13 @@ const Header = () => {
   const handelDetail = () => {
     toggleModal();
     handleGetId(movie?.id);
-    console.log('detail');
+    console.log("detail");
   };
 
   const handelPlay = () => {
     togglePlayMovieModal();
     handleGetId(movie?.id);
-    console.log('play');
-
+    console.log("play");
   };
 
   if (playMovieModal) {
@@ -61,21 +53,21 @@ const Header = () => {
         backgroundPosition: "center center",
       }}
     >
-      <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-28 pl-12">
+      <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-40 pl-12">
         <img
           className="w-[350px]"
           src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
           alt=""
         />
         <h1 className="w-[600px] text-white drop-shadow-2xl font-semibold">
-          {movie?.overview?.length > 200
-            ? movie?.overview?.slice(0, movie?.overview?.indexOf(".", 200) + 1)
+          {movie?.overview?.length > 100
+            ? movie?.overview?.slice(0, movie?.overview?.indexOf(".", 100) + 1)
             : movie?.overview}
         </h1>
         <div className="flex items-center gap-3">
           <button
             onClick={handelPlay}
-            className="flex items-center px-5 py-1 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold"
+            className="flex items-center px-6 h-12 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold custom-btn-bg"
           >
             <span className="">
               <BsPlayFill className="text-4xl" />
@@ -84,19 +76,15 @@ const Header = () => {
           </button>
           <button
             onClick={handelDetail}
-            className="flex items-center gap-2 px-5 py-2 bg-gray-500 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold"
+            className="flex items-center gap-2 px-6 h-12 bg-opacity-60 bg-gray-500 hover:bg-opacity-60 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold custom-btn-bg"
           >
             <span className="">
-              <BsInfoCircle className="text-2xl" />
+              <BiInfoCircle className="text-4xl" />
             </span>
             More Info
           </button>
         </div>
       </div>
-      {modal && <MovieDetail />}
-      {playMovieModal && <PlayMovie />}
-      {tvModal && <TvDetail />}
-      {playTvModal && <PlayTv />}
     </header>
   );
 };

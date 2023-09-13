@@ -158,7 +158,6 @@ const PopularMovie = () => {
           </div>
         </div>
       </div>
-      {modal && <MovieDetail />}
     </>
   );
 };

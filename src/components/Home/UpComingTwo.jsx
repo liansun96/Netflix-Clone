@@ -6,16 +6,15 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetPopularQuery } from "../../redux/api/movieApi";
+import { useGetUpcomingQuery, useGetUpcomingTwoQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
-import MovieDetail from "../Movie/MovieDetail";
 
-const Popular = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
+const UpComingTwo = () => {
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
     useContext(ToggleContext);
 
-  const { data } = useGetPopularQuery({genreId});
+  const { data } = useGetUpcomingTwoQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -42,7 +41,7 @@ const Popular = () => {
         <div className="flex items-end justify-between w-full">
           <div className="flex items-center gap-1  group/exp cursor-pointer">
             <h1 className="text-xl font-semibold text-gray-50">
-              Popular on Netflix
+              Up Coming on Netflix
             </h1>
             <div className="flex items-center mt-1.5">
               <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
@@ -76,6 +75,7 @@ const Popular = () => {
                   togglePlayMovieModal();
                   handleGetId(result?.id);
                 };
+
                 const handelDetail = () => {
                   toggleModal();
                   handleGetId(result?.id);
@@ -158,4 +158,4 @@ const Popular = () => {
   );
 };
 
-export default Popular;
+export default UpComingTwo;
