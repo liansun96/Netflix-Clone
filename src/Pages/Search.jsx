@@ -36,6 +36,10 @@ const Search = () => {
     navigate(-1);
   }
 
+  if (search !== "") {
+    setShowInput(true);
+  }
+
   return (
     <>
       <HomeNav />

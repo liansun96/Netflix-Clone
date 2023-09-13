@@ -72,6 +72,11 @@ export const movieApi = createApi({
     }),
     getUpcoming: builder.query({
       query: () =>
+        "/movie/upcoming?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1",
+      providesTags: ["movieApi"],
+    }),
+    getUpcomingTwo: builder.query({
+      query: () =>
         "/movie/upcoming?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2",
       providesTags: ["movieApi"],
     }),
@@ -130,8 +135,11 @@ export const movieApi = createApi({
       providesTags: ["movieApi"]
     }),
     getGenreSearch : builder.query({
-      query: ({id}) => `discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&sort_by=release_date.desc&page=1&with_genres=${id}`,
+      query: ({id}) => `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&sort_by=release_date.desc&page=1&with_genres=${id}`,
       providesTags: ["movieApi"],
+    }),
+    getLanguage : builder.query({
+      query: ({}) => `/configuration/languages?api_key=7fe0fbe72550cf27a1a5a738cabda3db`
     })
   }),
 });
@@ -148,6 +156,7 @@ export const {
   useGetTopRatedQuery,
   useGetTopRatedTvQuery,
   useGetUpcomingQuery,
+  useGetUpcomingTwoQuery,
   useGetMovieDetailQuery,
   useGetMovieImageQuery,
   useGetDetailVideoQuery,
@@ -163,4 +172,5 @@ export const {
   useGetTopRatedTwoQuery,
   useGetPopularTwoQuery,
   useGetGenreSearchQuery,
+  useGetLanguageQuery,
 } = movieApi;

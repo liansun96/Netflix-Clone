@@ -126,18 +126,23 @@ const TvNav = () => {
                 placeholder="Search"
               />
             </div>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block ">
               <div className="flex items-center gap-5">
-                <form
-                  className={`flex gap-3 px-2 items-center ${
-                    showInput && "border"
+                <div
+                  onClick={handleInput}
+                  className={showInput ? "inset-0 fixed mt-[50px]" : null}
+                ></div>
+                <div
+                  className={`flex gap-3 items-center ${
+                    showInput && "border px-3"
                   } border-white cursor-pointer`}
                 >
                   <BiSearch
                     onClick={handleInput}
-                    className="text-white text-xl"
+                    className="text-white text-2xl"
                   />
                   <input
+                    onClick={(e) => e.stopPropagation()}
                     ref={inputRef}
                     value={search}
                     onChange={handleInputChange}
@@ -147,7 +152,7 @@ const TvNav = () => {
                     } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                     placeholder="Search by name"
                   />
-                </form>
+                </div>
                 <IoMdNotificationsOutline className="text-white text-2xl" />
                 <Profile />
               </div>
@@ -160,7 +165,9 @@ const TvNav = () => {
               } absolute text-white text-3xl w-full pl-12 pr-10 py-2 flex items-center justify-between duration-300`}
             >
               <div className="flex items-center gap-10 relative">
-                <h1 className="text-3xl text-gray-50 font-semibold">Tv Shows</h1>
+                <h1 className="text-3xl text-gray-50 font-semibold">
+                  Tv Shows
+                </h1>
                 <div className="relative">
                   <button
                     onClick={handleShow}

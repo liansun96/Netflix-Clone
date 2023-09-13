@@ -14,7 +14,7 @@ import { ToggleContext } from "../../Context/ToggleProvider";
 import MovieDetail from "../Movie/MovieDetail";
 
 const TopRatedTv = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal ,genreId } =
+  const { handleGetId, tvModal, toggleTvModal, togglePlayTvMovieModal ,genreId } =
     useContext(ToggleContext);
 
   const { data } = useGetTopRatedTvQuery({genreId});
@@ -32,7 +32,7 @@ const TopRatedTv = () => {
     );
   };
 
-  if (modal) {
+  if (tvModal) {
     document.body.classList.add("overflow-y-hidden");
   } else {
     document.body.classList.remove("overflow-y-hidden");
@@ -75,11 +75,11 @@ const TopRatedTv = () => {
             >
               {data?.results?.map((result, index) => {
                 const handelPlay = () => {
-                  togglePlayMovieModal();
+                  togglePlayTvMovieModal();
                   handleGetId(result?.id);
                 };
                 const handelDetail = () => {
-                  toggleModal();
+                  toggleTvModal();
                   handleGetId(result?.id);
                 };
                 return (
@@ -155,8 +155,7 @@ const TopRatedTv = () => {
             />
           </div>
         </div>
-      </div>
-      {modal && <MovieDetail />}
+      </div>      
     </div>
   );
 };

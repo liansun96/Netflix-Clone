@@ -19,6 +19,7 @@ const ToggleProvider = ({ children }) => {
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {
     setShowInput(!showInput);
+    inputRef.current.focus();
   };
 
   const submitHandler = () => {

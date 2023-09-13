@@ -14,7 +14,7 @@ import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
 
 const TopRatedMovie = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
+  const { handleGetId, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);
 
   const { data } = useGetTopRatedQuery({genreId});
@@ -31,12 +31,6 @@ const TopRatedMovie = () => {
         (prevSlide - 1 + data?.results?.length) % data?.results?.length
     );
   };
-
-  if (modal) {
-    document.body.classList.add("overflow-y-hidden");
-  } else {
-    document.body.classList.remove("overflow-y-hidden");
-  }
 
   return (
     <>
@@ -157,8 +151,7 @@ const TopRatedMovie = () => {
             </div>
           </div>
         </div>
-      </div>
-      {modal && <MovieDetail />}
+      </div>      
     </>
   );
 };

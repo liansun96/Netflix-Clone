@@ -175,8 +175,8 @@ const Tv = () => {
           </div>
         </div>
       </div>
-      {tvModal && <TvDetail />}
-      {playTvModal && <PlayTv />}
+      {/* {tvModal && <TvDetail />}
+      {playTvModal && <PlayTv />} */}
     </>
   );
 };
