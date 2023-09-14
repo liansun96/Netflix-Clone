@@ -104,11 +104,12 @@ const ToggleProvider = ({ children }) => {
   console.log(iosName);
 
   //Get Country Name
-  const [languageName, setLanguageName] = useState("");
+  const [languageName, setLanguageName] = useState("English");
   const handleGetlanguageName = (languageName) => {
     setLanguageName(languageName);
   };
   console.log(languageName);
+  
 
   const value = {
     search,

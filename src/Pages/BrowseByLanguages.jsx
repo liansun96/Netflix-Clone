@@ -8,8 +8,6 @@ import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
 import { MdArrowDropDown } from "react-icons/md";
 import {
-  useGetCountryQuery,
-  useGetLanguageQuery,
   useGetMovieByCountryQuery,
   useGetMovieByCountryTwoQuery,
 } from "../redux/api/movieApi";
@@ -20,6 +18,9 @@ import { countryCodes } from "../redux/api/countryCode";
 
 const BrowseByLanguages = () => {
   const {
+    handleGetId,
+    toggleModal,
+    togglePlayMovieModal,
     tvModal,
     playTvModal,
     modal,
@@ -27,31 +28,32 @@ const BrowseByLanguages = () => {
     iosName,
     handleGetIosName,
     languageName,
-    handleGetLanguageName,
+    handleGetlanguageName,
   } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
-  
+
   const { data: MovieByCountry } = useGetMovieByCountryQuery({ iosName });
-  console.log(MovieByCountry);
-  const arr1 = MovieByCountry?.results;
-  console.log(arr1);
-  
-  const { data: MovieByCountryTwo } = useGetMovieByCountryTwoQuery({ iosName });
-  console.log(MovieByCountryTwo);
-  const arr2 = MovieByCountryTwo?.results;
-  console.log(arr2);
-  
-  const combine = [...arr1,...arr2];
-  useEffect(() => {
-    setMovie(combine);
-  }, [arr1,arr2]);
+  // console.log(MovieByCountry);
+  // const arr1 = MovieByCountry?.results;
+  // console.log(arr1);
+
+  // const { data: MovieByCountryTwo } = useGetMovieByCountryTwoQuery({ iosName });
+  // console.log(MovieByCountryTwo);
+  // const arr2 = MovieByCountryTwo?.results;
+  // console.log(arr2);
+
+  // const combine = [...arr1,...arr2];
+  // useEffect(() => {
+  //   setMovie(combine);
+  // }, [arr1,arr2]);
 
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
     setShow(!show);
+    console.log("show");
   };
 
   useEffect(() => {
@@ -76,11 +78,13 @@ const BrowseByLanguages = () => {
   return (
     <div className="bg-[#141414] min-h-screen">
       <HomeNav />
-      <div className="hidden lg:block w-[95%] mx-auto py-28">
+      <div className="hidden lg:block w-[95%] mx-auto py-24">
         <div
           className={`${
-            scrollHeight > 100 ? "bg-[#141414]" : "bg-transparent"
-          } absolute text-white text-3xl w-full pl-12 py-2 flex items-center justify-between duration-300`}
+            scrollHeight > 100
+              ? "lg:bg-[#141414] lg:bg-opacity-90"
+              : "bg-transparent"
+          } fixed top-[61px] z-[1000] text-white text-3xl w-full py-4 flex items-center justify-between duration-300`}
         >
           <div className="flex items-center gap-10 relative">
             <h1 className="text-3xl text-gray-50 font-semibold">
@@ -93,7 +97,7 @@ const BrowseByLanguages = () => {
                   onClick={handleShow}
                   className="flex items-center justify-between w-[250px] bg-black p-1 text-base border hover:bg-transparent hover:bg-opacity-50 "
                 >
-                  {iosName}
+                  {languageName}
                   <span>
                     <MdArrowDropDown className="text-lg" />
                   </span>
@@ -110,17 +114,16 @@ const BrowseByLanguages = () => {
                       <div key={countryCode.id}>
                         <p
                           onClick={() => (
+                            handleShow(),
                             handleGetIosName(countryCode?.original_language),
-                            handleGetLanguageName(countryCode?.language_name),
-                            handleShow()
-                            )}
-                            className="text-sm w-[215px] cursor-pointer"
-                            >
+                            handleGetlanguageName(countryCode?.language_name)
+                          )}
+                          className="text-sm w-[215px] cursor-pointer"
+                        >
                           {countryCode.language_name}
                         </p>
                       </div>
                     ))}
-                    
                   </div>
                 </div>
               </div>
@@ -131,22 +134,22 @@ const BrowseByLanguages = () => {
       <div className="overflow-hidden">
         <div className="w-[95%] mx-auto pb-36">
           <div className="flex flex-wrap justify-center gap-5 relative pt-11">
-            {movie?.map((result, index) => {
-              // const handelPlay = () => {
-              //   togglePlayMovieModal();
-              //   handleGetId(result?.id);
-              // };
-              // const handelDetail = () => {
-              //   toggleModal();
-              //   handleGetId(result?.id);
-              // };
+            {MovieByCountry?.results?.map((result, index) => {
+              const handelPlay = () => {
+                togglePlayMovieModal();
+                handleGetId(result?.id);
+              };
+              const handelDetail = () => {
+                toggleModal();
+                handleGetId(result?.id);
+              };
               return (
                 <div key={result?.id} className="w-[220px]">
                   <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
                     <div className="group/item flex flex-col">
                       {result?.backdrop_path == null ? (
                         <img
-                          // onClick={handelDetail}
+                          onClick={handelDetail}
                           src={
                             "https://image.tmdb.org/t/p/w300" +
                             result?.poster_path
@@ -156,7 +159,7 @@ const BrowseByLanguages = () => {
                         />
                       ) : (
                         <img
-                          // onClick={handelDetail}
+                          onClick={handelDetail}
                           src={
                             "https://image.tmdb.org/t/p/w300" +
                             result?.backdrop_path

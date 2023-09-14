@@ -13,12 +13,12 @@ export const movieApi = createApi({
     }),
     getMovieByCountry: builder.query({
       query: ({iosName}) =>
-        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&primary_release_year=2022&with_original_language=${iosName}`,
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&primary_release_year=2023&with_original_language=${iosName}`,
       providesTags: ["movieApi"],
     }),
     getMovieByCountryTwo: builder.query({
       query: ({iosName}) =>
-        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&primary_release_year=2022&with_original_language=${iosName}`,
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&primary_release_year=2023&with_original_language=${iosName}`,
       providesTags: ["movieApi"],
     }),
     getMovieGenres: builder.query({
