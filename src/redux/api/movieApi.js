@@ -11,6 +11,16 @@ export const movieApi = createApi({
         `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
+    getMovieByCountry: builder.query({
+      query: ({iosName}) =>
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&primary_release_year=2022&with_original_language=${iosName}`,
+      providesTags: ["movieApi"],
+    }),
+    getMovieByCountryTwo: builder.query({
+      query: ({iosName}) =>
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&primary_release_year=2022&with_original_language=${iosName}`,
+      providesTags: ["movieApi"],
+    }),
     getMovieGenres: builder.query({
       query: () => "/genre/movie/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
       providesTags: ["movieApi"],
@@ -139,13 +149,20 @@ export const movieApi = createApi({
       providesTags: ["movieApi"],
     }),
     getLanguage : builder.query({
-      query: ({}) => `/configuration/languages?api_key=7fe0fbe72550cf27a1a5a738cabda3db`
-    })
+      query: () => `/configuration/languages?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"]
+    }),
+    getCountry : builder.query({
+      query: () => `/configuration/countries?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"]
+    }),
   }),
 });
 
 export const {
   useGetMovieQuery,
+  useGetMovieByCountryQuery,
+  useGetMovieByCountryTwoQuery,
   useGetMovieGenresQuery,
   useGetTvQuery,
   useGetTvGenresQuery,
@@ -173,4 +190,5 @@ export const {
   useGetPopularTwoQuery,
   useGetGenreSearchQuery,
   useGetLanguageQuery,
+  useGetCountryQuery,
 } = movieApi;

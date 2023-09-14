@@ -6,9 +6,9 @@ import TvShows from "./Pages/TvShows";
 import SideBar from "./components/SideBar/SideBar";
 import MyList from "./Pages/MyList";
 import Search from "./Pages/Search";
-import Bbl from "./Pages/Bbl";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
+import BrowseByLanguages from "./Pages/BrowseByLanguages";
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/movies" element={<Movies />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/mylist" element={<MyList />} />
-        <Route path="/bbl" element={<Bbl />} />
+        <Route path="/browse-by-language" element={<BrowseByLanguages />} />
         <Route path="/search" element={<Search />} />
       </Routes>
       <SideBar />

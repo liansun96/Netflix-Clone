@@ -96,6 +96,20 @@ const ToggleProvider = ({ children }) => {
     setTvGenreName(tvGenreName);
   };
 
+  //Get Country IosName
+  const [iosName, setIosName] = useState('');
+  const handleGetIosName = (iosName) => {
+    setIosName(iosName);
+  };
+  console.log(iosName);
+
+  //Get Country Name
+  const [languageName, setLanguageName] = useState("");
+  const handleGetlanguageName = (languageName) => {
+    setLanguageName(languageName);
+  };
+  console.log(languageName);
+
   const value = {
     search,
     setSearch,
@@ -127,6 +141,10 @@ const ToggleProvider = ({ children }) => {
     toggleMovieShow,
     tvShow,
     toggleTvShow,
+    iosName,
+    handleGetIosName,
+    languageName,
+    handleGetlanguageName,
   };
 
   return (
