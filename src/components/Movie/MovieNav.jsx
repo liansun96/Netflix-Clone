@@ -110,7 +110,7 @@ const MovieNav = () => {
                       My List
                     </p>
                   </NavLink>
-                  <NavLink to={"/bbl"}>
+                  <NavLink to={"/browse-by-language"}>
                     <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
                       Browse by Languages
                     </p>
