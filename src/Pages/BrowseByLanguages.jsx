@@ -18,6 +18,8 @@ import { countryCodes } from "../redux/api/countryCode";
 
 const BrowseByLanguages = () => {
   const {
+    page,
+    setPage,
     handleGetId,
     toggleModal,
     togglePlayMovieModal,
@@ -31,29 +33,21 @@ const BrowseByLanguages = () => {
     handleGetlanguageName,
   } = useContext(ToggleContext);
 
-  const [movie, setMovie] = useState([]);
+  const { data, isLoading, isError } = useGetMovieByCountryQuery({ iosName });
 
-  const { data: MovieByCountry } = useGetMovieByCountryQuery({ iosName });
-  // console.log(MovieByCountry);
-  // const arr1 = MovieByCountry?.results;
-  // console.log(arr1);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  // const { data: MovieByCountryTwo } = useGetMovieByCountryTwoQuery({ iosName });
-  // console.log(MovieByCountryTwo);
-  // const arr2 = MovieByCountryTwo?.results;
-  // console.log(arr2);
-
-  // const combine = [...arr1,...arr2];
-  // useEffect(() => {
-  //   setMovie(combine);
-  // }, [arr1,arr2]);
+  if (isError) {
+    return <div>Error fetching data</div>;
+  }
 
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
     setShow(!show);
-    console.log("show");
   };
 
   useEffect(() => {
@@ -73,7 +67,6 @@ const BrowseByLanguages = () => {
   } else {
     document.body.classList.remove("overflow-y-hidden");
   }
-  console.log(languageName);
 
   return (
     <div className="bg-[#141414] min-h-screen">
@@ -106,10 +99,10 @@ const BrowseByLanguages = () => {
               <div
                 className={`${
                   show ? "block" : "hidden"
-                } w-[250px] h-[400px] absolute left-[150px] bg-black bg-opacity-80 z-[1006]`}
+                } w-[250px] h-[500px] absolute left-[150px] bg-black bg-opacity-80 z-[1006]`}
               >
                 <div className="py-1 px-2 flex gap-5 items-start">
-                  <div className="flex flex-col gap-3 h-[390px] overflow-y-scroll">
+                  <div className="flex flex-col gap-3 h-[490px] overflow-y-scroll language-dropdown">
                     {countryCodes?.map((countryCode) => (
                       <div key={countryCode.id}>
                         <p
@@ -118,7 +111,7 @@ const BrowseByLanguages = () => {
                             handleGetIosName(countryCode?.original_language),
                             handleGetlanguageName(countryCode?.language_name)
                           )}
-                          className="text-sm w-[215px] cursor-pointer"
+                          className="text-sm w-[215px] cursor-pointer hover:underline"
                         >
                           {countryCode.language_name}
                         </p>
@@ -134,7 +127,7 @@ const BrowseByLanguages = () => {
       <div className="overflow-hidden">
         <div className="w-[95%] mx-auto pb-36">
           <div className="flex flex-wrap justify-center gap-5 relative pt-11">
-            {MovieByCountry?.results?.map((result, index) => {
+            {data?.results?.map((result, index) => {
               const handelPlay = () => {
                 togglePlayMovieModal();
                 handleGetId(result?.id);
@@ -220,6 +213,7 @@ const BrowseByLanguages = () => {
               );
             })}
           </div>
+          
         </div>
       </div>
       <div className="">
