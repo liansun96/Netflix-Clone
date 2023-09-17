@@ -5,6 +5,8 @@ import { createContext } from "react";
 export const ToggleContext = createContext();
 
 const ToggleProvider = ({ children }) => {
+
+  const [page, setPage] = useState(1);
   //search input
   const [search, setSearch] = useState("");
 
@@ -109,9 +111,13 @@ const ToggleProvider = ({ children }) => {
     setLanguageName(languageName);
   };
   console.log(languageName);
+
+  
   
 
   const value = {
+    page,
+    setPage,
     search,
     setSearch,
     showInput,
