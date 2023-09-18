@@ -319,14 +319,9 @@ export const countryCodes = [
         id: 64,
         original_language:"vi",
         language_name:"Vietnamese",
-    },    
+    },        
     {
         id: 65,
-        original_language:"wo",
-        language_name:"Wolof",
-    },    
-    {
-        id: 66,
         original_language:"yi",
         language_name:"Yiddish",
     },    

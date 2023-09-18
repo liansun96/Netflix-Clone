@@ -6,7 +6,6 @@ export const ToggleContext = createContext();
 
 const ToggleProvider = ({ children }) => {
 
-  const [page, setPage] = useState(1);
   //search input
   const [search, setSearch] = useState("");
 
@@ -112,12 +111,17 @@ const ToggleProvider = ({ children }) => {
   };
   console.log(languageName);
 
+  //Get Sort Name
+  const [sortName, setSortName] = useState("Suggestions for you");
+  const handleGetSortName = (sortName) => {
+    setSortName(sortName);
+  };
+  console.log(sortName);
+
   
   
 
-  const value = {
-    page,
-    setPage,
+  const value = {    
     search,
     setSearch,
     showInput,
@@ -152,6 +156,8 @@ const ToggleProvider = ({ children }) => {
     handleGetIosName,
     languageName,
     handleGetlanguageName,
+    sortName,
+    handleGetSortName
   };
 
   return (

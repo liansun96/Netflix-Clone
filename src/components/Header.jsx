@@ -19,7 +19,7 @@ const Header = () => {
 
   const movieId = movie?.id;
 
-  const { data: detailImage } = useGetMovieImageQuery({ movieId });
+  const { data: detailImage , isLoading } = useGetMovieImageQuery({ movieId });
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {

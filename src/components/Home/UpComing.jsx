@@ -14,7 +14,7 @@ const UpComing = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal } =
     useContext(ToggleContext);
 
-  const { data } = useGetUpcomingQuery();
+  const { data , isLoading } = useGetUpcomingQuery();
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 

@@ -81,7 +81,7 @@ const MovieNav = () => {
                 />
               </div>
               <Link to={"/"}>
-                <img src={Logo} className="h-[45px] cursor-pointer" alt="" />
+                <img src={"https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"} className="h-[30px] my-2 cursor-pointer" alt="" />
               </Link>
               <div className="hidden lg:block">
                 <div className="flex items-center gap-5">
