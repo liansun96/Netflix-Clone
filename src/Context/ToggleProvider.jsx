@@ -111,6 +111,13 @@ const ToggleProvider = ({ children }) => {
   };
   console.log(languageName);
 
+  //Get Sort Name
+  const [sortName, setSortName] = useState("Suggestions for you");
+  const handleGetSortName = (sortName) => {
+    setSortName(sortName);
+  };
+  console.log(sortName);
+
   
   
 
@@ -149,6 +156,8 @@ const ToggleProvider = ({ children }) => {
     handleGetIosName,
     languageName,
     handleGetlanguageName,
+    sortName,
+    handleGetSortName
   };
 
   return (

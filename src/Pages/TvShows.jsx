@@ -107,9 +107,9 @@ const TvShows = () => {
             <div className="category-bg pt-20 lg:pt-0 lg:-translate-y-10">
               <div className="w-[95%] mx-auto lg:pb-10 lg:-translate-y-14">
                 <Tv />
-                <PopularTv />
                 <NowPlayingTv />
                 <TopRatedTv />
+                <PopularTv />
               </div>
             </div>
             <Footer />
