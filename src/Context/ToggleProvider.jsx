@@ -6,7 +6,6 @@ export const ToggleContext = createContext();
 
 const ToggleProvider = ({ children }) => {
 
-  const [page, setPage] = useState(1);
   //search input
   const [search, setSearch] = useState("");
 
@@ -115,9 +114,7 @@ const ToggleProvider = ({ children }) => {
   
   
 
-  const value = {
-    page,
-    setPage,
+  const value = {    
     search,
     setSearch,
     showInput,
