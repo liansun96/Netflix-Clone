@@ -33,8 +33,9 @@ const TvShows = () => {
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
-    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
+    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length -1)]);
   }, [genreId]);
+  console.log(Math.floor(Math.random() * data?.results?.length));
 
   const handelPlay = () => {
     togglePlayTvModal();

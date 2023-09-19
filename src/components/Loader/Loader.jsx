@@ -1,5 +1,3 @@
-import React from "react";
-import "./loader.css";
 import { motion } from "framer-motion";
 
 const Loader = () => {
@@ -37,7 +35,12 @@ const Loader = () => {
             animate={{ opacity: [0 ,1] }}
             transition={{ delay: 0.6 , duration: 1.5}}            
             className="h-[130px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] rounded bg-gray-500"
-          />          
+          />
+          <motion.div
+            animate={{ opacity: [0 ,1] }}
+            transition={{ delay: 0.7 , duration: 1.5}}            
+            className="h-[130px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] rounded bg-gray-500"
+          />           
         </div>
       </div>
     </div>

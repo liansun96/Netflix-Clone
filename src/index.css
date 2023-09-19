@@ -48,4 +48,8 @@
   .language-dropdown::-webkit-scrollbar-track:hover {
     background-color: #555; /* Set the background color when hovering */
   }
+
+  /* .carousel-child > :nth-child( n-4 ){
+    margin-right: 10px;
+  } */
 }
