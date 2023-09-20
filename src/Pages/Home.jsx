@@ -8,14 +8,14 @@ import { ToggleContext } from "../Context/ToggleProvider";
 
 const Home = () => {
   const nav = useNavigate();
-  const { token } = useContext(ToggleContext);
+  const { token, setToken } = useContext(ToggleContext);
 
   useEffect(() => {
-    if (token) {
-      nav("/");
-    } else {
-      nav("/signin");
-    }
+    !token && nav("/signin");
+    // setIsLoading(true);
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+    //   }, 2000);
   }, []);
 
   return (

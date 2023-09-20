@@ -6,7 +6,7 @@ import "./SignUp.css";
 import { ClapSpinner } from "react-spinners-kit";
 
 const SignIn = () => {
-  const { setToken } = useContext(ToggleContext);
+  const { setToken, token } = useContext(ToggleContext);
 
   const [email, setEmail] = useState("marcusjude.lian");
   const [password, setPassword] = useState("jokerxbox");
@@ -43,7 +43,7 @@ const SignIn = () => {
               <h1 className="text-lg text-gray-50">Sign In</h1>
               <div className="">
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email"
                   className="p-2 w-full bg-gray-500 outline-none text-gray-50 text-sm  rounded placeholder:text-gray-200 placeholder:text-sm"

@@ -21,10 +21,7 @@ const ToggleProvider = ({ children }) => {
     setShowInput(!showInput);
   };
 
-  const submitHandler = () => {
-    setToken(!token);
-    if (token === true) nav("/");
-  };
+ 
 
   //Sidebar
   const [sBar, setSBar] = useState(false);
