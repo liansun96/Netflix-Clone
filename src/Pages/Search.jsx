@@ -45,6 +45,14 @@ const Search = () => {
     setShowInput(true);
   }
 
+  if (modal) {
+    document.body.classList.add("overflow-y-hidden");
+    document.body.classList.add('modal-open');
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+    document.body.classList.remove('modal-open');
+  }
+  
   return (
     <div className="bg-[#141414]">
       <HomeNav />
