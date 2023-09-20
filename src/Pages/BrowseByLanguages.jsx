@@ -9,6 +9,7 @@ import PlayTv from "../components/Tv/PlayTv";
 import { MdArrowDropDown } from "react-icons/md";
 import {
   useGetMovieByCountryQuery,
+  useGetMovieByCountryThreeQuery,
   useGetMovieByCountryTwoQuery,
 } from "../redux/api/movieApi";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
@@ -39,6 +40,7 @@ const BrowseByLanguages = () => {
 
   const { data, isLoading } = useGetMovieByCountryQuery({ iosName });
   const { data: data2 } = useGetMovieByCountryTwoQuery({ iosName });
+  const { data: data3 } = useGetMovieByCountryThreeQuery({ iosName });
 
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
@@ -72,9 +74,9 @@ const BrowseByLanguages = () => {
   const handleShow1 = () => {
     setShow1(!show1);
   };
-
+  
   const sortByProperty = (property) => {
-    const sortedData = [...data?.results, ...data2?.results].sort((a, b) => {
+    const sortedData = [...data?.results].sort((a, b) => {
       let result;
       if (property === "title") {
         result = a.title.localeCompare(b.title);
@@ -198,7 +200,7 @@ const BrowseByLanguages = () => {
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-9 pb-36">
-            <div className="flex flex-wrap justify-between relative pt-11">
+            <div className="flex flex-wrap justify-between relative pt-11 list-disc [&>*:last-child]:me-auto list-disc [&>*:last-child]:ms-3">
               {sortedData?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -211,7 +213,7 @@ const BrowseByLanguages = () => {
                 return (
                   <div
                     key={result?.id}
-                    className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3 carousel-child"
+                    className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px]"
                   >
                     <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
                       <div className="group/item flex flex-col mb-20 3xl:mb-24 4xl:mb-28">

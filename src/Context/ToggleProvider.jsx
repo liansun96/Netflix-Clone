@@ -119,8 +119,11 @@ const ToggleProvider = ({ children }) => {
 
   //Set Page Number
   const [page, setPage] = useState(1);
-  const handlePageNumber = () => {
+  const handleNextPage = () => {
     setPage((pre) => pre + 1);
+  };
+  const handlePrevPage = () => {
+    setPage((pre) => pre - 1);
   };
 
   const value = {
@@ -161,7 +164,8 @@ const ToggleProvider = ({ children }) => {
     sortName,
     handleGetSortName,
     page,
-    handlePageNumber
+    handleNextPage,
+    handlePrevPage,
   };
 
   return (

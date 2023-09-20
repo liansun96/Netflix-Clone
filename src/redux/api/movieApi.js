@@ -21,6 +21,11 @@ export const movieApi = createApi({
         `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&primary_release_year=2022&with_original_language=${iosName}`,
       providesTags: ["movieApi"],
     }),
+    getMovieByCountryThree: builder.query({
+      query: ({iosName}) =>
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&primary_release_year=2022&with_original_language=${iosName}`,
+      providesTags: ["movieApi"],
+    }),
     getMovieGenres: builder.query({
       query: () => "/genre/movie/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
       providesTags: ["movieApi"],
@@ -141,7 +146,7 @@ export const movieApi = createApi({
       providesTags: ["movieApi"],
     }),
     getSearch : builder.query({
-      query: ({search}) => `/search/multi?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_adult=false&query=${search}}`,
+      query: ({search,page}) => `/search/multi?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_adult=false&page=${page}&query=${search}}`,
       providesTags: ["movieApi"]
     }),
     getGenreSearch : builder.query({
@@ -163,6 +168,7 @@ export const {
   useGetMovieQuery,
   useGetMovieByCountryQuery,
   useGetMovieByCountryTwoQuery,
+  useGetMovieByCountryThreeQuery,
   useGetMovieGenresQuery,
   useGetTvQuery,
   useGetTvGenresQuery,

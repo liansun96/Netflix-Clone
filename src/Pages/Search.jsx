@@ -21,9 +21,12 @@ const Search = () => {
     toggleModal,
     playMovieModal,
     togglePlayMovieModal,
+    page,
+    handlePrevPage,
+    handleNextPage,
   } = useContext(ToggleContext);
 
-  const { data, isLoading } = useGetSearchQuery({ search });
+  const { data, isLoading } = useGetSearchQuery({ search , page });
   console.log(data);
 
   useEffect(() => {
@@ -139,6 +142,12 @@ const Search = () => {
                   </div>
                 );
               })}
+              <button onClick={handlePrevPage} className="h-10 px-4 py-1 border rounded-lg bg-yellow-400 text-black">
+                More
+              </button>
+              <button onClick={handleNextPage} className="h-10 px-4 py-1 border rounded-lg bg-yellow-400 text-black">
+                More
+              </button>
             </div>
           </div>
         </div>

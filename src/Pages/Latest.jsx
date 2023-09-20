@@ -22,7 +22,7 @@ import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { RiArrowDropRightLine } from "react-icons/ri";
 
 const Latest = () => {
-  const { tvModal, playTvModal, modal, playMovieModal, genreId } =
+  const { tvModal, playTvModal, modal, playMovieModal, genreId,handleGetId, toggleModal, togglePlayMovieModal } =
     useContext(ToggleContext);
 
   const { data, isLoading } = useGetUpcomingTwoQuery({ genreId });
