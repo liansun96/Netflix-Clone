@@ -206,7 +206,7 @@ const Test = () => {
           </div>
         </div>
       </div>
-      {modal && <MovieDetail />}
+      {/* {modal && <MovieDetail />} */}
     </>
   );
 };

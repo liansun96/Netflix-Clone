@@ -14,13 +14,38 @@
     scrollbar-width: none; /* Firefox */
   }
 
+  .custom-btn-bg {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
   .home-nav-bg {
-    background-image: linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent);
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.7) 10%,
+      transparent
+    );
   }
 
   .category-bg {
-    background-image: linear-gradient(0deg,rgba(20,20,20,1) 95%,transparent);
+    background-image: linear-gradient(
+      0deg,
+      rgba(20, 20, 20, 1) 95%,
+      transparent
+    );
   }
-  
 
+  /* Customize the scrollbar track */
+  .language-dropdown::-webkit-scrollbar {
+    width: 10px; /* Set the width of the scrollbar */
+  }
+
+  /* Customize the scrollbar thumb (the draggable part) */
+  .language-dropdown::-webkit-scrollbar-thumb {
+    background-color: #CCCCCC; /* Set the background color of the thumb */    
+  }
+
+  /* Customize the scrollbar track when hovering over it */
+  .language-dropdown::-webkit-scrollbar-track:hover {
+    background-color: #555; /* Set the background color when hovering */
+  }
 }

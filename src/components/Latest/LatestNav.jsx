@@ -95,7 +95,7 @@ const LatestNav = () => {
                       My List
                     </p>
                   </NavLink>
-                  <NavLink to={"/bbl"}>
+                  <NavLink to={"/browse-by-language"}>
                     <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
                       Browse by Languages
                     </p>
@@ -115,16 +115,21 @@ const LatestNav = () => {
             </div>
             <div className="hidden lg:block">
               <div className="flex items-center gap-5">
-                <form
-                  className={`flex gap-3 px-2 items-center ${
-                    showInput && "border"
+                <div
+                  onClick={handleInput}
+                  className={showInput ? "inset-0 fixed mt-[50px]" : null}
+                ></div>
+                <div
+                  className={`flex gap-3 items-center ${
+                    showInput && "border px-3"
                   } border-white cursor-pointer`}
                 >
                   <BiSearch
                     onClick={handleInput}
-                    className="text-white text-xl"
-                  />
+                    className="text-white text-2xl"
+                  />x
                   <input
+                    onClick={(e) => e.stopPropagation()}
                     ref={inputRef}
                     value={search}
                     onChange={handleInputChange}
@@ -134,7 +139,7 @@ const LatestNav = () => {
                     } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                     placeholder="Search by name"
                   />
-                </form>
+                </div>
                 <IoMdNotificationsOutline className="text-white text-2xl" />
                 <Profile />
               </div>

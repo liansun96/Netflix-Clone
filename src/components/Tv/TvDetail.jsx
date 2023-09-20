@@ -127,7 +127,7 @@ const TvDetail = () => {
   return (
     <div
       onClick={toggleTvModal}
-      className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll no-scrollbar transition-all backdrop-blur-sm flex justify-center items-center z-[1005]"
+      className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1005]"
     >
       <div
         onClick={(e) => e.stopPropagation()}

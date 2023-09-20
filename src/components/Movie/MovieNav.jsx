@@ -81,7 +81,7 @@ const MovieNav = () => {
                 />
               </div>
               <Link to={"/"}>
-                <img src={Logo} className="h-[45px] cursor-pointer" alt="" />
+                <img src={"https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"} className="h-[30px] my-2 cursor-pointer" alt="" />
               </Link>
               <div className="hidden lg:block">
                 <div className="flex items-center gap-5">
@@ -110,7 +110,7 @@ const MovieNav = () => {
                       My List
                     </p>
                   </NavLink>
-                  <NavLink to={"/bbl"}>
+                  <NavLink to={"/browse-by-language"}>
                     <p className="text-[13px] font-semibold text-gray-300 hover:text-gray-400 duration-300">
                       Browse by Languages
                     </p>
@@ -130,16 +130,21 @@ const MovieNav = () => {
             </div>
             <div className="hidden lg:block">
               <div className="flex items-center gap-5">
-                <form
-                  className={`flex gap-3 px-2 items-center ${
-                    showInput && "border"
+                <div
+                  onClick={handleInput}
+                  className={showInput ? "inset-0 fixed mt-[50px]" : null}
+                ></div>
+                <div
+                  className={`flex gap-3 items-center ${
+                    showInput && "border px-3"
                   } border-white cursor-pointer`}
                 >
                   <BiSearch
                     onClick={handleInput}
-                    className="text-white text-xl"
+                    className="text-white text-2xl"
                   />
                   <input
+                    onClick={(e) => e.stopPropagation()}
                     ref={inputRef}
                     value={search}
                     onChange={handleInputChange}
@@ -149,7 +154,7 @@ const MovieNav = () => {
                     } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                     placeholder="Search by name"
                   />
-                </form>
+                </div>
                 <IoMdNotificationsOutline className="text-white text-2xl" />
                 <Profile />
               </div>
@@ -184,7 +189,9 @@ const MovieNav = () => {
                           <div key={genre.id}>
                             <p
                               onClick={() => (
-                                handleGetGenreId(genre?.id),handleGetGenreName(genre?.name), handleShow()
+                                handleGetGenreId(genre?.id),
+                                handleGetGenreName(genre?.name),
+                                handleShow()
                               )}
                               className="text-sm w-[120px] cursor-pointer"
                             >
