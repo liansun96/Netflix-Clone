@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+
+  body.modal-open {
+    overflow: hidden;
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
