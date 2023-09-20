@@ -19,6 +19,7 @@ import NowPlayingTv from "../components/Tv/NowPlayingTv";
 import PopularTv from "../components/Tv/PopularTv";
 import TopRatedTv from "../components/Tv/TopRatedTv";
 import Tv from "../components/Tv/Tv";
+import NowPlayingMovie from "../components/Movie/NowPlayingMovie";
 
 
 const Home = () => {
@@ -27,7 +28,7 @@ const Home = () => {
   const { token, tvModal, playTvModal, modal, playMovieModal } =
     useContext(ToggleContext);
 
-  if (tvModal) {
+  if (modal) {
     document.body.classList.add("overflow-y-hidden");
   } else {
     document.body.classList.remove("overflow-y-hidden");
@@ -46,7 +47,7 @@ const Home = () => {
             <div className="w-[95%] mx-auto">
               <Test />
               <Movie />
-              <NowPlaying />
+              <NowPlayingMovie />
               <TopRated />
               <Popular />
               <Tv />

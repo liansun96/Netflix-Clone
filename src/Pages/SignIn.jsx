@@ -4,13 +4,17 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../Context/ToggleProvider";
 import "./SignUp.css";
 import { ClapSpinner } from "react-spinners-kit";
+import { BiHide, BiShow } from "react-icons/bi";
 
 const SignIn = () => {
-  const { setToken, token } = useContext(ToggleContext);
+
+  const { token, setToken } = useContext(ToggleContext);
+
 
   const [email, setEmail] = useState("marcusjude.lian");
   const [password, setPassword] = useState("jokerxbox");
   const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const nav = useNavigate();
 
@@ -18,7 +22,7 @@ const SignIn = () => {
     e.preventDefault();
     if (email === "marcusjude.lian" && password === "jokerxbox") {
       setIsLoading(true);
-      setToken(true);
+      setToken(!token);
       setTimeout(() => {
         setIsLoading(false);
         nav("/");
@@ -37,32 +41,43 @@ const SignIn = () => {
   return (
     <div className="signup-bg w-full h-screen">
       <div className="flex items-center justify-center w-full h-full">
-        <div className=" bg-black bg-opacity-80 w-[350px] h-[500px] p-12 rounded">
+        <div className=" bg-black bg-opacity-80 lg:w-[400px] lg:h-[500px] p-16 rounded">
           <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col gap-5">
-              <h1 className="text-lg text-gray-50">Sign In</h1>
+              <h1 className="text-3xl font-bold text-gray-50">Sign In</h1>
               <div className="">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email"
-                  className="p-2 w-full bg-gray-500 outline-none text-gray-50 text-sm  rounded placeholder:text-gray-200 placeholder:text-sm"
+                  className="p-2 w-full h-12 bg-white outline-none rounded placeholder:text-gray-200 placeholder:text-sm"
                   placeholder="Email"
                 />
               </div>
-              <div className="">
+              <div className="relative">
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
-                  type="text"
-                  className="p-2 w-full bg-gray-500 outline-none text-gray-50 text-sm rounded placeholder:text-gray-200 placeholder:text-sm"
+                  type={show ? "text" : "password"}
+                  className="p-2 w-full h-12 bg-white outline-none rounded placeholder:text-gray-200 placeholder:text-sm"
                   placeholder="Password"
                 />
+                <button
+                  className=""
+                  type="reset"
+                  onClick={() => setShow(!show)}
+                >
+                  {show ? (
+                    <BiHide className="absolute cursor-pointer text-xl right-4 top-4 " />
+                  ) : (
+                    <BiShow className="absolute cursor-pointer text-xl right-4 top-4 " />
+                  )}
+                </button>
               </div>
               <div className="mt-7">
                 <div
                   onClick={handleSignIn}
-                  className="text-xs font-semibold text-gray-50 text-center bg-red-600 rounded w-full p-2.5 cursor-pointer"
+                  className="h-12 font-semibold text-gray-50 text-center bg-red-600 rounded w-full p-2.5 cursor-pointer"
                 >
                   Sign in
                 </div>

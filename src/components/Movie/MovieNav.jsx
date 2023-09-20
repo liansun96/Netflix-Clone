@@ -164,7 +164,7 @@ const MovieNav = () => {
             <div
               className={`${
                 scrollHeight > 100 ? "bg-[#141414]" : "bg-transparent"
-              } absolute text-white text-3xl w-full pl-12 pr-10 py-2 flex items-center justify-between duration-300`}
+              } absolute text-white text-3xl w-full px-10 py-2 flex items-center justify-between duration-300`}
             >
               <div className="flex items-center gap-10 relative">
                 <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
