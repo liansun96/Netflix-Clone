@@ -7,7 +7,9 @@ import { ClapSpinner } from "react-spinners-kit";
 import { BiHide, BiShow } from "react-icons/bi";
 
 const SignIn = () => {
+
   const { token, setToken } = useContext(ToggleContext);
+
 
   const [email, setEmail] = useState("marcusjude.lian");
   const [password, setPassword] = useState("jokerxbox");
@@ -45,7 +47,7 @@ const SignIn = () => {
               <h1 className="text-3xl font-bold text-gray-50">Sign In</h1>
               <div className="">
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email"
                   className="p-2 w-full h-12 bg-white outline-none rounded placeholder:text-gray-200 placeholder:text-sm"
