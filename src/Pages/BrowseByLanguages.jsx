@@ -62,6 +62,7 @@ const BrowseByLanguages = () => {
     };
   }, []);
 
+  
   if (modal) {
     document.body.classList.add("overflow-y-hidden");
     document.body.classList.add('modal-open');
@@ -101,6 +102,8 @@ const BrowseByLanguages = () => {
     setSortedData(sortedData);
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
+
+  
   return (
     <div className="bg-[#141414] min-h-screen">
       <HomeNav />

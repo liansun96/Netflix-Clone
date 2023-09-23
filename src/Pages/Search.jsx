@@ -26,7 +26,7 @@ const Search = () => {
     handleNextPage,
   } = useContext(ToggleContext);
 
-  const { data, isLoading } = useGetSearchQuery({ search , page });
+  const { data, isLoading } = useGetSearchQuery({ search, page });
   console.log(data);
 
   useEffect(() => {
@@ -47,12 +47,12 @@ const Search = () => {
 
   if (modal) {
     document.body.classList.add("overflow-y-hidden");
-    document.body.classList.add('modal-open');
+    document.body.classList.add("modal-open");
   } else {
     document.body.classList.remove("overflow-y-hidden");
-    document.body.classList.remove('modal-open');
+    document.body.classList.remove("modal-open");
   }
-  
+
   return (
     <div className="bg-[#141414]">
       <HomeNav />
@@ -150,12 +150,20 @@ const Search = () => {
                   </div>
                 );
               })}
-              <button onClick={handlePrevPage} className="h-10 px-4 py-1 border rounded-lg bg-yellow-400 text-black">
-                More
-              </button>
-              <button onClick={handleNextPage} className="h-10 px-4 py-1 border rounded-lg bg-yellow-400 text-black">
-                More
-              </button>
+              <div className="flex gap-4 mt-10">
+                <button
+                  onClick={handlePrevPage}
+                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                >
+                  Prev
+                </button>
+                <button
+                  onClick={handleNextPage}
+                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>
