@@ -21,7 +21,7 @@ const TvDetail = () => {
   console.log(data);
   console.log(recData?.results);
   console.log(video);
-
+  
   const lastRoom = video?.results[video?.results?.length - 1]?.key;
 
   useEffect(() => {
@@ -30,9 +30,28 @@ const TvDetail = () => {
 
   console.log(trailer);
 
+  const parentRef = useRef(null);
+  console.log(parentRef?.current?.offsetWidth);
+
+  useEffect(() => {
+    // Access the parent div's width after the component has mounted
+    if (parentRef.current) {
+      const parentWidth = parentRef.current.offsetWidth;
+      console.log('Parent div width:', parentWidth);
+    }
+  }, []);
+
   const opts = {
     height: "455",
     width: "880",
+    playerVars: {
+      autoplay: 0,
+    },
+  };
+
+  const opts_sm = {
+    height: "300" ,
+    width: `${parentRef?.current?.offsetWidth}`,
     playerVars: {
       autoplay: 0,
     },
@@ -131,14 +150,26 @@ const TvDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-10"
+        className="group/item w-full lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-10"
       >
-        <div className="video-bg">
-          <YouTube className="z-[1006]" videoId={trailer} opts={opts} />
+        <div className="group">
+          <YouTube
+            className="z-[1006] hidden lg:block"
+            videoId={trailer}
+            opts={opts}
+          />
         </div>
 
-        <div className="flex justify-between gap-10 p-10 text-white">
-          <div className="w-[60%]">
+        <div ref={parentRef} className="">
+          <YouTube
+            className="z-[1006] block lg:hidden"
+            videoId={trailer}
+            opts={opts_sm}
+          />
+        </div>
+
+        <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-10 p-5 lg:p-10 text-white">
+          <div className="w-full lg:w-[60%]">
             <div className="gap-5">
               <p className="font-bold text-green-500">
                 <span>{data?.vote_average?.toFixed(1) * 10}%</span> Match
@@ -159,7 +190,7 @@ const TvDetail = () => {
             <br />
             <p>{data?.overview}</p>
           </div>
-          <div className="w-[40%]">
+          <div className="w-full lg:w-[40%]">
             <div className="">
               <p className="">
                 <span className="text-sm font-semibold text-gray-500">
@@ -222,16 +253,16 @@ const TvDetail = () => {
             </p>
           </div>
         </div>
-        <h1 className="text-2xl text-white font-semibold p-10">
+        <h1 className="text-2xl text-white font-semibold p-5 lg:p-10">
           More Like This
         </h1>
 
-        <div className="flex gap-6 justify-start flex-wrap px-10">
+        <div className="flex gap-6 justify-start flex-wrap px-5 lg:px-10">
           {recData?.results.map((result, index) => (
             <SimilarTv key={index} result={result} />
           ))}
         </div>
-        <div className="p-10 space-y-3" ref={castRef}>
+        <div className="p-5 lg:p-10 space-y-3" ref={castRef}>
           <h1 className="text-2xl text-white font-semibold ">
             About{" "}
             <span className="text-3xl font-bold">{data?.original_name}</span>

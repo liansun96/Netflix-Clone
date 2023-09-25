@@ -17,19 +17,19 @@ const SimilarTv = ({ result }) => {
   return (
     <div
       onClick={handelPlay}
-      className="group/edit w-[250px] h-[350px] bg-[#2F2F2F] rounded cursor-pointer"
+      className="group/edit w-full lg:w-[250px] h-[390px] lg:h-[350px] bg-[#2F2F2F] rounded cursor-pointer"
     >
       <div className="relative">
         {result?.backdrop_path == null ? (
           <img
             src={"https://image.tmdb.org/t/p/w300" + result?.poster_path}
-            className="rounded object-cover object-top h-[142px] w-full"
+            className="rounded object-cover object-top h-[215px] lg:h-[142px] w-full"
             alt=""
           />
         ) : (
           <img
             src={"https://image.tmdb.org/t/p/w300" + result?.backdrop_path}
-            className="rounded"
+            className="rounded w-full"
             alt=""
           />
         )}
