@@ -150,7 +150,7 @@ const TvDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-full lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-10"
+        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
       >
         <div className="group">
           <YouTube

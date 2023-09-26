@@ -99,7 +99,7 @@ const MovieDetail = () => {
   // console.log(crewName);
 
   const productionLength = data?.production_companies?.length - 1;
-  console.log(productionLength);
+  // console.log(productionLength);
   const productionName = [];
   for (let i = 0; i <= productionLength; i++) {
     if (data?.production_companies) {
@@ -108,10 +108,10 @@ const MovieDetail = () => {
       break;
     }
   }
-  console.log(productionName);
+  // console.log(productionName);
 
   const countryLength = data?.production_countries?.length - 1;
-  console.log(countryLength);
+  // console.log(countryLength);
   const countryName = [];
   for (let i = 0; i <= countryLength; i++) {
     if (data?.production_countries) {
@@ -120,10 +120,10 @@ const MovieDetail = () => {
       break;
     }
   }
-  console.log(countryName);
+  // console.log(countryName);
 
   const languageLength = data?.spoken_languages?.length - 1;
-  console.log(languageLength);
+  // console.log(languageLength);
   const languageName = [];
   for (let i = 0; i <= languageLength; i++) {
     if (data?.spoken_languages) {
@@ -140,7 +140,7 @@ const MovieDetail = () => {
       break;
     }
   }
-  console.log(languageEngName);
+  // console.log(languageEngName);
 
   const scrollToRef = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
@@ -154,7 +154,7 @@ const MovieDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-full lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-10"
+        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
       >
         <div className="group">
           <YouTube
