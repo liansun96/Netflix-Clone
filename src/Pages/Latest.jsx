@@ -60,14 +60,14 @@ const Latest = () => {
         <Loader />
       ) : (
         <div className="overflow-hidden">
-          <div className="w-[95%] mx-auto py-24 min-h-screen">
+          <div className="w-[95%] mx-auto pb-32 pt-20 min-h-screen">
             <NowPlaying />
             <div className="group h-[230px] lg:h-[200px] my-5">
               <div className="flex flex-col gap-2 px-3">
                 <div className="flex items-center lg:items-end justify-between w-full">
                   <div className="flex items-center gap-1  group/exp cursor-pointer">
                     <h1 className="text-lg lg:text-xl font-semibold text-gray-50">
-                      Up Coming on Netflix
+                      New on Netflix
                     </h1>
                     <div className="flex items-center lg:mt-1.5">
                       <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
@@ -130,7 +130,7 @@ const Latest = () => {
                                     "https://image.tmdb.org/t/p/w300" +
                                     result?.poster_path
                                   }
-                                  className="block lg:hidden rounded w-full object-cover object-top cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                                  className="block lg:hidden rounded w-full object-cover object-top cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
                                   alt=""
                                 />
                                 <div className="relative group/edit invisible group-hover/item:visible group-hover/item:rounded-b group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full lg:group-hover/item:p-3 bg-[#181818] h-[0px]">

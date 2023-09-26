@@ -19,8 +19,8 @@
     scrollbar-width: none; /* Firefox */
   }
 
-  .custom-btn-bg {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  .custom-btn-shadow {
+    box-shadow: rgba(102, 102, 110, 0.25) 0px 7px 29px 0px;
   }
 
   .custom-shadow-lg{

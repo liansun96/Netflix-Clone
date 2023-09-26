@@ -43,7 +43,7 @@ const PopularMovie = () => {
           <div className="flex items-center lg:items-end justify-between w-full">
             <div className="flex items-center gap-1  group/exp cursor-pointer">
               <h1 className="text-lg lg:text-xl font-semibold text-gray-50">
-                Up Coming on Netflix
+                Popular Movies
               </h1>
               <div className="flex items-center lg:mt-1.5">
                 <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
@@ -103,7 +103,7 @@ const PopularMovie = () => {
                               "https://image.tmdb.org/t/p/w300" +
                               result?.poster_path
                             }
-                            className="block lg:hidden rounded w-full object-cover object-top cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                            className="block lg:hidden rounded w-full object-cover object-top cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
                             alt=""
                           />
                           <div className="relative group/edit invisible group-hover/item:visible group-hover/item:rounded-b group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full lg:group-hover/item:p-3 bg-[#181818] h-[0px]">

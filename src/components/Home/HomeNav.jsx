@@ -52,7 +52,13 @@ const HomeNav = () => {
                 />
               </div>
               <Link to={"/"}>
-                <img src={"https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"} className="h-[30px] my-2 cursor-pointer" alt="" />
+                <img
+                  src={
+                    "https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+                  }
+                  className="h-[30px] my-2 cursor-pointer"
+                  alt=""
+                />
               </Link>
               <div className="hidden lg:block">
                 <div className="flex items-center gap-5">
@@ -90,14 +96,27 @@ const HomeNav = () => {
               </div>
             </div>
             <div className="block lg:hidden">
-              <input
-                ref={inputRef}
-                value={search}
-                onChange={handleInputChange}
-                type="text"
-                className="px-2 py-1 bg-transparent border border-gray-400 text-xs text-gray-50 font-semibold w-[100px] outline-none placeholder:text-gray-500 focus:rounded focus:border-gray-50"
-                placeholder="Search"
-              />
+              <div
+                className={`flex gap-3 items-center rounded ${
+                  showInput && "border px-3"
+                } border-white cursor-pointer`}
+              >
+                <BiSearch
+                  onClick={handleInput}
+                  className="text-white text-2xl"
+                />
+                <input
+                  onClick={(e) => e.stopPropagation()}
+                  ref={inputRef}
+                  value={search}
+                  onChange={handleInputChange}
+                  type="text"
+                  className={`${
+                    showInput ? "w-[120px]" : "w-0"
+                  } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
+                  placeholder="Search by name"
+                />
+              </div>
             </div>
             <div className="hidden lg:block ">
               <div className="flex items-center gap-5">
@@ -109,7 +128,7 @@ const HomeNav = () => {
                       : null
                   }
                 ></div> */}
-                <div                  
+                <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"
                   } border-white cursor-pointer`}

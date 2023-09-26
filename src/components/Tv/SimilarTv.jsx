@@ -35,12 +35,22 @@ const SimilarTv = ({ result }) => {
             />
           )}
         </div>
-        <img
-          src={"https://image.tmdb.org/t/p/w300" + result?.poster_path}
-          className="block lg:hidden rounded w-full"
-          alt=""
-        />
-        <div className="scale-0 group-hover/edit:scale-100 duration-75 w-[50px] h-[50px] absolute top-[40%] left-[40%] rounded-full border-2 bg-black bg-opacity-50 border-white flex justify-center items-center cursor-pointer">
+        <div className="block lg:hidden">
+          {result?.poster_path == null ? (
+            <img
+              src={"https://image.tmdb.org/t/p/w300" + result?.backdrop_path}
+              className="rounded-t h-[250px] w-full"
+              alt=""
+            />
+          ) : (
+            <img
+              src={"https://image.tmdb.org/t/p/w300" + result?.poster_path}
+              className="block lg:hidden rounded-t h-[250px] w-full"
+              alt=""
+            />
+          )}
+        </div>
+        <div className="scale-0 group-hover/edit:scale-100 duration-75 w-[30px] h-[30px] lg:w-[50px] lg:h-[50px] absolute top-[40%] left-[40%] rounded-full border-2 bg-black bg-opacity-50 border-white flex justify-center items-center cursor-pointer">
           <IoPlaySharp className="text-white text-lg translate-x-[2px]" />
         </div>
       </div>
@@ -56,7 +66,7 @@ const SimilarTv = ({ result }) => {
               ? `${result?.original_name?.substring(0, 28)} . . .`
               : result?.original_name}
           </p>
-          <div className="block lg:hidden group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
+          <div className="visible lg:invisible group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
             <HiOutlinePlus className="text-2xl text-gray-200" />
             <div className="invisible group-hover/my-list:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
               <p className="text-lg font-semibold">Add to My List</p>
@@ -76,7 +86,7 @@ const SimilarTv = ({ result }) => {
               : {result?.first_air_date}
             </p>
           </div>
-          <div className="hidden lg:block group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
+          <div className="invisible lg:visible group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
             <HiOutlinePlus className="text-2xl text-gray-200" />
             <div className="invisible group-hover/my-list:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
               <p className="text-lg font-semibold">Add to My List</p>
