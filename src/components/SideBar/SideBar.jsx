@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { ToggleContext } from "../../Context/ToggleProvider";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { IoMenu } from "react-icons/io5";
 import {
   useGetMovieGenresQuery,
   useGetTvGenresQuery,
@@ -25,13 +26,26 @@ const SideBar = () => {
       onClick={toggleSideBar}
       className={`${
         sBar ? "translate-x-0" : "-translate-x-96"
-      } w-full h-screen bg-transparent fixed left-0 top-0 block lg:hidden duration-300`}
+      } w-full h-screen bg-transparent fixed left-0 top-0 block lg:hidden duration-300 z-[10009]`}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[250px] h-full absolute bg-black overflow-scroll"
+        className="w-[250px] h-full absolute bg-black bg-opacity-90 overflow-scroll"
       >
-        <div className="h-[80px]"></div>
+        <div className="flex gap-1 items-center p-3">
+          <div className="block lg:hidden">
+            <IoMenu onClick={toggleSideBar} className="text-gray-50 text-4xl" />
+          </div>
+          <Link to={"/"}>
+            <img
+              src={
+                "https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+              }
+              className="h-[30px] my-2 cursor-pointer"
+              alt=""
+            />
+          </Link>
+        </div>
         <div className="flex flex-col gap-1 p-3">
           <div className="flex items-center gap-1">
             <div className="h-[30px] w-[30px] bg-gray-50 rounded"></div>
@@ -44,13 +58,13 @@ const SideBar = () => {
         <div className="border-t-[0.5px] border-gray-700"></div>
         <div className="flex flex-col gap-1 p-3">
           <NavLink to={"/"}>
-            <p className="font-semibold text-gray-400">Home</p>
+            <p onClick={toggleSideBar} className="font-semibold text-gray-400">Home</p>
           </NavLink>
 
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <NavLink to={"/tvshows"}>
-                <p className="font-semibold text-gray-400">Tv Shows</p>
+                <p onClick={toggleSideBar} className="font-semibold text-gray-400">Tv Shows</p>
               </NavLink>
               <IoIosArrowDown
                 onClick={toggleTvShow}
@@ -64,7 +78,7 @@ const SideBar = () => {
             >
               <div className="flex flex-col gap-2 ps-5">
                 {TvGenres?.genres?.map((genre) => (
-                  <div key={genre.id}>
+                  <div  key={genre.id}>
                     <p
                       onClick={() => handleGetGenreId(genre?.id)}
                       className="text-sm text-gray-300 cursor-pointer hover:underline"
@@ -79,7 +93,7 @@ const SideBar = () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <NavLink to={"/movies"}>
-                <p className="font-semibold text-gray-400">Movies</p>
+                <p onClick={toggleSideBar} className="font-semibold text-gray-400">Movies</p>
               </NavLink>
               <IoIosArrowDown
                 onClick={toggleMovieShow}
@@ -110,10 +124,10 @@ const SideBar = () => {
             </div>
           </div>
           <NavLink to={"/latest"}>
-            <p className="font-semibold text-gray-400">Latest</p>
+            <p onClick={toggleSideBar} className="font-semibold text-gray-400">Latest</p>
           </NavLink>
           <NavLink to={"/mylist"}>
-            <p className="font-semibold text-gray-400">My List</p>
+            <p onClick={toggleSideBar} className="font-semibold text-gray-400">My List</p>
           </NavLink>
         </div>
       </div>

@@ -16,6 +16,7 @@ import { ToggleContext } from "../Context/ToggleProvider";
 import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
 import Loader from "../components/Loader/Loader";
+import MobileMovieHeader from "../components/Movie/MobileMovieHeader";
 
 const Movies = () => {
   const {
@@ -59,7 +60,7 @@ const Movies = () => {
   return (
     <div>
       <MovieNav />
-      <div className="bg-[#141414]">
+      <div className="bg-gradient-to-b from-[#356d75] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
         ) : (
@@ -108,8 +109,9 @@ const Movies = () => {
                 </div>
               </div>
             </header>
-            <div className="category-bg pt-20 lg:pt-0 lg:-translate-y-10">
-              <div className="w-[95%] mx-auto lg:pb-10 lg:-translate-y-14">
+            <MobileMovieHeader movie={movie} detailImage={detailImage} />
+            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-10">
+              <div className="w-[95%] mx-auto pb-10 lg:-translate-y-14">
                 <Movie />
                 <PopularMovie />
                 <NowPlayingMovie />
