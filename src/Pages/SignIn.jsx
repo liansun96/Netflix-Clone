@@ -41,7 +41,7 @@ const SignIn = () => {
   return (
     <div className="signup-bg w-full h-screen">
       <div className="flex items-center justify-center w-full h-full">
-        <div className=" bg-black bg-opacity-80 lg:w-[400px] lg:h-[500px] p-16 rounded">
+        <div className=" bg-black bg-opacity-80 w-[90%] lg:w-[400px] lg:h-[500px] p-10 lg:p-16 rounded">
           <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col gap-5">
               <h1 className="text-3xl font-bold text-gray-50">Sign In</h1>

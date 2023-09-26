@@ -98,21 +98,21 @@ const ToggleProvider = ({ children }) => {
   const handleGetIosName = (iosName) => {
     setIosName(iosName);
   };
-  console.log(iosName);
+  // console.log(iosName);
 
   //Get Country Name
   const [languageName, setLanguageName] = useState("English");
   const handleGetlanguageName = (languageName) => {
     setLanguageName(languageName);
   };
-  console.log(languageName);
+  // console.log(languageName);
 
   //Get Sort Name
   const [sortName, setSortName] = useState("Suggestions for you");
   const handleGetSortName = (sortName) => {
     setSortName(sortName);
   };
-  console.log(sortName);
+  // console.log(sortName);
 
   //Set Page Number
   const [page, setPage] = useState(1);

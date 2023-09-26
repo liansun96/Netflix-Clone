@@ -23,6 +23,10 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 
+  .custom-shadow-lg{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
   .home-nav-bg {
     background-image: linear-gradient(
       180deg,

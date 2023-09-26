@@ -22,13 +22,13 @@ const MovieDetail = () => {
   // console.log(data);
   // console.log(recData?.results);
   const parentRef = useRef(null);
-  console.log(parentRef?.current?.offsetWidth);
+  // console.log(parentRef?.current?.offsetWidth);
 
   useEffect(() => {
     // Access the parent div's width after the component has mounted
     if (parentRef.current) {
       const parentWidth = parentRef.current.offsetWidth;
-      console.log('Parent div width:', parentWidth);
+      // console.log('Parent div width:', parentWidth);
     }
   }, []);
 
@@ -156,7 +156,7 @@ const MovieDetail = () => {
         onClick={(e) => e.stopPropagation()}
         className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
       >
-        <div className="group">
+        <div className="">
           <YouTube
             className="z-[1006] hidden lg:block"
             videoId={trailer}
@@ -258,7 +258,7 @@ const MovieDetail = () => {
           More Like This
         </h1>
 
-        <div className="flex gap-6 justify-start flex-wrap px-5 lg:px-10">
+        <div className="flex gap-2 lg:gap-6 justify-start flex-wrap px-5 lg:px-10">
           {recData?.results.map((result, index) => (
             <SimilarMovie key={index} result={result} />
           ))}

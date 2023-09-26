@@ -17,10 +17,10 @@ const TvDetail = () => {
   const { data } = useGetTvDetailQuery({ id });
   const { data: recData } = useGetTvDetailRecommendationsQuery({ id });
   const { data: video } = useGetTvDetailVideoQuery({ id });
-  console.log(id);
-  console.log(data);
-  console.log(recData?.results);
-  console.log(video);
+  // console.log(id);
+  // console.log(data);
+  // console.log(recData?.results);
+  // console.log(video);
   
   const lastRoom = video?.results[video?.results?.length - 1]?.key;
 
@@ -28,7 +28,7 @@ const TvDetail = () => {
     setTrailer(lastRoom);
   });
 
-  console.log(trailer);
+  // console.log(trailer);
 
   const parentRef = useRef(null);
   console.log(parentRef?.current?.offsetWidth);
@@ -37,7 +37,7 @@ const TvDetail = () => {
     // Access the parent div's width after the component has mounted
     if (parentRef.current) {
       const parentWidth = parentRef.current.offsetWidth;
-      console.log('Parent div width:', parentWidth);
+      // console.log('Parent div width:', parentWidth);
     }
   }, []);
 
@@ -76,8 +76,8 @@ const TvDetail = () => {
       break;
     }
   }
-  console.log(castName);
-  console.log(castNameSm);
+  // console.log(castName);
+  // console.log(castNameSm);
 
   const genresLength = data?.genres.length - 1;
   const genresName = [];
@@ -103,7 +103,7 @@ const TvDetail = () => {
   // console.log(crewName);
 
   const productionLength = data?.production_companies?.length - 1;
-  console.log(productionLength);
+  // console.log(productionLength);
   const productionName = [];
   for (let i = 0; i <= productionLength; i++) {
     if (data?.production_companies) {
@@ -112,10 +112,10 @@ const TvDetail = () => {
       break;
     }
   }
-  console.log(productionName);
+  // console.log(productionName);
 
   const countryLength = data?.production_countries?.length - 1;
-  console.log(countryLength);
+  // console.log(countryLength);
   const countryName = [];
   for (let i = 0; i <= countryLength; i++) {
     if (data?.production_countries) {
@@ -124,10 +124,10 @@ const TvDetail = () => {
       break;
     }
   }
-  console.log(countryName);
+  // console.log(countryName);
 
   const languageLength = data?.spoken_languages?.length - 1;
-  console.log(languageLength);
+  // console.log(languageLength);
   const languageName = [];
   for (let i = 0; i <= languageLength; i++) {
     if (data?.spoken_languages) {
@@ -136,7 +136,7 @@ const TvDetail = () => {
       break;
     }
   }
-  console.log(languageName);
+  // console.log(languageName);
 
   const scrollToRef = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
@@ -257,7 +257,7 @@ const TvDetail = () => {
           More Like This
         </h1>
 
-        <div className="flex gap-6 justify-start flex-wrap px-5 lg:px-10">
+        <div className="flex gap-2 lg:gap-6 justify-start flex-wrap px-5 lg:px-10">
           {recData?.results.map((result, index) => (
             <SimilarTv key={index} result={result} />
           ))}
