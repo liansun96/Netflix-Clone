@@ -210,12 +210,12 @@ const MovieDetail = () => {
                 Genres
               </span>{" "}
               :
-              {genresName.map((name, index) => (
+              {genresName.map((name, i) => (
                 <>
-                  <p key={index} className="inline">
+                  <p key={i} className="inline">
                     {name}
                   </p>
-                  {index !== genresName.length - 1 && <span>, </span>}
+                  {i !== genresName.length - 1 && <span>, </span>}
                 </>
               ))}
             </div>
@@ -258,7 +258,7 @@ const MovieDetail = () => {
           More Like This
         </h1>
 
-        <div className="flex gap-2 lg:gap-6 justify-start flex-wrap px-5 lg:px-10">
+        <div className="flex gap-2 lg:gap-6 justify-between flex-wrap px-5 lg:px-10">
           {recData?.results.map((result, index) => (
             <SimilarMovie key={index} result={result} />
           ))}

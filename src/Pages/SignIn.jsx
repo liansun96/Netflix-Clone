@@ -26,7 +26,7 @@ const SignIn = () => {
       setTimeout(() => {
         setIsLoading(false);
         nav("/");
-      }, 2000);
+      }, 800);
     }
   };
 

@@ -86,8 +86,8 @@ const SimilarTv = ({ result }) => {
               : {result?.first_air_date}
             </p>
           </div>
-          <div className="invisible lg:visible group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
-            <HiOutlinePlus className="text-2xl text-gray-200" />
+          <div className="hidden lg:block group/my-list relative h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
+            <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
             <div className="invisible group-hover/my-list:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
               <p className="text-lg font-semibold">Add to My List</p>
               <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />

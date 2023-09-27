@@ -10,7 +10,6 @@ import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
 import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
-import Loader from "../components/Loader/Loader";
 import { useGetUpcomingTwoQuery } from "../redux/api/movieApi";
 import { HiOutlinePlus } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
@@ -20,6 +19,7 @@ import {
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { RiArrowDropRightLine } from "react-icons/ri";
+import LatestLoader from "../components/Loader/LatestLoader";
 
 const Latest = () => {
   const {
@@ -57,7 +57,7 @@ const Latest = () => {
     <div className="bg-[#141414]">
       <HomeNav />
       {isLoading ? (
-        <Loader />
+        <LatestLoader />
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pb-32 pt-20 min-h-screen">

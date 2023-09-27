@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import Logo from "../image/Logo.svg";
+import { GoChevronDown } from "react-icons/go";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiLayoutGridFill } from "react-icons/ri";
 import { MdArrowDropDown } from "react-icons/md";
@@ -10,6 +11,7 @@ import { ToggleContext } from "../../Context/ToggleProvider";
 import { BiSearch } from "react-icons/bi";
 import Profile from "../Profile";
 import { useGetTvGenresQuery } from "../../redux/api/movieApi";
+import { AnimatePresence, motion } from "framer-motion";
 
 const TvNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -70,7 +72,7 @@ const TvNav = () => {
     <div className="pb-0 lg:pb-5">
       <div className="fixed top-0 w-full z-50">
         <div className="">
-          <div className="flex items-start lg:items-center justify-between px-3 lg:px-10 py-2 home-bg lg:bg-[#141414]">
+          <div className="flex items-center lg:items-center justify-between px-3 lg:px-10 py-2 home-nav-bg lg:bg-[#141414]">
             <div className="flex items-center gap-1 lg:gap-5">
               <div className="block lg:hidden">
                 <IoMenu
@@ -79,7 +81,13 @@ const TvNav = () => {
                 />
               </div>
               <Link to={"/"}>
-                <img src={"https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"} className="h-[30px] my-2 cursor-pointer" alt="" />
+                <img
+                  src={
+                    "https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+                  }
+                  className="h-[30px] my-2 cursor-pointer"
+                  alt=""
+                />
               </Link>
               <div className="hidden lg:block">
                 <div className="flex items-center gap-5">
@@ -117,14 +125,27 @@ const TvNav = () => {
               </div>
             </div>
             <div className="block lg:hidden">
-              <input
-                ref={inputRef}
-                value={search}
-                onChange={handleInputChange}
-                type="text"
-                className="px-2 py-1 bg-transparent border border-gray-400 text-xs text-gray-50 font-semibold w-[100px] outline-none placeholder:text-gray-500 focus:rounded focus:border-gray-50"
-                placeholder="Search"
-              />
+              <div
+                className={`flex gap-3 items-center rounded ${
+                  showInput && "border px-3"
+                } border-white cursor-pointer`}
+              >
+                <BiSearch
+                  onClick={handleInput}
+                  className="text-white text-2xl"
+                />
+                <input
+                  onClick={(e) => e.stopPropagation()}
+                  ref={inputRef}
+                  value={search}
+                  onChange={handleInputChange}
+                  type="text"
+                  className={`${
+                    showInput ? "w-[120px]" : "w-0"
+                  } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
+                  placeholder="Search by name"
+                />
+              </div>
             </div>
             <div className="hidden lg:block ">
               <div className="flex items-center gap-5">
@@ -158,11 +179,11 @@ const TvNav = () => {
               </div>
             </div>
           </div>
-          <div className="hidden lg:block">
+          <div className="">
             <div
               className={`${
                 scrollHeight > 100 ? "bg-[#141414]" : "bg-transparent"
-              } absolute text-white text-3xl w-full px-10 py-2 flex items-center justify-between duration-300`}
+              } absolute text-white text-3xl w-full px-10 py-2 flex items-center justify-between duration-300 invisible lg:visible`}
             >
               <div className="flex items-center gap-10 relative">
                 <h1 className="text-3xl text-gray-50 font-semibold">
@@ -253,6 +274,67 @@ const TvNav = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div
+              className={`${
+                scrollHeight > 10
+                  ? "opacity-0 duration-300 -translate-y-5"
+                  : "opacity-100"
+              } absolute text-white text-3xl w-full lg:px-10 py-2 ps-10 lg:flex lg:items-center lg:justify-between duration-300 block lg:hidden -z-10`}
+            >
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, translateX: -20 }}
+                  transition={{ duration: 1, delay: 0.1 }}
+                  animate={{ opacity: 1, translateX: 0 }}
+                  className="flex items-start gap-3 relative"
+                >
+                  <button
+                    onClick={() => navigate(-1)}
+                    className="flex items-center justify-center gap-2 lg:gap-4 w-6 h-6 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
+                  >
+                    <RxCross1 />
+                  </button>
+                  <div className="flex items-center gap-2 lg:gap-4 px-3 h-6 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1">
+                    TV Shows
+                  </div>
+                  <div className="relative">
+                    <button
+                      onClick={handleShow}
+                      className="flex items-center gap-2 lg:gap-4 bg-[#556263] px-2 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
+                    >
+                      {tvGenreName}
+                      <span>
+                        <GoChevronDown className="text-xl mt-[4px]" />
+                      </span>
+                    </button>
+                    <div
+                      className={`${
+                        show ? "block" : "hidden"
+                      } w-[450px] h-[200px] absolute bg-black bg-opacity-80`}
+                    >
+                      <div className="py-1 px-2 flex gap-5 items-start">
+                        <div className="flex flex-wrap gap-3">
+                          {TvGenres?.genres?.map((genre) => (
+                            <div key={genre.id}>
+                              <p
+                                onClick={() => (
+                                  handleGetGenreId(genre?.id),
+                                  handleGetTvGenreName(genre?.name),
+                                  handleShow()
+                                )}
+                                className="text-sm w-[135px] cursor-pointer"
+                              >
+                                {genre?.name}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
