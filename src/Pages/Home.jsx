@@ -1,5 +1,4 @@
 import Footer from "../components/Footer/Footer";
-import Categories from "../components/Home/Categories";
 import Header from "../components/Header";
 import HomeNav from "../components/Home/HomeNav";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
 import Test from "../components/Test/Test";
 import Movie from "../components/Movie/Movie";
-import TopRated from "../components/Home/TopRated";
 import Popular from "../components/Home/Popular";
 import UpComing from "../components/Home/UpComing";
 import NowPlayingTv from "../components/Tv/NowPlayingTv";
@@ -21,6 +19,7 @@ import NowPlayingMovie from "../components/Movie/NowPlayingMovie";
 import MobileMovieHeader from "../components/Movie/MobileMovieHeader";
 import { useGetMovieQuery } from "../redux/api/movieApi";
 import Loader from "../components/Loader/Loader";
+import TopRatedMovie from "../components/Movie/TopRatedMovie";
 
 const Home = () => {
   const nav = useNavigate();
@@ -65,7 +64,7 @@ const Home = () => {
                 {/* <Test /> */}
                 <Movie />
                 <NowPlayingMovie />
-                <TopRated />
+                <TopRatedMovie />
                 <Popular />
                 <Tv />
                 <UpComing />
