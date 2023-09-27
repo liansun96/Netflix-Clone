@@ -60,7 +60,7 @@ const Movies = () => {
   return (
     <div>
       <MovieNav />
-      <div className="bg-gradient-to-b from-[#356d75] via-[#110808] to-[#171818]">
+      <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
         ) : (

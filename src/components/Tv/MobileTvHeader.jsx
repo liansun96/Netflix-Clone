@@ -4,23 +4,23 @@ import { BiInfoCircle } from "react-icons/bi";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { AnimatePresence, motion } from "framer-motion";
 
-const MobileMovieHeader = ({ movie, detailImage }) => {
+const MobileTvHeader = ({movie}) => {
   const {
-    handleGetId,
-    modal,
-    toggleModal,
-    playMovieModal,
-    togglePlayMovieModal,
     genreId,
+    handleGetId,
+    tvModal,
+    toggleTvModal,
+    playTvModal,
+    togglePlayTvModal,
   } = useContext(ToggleContext);
 
-  const handelDetail = () => {
-    toggleModal();
+  const handelPlay = () => {
+    togglePlayTvModal();
     handleGetId(movie?.id);
   };
 
-  const handelPlay = () => {
-    togglePlayMovieModal();
+  const handelDetail = () => {
+    toggleTvModal();
     handleGetId(movie?.id);
   };
 
@@ -39,11 +39,11 @@ const MobileMovieHeader = ({ movie, detailImage }) => {
         height: "600px",
       }}
     >
-      <div className="flex flex-col gap-4 items-center justify-end w-full h-full pb-4 custom-shadow-lg">
+      <div className="flex flex-col gap-4 items-center justify-end w-full h-full pb-4 custom-shadow-lg">        
         <div className="flex items-center gap-3 w-full px-4">
           <button
             onClick={handelPlay}
-            className="flex items-center justify-center w-full h-10 bg-slate-50 hover:bg-slate-200 duration-300 rounded text-lg text-black font-semibold custom-btn-shadow"
+            className="flex items-center justify-center w-full h-12 bg-slate-50 hover:bg-slate-200 duration-300 rounded text-lg text-black font-semibold custom-btn-shadow"
           >
             <span className="">
               <BsPlayFill className="text-4xl" />
@@ -52,7 +52,7 @@ const MobileMovieHeader = ({ movie, detailImage }) => {
           </button>
           <button
             onClick={handelDetail}
-            className="flex items-center justify-center gap-2 w-full h-10 bg-opacity-60 bg-gray-500 hover:bg-opacity-60 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold custom-btn-shadow"
+            className="flex items-center justify-center gap-2 w-full h-12 bg-opacity-60 bg-gray-500 hover:bg-opacity-60 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold custom-btn-shadow"
           >
             <span className="">
               <BiInfoCircle className="text-4xl" />
@@ -65,4 +65,4 @@ const MobileMovieHeader = ({ movie, detailImage }) => {
   );
 };
 
-export default MobileMovieHeader;
+export default MobileTvHeader;
