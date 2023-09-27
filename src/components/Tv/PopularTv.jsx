@@ -9,10 +9,9 @@ import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { useGetPopularTvQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
-import MovieDetail from "../Movie/MovieDetail";
 
 const PopularTv = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
+  const { handleGetId, tvModal, toggleTvModal, togglePlayTvMovieModal, genreId } =
     useContext(ToggleContext);
 
   const { data } = useGetPopularTvQuery({ genreId });
@@ -30,7 +29,7 @@ const PopularTv = () => {
     );
   };
 
-  if (modal) {
+  if (tvModal) {
     document.body.classList.add("overflow-y-hidden");
   } else {
     document.body.classList.remove("overflow-y-hidden");
@@ -73,11 +72,11 @@ const PopularTv = () => {
             >
               {data?.results?.map((result, index) => {
                 const handelPlay = () => {
-                  togglePlayMovieModal();
+                  togglePlayTvMovieModal();
                   handleGetId(result?.id);
                 };
                 const handelDetail = () => {
-                  toggleModal();
+                  toggleTvModal();
                   handleGetId(result?.id);
                 };
                 return (
@@ -165,8 +164,7 @@ const PopularTv = () => {
             />
           </div>
         </div>
-      </div>
-      {modal && <MovieDetail />}
+      </div>      
     </div>
   );
 };

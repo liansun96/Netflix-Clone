@@ -195,7 +195,6 @@ const Movie = () => {
           </div>
         </div>
       </div>
-      {modal && <MovieDetail />}
     </>
   );
 };

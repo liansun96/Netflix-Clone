@@ -37,7 +37,7 @@ const Profile = () => {
       <div
         className={`${
           hovered ? "block" : "hidden"
-        } w-[180px] absolute bg-transparent top-8 right-5 p-1`}
+        } w-[180px] absolute bg-transparent top-7 right-5 p-1`}
       >
         <div className=" p-3 bg-black">
           <div className="flex flex-col gap-3">

@@ -115,7 +115,15 @@ const MovieDetail = () => {
       break;
     }
   }
-  console.log(languageName);
+  const languageEngName = [];
+  for (let i = 0; i <= languageLength; i++) {
+    if (data?.spoken_languages) {
+      languageEngName.push(data?.spoken_languages[`${i}`]?.english_name);
+    } else {
+      break;
+    }
+  }
+  console.log(languageEngName);
 
   const scrollToRef = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
@@ -125,7 +133,7 @@ const MovieDetail = () => {
   return (
     <div
       onClick={toggleModal}
-      className="fixed inset-0 bg-black bg-opacity-5 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1005]"
+      className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1006]"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -195,8 +203,18 @@ const MovieDetail = () => {
                   </p>
                   {index !== languageName.length - 1 && <span>, </span>}
                 </>
+              ))}{" "}
+              /{" "}
+              {languageEngName.map((name, index) => (
+                <>
+                  <p key={index} className="inline">
+                    {name}
+                  </p>
+                  {index !== languageEngName.length - 1 && <span>, </span>}
+                </>
               ))}
             </div>
+
             <br />
             <p>
               <span className="text-sm font-semibold text-[#747474]">

@@ -5,6 +5,7 @@ import { createContext } from "react";
 export const ToggleContext = createContext();
 
 const ToggleProvider = ({ children }) => {
+
   //search input
   const [search, setSearch] = useState("");
 
@@ -19,6 +20,7 @@ const ToggleProvider = ({ children }) => {
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {
     setShowInput(!showInput);
+    inputRef.current.focus();
   };
 
  
@@ -92,7 +94,31 @@ const ToggleProvider = ({ children }) => {
     setTvGenreName(tvGenreName);
   };
 
-  const value = {
+  //Get Country IosName
+  const [iosName, setIosName] = useState('');
+  const handleGetIosName = (iosName) => {
+    setIosName(iosName);
+  };
+  console.log(iosName);
+
+  //Get Country Name
+  const [languageName, setLanguageName] = useState("English");
+  const handleGetlanguageName = (languageName) => {
+    setLanguageName(languageName);
+  };
+  console.log(languageName);
+
+  //Get Sort Name
+  const [sortName, setSortName] = useState("Suggestions for you");
+  const handleGetSortName = (sortName) => {
+    setSortName(sortName);
+  };
+  console.log(sortName);
+
+  
+  
+
+  const value = {    
     search,
     setSearch,
     showInput,
@@ -123,6 +149,12 @@ const ToggleProvider = ({ children }) => {
     toggleMovieShow,
     tvShow,
     toggleTvShow,
+    iosName,
+    handleGetIosName,
+    languageName,
+    handleGetlanguageName,
+    sortName,
+    handleGetSortName
   };
 
   return (

@@ -1,10 +1,10 @@
-import React from "react";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { HiCheck } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { removeMovie } from "../redux/services/favoritMovieSlice";
 import HomeNav from "../components/Home/HomeNav";
+import Footer from "../components/Footer/Footer";
 
 const MyList = () => {
   const favMoives = useSelector((state) => state.favoriteMovieSlice.favMovies);
@@ -13,14 +13,12 @@ const MyList = () => {
 
   const removeFav = () => {};
   return (
-    <div className="bg-gray-900 h-screen w-full">
-      <div className="">
-        <HomeNav />
-        <div className="w-[90%] mx-auto pt-14">
+    <div className="bg-[#141414]">
+      <HomeNav />
+      <div className="h-screen w-full">
+        <div className="w-[95%] mx-auto pt-20">
           <div className="">
-            <h1 className="text-2xl text-gray-50 font-semibold">
-              Your favourite list
-            </h1>
+            <h1 className="text-3xl text-gray-50 font-semibold">My List</h1>
           </div>
           <div className="flex flex-wrap justify-center gap-5 relative pt-10">
             {favMoives.map((favMovie) => {
@@ -114,6 +112,7 @@ const MyList = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
