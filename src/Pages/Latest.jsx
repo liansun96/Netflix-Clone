@@ -20,6 +20,7 @@ import {
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import LatestLoader from "../components/Loader/LatestLoader";
+import LatestNav from "../components/Latest/LatestNav";
 
 const Latest = () => {
   const {
@@ -55,7 +56,8 @@ const Latest = () => {
 
   return (
     <div className="bg-[#141414]">
-      <HomeNav />
+      {/* <HomeNav /> */}
+      <LatestNav/>
       {isLoading ? (
         <LatestLoader />
       ) : (

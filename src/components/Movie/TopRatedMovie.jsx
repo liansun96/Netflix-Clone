@@ -8,7 +8,6 @@ import {
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { useGetTopRatedQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
-import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
 
 const TopRatedMovie = () => {
