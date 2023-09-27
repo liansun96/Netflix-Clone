@@ -16,13 +16,13 @@ const Profile = () => {
 
   return (
     <div
-      className="flex relative z-40"
+      className="flex relative z-[1016]"
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
     >
       <div className="flex items-center gap-1 cursor-pointer">
         <img
-          className="rounded w-7"
+          className="rounded w-8"
           src="https://occ-0-3494-64.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdYJV5wt63AcxNaDoqDXUhqZb55oN5Dxt1m-Zdn_z5rn_hIq9m8dA8JB2xdcPmrY3yXnlVWYKPXnOrbv2QN4aEVU28dESJg.png?r=1d4"
           alt=""
         />
@@ -30,7 +30,7 @@ const Profile = () => {
           <IoMdArrowDropdown
             className={`${
               hovered ? "rotate-180 duration-300" : "rotate-0 duration-300"
-            } text-gray-50`}
+            } text-gray-50 text-xl translate-x-1`}
           />
         </div>
       </div>
@@ -39,11 +39,11 @@ const Profile = () => {
           hovered ? "block" : "hidden"
         } w-[180px] absolute bg-transparent top-7 right-5 p-1`}
       >
-        <div className=" p-3 bg-black">
-          <div className="flex flex-col gap-3">
+        <div className=" p-3 bg-black bg-opacity-80">
+          <div className="flex flex-col gap-4 p-1">
             <div className="flex gap-1 items-center cursor-pointer">
               <img
-                className="rounded w-7"
+                className="rounded w-8"
                 src="https://occ-0-3494-64.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdYJV5wt63AcxNaDoqDXUhqZb55oN5Dxt1m-Zdn_z5rn_hIq9m8dA8JB2xdcPmrY3yXnlVWYKPXnOrbv2QN4aEVU28dESJg.png?r=1d4"
                 alt=""
               />

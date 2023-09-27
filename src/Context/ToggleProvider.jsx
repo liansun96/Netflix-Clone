@@ -5,7 +5,6 @@ import { createContext } from "react";
 export const ToggleContext = createContext();
 
 const ToggleProvider = ({ children }) => {
-
   //search input
   const [search, setSearch] = useState("");
 
@@ -81,44 +80,50 @@ const ToggleProvider = ({ children }) => {
   };
 
   //Get Genres Name
-  const [genreName, setGenreName] = useState('Genres');
+  const [genreName, setGenreName] = useState("Genres");
   const handleGetGenreName = (genreName) => {
     // Set the clicked ID in the state
     setGenreName(genreName);
   };
 
   //Get Genres Name
-  const [tvGenreName, setTvGenreName] = useState('Genres');
+  const [tvGenreName, setTvGenreName] = useState("Genres");
   const handleGetTvGenreName = (tvGenreName) => {
     // Set the clicked ID in the state
     setTvGenreName(tvGenreName);
   };
 
   //Get Country IosName
-  const [iosName, setIosName] = useState('');
+  const [iosName, setIosName] = useState("");
   const handleGetIosName = (iosName) => {
     setIosName(iosName);
   };
-  console.log(iosName);
+  // console.log(iosName);
 
   //Get Country Name
   const [languageName, setLanguageName] = useState("English");
   const handleGetlanguageName = (languageName) => {
     setLanguageName(languageName);
   };
-  console.log(languageName);
+  // console.log(languageName);
 
   //Get Sort Name
   const [sortName, setSortName] = useState("Suggestions for you");
   const handleGetSortName = (sortName) => {
     setSortName(sortName);
   };
-  console.log(sortName);
+  // console.log(sortName);
 
-  
-  
+  //Set Page Number
+  const [page, setPage] = useState(1);
+  const handleNextPage = () => {
+    setPage((pre) => pre + 1);
+  };
+  const handlePrevPage = () => {
+    setPage((pre) => pre - 1);
+  };
 
-  const value = {    
+  const value = {
     search,
     setSearch,
     showInput,
@@ -154,7 +159,10 @@ const ToggleProvider = ({ children }) => {
     languageName,
     handleGetlanguageName,
     sortName,
-    handleGetSortName
+    handleGetSortName,
+    page,
+    handleNextPage,
+    handlePrevPage,
   };
 
   return (

@@ -12,6 +12,7 @@ import PopularTv from "../components/Tv/PopularTv";
 import NowPlayingTv from "../components/Tv/NowPlayingTv";
 import TopRatedTv from "../components/Tv/TopRatedTv";
 import Loader from "../components/Loader/Loader";
+import MobileTvHeader from "../components/Tv/MobileTvHeader";
 
 const TvShows = () => {
   const {
@@ -33,8 +34,11 @@ const TvShows = () => {
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
-    setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
+    setMovie(
+      data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
+    );
   }, [genreId]);
+  console.log(Math.floor(Math.random() * data?.results?.length));
 
   const handelPlay = () => {
     togglePlayTvModal();
@@ -55,7 +59,7 @@ const TvShows = () => {
   return (
     <div className="">
       <TvNav />
-      <div className="bg-[#141414]">
+      <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
         ) : (
@@ -104,8 +108,9 @@ const TvShows = () => {
                 </div>
               </div>
             </header>
-            <div className="category-bg pt-20 lg:pt-0 lg:-translate-y-10">
-              <div className="w-[95%] mx-auto lg:pb-10 lg:-translate-y-14">
+            <MobileTvHeader movie={movie} />
+            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-10">
+              <div className="w-[95%] mx-auto pb-10 lg:-translate-y-14">
                 <Tv />
                 <NowPlayingTv />
                 <TopRatedTv />

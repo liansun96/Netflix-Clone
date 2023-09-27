@@ -41,7 +41,7 @@ const Carousel = () => {
   return (
     <div className="">
       <NavBar />
-      <div className="overflow-hidden">
+      <div className="overflow-hidde">
         <header
           className="h-screen w-full"
           style={{

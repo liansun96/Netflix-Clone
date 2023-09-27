@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+
+  body.modal-open {
+    overflow: hidden;
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -14,8 +19,12 @@
     scrollbar-width: none; /* Firefox */
   }
 
-  .custom-btn-bg {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  .custom-btn-shadow {
+    box-shadow: rgba(102, 102, 110, 0.25) 0px 7px 29px 0px;
+  }
+
+  .custom-shadow-lg{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 
   .home-nav-bg {
@@ -48,4 +57,8 @@
   .language-dropdown::-webkit-scrollbar-track:hover {
     background-color: #555; /* Set the background color when hovering */
   }
+
+  /* .parent-element :nth-child(39){
+    padding-right: 20px;
+  } */
 }

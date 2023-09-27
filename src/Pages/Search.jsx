@@ -21,9 +21,12 @@ const Search = () => {
     toggleModal,
     playMovieModal,
     togglePlayMovieModal,
+    page,
+    handlePrevPage,
+    handleNextPage,
   } = useContext(ToggleContext);
 
-  const { data, isLoading } = useGetSearchQuery({ search });
+  const { data, isLoading } = useGetSearchQuery({ search, page });
   console.log(data);
 
   useEffect(() => {
@@ -42,6 +45,14 @@ const Search = () => {
     setShowInput(true);
   }
 
+  if (modal) {
+    document.body.classList.add("overflow-y-hidden");
+    document.body.classList.add("modal-open");
+  } else {
+    document.body.classList.remove("overflow-y-hidden");
+    document.body.classList.remove("modal-open");
+  }
+
   return (
     <div className="bg-[#141414]">
       <HomeNav />
@@ -50,7 +61,7 @@ const Search = () => {
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">
-            <div className="flex flex-wrap justify-between relative pt-11 last:mr-auto">
+            <div className="flex flex-wrap justify-between px-2 relative pt-11 last:mr-auto">
               {data?.results?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -63,31 +74,42 @@ const Search = () => {
                 return (
                   <div
                     key={result?.id}
-                    className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
+                    className="w-[45%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
                   >
                     <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
                       <div className="group/item flex flex-col mb-20 3xl:mb-24 4xl:mb-28">
-                        {result?.backdrop_path == null ? (
-                          <img
-                            onClick={handelDetail}
-                            src={
-                              "https://image.tmdb.org/t/p/w300" +
-                              result?.poster_path
-                            }
-                            className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
-                            alt=""
-                          />
-                        ) : (
-                          <img
-                            onClick={handelDetail}
-                            src={
-                              "https://image.tmdb.org/t/p/w300" +
-                              result?.backdrop_path
-                            }
-                            className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
-                            alt=""
-                          />
-                        )}
+                        <div className="hidden lg:block">
+                          {result?.backdrop_path == null ? (
+                            <img
+                              onClick={handelDetail}
+                              src={
+                                "https://image.tmdb.org/t/p/w300" +
+                                result?.poster_path
+                              }
+                              className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                              alt=""
+                            />
+                          ) : (
+                            <img
+                              onClick={handelDetail}
+                              src={
+                                "https://image.tmdb.org/t/p/w300" +
+                                result?.backdrop_path
+                              }
+                              className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                              alt=""
+                            />
+                          )}
+                        </div>
+                        <img
+                          onClick={handelDetail}
+                          src={
+                            "https://image.tmdb.org/t/p/w300" +
+                            result?.poster_path
+                          }
+                          className="block lg:hidden rounded object-cover object-top xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                          alt=""
+                        />
                         <div className="relativ xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
@@ -139,6 +161,20 @@ const Search = () => {
                   </div>
                 );
               })}
+              <div className="flex gap-4 mt-10">
+                <button
+                  onClick={handlePrevPage}
+                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                >
+                  Prev
+                </button>
+                <button
+                  onClick={handleNextPage}
+                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>

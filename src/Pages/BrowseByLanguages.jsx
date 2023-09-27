@@ -9,6 +9,7 @@ import PlayTv from "../components/Tv/PlayTv";
 import { MdArrowDropDown } from "react-icons/md";
 import {
   useGetMovieByCountryQuery,
+  useGetMovieByCountryThreeQuery,
   useGetMovieByCountryTwoQuery,
 } from "../redux/api/movieApi";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
@@ -32,15 +33,19 @@ const BrowseByLanguages = () => {
     languageName,
     handleGetlanguageName,
     sortName,
-    handleGetSortName
+    handleGetSortName,
+    page,
+    handlePageNumber,
   } = useContext(ToggleContext);
 
   const { data, isLoading } = useGetMovieByCountryQuery({ iosName });
+  const { data: data2 } = useGetMovieByCountryTwoQuery({ iosName });
+  const { data: data3 } = useGetMovieByCountryThreeQuery({ iosName });
 
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
-  const [sortedData, setSortedData] = useState(data?.results);
+  const [sortedData, setSortedData] = useState();
   const [sortOrder, setSortOrder] = useState("asc");
 
   console.log(sortedData);
@@ -49,36 +54,36 @@ const BrowseByLanguages = () => {
     const scrollFunc = () => {
       setScrollHeight(parseInt(window.scrollY));
     };
-    
+
     window.addEventListener("scroll", scrollFunc);
-    
+
     return () => {
       window.removeEventListener("scroll", scrollFunc);
     };
-  }, []);  
+  }, []);
+
   
-  if (tvModal) {
+  if (modal) {
     document.body.classList.add("overflow-y-hidden");
+    document.body.classList.add('modal-open');
   } else {
     document.body.classList.remove("overflow-y-hidden");
+    document.body.classList.remove('modal-open');
   }
-  
+
   const handleShow = () => {
     setShow(!show);
   };
   const handleShow1 = () => {
     setShow1(!show1);
   };
-
+  
   const sortByProperty = (property) => {
     const sortedData = [...data?.results].sort((a, b) => {
       let result;
       if (property === "title") {
         result = a.title.localeCompare(b.title);
-      } else if (        
-        property === "vote_average" ||
-        property === "release_date"
-      ) {
+      } else if (property === "vote_average" || property === "release_date") {
         result = a[property] - b[property];
       } else if (property === "release_date") {
         const timeA = parseInt(a[property].split(" ")[0]);
@@ -97,93 +102,97 @@ const BrowseByLanguages = () => {
     setSortedData(sortedData);
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
+
+  
   return (
     <div className="bg-[#141414] min-h-screen">
       <HomeNav />
-      <div className="hidden lg:block w-[95%] mx-auto py-24">
+      <div className="hidden lg:block w-[95%] mx-auto pt-24 pb-10">
         <div
           className={`${
             scrollHeight > 100
               ? "lg:bg-[#141414] lg:bg-opacity-90"
               : "bg-transparent"
-          } fixed top-[62px] z-[1000] text-white text-3xl w-full py-4 flex items-center justify-between duration-300`}
+          } fixed top-[62px] z-10 text-white text-3xl w-full py-4 flex items-center justify-between duration-300`}
         >
-          <div className="flex items-center gap-10 relative">
+          <div className="w-[95%] flex items-center justify-between relative">
             <h1 className="text-3xl text-gray-50 font-semibold">
               Browse By Languages
             </h1>
-            <div className="relative">
-              <div className="flex items-center gap-2">
-                <p className="text-sm ">Select Your Preferences</p>
-                <button
-                  onClick={handleShow}
-                  className="flex items-center justify-between w-[250px] bg-black p-1 text-base border hover:bg-transparent hover:bg-opacity-50 "
+            <div className="flex gap-5">
+              <div className="relative">
+                <div className="flex items-center gap-2">
+                  <p className="text-sm ">Select Your Preferences</p>
+                  <button
+                    onClick={handleShow}
+                    className="flex items-center justify-between w-[250px] bg-black p-1 text-base border hover:bg-transparent hover:bg-opacity-50 "
+                  >
+                    {languageName}
+                    <span>
+                      <MdArrowDropDown className="text-lg" />
+                    </span>
+                  </button>
+                </div>
+                <div
+                  className={`${
+                    show ? "block" : "hidden"
+                  } w-[250px] h-[500px] absolute left-[150px] bg-black bg-opacity-80 z-[1006]`}
                 >
-                  {languageName}
-                  <span>
-                    <MdArrowDropDown className="text-lg" />
-                  </span>
-                </button>
-              </div>
-              <div
-                className={`${
-                  show ? "block" : "hidden"
-                } w-[250px] h-[500px] absolute left-[150px] bg-black bg-opacity-80 z-[1006]`}
-              >
-                <div className="py-1 px-2 flex gap-5 items-start">
-                  <div className="flex flex-col gap-3 h-[490px] overflow-y-scroll language-dropdown">
-                    {countryCodes?.map((countryCode) => (
-                      <div key={countryCode.id}>
-                        <p
-                          onClick={() => (
-                            handleShow(),
-                            handleGetIosName(countryCode?.original_language),
-                            handleGetlanguageName(countryCode?.language_name)
-                          )}
-                          className="text-sm w-[215px] cursor-pointer hover:underline"
-                        >
-                          {countryCode.language_name}
-                        </p>
-                      </div>
-                    ))}
+                  <div className="py-1 px-2 flex gap-5 items-start">
+                    <div className="flex flex-col gap-3 h-[490px] overflow-y-scroll language-dropdown">
+                      {countryCodes?.map((countryCode) => (
+                        <div key={countryCode.id}>
+                          <p
+                            onClick={() => (
+                              handleShow(),
+                              handleGetIosName(countryCode?.original_language),
+                              handleGetlanguageName(countryCode?.language_name)
+                            )}
+                            className="text-sm w-[215px] cursor-pointer hover:underline"
+                          >
+                            {countryCode.language_name}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="relative">
-              <div className="flex items-center gap-2">
-                <p className="text-sm ">Sort by</p>
-                <button
-                  onClick={handleShow1}
-                  className="flex items-center justify-between w-[250px] bg-black p-1 text-base border hover:bg-transparent hover:bg-opacity-50 "
+              <div className="relative">
+                <div className="flex items-center gap-2">
+                  <p className="text-sm ">Sort by</p>
+                  <button
+                    onClick={handleShow1}
+                    className="flex items-center justify-between w-[250px] bg-black p-1 text-base border hover:bg-transparent hover:bg-opacity-50 "
+                  >
+                    {sortName}
+                    <span>
+                      <MdArrowDropDown className="text-lg" />
+                    </span>
+                  </button>
+                </div>
+                <div
+                  className={`${
+                    show1 ? "block" : "hidden"
+                  } w-[250px] h-[130px] absolute left-[50px] bg-black bg-opacity-80 z-[1006]`}
                 >
-                  {sortName}
-                  <span>
-                    <MdArrowDropDown className="text-lg" />
-                  </span>
-                </button>
-              </div>
-              <div
-                className={`${
-                  show1 ? "block" : "hidden"
-                } w-[250px] h-[130px] absolute left-[50px] bg-black bg-opacity-80 z-[1006]`}
-              >
-                <div className="py-1 px-2 flex gap-5 items-start">
-                  <div className="flex flex-col gap-3 h-[130px]">
-                    {sortDatas?.map((sortData) => (
-                      <div key={sortData.id}>
-                        <p
-                          onClick={() => (
-                            handleShow1(),
-                            sortByProperty(`${sortData.sort}`),                            
-                            handleGetSortName(sortData?.name)
-                          )}
-                          className="text-sm w-[215px] cursor-pointer hover:underline"
-                        >
-                          {sortData.name}
-                        </p>
-                      </div>
-                    ))}
+                  <div className="py-1 px-2 flex gap-5 items-start">
+                    <div className="flex flex-col gap-3 h-[130px]">
+                      {sortDatas?.map((sortData) => (
+                        <div key={sortData.id}>
+                          <p
+                            onClick={() => (
+                              handleShow1(),
+                              sortByProperty(`${sortData.sort}`),
+                              handleGetSortName(sortData?.name)
+                            )}
+                            className="text-sm w-[215px] cursor-pointer hover:underline"
+                          >
+                            {sortData.name}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -196,7 +205,7 @@ const BrowseByLanguages = () => {
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-9 pb-36">
-            <div className="flex flex-wrap justify-between relative pt-11 last:mr-auto">
+            <div className="flex flex-wrap justify-between relative pt-11 list-disc [&>*:last-child]:me-auto list-disc [&>*:last-child]:ms-3">
               {sortedData?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -209,7 +218,7 @@ const BrowseByLanguages = () => {
                 return (
                   <div
                     key={result?.id}
-                    className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
+                    className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px]"
                   >
                     <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
                       <div className="group/item flex flex-col mb-20 3xl:mb-24 4xl:mb-28">
