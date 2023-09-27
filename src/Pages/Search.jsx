@@ -3,13 +3,13 @@ import { useGetSearchQuery } from "../redux/api/movieApi";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { HiOutlinePlus } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
-import HomeNav from "../components/Home/HomeNav";
 import { ToggleContext } from "../Context/ToggleProvider";
 import { useNavigate } from "react-router";
 import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
 import Footer from "../components/Footer/Footer";
 import Loader from "../components/Loader/Loader";
+import LatestNav from "../components/Latest/LatestNav";
 
 const Search = () => {
   const {
@@ -55,7 +55,7 @@ const Search = () => {
 
   return (
     <div className="bg-[#141414]">
-      <HomeNav />
+      <LatestNav/>
       {isLoading ? (
         <Loader />
       ) : (
