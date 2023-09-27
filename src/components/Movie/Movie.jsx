@@ -12,16 +12,10 @@ import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
 
 const Movie = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);
-
-  const carouselContainerRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(null);
-  const [dragDeltaX, setDragDeltaX] = useState(0);
 
   const { data } = useGetMovieQuery({ genreId });
   console.log(data?.results);
@@ -48,51 +42,6 @@ const Movie = () => {
         (prevSlide - 1 + data?.results?.length) % data?.results?.length
     );
   };
-
-  useEffect(() => {
-    const container = carouselContainerRef.current;
-
-    const handleMouseDown = (e) => {
-      setIsDragging(true);
-      setDragStartX(e.clientX);
-    };
-
-    const handleMouseMove = (e) => {
-      if (!isDragging) return;
-
-      const deltaX = e.clientX - dragStartX;
-      setDragDeltaX(deltaX);
-    };
-
-    const handleMouseUp = () => {
-      if (!isDragging) return;
-
-      // Determine the direction and distance to move the carousel
-      const moveDirection = dragDeltaX > 0 ? -1 : 1;
-      const moveDistance = Math.abs(dragDeltaX);
-
-      // Update the current slide based on the drag distance
-      setCurrentSlide((prevSlide) => {
-        const newIndex =
-          prevSlide + moveDirection * Math.ceil(moveDistance / 166);
-        return (newIndex + data?.results?.length) % data?.results?.length;
-      });
-
-      setIsDragging(false);
-      setDragStartX(null);
-      setDragDeltaX(0);
-    };
-
-    container.addEventListener("mousedown", handleMouseDown);
-    container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
-      container.removeEventListener("mousedown", handleMouseDown);
-      container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isDragging, dragStartX, dragDeltaX, setCurrentSlide, data]);
 
   if (modal) {
     document.body.classList.add("overflow-y-hidden");
@@ -130,17 +79,12 @@ const Movie = () => {
               ))}
             </div>
           </div>
-          <div
-            ref={carouselContainerRef}
-            className="carousel-container hover:z-30"
-          >
+          <div className="carousel-container hover:z-30">
             <div className="carousel">
               <div
                 className="slides duration-500 flex items-start gap-2 lg:gap-1 "
                 style={{
-                  transform: `translateX(-${
-                    currentSlide * 166 + dragDeltaX
-                  }px)`,
+                  transform: `translateX(-${currentSlide * 166}px)`,
                 }}
               >
                 {data?.results?.map((result, index) => {
