@@ -1,3 +1,6 @@
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import { useContext, useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
@@ -61,7 +64,7 @@ const Tv = () => {
                 <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
               </div>
             </div>
-            <div className="dots opacity-0 group-hover:opacity-100">
+            <div className="dots opacity-0 group-hover:opacity-100 hidden lg:block">
               {[...Array(6)].map((_, index) => (
                 <span
                   key={index}
@@ -73,7 +76,7 @@ const Tv = () => {
               ))}
             </div>
           </div>
-          <div className="carousel-container hover:z-30">
+          <div className="carousel-container hover:z-30 hidden lg:block">
             <div className="carousel">
               <div
                 className="slides duration-500 flex items-start gap-2 lg:gap-1 "
@@ -83,12 +86,12 @@ const Tv = () => {
               >
                 {data?.results?.map((result, index) => {
                   const handelPlay = () => {
-                    togglePlayTvModal();
+                    togglePlayMovieModal();
                     handleGetId(result?.id);
                   };
 
                   const handelDetail = () => {
-                    toggleTvModal();
+                    toggleModal();
                     handleGetId(result?.id);
                   };
                   return (
@@ -175,8 +178,45 @@ const Tv = () => {
               />
             </div>
           </div>
+          <div className="block lg:hidden">
+            <Swiper
+              spaceBetween={5}
+              slidesPerView={2.6}
+              pagination={{ clickable: true }}
+              className="mySwiper"
+            >
+              {data?.results?.map((result) => {
+                const handelPlay = () => {
+                  togglePlayMovieModal();
+                  handleGetId(result?.id);
+                };
+
+                const handelDetail = () => {
+                  toggleModal();
+                  handleGetId(result?.id);
+                };
+                return (
+                  <SwiperSlide key={result?.id} className="w-[120px]">
+                    <div>
+                      <div className="group/item flex flex-col slide-inner hover:custom-shadow-lg hover:scale-95 lg:hover:w-auto duration-300 hover:delay-500 rounded-lg">
+                        <img
+                          onClick={handelDetail}
+                          src={
+                            "https://image.tmdb.org/t/p/w300" +
+                            result?.poster_path
+                          }
+                          className="rounded w-full object-cover object-top cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
         </div>
-      </div>      
+      </div>
     </>
   );
 };
