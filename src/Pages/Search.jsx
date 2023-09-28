@@ -61,7 +61,7 @@ const Search = () => {
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">
-            <div className="flex flex-wrap justify-between px-2 relative pt-11 last:mr-auto">
+            <div className="flex flex-wrap justify-between px-2 relative lg:pt-11 last:mr-auto">
               {data?.results?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -74,10 +74,10 @@ const Search = () => {
                 return (
                   <div
                     key={result?.id}
-                    className="w-[45%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
+                    className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
                   >
                     <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
-                      <div className="group/item flex flex-col mb-20 3xl:mb-24 4xl:mb-28">
+                      <div className="group/item flex flex-col mb-5 lg:mb-20 3xl:mb-24 4xl:mb-28">
                         <div className="hidden lg:block">
                           {result?.backdrop_path == null ? (
                             <img
@@ -107,10 +107,10 @@ const Search = () => {
                             "https://image.tmdb.org/t/p/w300" +
                             result?.poster_path
                           }
-                          className="block lg:hidden rounded object-cover object-top xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                          className="block lg:hidden rounded object-cover object-top cursor-pointer"
                           alt=""
                         />
-                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
                               <div className="flex items-center gap-2">

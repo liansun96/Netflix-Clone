@@ -17,7 +17,7 @@ const SimilarTv = ({ result }) => {
   return (
     <div
       onClick={handelPlay}
-      className="group/edit w-[48%] lg:w-[250px] h-[350px] lg:h-[350px] bg-[#2F2F2F] rounded cursor-pointer"
+      className="group/edit w-[48%] md:w-[30%] lg:w-[250px] h-[350px] lg:h-[350px] bg-[#2F2F2F] rounded cursor-pointer"
     >
       <div className="relative">
         <div className="hidden lg:block">
@@ -68,9 +68,9 @@ const SimilarTv = ({ result }) => {
           </p>
           <div className="visible lg:invisible group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
             <HiOutlinePlus className="text-2xl text-gray-200" />
-            <div className="invisible group-hover/my-list:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+            <div className="invisible group-hover/my-list:visible absolute -top-[55px] right-[-15px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
               <p className="text-lg font-semibold">Add to My List</p>
-              <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+              <VscTriangleDown className="text-white text-3xl translate-x-[80px] lg:translate-x-[45px] -translate-y-2 absolute" />
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ const SimilarTv = ({ result }) => {
           </div>
           <div className="hidden lg:block group/my-list relative h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
             <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
-            <div className="invisible group-hover/my-list:visible absolute -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+            <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
               <p className="text-lg font-semibold">Add to My List</p>
               <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
             </div>

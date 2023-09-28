@@ -109,7 +109,7 @@ const TvShows = () => {
               </div>
             </header>
             <MobileTvHeader movie={movie} />
-            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-10">
+            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-16">
               <div className="w-[95%] mx-auto pb-10 lg:-translate-y-14">
                 <Tv />
                 <NowPlayingTv />

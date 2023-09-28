@@ -311,7 +311,7 @@ const TvNav = () => {
                     <div
                       className={`${
                         show ? "block" : "hidden"
-                      } w-[450px] h-[200px] absolute bg-black bg-opacity-80`}
+                      }  w-[300px] h-[255px] lg:w-[400px] lg:h-[220px] absolute -right-24 lg:left-0  bg-black bg-opacity-80`}
                     >
                       <div className="py-1 px-2 flex gap-5 items-start">
                         <div className="flex flex-wrap gap-3">

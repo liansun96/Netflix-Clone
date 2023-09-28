@@ -177,7 +177,7 @@ const HomeNav = () => {
               scrollHeight > 10
                 ? "opacity-0 duration-300 -translate-y-5"
                 : "opacity-100"
-            } absolute text-white text-3xl w-full lg:px-10 py-2 ps-7 lg:flex lg:items-center lg:justify-between duration-300 block lg:hidden -z-10`}
+            } absolute text-white text-3xl w-full lg:px-10 py-4 ps-7 lg:flex lg:items-center lg:justify-between duration-300 block lg:hidden -z-10`}
           >
             <AnimatePresence>
               <motion.div
