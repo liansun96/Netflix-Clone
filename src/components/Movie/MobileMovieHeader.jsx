@@ -32,7 +32,7 @@ const MobileMovieHeader = ({ movie, detailImage }) => {
       className="block lg:hidden mt-14 w-full shadow-inner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url("https:/image.tmdb.org/t/p/original/${movie?.poster_path}")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.poster_path}")`,
         backgroundPosition: "center",
         borderRadius: "10px",
         scale: "80%",
