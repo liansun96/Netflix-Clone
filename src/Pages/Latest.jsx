@@ -55,8 +55,7 @@ const Latest = () => {
   }
 
   return (
-    <div className="bg-[#141414]">
-      {/* <HomeNav /> */}
+    <div className="bg-[#141414]">     
       <LatestNav/>
       {isLoading ? (
         <LatestLoader />

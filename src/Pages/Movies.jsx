@@ -69,7 +69,7 @@ const Movies = () => {
               className="h-screen w-full shadow-inner hidden lg:block"
               style={{
                 backgroundSize: "cover",
-                backgroundImage: `url("https:/image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
+                backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
                 backgroundPosition: "center center",
               }}
             >
@@ -110,8 +110,8 @@ const Movies = () => {
               </div>
             </header>
             <MobileMovieHeader movie={movie} detailImage={detailImage} />
-            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-10">
-              <div className="w-[95%] mx-auto pb-10 lg:-translate-y-14">
+            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-20">
+              <div className="w-[95%] mx-auto pb-10 lg:-translate-y-10">
                 <Movie />
                 <PopularMovie />
                 <NowPlayingMovie />

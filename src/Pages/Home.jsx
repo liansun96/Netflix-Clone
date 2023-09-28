@@ -59,8 +59,8 @@ const Home = () => {
           <div className="overflow-hidden">
             <Header />
             <MobileMovieHeader movie={movie} />
-            <div className="category-bg lg:pt-10 -translate-y-9 lg:translate-y-[-140px] h-full">
-              <div className="w-[95%] mx-auto">
+            <div className="category-bg lg:pt-10 -translate-y-9 lg:translate-y-[-120px] h-full">
+              <div className="w-[95%] mx-auto lg:translate-y-[-50px]">
                 {/* <Test /> */}
                 <Movie />
                 <NowPlayingMovie />
