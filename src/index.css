@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-
   body.modal-open {
     overflow: hidden;
   }
@@ -23,7 +22,7 @@
     box-shadow: rgba(102, 102, 110, 0.25) 0px 7px 29px 0px;
   }
 
-  .custom-shadow-lg{
+  .custom-shadow-lg {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
 
@@ -50,7 +49,7 @@
 
   /* Customize the scrollbar thumb (the draggable part) */
   .language-dropdown::-webkit-scrollbar-thumb {
-    background-color: #CCCCCC; /* Set the background color of the thumb */    
+    background-color: #cccccc; /* Set the background color of the thumb */
   }
 
   /* Customize the scrollbar track when hovering over it */
@@ -61,4 +60,55 @@
   /* .parent-element :nth-child(39){
     padding-right: 20px;
   } */
+}
+
+.home-bg {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 5s ease;
+}
+
+.slide {
+  width: 220px;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+}
+
+.dots {
+  display: flex;
+}
+
+.dot {
+  width: 10px;
+  height: 2px;
+  background-color: gray;
+  border-radius: 10px;
+  margin: 0 1px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: white;
+}
+
+.plus:hover .plus-children {
+  display: block;
+  transition: 5s;
+}
+
+.active p {
+  @apply text-white;
 }

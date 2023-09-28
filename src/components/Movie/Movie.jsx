@@ -12,6 +12,7 @@ import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch } from "react-redux";
+import '../Carousel.css'
 
 const Movie = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =

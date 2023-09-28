@@ -19,7 +19,7 @@ const Header = () => {
 
   const movieId = movie?.id;
 
-  const { data: detailImage , isLoading } = useGetMovieImageQuery({ movieId });
+  const { data: detailImage, isLoading } = useGetMovieImageQuery({ movieId });
   console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Header = () => {
       className="h-screen w-full shadow-inner hidden lg:block"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url("https:/image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         backgroundPosition: "center center",
       }}
     >
