@@ -1,3 +1,6 @@
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import { useContext, useEffect, useState } from "react";
 import { HiOutlinePlus, HiCheck } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
@@ -12,7 +15,6 @@ import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch } from "react-redux";
-
 
 const Movie = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
@@ -68,7 +70,7 @@ const Movie = () => {
                 <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
               </div>
             </div>
-            <div className="dots opacity-0 group-hover:opacity-100">
+            <div className="dots opacity-0 group-hover:opacity-100 hidden lg:block">
               {[...Array(6)].map((_, index) => (
                 <span
                   key={index}
@@ -80,7 +82,7 @@ const Movie = () => {
               ))}
             </div>
           </div>
-          <div className="carousel-container hover:z-30">
+          <div className="carousel-container hover:z-30 hidden lg:block">
             <div className="carousel">
               <div
                 className="slides duration-500 flex items-start gap-2 lg:gap-1 "
@@ -181,6 +183,43 @@ const Movie = () => {
                 onClick={handleNextSlide}
               />
             </div>
+          </div>
+          <div className="block lg:hidden">
+            <Swiper
+              spaceBetween={5}
+              slidesPerView={2.6}
+              pagination={{ clickable: true }}
+              className="mySwiper"
+            >
+              {data?.results?.map((result) => {
+                const handelPlay = () => {
+                  togglePlayMovieModal();
+                  handleGetId(result?.id);
+                };
+
+                const handelDetail = () => {
+                  toggleModal();
+                  handleGetId(result?.id);
+                };
+                return (
+                  <SwiperSlide key={result?.id} className="w-[120px]">
+                    <div>
+                      <div className="group/item flex flex-col slide-inner hover:custom-shadow-lg hover:scale-95 lg:hover:w-auto duration-300 hover:delay-500 rounded-lg">
+                        <img
+                          onClick={handelDetail}
+                          src={
+                            "https://image.tmdb.org/t/p/w300" +
+                            result?.poster_path
+                          }
+                          className="rounded w-full object-cover object-top cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </div>
         </div>
       </div>

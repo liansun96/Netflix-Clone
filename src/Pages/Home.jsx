@@ -29,7 +29,7 @@ const Home = () => {
 
   const [movie, setMovie] = useState([]);
 
-  const { data,isLoading } = useGetMovieQuery({ genreId });
+  const { data, isLoading } = useGetMovieQuery({ genreId });
   console.log(data?.results);
 
   useEffect(() => {
