@@ -13,6 +13,7 @@ import { ToggleContext } from "../../Context/ToggleProvider";
 import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch } from "react-redux";
 
+
 const Movie = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);

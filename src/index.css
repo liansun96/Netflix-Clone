@@ -4,6 +4,57 @@
 
 @layer components {
 
+  .home-bg {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 5s ease;
+  }
+  
+  .slide {
+    width: 220px;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .dots {
+    display: flex;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 2px;
+    background-color: gray;
+    border-radius: 10px;
+    margin: 0 1px;
+    cursor: pointer;
+  }
+  
+  .dot.active {
+    background-color: white;
+  }
+  
+  .plus:hover .plus-children {
+    display: block;
+    transition: 5s;
+  }
+  
+  .active p{
+    @apply text-white 
+  }
+
   body.modal-open {
     overflow: hidden;
   }
