@@ -76,7 +76,7 @@ const Search = () => {
                     key={result?.id}
                     className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
                   >
-                    <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
+                    <div className="lg:hover:absolute hover:duration-300 lg:hover:scale-150 hover:delay-500 rounded-lg">
                       <div className="group/item flex flex-col mb-5 lg:mb-20 3xl:mb-24 4xl:mb-28">
                         <div className="hidden lg:block">
                           {result?.backdrop_path == null ? (
@@ -110,7 +110,7 @@ const Search = () => {
                           className="block lg:hidden rounded object-cover object-top cursor-pointer"
                           alt=""
                         />
-                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
                               <div className="flex items-center gap-2">
