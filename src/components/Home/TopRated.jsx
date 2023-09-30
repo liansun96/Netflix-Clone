@@ -39,7 +39,7 @@ const TopRated = () => {
   }
 
   return (
-    <div className="group h-[200px]">
+    <div className="group h-[185px] lg:h-[200px] my-5">
       <div className="flex flex-col gap-2 px-3">
         <div className="flex items-end justify-between w-full">
           <div className="flex items-center gap-1  group/exp cursor-pointer">
@@ -168,7 +168,7 @@ const TopRated = () => {
         <div className="block lg:hidden">
           <Swiper
             spaceBetween={5}
-            slidesPerView={2.6}
+            slidesPerView={3.3}
             pagination={{ clickable: true }}
             className="mySwiper"
           >
