@@ -19,6 +19,7 @@ import { countryCodes } from "../redux/api/countryCode";
 import { sortDatas } from "../redux/api/sortDatas";
 import Loader from "../components/Loader/Loader";
 import LatestNav from "../components/Latest/LatestNav";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const BrowseByLanguages = () => {
   const {
@@ -104,15 +105,15 @@ const BrowseByLanguages = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818] min-h-screen">
+    <div className="bg-[#171818] min-h-screen">
       <LatestNav />
       <div className="w-[95%] mx-auto pt-24 lg:pt-0 pb-10">
         <div
           className={`${
-            scrollHeight > 100
-              ? "lg:bg-[#141414] lg:bg-opacity-90"
-              : "bg-transparent"
-          } fixed top-[50px] lg:top-[62px] z-10 text-white text-3xl w-full py-2 lg:py-4 flex items-center justify-between duration-300`}
+            scrollHeight > 60
+              ? "opacity-0 duration-300 -translate-y-5"
+              : "opacity-100"
+          } fixed top-[50px] lg:top-[62px] z-10 text-white text-3xl w-full py-4 flex items-center justify-between duration-300`}
         >
           <div className="w-[95%] flex flex-col lg:flex-row items-start lg:items-center justify-between relative">
             <h1 className="text-2xl lg:text-3xl text-gray-50 font-semibold mb-4 lg:mb-0">
@@ -124,7 +125,7 @@ const BrowseByLanguages = () => {
                   <p className="text-xs lg:text-sm">Select Your Preferences</p>
                   <button
                     onClick={handleShow}
-                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-sm px-2 lg:px-0 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-sm px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {languageName}
                     <span>
@@ -162,7 +163,7 @@ const BrowseByLanguages = () => {
                   <p className="text-xs lg:text-sm">Sort by</p>
                   <button
                     onClick={handleShow1}
-                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-sm px-2 lg:px-0 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-sm px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {sortName}
                     <span>
@@ -203,9 +204,9 @@ const BrowseByLanguages = () => {
         <Loader />
       ) : (
         <div className="overflow-hidden">
-          <div className="w-[95%] mx-auto pt-24 pb-28">
+          <div className="w-[95%] mx-auto pt-[70px] lg:pt-24 pb-28">
             <div className="flex flex-wrap justify-between px-2 relative lg:pt-11 last:mr-auto">
-              {data?.results?.map((result, index) => {
+              {sortedData?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
                   handleGetId(result?.id);
@@ -219,7 +220,7 @@ const BrowseByLanguages = () => {
                     key={result?.id}
                     className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
                   >
-                    <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
+                    <div className="lg:hover:absolute lg:hover:duration-300 lg:hover:scale-150 lg:hover:delay-500 rounded-lg">
                       <div className="group/item flex flex-col mb-5 lg:mb-20 3xl:mb-24 4xl:mb-28">
                         <div className="hidden lg:block">
                           {result?.backdrop_path == null ? (
@@ -229,7 +230,7 @@ const BrowseByLanguages = () => {
                                 "https://image.tmdb.org/t/p/w300" +
                                 result?.poster_path
                               }
-                              className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                              className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit lg:group-hover/item:rounded-none lg:group-hover/item:delay-300 lg:group-hover/item:duration-300"
                               alt=""
                             />
                           ) : (
@@ -239,7 +240,7 @@ const BrowseByLanguages = () => {
                                 "https://image.tmdb.org/t/p/w300" +
                                 result?.backdrop_path
                               }
-                              className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                              className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit lg:group-hover/item:rounded-none lg:group-hover/item:delay-300 lg:group-hover/item:duration-500"
                               alt=""
                             />
                           )}
@@ -253,7 +254,7 @@ const BrowseByLanguages = () => {
                           className="block lg:hidden rounded object-cover object-top cursor-pointer"
                           alt=""
                         />
-                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full lg:group-hover/item:p-3 bg-gray-800 h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
                               <div className="flex items-center gap-2">
@@ -310,6 +311,7 @@ const BrowseByLanguages = () => {
       )}
       <div className="">
         <Footer />
+        <MobileBottomMenuBar/>
       </div>
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeMovie } from "../redux/services/favoritMovieSlice";
 import Footer from "../components/Footer/Footer";
 import LatestNav from "../components/Latest/LatestNav";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const MyList = () => {
   const favMoives = useSelector((state) => state.favoriteMovieSlice.favMovies);
@@ -15,6 +16,7 @@ const MyList = () => {
   return (
     <div className="bg-[#141414]">
       <LatestNav/>
+      <MobileBottomMenuBar/>
       <div className="h-screen w-full">
         <div className="w-[95%] mx-auto pt-20">
           <div className="">

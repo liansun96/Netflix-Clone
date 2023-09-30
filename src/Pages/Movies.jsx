@@ -17,6 +17,7 @@ import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
 import Loader from "../components/Loader/Loader";
 import MobileMovieHeader from "../components/Movie/MobileMovieHeader";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const Movies = () => {
   const {
@@ -59,7 +60,7 @@ const Movies = () => {
 
   return (
     <div>
-      <MovieNav />
+      <MovieNav />      
       <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
@@ -110,15 +111,16 @@ const Movies = () => {
               </div>
             </header>
             <MobileMovieHeader movie={movie} detailImage={detailImage} />
-            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-20">
-              <div className="w-[95%] mx-auto pb-10 lg:-translate-y-10">
+            <div className="category-bg  lg:pt-0 translate-y-[-50px] lg:-translate-y-20">
+              <div className="w-[95%] mx-auto lg:-translate-y-10">
                 <Movie />
                 <PopularMovie />
                 <NowPlayingMovie />
                 <TopRatedMovie />
               </div>
             </div>
-            <Footer />
+            <Footer />   
+            <MobileBottomMenuBar/>         
           </div>
         )}
       </div>

@@ -20,6 +20,7 @@ import MobileMovieHeader from "../components/Movie/MobileMovieHeader";
 import { useGetMovieQuery } from "../redux/api/movieApi";
 import Loader from "../components/Loader/Loader";
 import TopRatedMovie from "../components/Movie/TopRatedMovie";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const Home = () => {
   const nav = useNavigate();
@@ -52,6 +53,7 @@ const Home = () => {
   return (
     <>
       <HomeNav />
+      <MobileBottomMenuBar/>
       <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
@@ -59,7 +61,7 @@ const Home = () => {
           <div className="overflow-hidden">
             <Header />
             <MobileMovieHeader movie={movie} />
-            <div className="category-bg lg:pt-10 -translate-y-9 lg:translate-y-[-120px] h-full">
+            <div className="category-bg lg:pt-10 -translate-y-12 lg:translate-y-[-120px] h-full">
               <div className="w-[95%] mx-auto lg:translate-y-[-50px]">
                 {/* <Test /> */}
                 <Movie />
@@ -73,6 +75,7 @@ const Home = () => {
               </div>
             </div>
             <Footer />
+            <MobileBottomMenuBar/>
           </div>
         )}
         {modal && <MovieDetail />}

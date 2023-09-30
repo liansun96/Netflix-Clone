@@ -22,6 +22,7 @@ const LatestNav = () => {
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
+    inputRef.current.focus();
     navigate("/search");
   };
 

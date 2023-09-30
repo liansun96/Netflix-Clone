@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { GoChevronDown } from "react-icons/go";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -16,7 +16,6 @@ const HomeNav = () => {
     showInput,
     setShowInput,
     handleInput,
-    inputRef,
     genreName,
     handleGetGenreId,
     handleGetGenreName,
@@ -34,6 +33,13 @@ const HomeNav = () => {
     setSearch(e.target.value);
     navigate("/search");
   };
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    // When the component mounts, focus the input element
+    inputRef.current.focus();
+  }, []);
 
   const handleShow = () => {
     setShow(!show);

@@ -21,6 +21,7 @@ import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import LatestLoader from "../components/Loader/LatestLoader";
 import LatestNav from "../components/Latest/LatestNav";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const Latest = () => {
   const {
@@ -55,13 +56,13 @@ const Latest = () => {
   }
 
   return (
-    <div className="bg-[#141414]">     
+    <div className="bg-[#171818]">     
       <LatestNav/>
       {isLoading ? (
         <LatestLoader />
       ) : (
         <div className="overflow-hidden">
-          <div className="w-[95%] mx-auto pb-32 pt-20 min-h-screen">
+          <div className="w-[95%] mx-auto pt-16 pb-10 min-h-screen">
             <NowPlaying />
             <div className="group h-[230px] lg:h-[200px] my-5">
               <div className="flex flex-col gap-2 px-3">
@@ -204,6 +205,7 @@ const Latest = () => {
         </div>
       )}
       <Footer />
+      <MobileBottomMenuBar/>
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}
       {tvModal && <TvDetail />}
