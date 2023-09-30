@@ -125,7 +125,7 @@ const BrowseByLanguages = () => {
                   <p className="text-xs lg:text-sm">Select Your Preferences</p>
                   <button
                     onClick={handleShow}
-                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[160px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {languageName}
                     <span>
@@ -163,7 +163,7 @@ const BrowseByLanguages = () => {
                   <p className="text-xs lg:text-sm">Sort by</p>
                   <button
                     onClick={handleShow1}
-                    className="flex items-center justify-between w-[170 px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[160px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {sortName}
                     <span>
