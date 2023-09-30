@@ -76,7 +76,7 @@ const MyNetflixNav = () => {
                   />
                 </div>
               </div>
-              <div className="block lg:hidden">
+              <div className="block lg:hidden ms-2">
                 <AiOutlineMenu
                   onClick={toggleSideBar}
                   className="text-gray-50 text-2xl"
