@@ -23,10 +23,10 @@ const MobileBottomMenuBar = () => {
           <TbLanguageHiragana className="text-2xl font-light" />
           <p className="text-xs">Languages</p>
         </NavLink>
-        <NavLink className="w-[30%] flex flex-col justify-center items-center">
+        <NavLink to={'/my-netflix'} className="w-[30%] flex flex-col justify-center items-center">
           <img
             className="rounded w-7"
-            src="https://occ-0-3494-64.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdYJV5wt63AcxNaDoqDXUhqZb55oN5Dxt1m-Zdn_z5rn_hIq9m8dA8JB2xdcPmrY3yXnlVWYKPXnOrbv2QN4aEVU28dESJg.png?r=1d4"
+            src="https://occ-0-395-325.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABfNXUMVXGhnCZwPI1SghnGpmUgqS_J-owMff-jig42xPF7vozQS1ge5xTgPTzH7ttfNYQXnsYs4vrMBaadh4E6RTJMVepojWqOXx.png?r=1d4"
             alt=""
           />
           <p className="text-xs text-neutral-400">My Netflix</p>

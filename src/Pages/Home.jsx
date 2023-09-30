@@ -8,7 +8,6 @@ import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
 import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
-import Test from "../components/Test/Test";
 import Movie from "../components/Movie/Movie";
 import Popular from "../components/Home/Popular";
 import UpComing from "../components/Home/UpComing";
