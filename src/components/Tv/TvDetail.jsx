@@ -146,11 +146,11 @@ const TvDetail = () => {
   return (
     <div
       onClick={toggleTvModal}
-      className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1005]"
+      className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1011]"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
+        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10 mb-10"
       >
         <div className="group">
           <YouTube

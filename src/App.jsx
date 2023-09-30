@@ -9,10 +9,11 @@ import Search from "./Pages/Search";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
 import BrowseByLanguages from "./Pages/BrowseByLanguages";
+import MyNetflix from "./Pages/MyNetflix";
 
 const App = () => {
   return (
-    <div className="relative">
+    <div className="relative bg-[#141414]">
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/movies" element={<Movies />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/mylist" element={<MyList />} />
+        <Route path="/my-netflix" element={<MyNetflix />} />
         <Route path="/browse-by-language" element={<BrowseByLanguages />} />
         <Route path="/search" element={<Search />} />
       </Routes>

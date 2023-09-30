@@ -62,7 +62,7 @@ const Latest = () => {
         <LatestLoader />
       ) : (
         <div className="overflow-hidden">
-          <div className="w-[95%] mx-auto pt-16 pb-10 min-h-screen">
+          <div className="w-[95%] mx-auto pt-16 pb10 lg:pb-28 min-h-screen">
             <NowPlaying />
             <div className="group h-[230px] lg:h-[200px] my-5">
               <div className="flex flex-col gap-2 px-3">

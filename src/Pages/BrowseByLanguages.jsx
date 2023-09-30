@@ -119,13 +119,13 @@ const BrowseByLanguages = () => {
             <h1 className="text-2xl lg:text-3xl text-gray-50 font-semibold mb-4 lg:mb-0">
               Browse By Languages
             </h1>
-            <div className="flex gap-5">
+            <div className="w-full lg:w-auto flex justify-start lg:justify-end gap-5">
               <div className="relative">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-2">
                   <p className="text-xs lg:text-sm">Select Your Preferences</p>
                   <button
                     onClick={handleShow}
-                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-sm px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {languageName}
                     <span>
@@ -163,7 +163,7 @@ const BrowseByLanguages = () => {
                   <p className="text-xs lg:text-sm">Sort by</p>
                   <button
                     onClick={handleShow1}
-                    className="flex items-center justify-between w-[170px] lg:w-[250px] text-sm px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[170 px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {sortName}
                     <span>
@@ -204,7 +204,7 @@ const BrowseByLanguages = () => {
         <Loader />
       ) : (
         <div className="overflow-hidden">
-          <div className="w-[95%] mx-auto pt-[70px] lg:pt-24 pb-28">
+          <div className="w-[95%] mx-auto pt-[70px] lg:pt-24 lg:pb-20">
             <div className="flex flex-wrap justify-between px-2 relative lg:pt-11 last:mr-auto">
               {sortedData?.map((result, index) => {
                 const handelPlay = () => {
@@ -304,15 +304,16 @@ const BrowseByLanguages = () => {
                     </div>
                   </div>
                 );
-              })}             
+              })}
             </div>
           </div>
         </div>
       )}
-      <div className="">
+      <div>
         <Footer />
-        <MobileBottomMenuBar/>
+        <MobileBottomMenuBar />
       </div>
+
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}
       {tvModal && <TvDetail />}

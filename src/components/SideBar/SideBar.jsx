@@ -1,16 +1,15 @@
 import { useContext, useState } from "react";
 import { ToggleContext } from "../../Context/ToggleProvider";
-import { Link, NavLink } from "react-router-dom";
-import { IoMenu } from "react-icons/io5";
 import {
-  useGetMovieGenresQuery,
-  useGetTvGenresQuery,
-} from "../../redux/api/movieApi";
-import { IoIosArrowDown } from "react-icons/io";
+  MdOutlineModeEdit,
+  MdOutlineSettings,
+  MdOutlineHelpOutline,
+} from "react-icons/md";
+import { RiUser3Line } from "react-icons/ri";
+import { VscSignOut } from "react-icons/vsc";
+import {RxCross2} from 'react-icons/rx'
 
 const SideBar = () => {
-  const { data: movieGenres } = useGetMovieGenresQuery();
-  const { data: TvGenres } = useGetTvGenresQuery();
   const { handleGetGenreId } = useContext(ToggleContext);
   const {
     sBar,
@@ -25,110 +24,38 @@ const SideBar = () => {
     <div
       onClick={toggleSideBar}
       className={`${
-        sBar ? "translate-x-0" : "-translate-x-96"
-      } w-full h-screen bg-transparent fixed left-0 top-0 block lg:hidden duration-300 z-[10009]`}
+        sBar ? "translate-y-0" : "translate-y-[1000px]"
+      } w-full h-screen fixed left-0 top-0 block lg:hidden duration-300 z-[10009]`}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[250px] h-full absolute bg-black bg-opacity-90 overflow-scroll"
+        className="w-full h-[40%] absolute bottom-0 bg-neutral-800 "
       >
-        <div className="flex gap-1 items-center p-3">
-          <div className="block lg:hidden">
-            <IoMenu onClick={toggleSideBar} className="text-gray-50 text-4xl" />
+        <div className="flex flex-col gap-6 p-3">
+          <div className="flex items-center gap-2 text-white">
+            <MdOutlineModeEdit className="text-3xl" />
+            <p className="font-semibold">Manage Profiles</p>
           </div>
-          <Link to={"/"}>
-            <img
-              src={
-                "https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-              }
-              className="h-[30px] my-2 cursor-pointer"
-              alt=""
-            />
-          </Link>
-        </div>
-        <div className="flex flex-col gap-1 p-3">
-          <div className="flex items-center gap-1">
-            <div className="h-[30px] w-[30px] bg-gray-50 rounded"></div>
-            <p className="text-gray-50 font-semibold">Marcus</p>
+          <div className="flex items-center gap-2 text-white">
+            <MdOutlineSettings className="text-3xl" />
+            <p className="font-semibold">App Settings</p>
           </div>
-          <p className="font-semibold text-gray-400">Account</p>
-          <p className="font-semibold text-gray-400">Help Center</p>
-          <p className="font-semibold text-gray-400">Sign Out of Netflix</p>
-        </div>
-        <div className="border-t-[0.5px] border-gray-700"></div>
-        <div className="flex flex-col gap-1 p-3">
-          <NavLink to={"/"}>
-            <p onClick={toggleSideBar} className="font-semibold text-gray-400">Home</p>
-          </NavLink>
-
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <NavLink to={"/tvshows"}>
-                <p onClick={toggleSideBar} className="font-semibold text-gray-400">Tv Shows</p>
-              </NavLink>
-              <IoIosArrowDown
-                onClick={toggleTvShow}
-                className={`${
-                  tvShow ? "rotate-180 duration-300" : "rotate-0 duration-300"
-                } text-gray-300`}
-              />
-            </div>
-            <div
-              className={`${tvShow ? "block h-full w-full" : "hidden h-0 w-0"}`}
-            >
-              <div className="flex flex-col gap-2 ps-5">
-                {TvGenres?.genres?.map((genre) => (
-                  <div  key={genre.id}>
-                    <p
-                      onClick={() => handleGetGenreId(genre?.id)}
-                      className="text-sm text-gray-300 cursor-pointer hover:underline"
-                    >
-                      {genre?.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="flex items-center gap-2 text-white">
+            <RiUser3Line className="text-3xl" />
+            <p className="font-semibold">Account</p>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <NavLink to={"/movies"}>
-                <p onClick={toggleSideBar} className="font-semibold text-gray-400">Movies</p>
-              </NavLink>
-              <IoIosArrowDown
-                onClick={toggleMovieShow}
-                className={`${
-                  movieShow
-                    ? "rotate-180 duration-300"
-                    : "rotate-0 duration-300"
-                } text-gray-300`}
-              />
-            </div>
-            <div
-              className={`${
-                movieShow ? "block h-full w-full" : "hidden h-0 w-0"
-              }`}
-            >
-              <div className="flex flex-col gap-2 ps-5">
-                {movieGenres?.genres?.map((genre) => (
-                  <div key={genre.id}>
-                    <p
-                      onClick={() => handleGetGenreId(genre?.id)}
-                      className="text-sm text-gray-300 cursor-pointer hover:underline"
-                    >
-                      {genre?.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="flex items-center gap-2 text-white">
+            <MdOutlineHelpOutline className="text-3xl" />
+            <p className="font-semibold">Help</p>
           </div>
-          <NavLink to={"/latest"}>
-            <p onClick={toggleSideBar} className="font-semibold text-gray-400">Latest</p>
-          </NavLink>
-          <NavLink to={"/mylist"}>
-            <p onClick={toggleSideBar} className="font-semibold text-gray-400">My List</p>
-          </NavLink>
+          <div className="flex items-center gap-2 text-white">
+            <VscSignOut className="text-3xl" />
+            <p className="font-semibold">Sign Out</p>
+          </div>
+          <p className="text-gray-500 text-sm">Version: 16.1.0 (4535) 5.0.1-0011</p>
+          <div onClick={toggleSideBar} className="w-8 h-8 rounded-full flex items-center justify-center bg-black bg-opacity-30 absolute top-2 right-2">
+            <RxCross2 className="text-white text-xl"/>
+          </div>
         </div>
       </div>
     </div>
