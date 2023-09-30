@@ -136,10 +136,10 @@ const BrowseByLanguages = () => {
                 <div
                   className={`${
                     show ? "block" : "hidden"
-                  } w-[150px] lg:w-[250px] h-[500px] absolute left-2 lg:left-[150px] bg-black bg-opacity-80 z-[1006]`}
+                  } w-[150px] lg:w-[250px] h-[360px] lg:h-[500px] absolute left-2 lg:left-[150px] bg-black bg-opacity-80 z-[1006]`}
                 >
                   <div className="py-1 px-2 flex gap-5 items-start">
-                    <div className="flex flex-col gap-3 h-[490px] overflow-y-scroll language-dropdown">
+                    <div className="flex flex-col gap-3 h-[350px] lg:h-[490px] overflow-y-scroll language-dropdown">
                       {countryCodes?.map((countryCode) => (
                         <div key={countryCode.id}>
                           <p
