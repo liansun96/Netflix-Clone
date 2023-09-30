@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { GoChevronDown } from "react-icons/go";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { IoMenu } from "react-icons/io5";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import Profile from "../Profile";
@@ -16,7 +15,6 @@ const HomeNav = () => {
     showInput,
     setShowInput,
     handleInput,
-    inputRef,
     genreName,
     handleGetGenreId,
     handleGetGenreName,
@@ -34,6 +32,13 @@ const HomeNav = () => {
     setSearch(e.target.value);
     navigate("/search");
   };
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    // When the component mounts, focus the input element
+    inputRef.current.focus();
+  }, []);
 
   const handleShow = () => {
     setShow(!show);
@@ -62,13 +67,7 @@ const HomeNav = () => {
           } absolute w-full px-3 lg:px-10 py-2 home-nav-bg`}
         >
           <div className="flex items-center lg:items-center justify-between">
-            <div className="flex items-center gap-1 lg:gap-5">
-              <div className="block lg:hidden">
-                <IoMenu
-                  onClick={toggleSideBar}
-                  className="text-gray-50 text-4xl"
-                />
-              </div>
+            <div className="flex items-center gap-1 lg:gap-5">             
               <Link to={"/"}>
                 <img
                   src={
@@ -177,7 +176,7 @@ const HomeNav = () => {
               scrollHeight > 10
                 ? "opacity-0 duration-300 -translate-y-5"
                 : "opacity-100"
-            } absolute text-white text-3xl w-full lg:px-10 py-2 ps-7 lg:flex lg:items-center lg:justify-between duration-300 block lg:hidden -z-10`}
+            } absolute text-white text-3xl w-full lg:px-10 py-4 ps-7 lg:flex lg:items-center lg:justify-between duration-300 block lg:hidden -z-10`}
           >
             <AnimatePresence>
               <motion.div

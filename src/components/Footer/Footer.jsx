@@ -7,7 +7,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="h-full p-5">
+    <footer className="h-full p-5 pb-20 lg:pb-5">
       <div className="block lg:hidden">
         <div className="flex flex-wrap items-center gap-5 justify-center">
           <p className="text-[#808080]">Terms of Use</p>

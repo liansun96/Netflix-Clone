@@ -146,11 +146,11 @@ const TvDetail = () => {
   return (
     <div
       onClick={toggleTvModal}
-      className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1005]"
+      className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1011]"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
+        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10 mb-10"
       >
         <div className="group">
           <YouTube
@@ -257,7 +257,7 @@ const TvDetail = () => {
           More Like This
         </h1>
 
-        <div className="flex gap-2 lg:gap-6 justify-start flex-wrap px-5 lg:px-10">
+        <div className="flex gap-2 lg:gap-6 justify-between flex-wrap px-5 lg:px-10">
           {recData?.results.map((result, index) => (
             <SimilarTv key={index} result={result} />
           ))}

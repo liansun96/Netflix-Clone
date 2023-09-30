@@ -18,6 +18,8 @@ import { VscTriangleDown } from "react-icons/vsc";
 import { countryCodes } from "../redux/api/countryCode";
 import { sortDatas } from "../redux/api/sortDatas";
 import Loader from "../components/Loader/Loader";
+import LatestNav from "../components/Latest/LatestNav";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const BrowseByLanguages = () => {
   const {
@@ -62,13 +64,12 @@ const BrowseByLanguages = () => {
     };
   }, []);
 
-  
   if (modal) {
     document.body.classList.add("overflow-y-hidden");
-    document.body.classList.add('modal-open');
+    document.body.classList.add("modal-open");
   } else {
     document.body.classList.remove("overflow-y-hidden");
-    document.body.classList.remove('modal-open');
+    document.body.classList.remove("modal-open");
   }
 
   const handleShow = () => {
@@ -77,7 +78,7 @@ const BrowseByLanguages = () => {
   const handleShow1 = () => {
     setShow1(!show1);
   };
-  
+
   const sortByProperty = (property) => {
     const sortedData = [...data?.results].sort((a, b) => {
       let result;
@@ -103,29 +104,28 @@ const BrowseByLanguages = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
-  
   return (
-    <div className="bg-[#141414] min-h-screen">
-      <HomeNav />
-      <div className="hidden lg:block w-[95%] mx-auto pt-24 pb-10">
+    <div className="bg-[#171818] min-h-screen">
+      <LatestNav />
+      <div className="w-[95%] mx-auto pt-24 lg:pt-0 pb-10">
         <div
           className={`${
-            scrollHeight > 100
-              ? "lg:bg-[#141414] lg:bg-opacity-90"
-              : "bg-transparent"
-          } fixed top-[62px] z-10 text-white text-3xl w-full py-4 flex items-center justify-between duration-300`}
+            scrollHeight > 60
+              ? "opacity-0 duration-300 -translate-y-5"
+              : "opacity-100"
+          } fixed top-[50px] lg:top-[62px] z-10 text-white text-3xl w-full py-4 flex items-center justify-between duration-300`}
         >
-          <div className="w-[95%] flex items-center justify-between relative">
-            <h1 className="text-3xl text-gray-50 font-semibold">
+          <div className="w-[95%] flex flex-col lg:flex-row items-start lg:items-center justify-between relative">
+            <h1 className="text-2xl lg:text-3xl text-gray-50 font-semibold mb-4 lg:mb-0">
               Browse By Languages
             </h1>
-            <div className="flex gap-5">
+            <div className="w-full lg:w-auto flex justify-start lg:justify-end gap-5">
               <div className="relative">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm ">Select Your Preferences</p>
+                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-2">
+                  <p className="text-xs lg:text-sm">Select Your Preferences</p>
                   <button
                     onClick={handleShow}
-                    className="flex items-center justify-between w-[250px] bg-black p-1 text-base border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[160px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {languageName}
                     <span>
@@ -136,10 +136,10 @@ const BrowseByLanguages = () => {
                 <div
                   className={`${
                     show ? "block" : "hidden"
-                  } w-[250px] h-[500px] absolute left-[150px] bg-black bg-opacity-80 z-[1006]`}
+                  } w-[150px] lg:w-[250px] h-[360px] lg:h-[500px] absolute left-2 lg:left-[150px] bg-black bg-opacity-80 z-[1006]`}
                 >
                   <div className="py-1 px-2 flex gap-5 items-start">
-                    <div className="flex flex-col gap-3 h-[490px] overflow-y-scroll language-dropdown">
+                    <div className="flex flex-col gap-3 h-[350px] lg:h-[490px] overflow-y-scroll language-dropdown">
                       {countryCodes?.map((countryCode) => (
                         <div key={countryCode.id}>
                           <p
@@ -148,7 +148,7 @@ const BrowseByLanguages = () => {
                               handleGetIosName(countryCode?.original_language),
                               handleGetlanguageName(countryCode?.language_name)
                             )}
-                            className="text-sm w-[215px] cursor-pointer hover:underline"
+                            className="text-sm w-[125px] lg:w-[215px] cursor-pointer hover:underline"
                           >
                             {countryCode.language_name}
                           </p>
@@ -159,11 +159,11 @@ const BrowseByLanguages = () => {
                 </div>
               </div>
               <div className="relative">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm ">Sort by</p>
+                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-2">
+                  <p className="text-xs lg:text-sm">Sort by</p>
                   <button
                     onClick={handleShow1}
-                    className="flex items-center justify-between w-[250px] bg-black p-1 text-base border hover:bg-transparent hover:bg-opacity-50 "
+                    className="flex items-center justify-between w-[160px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {sortName}
                     <span>
@@ -174,7 +174,7 @@ const BrowseByLanguages = () => {
                 <div
                   className={`${
                     show1 ? "block" : "hidden"
-                  } w-[250px] h-[130px] absolute left-[50px] bg-black bg-opacity-80 z-[1006]`}
+                  } w-[150px] lg:w-[250px] h-[130px] absolute left-2 lg:left-[50px] bg-black bg-opacity-80 z-[1006]`}
                 >
                   <div className="py-1 px-2 flex gap-5 items-start">
                     <div className="flex flex-col gap-3 h-[130px]">
@@ -204,8 +204,8 @@ const BrowseByLanguages = () => {
         <Loader />
       ) : (
         <div className="overflow-hidden">
-          <div className="w-[95%] mx-auto pt-9 pb-36">
-            <div className="flex flex-wrap justify-between relative pt-11 list-disc [&>*:last-child]:me-auto list-disc [&>*:last-child]:ms-3">
+          <div className="w-[95%] mx-auto pt-[70px] lg:pt-24 lg:pb-20">
+            <div className="flex flex-wrap justify-between px-2 relative lg:pt-11 last:mr-auto">
               {sortedData?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -218,32 +218,43 @@ const BrowseByLanguages = () => {
                 return (
                   <div
                     key={result?.id}
-                    className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px]"
+                    className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
                   >
-                    <div className="hover:absolute hover:duration-300 hover:scale-150 hover:delay-500 rounded-lg">
-                      <div className="group/item flex flex-col mb-20 3xl:mb-24 4xl:mb-28">
-                        {result?.backdrop_path == null ? (
-                          <img
-                            onClick={handelDetail}
-                            src={
-                              "https://image.tmdb.org/t/p/w300" +
-                              result?.poster_path
-                            }
-                            className="rounded object-cover object-top lg:h-[129px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
-                            alt=""
-                          />
-                        ) : (
-                          <img
-                            onClick={handelDetail}
-                            src={
-                              "https://image.tmdb.org/t/p/w300" +
-                              result?.backdrop_path
-                            }
-                            className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
-                            alt=""
-                          />
-                        )}
-                        <div className="relativ xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible group-hover/item:visible group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                    <div className="lg:hover:absolute lg:hover:duration-300 lg:hover:scale-150 lg:hover:delay-500 rounded-lg">
+                      <div className="group/item flex flex-col mb-5 lg:mb-20 3xl:mb-24 4xl:mb-28">
+                        <div className="hidden lg:block">
+                          {result?.backdrop_path == null ? (
+                            <img
+                              onClick={handelDetail}
+                              src={
+                                "https://image.tmdb.org/t/p/w300" +
+                                result?.poster_path
+                              }
+                              className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit lg:group-hover/item:rounded-none lg:group-hover/item:delay-300 lg:group-hover/item:duration-300"
+                              alt=""
+                            />
+                          ) : (
+                            <img
+                              onClick={handelDetail}
+                              src={
+                                "https://image.tmdb.org/t/p/w300" +
+                                result?.backdrop_path
+                              }
+                              className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit lg:group-hover/item:rounded-none lg:group-hover/item:delay-300 lg:group-hover/item:duration-500"
+                              alt=""
+                            />
+                          )}
+                        </div>
+                        <img
+                          onClick={handelDetail}
+                          src={
+                            "https://image.tmdb.org/t/p/w300" +
+                            result?.poster_path
+                          }
+                          className="block lg:hidden rounded object-cover object-top cursor-pointer"
+                          alt=""
+                        />
+                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full lg:group-hover/item:p-3 bg-gray-800 h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
                               <div className="flex items-center gap-2">
@@ -298,9 +309,11 @@ const BrowseByLanguages = () => {
           </div>
         </div>
       )}
-      <div className="">
+      <div>
         <Footer />
+        <MobileBottomMenuBar />
       </div>
+
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}
       {tvModal && <TvDetail />}

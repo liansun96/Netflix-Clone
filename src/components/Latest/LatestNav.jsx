@@ -1,20 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import Logo from "../image/Logo.svg";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { RiLayoutGridFill } from "react-icons/ri";
-import { MdArrowDropDown } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { BiSearch } from "react-icons/bi";
 import Profile from "../Profile";
 
 const LatestNav = () => {
-  const [scrollHeight, setScrollHeight] = useState(0);
-  const [show, setShow] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
-  const [showSuggest, setShowSuggest] = useState(false);
+  const [scrollHeight, setScrollHeight] = useState(0);  
   const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef } =
     useContext(ToggleContext);
 
@@ -22,24 +15,9 @@ const LatestNav = () => {
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
+    inputRef.current.focus();
     navigate("/search");
-  };
-
-  const handleShowSuggest = () => {
-    setShowSuggest(!showSuggest);
-  };
-
-  const handleShow = () => {
-    setShow(!show);
-  };
-
-  const handleShowMenuOpen = () => {
-    setShowMenu(true);
-  };
-
-  const handleSHowMenuClose = () => {
-    setShowMenu(false);
-  };
+  }; 
 
   useEffect(() => {
     const scrollFunc = () => {

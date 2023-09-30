@@ -8,7 +8,6 @@ import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
 import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
-import Test from "../components/Test/Test";
 import Movie from "../components/Movie/Movie";
 import Popular from "../components/Home/Popular";
 import UpComing from "../components/Home/UpComing";
@@ -20,6 +19,7 @@ import MobileMovieHeader from "../components/Movie/MobileMovieHeader";
 import { useGetMovieQuery } from "../redux/api/movieApi";
 import Loader from "../components/Loader/Loader";
 import TopRatedMovie from "../components/Movie/TopRatedMovie";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const Home = () => {
   const nav = useNavigate();
@@ -52,6 +52,7 @@ const Home = () => {
   return (
     <>
       <HomeNav />
+      <MobileBottomMenuBar/>
       <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
@@ -59,7 +60,7 @@ const Home = () => {
           <div className="overflow-hidden">
             <Header />
             <MobileMovieHeader movie={movie} />
-            <div className="category-bg lg:pt-10 -translate-y-9 lg:translate-y-[-120px] h-full">
+            <div className="category-bg lg:pt-10 -translate-y-12 lg:translate-y-[-120px] h-full">
               <div className="w-[95%] mx-auto lg:translate-y-[-50px]">
                 {/* <Test /> */}
                 <Movie />
@@ -73,6 +74,7 @@ const Home = () => {
               </div>
             </div>
             <Footer />
+            <MobileBottomMenuBar/>
           </div>
         )}
         {modal && <MovieDetail />}

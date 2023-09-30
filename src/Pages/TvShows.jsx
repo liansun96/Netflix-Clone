@@ -13,6 +13,7 @@ import NowPlayingTv from "../components/Tv/NowPlayingTv";
 import TopRatedTv from "../components/Tv/TopRatedTv";
 import Loader from "../components/Loader/Loader";
 import MobileTvHeader from "../components/Tv/MobileTvHeader";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const TvShows = () => {
   const {
@@ -58,7 +59,7 @@ const TvShows = () => {
 
   return (
     <div className="">
-      <TvNav />
+      <TvNav />      
       <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
@@ -109,8 +110,8 @@ const TvShows = () => {
               </div>
             </header>
             <MobileTvHeader movie={movie} />
-            <div className="category-bg  lg:pt-0 translate-y-[-35px] lg:-translate-y-10">
-              <div className="w-[95%] mx-auto pb-10 lg:-translate-y-14">
+            <div className="category-bg  lg:pt-0 translate-y-[-50px] lg:-translate-y-16">
+              <div className="w-[95%] mx-auto lg:-translate-y-14">
                 <Tv />
                 <NowPlayingTv />
                 <TopRatedTv />
@@ -118,6 +119,7 @@ const TvShows = () => {
               </div>
             </div>
             <Footer />
+            <MobileBottomMenuBar/>
           </div>
         )}
         {tvModal && <TvDetail />}
