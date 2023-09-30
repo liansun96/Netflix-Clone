@@ -19,6 +19,7 @@ import { countryCodes } from "../redux/api/countryCode";
 import { sortDatas } from "../redux/api/sortDatas";
 import Loader from "../components/Loader/Loader";
 import LatestNav from "../components/Latest/LatestNav";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const BrowseByLanguages = () => {
   const {
@@ -104,7 +105,7 @@ const BrowseByLanguages = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818] min-h-screen">
+    <div className="bg-[#171818] min-h-screen">
       <LatestNav />
       <div className="w-[95%] mx-auto pt-24 lg:pt-0 pb-10">
         <div
@@ -310,6 +311,7 @@ const BrowseByLanguages = () => {
       )}
       <div className="">
         <Footer />
+        <MobileBottomMenuBar/>
       </div>
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}

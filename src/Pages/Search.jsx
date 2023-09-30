@@ -10,6 +10,7 @@ import PlayMovie from "../components/Movie/PlayMovie";
 import Footer from "../components/Footer/Footer";
 import Loader from "../components/Loader/Loader";
 import LatestNav from "../components/Latest/LatestNav";
+import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 
 const Search = () => {
   const {
@@ -55,7 +56,7 @@ const Search = () => {
 
   return (
     <div className="bg-[#141414]">
-      <LatestNav/>
+      <LatestNav />
       {isLoading ? (
         <Loader />
       ) : (
@@ -180,6 +181,7 @@ const Search = () => {
         </div>
       )}
       <Footer />
+      <MobileBottomMenuBar />
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}
     </div>
