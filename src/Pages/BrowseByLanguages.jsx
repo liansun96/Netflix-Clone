@@ -148,7 +148,7 @@ const BrowseByLanguages = () => {
                               handleGetIosName(countryCode?.original_language),
                               handleGetlanguageName(countryCode?.language_name)
                             )}
-                            className="text-sm w-[215px] cursor-pointer hover:underline"
+                            className="text-sm w-[125px] lg:w-[215px] cursor-pointer hover:underline"
                           >
                             {countryCode.language_name}
                           </p>
