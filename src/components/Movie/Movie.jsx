@@ -2,7 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useContext, useEffect, useState } from "react";
-import { HiOutlinePlus, HiCheck } from "react-icons/hi";
+import { HiOutlinePlus, HiOutlineCheck } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
 import {
   MdOutlineArrowForwardIos,
@@ -14,26 +14,18 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Movie = () => {
   const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
     useContext(ToggleContext);
 
   const { data } = useGetMovieQuery({ genreId });
-  console.log(data?.results);
+  // console.log(data?.results);
 
+  const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
+  // console.log(favMovies);
   const dispatch = useDispatch();
-  // Initialize an array of boolean values to track the toggle state for each card
-  const [cardToggles, setCardToggles] = useState(
-    JSON.parse(localStorage.getItem("cardToggles")) ||
-      Array(data?.results?.length).fill(false)
-  );
-  console.log(cardToggles);
-  useEffect(() => {
-    // Save the cardToggles state to local storage whenever it changes
-    localStorage.setItem("cardToggles", JSON.stringify(cardToggles));
-  }, [cardToggles]);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const handleNextSlide = () => {
@@ -54,7 +46,7 @@ const Movie = () => {
 
   return (
     <>
-      <div className="group h-[185px] lg:h-[200px] my-5">
+      <div className="group h-[200px] my-5">
         <div className="flex flex-col gap-2 px-3">
           <div className="flex items-center lg:items-end justify-between w-full">
             <div className="flex items-center gap-1  group/exp cursor-pointer">
@@ -100,6 +92,21 @@ const Movie = () => {
                     toggleModal();
                     handleGetId(result?.id);
                   };
+
+                  const isMovieInList = favMovies?.find(
+                    (m) => m.id === result?.id
+                  );
+                  console.log(isMovieInList);
+
+                  const handleAddFav = () => {
+                    if (isMovieInList) {
+                      dispatch(removeMovie(result));
+                    } else {
+                      // Movie is not in the list, dispatch addMovie action
+                      dispatch(addMovie(result));
+                    }
+                  };
+
                   return (
                     <div key={result?.id} className="w-[120px] lg:w-[220px]">
                       <div>
@@ -132,14 +139,30 @@ const Movie = () => {
                                   >
                                     <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
                                   </button>
-                                  <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
-                                    <HiOutlinePlus className="text-sm text-gray-200" />
-                                    <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-                                      <p className="text-xs font-semibold">
-                                        Add to My List
-                                      </p>
-                                      <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
-                                    </div>
+                                  <button
+                                    onClick={() => handleAddFav(result)}
+                                    className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
+                                  >
+                                    {isMovieInList ? (
+                                      <HiOutlineCheck className="text-sm text-gray-200" />
+                                    ) : (
+                                      <HiOutlinePlus className="text-sm text-gray-200" />
+                                    )}
+                                    {isMovieInList ? (
+                                      <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                        <p className="text-xs font-semibold">
+                                          Remove from List
+                                        </p>
+                                        <VscTriangleDown className="text-white text-2xl translate-x-[36px] -translate-y-2 absolute" />
+                                      </div>
+                                    ) : (
+                                      <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                        <p className="text-xs font-semibold">
+                                          Add to My List
+                                        </p>
+                                        <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
+                                      </div>
+                                    )}
                                   </button>
                                   <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
                                     <BsHandThumbsUp className="text-sm text-gray-200" />
@@ -187,9 +210,9 @@ const Movie = () => {
           <div className="block lg:hidden">
             <Swiper
               spaceBetween={5}
-              slidesPerView={3.3}
+              slidesPerView={3.1}
               pagination={{ clickable: true }}
-              className="mySwiper"
+              className="mySwiper overflow-x-visible"
             >
               {data?.results?.map((result) => {
                 const handelPlay = () => {

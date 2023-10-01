@@ -38,7 +38,7 @@ const MyNetflixNav = () => {
             scrollHeight > 100
               ? "lg:bg-[#141414] lg:bg-opacity-90"
               : "bg-transparent"
-          } absolute w-full px-3 lg:px-10 py-2 ${sBar ? "" : "home-nav-bg"}`}
+          } absolute w-full px-3 lg:px-10 py-2 duration-500 ${sBar ? "" : "home-nav-bg"}`}
         >
           <div className="flex items-center lg:items-center justify-between">
             <div className="flex items-center gap-1 lg:gap-5">

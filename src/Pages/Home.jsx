@@ -20,6 +20,7 @@ import { useGetMovieQuery } from "../redux/api/movieApi";
 import Loader from "../components/Loader/Loader";
 import TopRatedMovie from "../components/Movie/TopRatedMovie";
 import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
+import TopRated from "../components/Home/TopRated";
 
 const Home = () => {
   const nav = useNavigate();
@@ -65,7 +66,7 @@ const Home = () => {
                 {/* <Test /> */}
                 <Movie />
                 <NowPlayingMovie />
-                <TopRatedMovie />
+                <TopRated />
                 <Popular />
                 <Tv />
                 <UpComing />
