@@ -16,13 +16,13 @@ const ToggleProvider = ({ children }) => {
 
   const inputRef = useRef(null);
 
+  const [noti, setNoti] = useState(false);
+
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {
     setShowInput(!showInput);
     inputRef.current.focus();
   };
-
- 
 
   //Sidebar
   const [sBar, setSBar] = useState(false);
@@ -163,6 +163,8 @@ const ToggleProvider = ({ children }) => {
     page,
     handleNextPage,
     handlePrevPage,
+    noti,
+    setNoti,
   };
 
   return (

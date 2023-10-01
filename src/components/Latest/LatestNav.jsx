@@ -4,9 +4,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { BiSearch } from "react-icons/bi";
 import Profile from "../Profile";
+import Noti from "../Noti";
 
 const LatestNav = () => {
-  const [scrollHeight, setScrollHeight] = useState(0);  
+  const [scrollHeight, setScrollHeight] = useState(0);
   const { toggleSideBar, search, setSearch, showInput, handleInput, inputRef } =
     useContext(ToggleContext);
 
@@ -16,7 +17,7 @@ const LatestNav = () => {
     setSearch(e.target.value);
     inputRef.current.focus();
     navigate("/search");
-  }; 
+  };
 
   useEffect(() => {
     const scrollFunc = () => {
@@ -41,7 +42,7 @@ const LatestNav = () => {
           } absolute w-full px-3 lg:px-10 py-2 home-nav-bg`}
         >
           <div className="flex items-center lg:items-center justify-between">
-            <div className="flex items-center gap-1 lg:gap-5">              
+            <div className="flex items-center gap-1 lg:gap-5">
               <Link to={"/"}>
                 <img
                   src={
@@ -140,7 +141,7 @@ const LatestNav = () => {
                     placeholder="Search by name"
                   />
                 </div>
-                <IoMdNotificationsOutline className="text-white text-2xl" />
+                <Noti />
                 <Profile />
               </div>
             </div>
