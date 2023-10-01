@@ -4,14 +4,13 @@ import NowPlaying from "../components/Home/NowPlaying";
 import UpComing from "../components/Home/UpComing";
 import UpComingTwo from "../components/Home/UpComingTwo";
 import PopularMovie from "../components/Movie/PopularMovie";
-import HomeNav from "../components/Home/HomeNav";
 import { ToggleContext } from "../Context/ToggleProvider";
 import MovieDetail from "../components/Movie/MovieDetail";
 import PlayMovie from "../components/Movie/PlayMovie";
 import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
 import { useGetUpcomingTwoQuery } from "../redux/api/movieApi";
-import { HiOutlinePlus } from "react-icons/hi";
+import { HiOutlinePlus ,HiOutlineCheck } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
 import {
   MdOutlineArrowForwardIos,
@@ -22,6 +21,10 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import LatestLoader from "../components/Loader/LatestLoader";
 import LatestNav from "../components/Latest/LatestNav";
 import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
+import { useDispatch, useSelector } from "react-redux";
+import { addMovie, removeMovie } from "../redux/services/favoritMovieSlice";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const Latest = () => {
   const {
@@ -36,8 +39,12 @@ const Latest = () => {
   } = useContext(ToggleContext);
 
   const { data, isLoading } = useGetUpcomingTwoQuery({ genreId });
-  const [currentSlide, setCurrentSlide] = useState(0);
 
+  const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
+  // console.log(favMovies);
+  const dispatch = useDispatch();
+
+  const [currentSlide, setCurrentSlide] = useState(0);
   const handleNextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % data?.results?.length);
   };
@@ -56,20 +63,20 @@ const Latest = () => {
   }
 
   return (
-    <div className="bg-[#171818]">     
-      <LatestNav/>
+    <div className="bg-[#171818]">
+      <LatestNav />
       {isLoading ? (
         <LatestLoader />
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-16 pb10 lg:pb-28 min-h-screen">
             <NowPlaying />
-            <div className="group h-[230px] lg:h-[200px] my-5">
+            <div className="group h-[200px] my-5">
               <div className="flex flex-col gap-2 px-3">
                 <div className="flex items-center lg:items-end justify-between w-full">
                   <div className="flex items-center gap-1  group/exp cursor-pointer">
                     <h1 className="text-lg lg:text-xl font-semibold text-gray-50">
-                      New on Netflix
+                      Movies
                     </h1>
                     <div className="flex items-center lg:mt-1.5">
                       <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
@@ -80,7 +87,7 @@ const Latest = () => {
                       <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
                     </div>
                   </div>
-                  <div className="dots opacity-0 group-hover:opacity-100">
+                  <div className="dots opacity-0 group-hover:opacity-100 hidden lg:block">
                     {[...Array(6)].map((_, index) => (
                       <span
                         key={index}
@@ -92,7 +99,7 @@ const Latest = () => {
                     ))}
                   </div>
                 </div>
-                <div className="carousel-container hover:z-30">
+                <div className="carousel-container hover:z-30 hidden lg:block">
                   <div className="carousel">
                     <div
                       className="slides duration-500 flex items-start gap-2 lg:gap-1 "
@@ -110,6 +117,21 @@ const Latest = () => {
                           toggleModal();
                           handleGetId(result?.id);
                         };
+
+                        const isMovieInList = favMovies?.find(
+                          (m) => m.id === result?.id
+                        );
+                        console.log(isMovieInList);
+
+                        const handleAddFav = () => {
+                          if (isMovieInList) {
+                            dispatch(removeMovie(result));
+                          } else {
+                            // Movie is not in the list, dispatch addMovie action
+                            dispatch(addMovie(result));
+                          }
+                        };
+
                         return (
                           <div
                             key={result?.id}
@@ -145,14 +167,30 @@ const Latest = () => {
                                         >
                                           <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
                                         </button>
-                                        <button className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
-                                          <HiOutlinePlus className="text-sm text-gray-200" />
-                                          <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-                                            <p className="text-xs font-semibold">
-                                              Add to My List
-                                            </p>
-                                            <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
-                                          </div>
+                                        <button
+                                          onClick={() => handleAddFav(result)}
+                                          className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
+                                        >
+                                          {isMovieInList ? (
+                                            <HiOutlineCheck className="text-sm text-gray-200" />
+                                          ) : (
+                                            <HiOutlinePlus className="text-sm text-gray-200" />
+                                          )}
+                                          {isMovieInList ? (
+                                            <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                              <p className="text-xs font-semibold">
+                                                Remove from List
+                                              </p>
+                                              <VscTriangleDown className="text-white text-2xl translate-x-[36px] -translate-y-2 absolute" />
+                                            </div>
+                                          ) : (
+                                            <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                              <p className="text-xs font-semibold">
+                                                Add to My List
+                                              </p>
+                                              <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
+                                            </div>
+                                          )}
                                         </button>
                                         <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
                                           <BsHandThumbsUp className="text-sm text-gray-200" />
@@ -197,6 +235,43 @@ const Latest = () => {
                     />
                   </div>
                 </div>
+                <div className="block lg:hidden">
+                  <Swiper
+                    spaceBetween={5}
+                    slidesPerView={3.1}
+                    pagination={{ clickable: true }}
+                    className="mySwiper overflow-x-visible"
+                  >
+                    {data?.results?.map((result) => {
+                      const handelPlay = () => {
+                        togglePlayMovieModal();
+                        handleGetId(result?.id);
+                      };
+
+                      const handelDetail = () => {
+                        toggleModal();
+                        handleGetId(result?.id);
+                      };
+                      return (
+                        <SwiperSlide key={result?.id} className="w-[120px]">
+                          <div>
+                            <div className="group/item flex flex-col slide-inner hover:custom-shadow-lg hover:scale-95 lg:hover:w-auto duration-300 hover:delay-500 rounded-lg">
+                              <img
+                                onClick={handelDetail}
+                                src={
+                                  "https://image.tmdb.org/t/p/w300" +
+                                  result?.poster_path
+                                }
+                                className="rounded w-full object-cover object-top cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
+                </div>
               </div>
             </div>
             <UpComing />
@@ -205,7 +280,7 @@ const Latest = () => {
         </div>
       )}
       <Footer />
-      <MobileBottomMenuBar/>
+      <MobileBottomMenuBar />
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}
       {tvModal && <TvDetail />}

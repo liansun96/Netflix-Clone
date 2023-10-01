@@ -18,6 +18,7 @@ import PlayMovie from "../components/Movie/PlayMovie";
 import Loader from "../components/Loader/Loader";
 import MobileMovieHeader from "../components/Movie/MobileMovieHeader";
 import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
+import TopRated from "../components/Home/TopRated";
 
 const Movies = () => {
   const {
@@ -116,7 +117,7 @@ const Movies = () => {
                 <Movie />
                 <PopularMovie />
                 <NowPlayingMovie />
-                <TopRatedMovie />
+                <TopRated />
               </div>
             </div>
             <Footer />   

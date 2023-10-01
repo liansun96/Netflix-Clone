@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { RxCross1 } from "react-icons/rx";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { IoMenu } from "react-icons/io5";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiLayoutGridFill } from "react-icons/ri";
 import { MdArrowDropDown } from "react-icons/md";
@@ -75,13 +74,7 @@ const MovieNav = () => {
       <div className="fixed top-0 w-full z-50">
         <div className="">
           <div className="flex items-center lg:items-center justify-between px-3 lg:px-10 py-2 home-nav-bg lg:bg-[#141414] rounded-none">
-            <div className="flex items-center gap-1 lg:gap-5">
-              <div className="block lg:hidden">
-                <IoMenu
-                  onClick={toggleSideBar}
-                  className="text-gray-50 text-4xl"
-                />
-              </div>
+            <div className="flex items-center gap-1 lg:gap-5">              
               <Link to={"/"}>
                 <img
                   src={

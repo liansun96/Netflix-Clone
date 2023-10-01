@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { IoMenu } from "react-icons/io5";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { BiSearch } from "react-icons/bi";
@@ -42,13 +41,7 @@ const LatestNav = () => {
           } absolute w-full px-3 lg:px-10 py-2 home-nav-bg`}
         >
           <div className="flex items-center lg:items-center justify-between">
-            <div className="flex items-center gap-1 lg:gap-5">
-              <div className="block lg:hidden">
-                <IoMenu
-                  onClick={toggleSideBar}
-                  className="text-gray-50 text-4xl"
-                />
-              </div>
+            <div className="flex items-center gap-1 lg:gap-5">              
               <Link to={"/"}>
                 <img
                   src={
