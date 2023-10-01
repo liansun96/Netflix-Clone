@@ -39,7 +39,7 @@ const Profile = () => {
           hovered ? "block" : "hidden"
         } w-[180px] absolute bg-transparent top-7 right-5 p-1`}
       >
-        <div className=" p-3 bg-black bg-opacity-80">
+        <div className=" p-3 bg-black bg-opacity-60">
           <div className="flex flex-col gap-4 p-1">
             <div className="flex gap-1 items-center cursor-pointer">
               <img

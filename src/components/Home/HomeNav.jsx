@@ -1,12 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { GoChevronDown } from "react-icons/go";
-import { IoMdNotificationsOutline } from "react-icons/io";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import Profile from "../Profile";
 import { useGetMovieGenresQuery } from "../../redux/api/movieApi";
 import { AnimatePresence, motion } from "framer-motion";
+import Noti from "../Noti";
 
 const HomeNav = () => {
   const {
@@ -67,7 +67,7 @@ const HomeNav = () => {
           } absolute w-full px-3 lg:px-10 py-2 home-nav-bg`}
         >
           <div className="flex items-center lg:items-center justify-between">
-            <div className="flex items-center gap-1 lg:gap-5">             
+            <div className="flex items-center gap-1 lg:gap-5">
               <Link to={"/"}>
                 <img
                   src={
@@ -166,7 +166,7 @@ const HomeNav = () => {
                     placeholder="Search by name"
                   />
                 </div>
-                <IoMdNotificationsOutline className="text-white text-2xl" />
+                <Noti />
                 <Profile />
               </div>
             </div>

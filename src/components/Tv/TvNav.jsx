@@ -11,6 +11,7 @@ import { BiSearch } from "react-icons/bi";
 import Profile from "../Profile";
 import { useGetTvGenresQuery } from "../../redux/api/movieApi";
 import { AnimatePresence, motion } from "framer-motion";
+import Noti from "../Noti";
 
 const TvNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -72,7 +73,7 @@ const TvNav = () => {
       <div className="fixed top-0 w-full z-50">
         <div className="">
           <div className="flex items-center lg:items-center justify-between px-3 lg:px-10 py-2 home-nav-bg lg:bg-[#141414]">
-            <div className="flex items-center gap-1 lg:gap-5">              
+            <div className="flex items-center gap-1 lg:gap-5">
               <Link to={"/"}>
                 <img
                   src={
@@ -167,7 +168,7 @@ const TvNav = () => {
                     placeholder="Search by name"
                   />
                 </div>
-                <IoMdNotificationsOutline className="text-white text-2xl" />
+                <Noti />
                 <Profile />
               </div>
             </div>

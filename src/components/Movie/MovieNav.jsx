@@ -11,6 +11,7 @@ import { BiSearch } from "react-icons/bi";
 import Profile from "../Profile";
 import { useGetMovieGenresQuery } from "../../redux/api/movieApi";
 import { AnimatePresence, motion } from "framer-motion";
+import Noti from "../Noti";
 
 const MovieNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -28,6 +29,8 @@ const MovieNav = () => {
     handleGetGenreId,
     genreName,
     handleGetGenreName,
+    noti,
+    setNoti,
   } = useContext(ToggleContext);
 
   const { data: movieGenres } = useGetMovieGenresQuery();
@@ -74,7 +77,7 @@ const MovieNav = () => {
       <div className="fixed top-0 w-full z-50">
         <div className="">
           <div className="flex items-center lg:items-center justify-between px-3 lg:px-10 py-2 home-nav-bg lg:bg-[#141414] rounded-none">
-            <div className="flex items-center gap-1 lg:gap-5">              
+            <div className="flex items-center gap-1 lg:gap-5">
               <Link to={"/"}>
                 <img
                   src={
@@ -169,7 +172,7 @@ const MovieNav = () => {
                     placeholder="Search by name"
                   />
                 </div>
-                <IoMdNotificationsOutline className="text-white text-2xl" />
+                <Noti />
                 <Profile />
               </div>
             </div>
@@ -277,9 +280,9 @@ const MovieNav = () => {
             >
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0 , translateX: -20 }}                  
+                  initial={{ opacity: 0, translateX: -20 }}
                   transition={{ duration: 1, delay: 0.1 }}
-                  animate={{ opacity: 1 , translateX: 0 }}
+                  animate={{ opacity: 1, translateX: 0 }}
                   className="flex items-start gap-3 relative"
                 >
                   <button
