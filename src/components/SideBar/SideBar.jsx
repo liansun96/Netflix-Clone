@@ -29,7 +29,7 @@ const SideBar = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full h-[40%] absolute bottom-0 bg-neutral-800 "
+        className="w-full h-[40%] absolute bottom-0 rounded-t-xl bg-neutral-800 "
       >
         <div className="flex flex-col gap-6 p-3">
           <div className="flex items-center gap-2 text-white">
