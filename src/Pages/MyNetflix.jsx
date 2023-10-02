@@ -31,7 +31,7 @@ const MyNetflix = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="block lg:hidden">
+    <div className="block lg:hidden overflow-hidden">
       <div
         className={`bg-[#141414] min-h-screen duration-500 ${
           sBar ? "scale-90 opacity-80" : "scale-100"
@@ -75,7 +75,7 @@ const MyNetflix = () => {
             <HiMiniChevronRight className="text-white text-2xl" />
           </div>
         </div>
-        <div className="w-full px-4 flex justify-between items-center my-3">
+        <div className="w-full px-4 flex justify-between items-center mt-6 mb-1">
           <div className="flex items-center gap-2">
             <p className="text-neutral-200 text-xl font-bold">My List</p>
           </div>
@@ -86,7 +86,7 @@ const MyNetflix = () => {
             spaceBetween={5}
             slidesPerView={3.3}
             pagination={{ clickable: true }}
-            className="mySwiper overflow-x-visible"
+            className="mySwiper overflow-x-visible w-[92%] mx-auto"
           >
             {favMovies?.map((result) => {
               const handelPlay = () => {
