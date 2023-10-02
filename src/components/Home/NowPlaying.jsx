@@ -97,10 +97,10 @@ const NowPlaying = () => {
 
                 const handleAddFav = () => {
                   if (isMovieInList) {
-                    dispatch(removeMovie(result));
+                    
                   } else {
                     // Movie is not in the list, dispatch addMovie action
-                    dispatch(addMovie(result));
+                    dispatch(addMovie(result));                    
                   }
                 };
 
