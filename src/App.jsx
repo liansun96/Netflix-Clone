@@ -11,6 +11,7 @@ import SignIn from "./Pages/SignIn";
 import BrowseByLanguages from "./Pages/BrowseByLanguages";
 import MyNetflix from "./Pages/MyNetflix";
 import MobileNoti from "./components/MobileNoti";
+import MobileMovieDetail from "./components/Movie/MobileMovieDetail";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/mylist" element={<MyList />} />
         <Route path="/my-netflix" element={<MyNetflix />} />
         <Route path="/notification" element={<MobileNoti />} />
+        <Route path="/mobile-movie-detail/:id" element={<MobileMovieDetail />} />
         <Route path="/browse-by-language" element={<BrowseByLanguages />} />
         <Route path="/search" element={<Search />} />
       </Routes>

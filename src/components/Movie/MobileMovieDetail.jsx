@@ -1,37 +1,26 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import {
-  useGetTvDetailQuery,
-  useGetTvDetailRecommendationsQuery,
-  useGetTvDetailVideoQuery,
+  useGetDetailRecommendationsQuery,
+  useGetDetailVideoQuery,
+  useGetMovieDetailQuery,
 } from "../../redux/api/movieApi";
 import { RxCross1 } from "react-icons/rx";
 import YouTube from "react-youtube";
-import { Link } from "react-router-dom";
-import SimilarTv from "./SimilarTv";
+import "./MovieDetail.css";
+import SimilarMovie from "./SimilarMovie";
+import { Link, useParams } from "react-router-dom";
 
-const TvDetail = () => {
+const MobileMovieDetail = () => {
   const [trailer, setTrailer] = useState([]);
 
-  const { toggleTvModal, id } = useContext(ToggleContext);
-  const { data } = useGetTvDetailQuery({ id });
-  const { data: recData } = useGetTvDetailRecommendationsQuery({ id });
-  const { data: video } = useGetTvDetailVideoQuery({ id });
-  // console.log(id);
-  // console.log(data);
-  // console.log(recData?.results);
-  // console.log(video);
-  
-  const lastRoom = video?.results[video?.results?.length - 1]?.key;
-
-  useEffect(() => {
-    setTrailer(lastRoom);
-  });
-
-  // console.log(trailer);
+  const {id} = useParams();
+  const { toggleModal } = useContext(ToggleContext);
+  const { data } = useGetMovieDetailQuery({ id });
+  const { data: recData } = useGetDetailRecommendationsQuery({ id });
+  const { data: video } = useGetDetailVideoQuery({ id });
 
   const parentRef = useRef(null);
-  console.log(parentRef?.current?.offsetWidth);
 
   useEffect(() => {
     // Access the parent div's width after the component has mounted
@@ -41,6 +30,13 @@ const TvDetail = () => {
     }
   }, []);
 
+  const lastRoom = video?.results[video?.results?.length - 1]?.key;
+
+  useEffect(() => {
+    setTrailer(lastRoom);
+  });
+  // console.log(trailer);
+
   const opts = {
     height: "455",
     width: "880",
@@ -48,7 +44,6 @@ const TvDetail = () => {
       autoplay: 0,
     },
   };
-
   const opts_sm = {
     height: "300" ,
     width: `${parentRef?.current?.offsetWidth}`,
@@ -77,7 +72,6 @@ const TvDetail = () => {
     }
   }
   // console.log(castName);
-  // console.log(castNameSm);
 
   const genresLength = data?.genres.length - 1;
   const genresName = [];
@@ -136,7 +130,15 @@ const TvDetail = () => {
       break;
     }
   }
-  // console.log(languageName);
+  const languageEngName = [];
+  for (let i = 0; i <= languageLength; i++) {
+    if (data?.spoken_languages) {
+      languageEngName.push(data?.spoken_languages[`${i}`]?.english_name);
+    } else {
+      break;
+    }
+  }
+  // console.log(languageEngName);
 
   const scrollToRef = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
@@ -145,14 +147,14 @@ const TvDetail = () => {
 
   return (
     <div
-      onClick={toggleTvModal}
+      onClick={toggleModal}
       className="fixed inset-0 bg-black bg-opacity-50 overflow-y-scroll transition-all backdrop-blur-sm flex justify-center items-center z-[1011]"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden overflow-y-scroll bg-[#181818] fixed top-20 lg:top-10 mb-10"
+        className="group/item w-full lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-0 lg:top-10"
       >
-        <div className="group">
+        <div className="">
           <YouTube
             className="z-[1006] hidden lg:block"
             videoId={trailer}
@@ -169,66 +171,52 @@ const TvDetail = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-10 p-5 lg:p-10 text-white">
-          <div className="w-full lg:w-[60%]">
-            <div className="gap-5">
+          <div className="w-full lg:w-[65%]">
+            <div className="flex gap-5">
               <p className="font-bold text-green-500">
                 <span>{data?.vote_average?.toFixed(1) * 10}%</span> Match
               </p>
-              <p>
-                <span className="text-sm font-semibold text-gray-500">
-                  First Released
-                </span>{" "}
-                : {data?.first_air_date}
-              </p>
-              <p>
-                <span className="text-sm font-semibold text-gray-500">
-                  Last Released
-                </span>{" "}
-                : {data?.last_air_date}
+              <p className="text-sm font-semibold text-[#747474]">
+                Release Date :{" "}
+                <span className="text-base text-white">
+                  {data?.release_date}
+                </span>
               </p>
             </div>
             <br />
             <p>{data?.overview}</p>
           </div>
-          <div className="w-full lg:w-[40%]">
+          <div className="w-full lg:w-[50%]">
             <div className="">
-              <p className="">
-                <span className="text-sm font-semibold text-gray-500">
-                  Cast
-                </span>{" "}
-                :
-                {castName.length <= 4
-                  ? castName
-                  : castNameSm.map((name, index) => (
-                      <p key={index} className="inline">
-                        {name} ,{" "}
-                      </p>
-                    ))}
-                {castName.length > 1 && (
-                  <i
-                    onClick={() => scrollToRef(castRef)}
-                    className="font-bold cursor-pointer"
-                  >
-                    more
-                  </i>
-                )}
-              </p>
+              <span className="text-sm font-semibold text-[#747474]">Cast</span>{" "}
+              :
+              {castNameSm.map((name, index) => (
+                <p key={index} className="inline">
+                  {name} ,{" "}
+                </p>
+              ))}
+              <i
+                onClick={() => scrollToRef(castRef)}
+                className="font-bold cursor-pointer"
+              >
+                more
+              </i>
             </div>
             <br />
-            <p>
-              <span className="text-sm font-semibold text-gray-500">
+            <div>
+              <span className="text-sm font-semibold text-[#747474]">
                 Genres
               </span>{" "}
               :
-              {genresName.map((name, index) => (
+              {genresName.map((name, i) => (
                 <>
-                  <p key={index} className="inline">
+                  <p key={i} className="inline">
                     {name}
                   </p>
-                  {index !== genresName.length - 1 && <span>, </span>}
+                  {i !== genresName.length - 1 && <span>, </span>}
                 </>
               ))}
-            </p>
+            </div>
             <br />
             <div>
               <span className="text-sm font-semibold text-[#747474]">
@@ -242,30 +230,42 @@ const TvDetail = () => {
                   </p>
                   {index !== languageName.length - 1 && <span>, </span>}
                 </>
+              ))}{" "}
+              /{" "}
+              {languageEngName.map((name, index) => (
+                <>
+                  <p key={index} className="inline">
+                    {name}
+                  </p>
+                  {index !== languageEngName.length - 1 && <span>, </span>}
+                </>
               ))}
             </div>
+
             <br />
             <p>
-              <span className="text-sm font-semibold text-gray-500">
+              <span className="text-sm font-semibold text-[#747474]">
                 Status
               </span>{" "}
               : {data?.status}
             </p>
           </div>
         </div>
+
         <h1 className="text-2xl text-white font-semibold p-5 lg:p-10">
           More Like This
         </h1>
 
         <div className="flex gap-2 lg:gap-6 justify-between flex-wrap px-5 lg:px-10">
           {recData?.results.map((result, index) => (
-            <SimilarTv key={index} result={result} />
+            <SimilarMovie key={index} result={result} />
           ))}
         </div>
+
         <div className="p-5 lg:p-10 space-y-3" ref={castRef}>
           <h1 className="text-2xl text-white font-semibold ">
             About{" "}
-            <span className="text-3xl font-bold">{data?.original_name}</span>
+            <span className="text-3xl font-bold">{data?.original_title}</span>
           </h1>
           <div className="">
             <span className="text-sm font-semibold text-[#747474]">
@@ -326,24 +326,8 @@ const TvDetail = () => {
             ))}
           </div>
           <p className="text-sm font-semibold text-[#747474]">
-            First Released Date :{" "}
-            <span className="text-base text-white">{data?.first_air_date}</span>
-          </p>
-          <p className="text-sm font-semibold text-[#747474]">
-            Last Released Date :{" "}
-            <span className="text-base text-white">{data?.last_air_date}</span>
-          </p>
-          <p className="text-sm font-semibold text-[#747474]">
-            Number Of Episodes :{" "}
-            <span className="text-base text-white">
-              {data?.number_of_episodes}
-            </span>
-          </p>
-          <p className="text-sm font-semibold text-[#747474]">
-            Number Of Seasons :{" "}
-            <span className="text-base text-white">
-              {data?.number_of_seasons}
-            </span>
+            Release Date :{" "}
+            <span className="text-base text-white">{data?.release_date}</span>
           </p>
           <p className="text-sm font-semibold text-[#747474]">
             Website :{" "}
@@ -386,8 +370,9 @@ const TvDetail = () => {
             ))}
           </div>
         </div>
+
         <button
-          onClick={toggleTvModal}
+          onClick={toggleModal}
           className="-top-10 group-hover/item:top-5 w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
         >
           <RxCross1 className="text-white font-bold scale-150" />
@@ -397,4 +382,4 @@ const TvDetail = () => {
   );
 };
 
-export default TvDetail;
+export default MobileMovieDetail;
