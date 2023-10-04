@@ -46,7 +46,7 @@ const BrowseByLanguages = () => {
   const { data, isLoading } = useGetMovieByCountryQuery({ iosName });
   const { data: data2 } = useGetMovieByCountryTwoQuery({ iosName });
   const { data: data3 } = useGetMovieByCountryThreeQuery({ iosName });
-
+  console.log(data);
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
   // console.log(favMovies);
   const dispatch = useDispatch();
@@ -226,7 +226,7 @@ const BrowseByLanguages = () => {
                 const isMovieInList = favMovies?.find(
                   (m) => m.id === result?.id
                 );
-                console.log(isMovieInList);
+                // console.log(isMovieInList);
 
                 const handleAddFav = () => {
                   if (isMovieInList) {

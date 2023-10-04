@@ -45,7 +45,7 @@ const MyList = () => {
       <div className="hidden lg:block">
         <div className="overflow-hidden lg:h-[260vh]">
           <div className="w-[95%] mx-auto pt-24 pb-28">
-            <div className="flex flex-wrap justify-between px-2 relative lg:pt-11">
+            <div className="flex flex-wrap justify-start gap-3 lg:gap-7 px-2 relative lg:pt-11">
               {favMovies?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
