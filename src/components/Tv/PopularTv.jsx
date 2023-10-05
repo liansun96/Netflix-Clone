@@ -98,8 +98,7 @@ const PopularTv = () => {
                 const isMovieInList = favMovies?.find(
                   (m) => m.id === result?.id
                 );
-                console.log(isMovieInList);
-
+                
                 const handleAddFav = () => {
                   if (isMovieInList) {
                     dispatch(removeMovie(result));

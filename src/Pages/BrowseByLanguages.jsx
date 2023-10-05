@@ -46,7 +46,7 @@ const BrowseByLanguages = () => {
   const { data, isLoading } = useGetMovieByCountryQuery({ iosName });
   const { data: data2 } = useGetMovieByCountryTwoQuery({ iosName });
   const { data: data3 } = useGetMovieByCountryThreeQuery({ iosName });
-
+  console.log(data);
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
   // console.log(favMovies);
   const dispatch = useDispatch();
@@ -212,7 +212,7 @@ const BrowseByLanguages = () => {
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">
-            <div className="flex flex-wrap justify-between px-2 relative lg:pt-11 last:mr-auto">
+            <div className="flex flex-wrap justify-between px-2 relative last:mr-auto">
               {data?.results?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -226,7 +226,7 @@ const BrowseByLanguages = () => {
                 const isMovieInList = favMovies?.find(
                   (m) => m.id === result?.id
                 );
-                console.log(isMovieInList);
+                // console.log(isMovieInList);
 
                 const handleAddFav = () => {
                   if (isMovieInList) {
@@ -251,7 +251,7 @@ const BrowseByLanguages = () => {
                                 "https://image.tmdb.org/t/p/w300" +
                                 result?.poster_path
                               }
-                              className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-300"
+                              className="object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
                               alt=""
                             />
                           ) : (
@@ -261,7 +261,7 @@ const BrowseByLanguages = () => {
                                 "https://image.tmdb.org/t/p/w300" +
                                 result?.backdrop_path
                               }
-                              className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-none group-hover/item:delay-300 group-hover/item:duration-500"
+                              className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-500"
                               alt=""
                             />
                           )}
@@ -275,7 +275,7 @@ const BrowseByLanguages = () => {
                           className="block lg:hidden rounded object-cover object-top cursor-pointer"
                           alt=""
                         />
-                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full group-hover/item:p-3 bg-gray-800 h-[0px]">
+                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full p-3 rounded group-hover/item:rounded-t-none bg-[#181818] h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
                               <div className="flex items-center justify-start gap-1 lg:gap-2">

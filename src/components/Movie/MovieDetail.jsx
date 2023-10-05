@@ -6,15 +6,20 @@ import {
   useGetMovieDetailQuery,
 } from "../../redux/api/movieApi";
 import { RxCross1 } from "react-icons/rx";
+import { HiOutlinePlus, HiOutlineCheck } from "react-icons/hi";
 import YouTube from "react-youtube";
 import "./MovieDetail.css";
 import SimilarMovie from "./SimilarMovie";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { VscTriangleDown } from "react-icons/vsc";
+import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
+import { BsHandThumbsUp, BsPlayFill } from "react-icons/bs";
 
 const MovieDetail = () => {
   const [trailer, setTrailer] = useState([]);
 
-  const { toggleModal, id } = useContext(ToggleContext);
+  const { toggleModal, id, togglePlayMovieModal } = useContext(ToggleContext);
   const { data } = useGetMovieDetailQuery({ id });
   const { data: recData } = useGetDetailRecommendationsQuery({ id });
   const { data: video } = useGetDetailVideoQuery({ id });
@@ -47,7 +52,7 @@ const MovieDetail = () => {
     },
   };
   const opts_sm = {
-    height: "300" ,
+    height: "300",
     width: `${parentRef?.current?.offsetWidth}`,
     playerVars: {
       autoplay: 0,
@@ -147,6 +152,28 @@ const MovieDetail = () => {
   };
   const castRef = useRef(null);
 
+  const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
+  // console.log(favMovies);
+  const dispatch = useDispatch();
+
+  const handelPlay = () => {
+    togglePlayMovieModal();
+    toggleModal();
+    handleGetId(data);
+  };
+
+  const handleAddFav = () => {
+    if (isMovieInList) {
+      dispatch(removeMovie(data));
+    } else {
+      // Movie is not in the list, dispatch addMovie action
+      dispatch(addMovie(data));
+    }
+  };
+
+  const isMovieInList = favMovies?.find((m) => m.id === data?.id);
+  console.log(isMovieInList);
+
   return (
     <div
       onClick={toggleModal}
@@ -154,14 +181,52 @@ const MovieDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl touch-auto bg-[#181818] fixed top-20 lg:top-10"
+        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl touch-auto overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
       >
-        <div className="">
+        <div className="relative">
           <YouTube
             className="z-[1006] hidden lg:block"
             videoId={trailer}
             opts={opts}
           />
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex gap-2 absolute bottom-4  right-4 z-[1007] invisible lg:visible"
+          >
+            <button
+              onClick={handelPlay}
+              className="flex items-center px-6 h-10 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold custom-btn-bg"
+            >
+              <span className="">
+                <BsPlayFill className="text-4xl" />
+              </span>
+              Play
+            </button>
+            <div
+              onClick={() => handleAddFav(data)}
+              className="group/my-list relative h-10 w-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/edit cursor-pointer"
+            >
+              {isMovieInList ? (
+                <HiOutlineCheck className="text-xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              ) : (
+                <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              )}
+              {isMovieInList ? (
+                <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Remove From List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[71px] -translate-y-2 absolute" />
+                </div>
+              ) : (
+                <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Add to My List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+                </div>
+              )}
+            </div>
+            <button className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+              <BsHandThumbsUp className="text-xl text-gray-200" />
+            </button>
+          </div>
         </div>
 
         <div ref={parentRef} className="">
@@ -170,6 +235,45 @@ const MovieDetail = () => {
             videoId={trailer}
             opts={opts_sm}
           />
+        </div>
+
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="flex gap-2 translate-x-4 z-[1007] block lg:hidden mt-5"
+        >
+          <button
+            onClick={handelPlay}
+            className="flex items-center px-6 h-10 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold custom-btn-bg"
+          >
+            <span className="">
+              <BsPlayFill className="text-4xl" />
+            </span>
+            Play
+          </button>
+          <div
+            onClick={() => handleAddFav(data)}
+            className="group/my-list relative h-10 w-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/edit cursor-pointer"
+          >
+            {isMovieInList ? (
+              <HiOutlineCheck className="text-xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+            ) : (
+              <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+            )}
+            {isMovieInList ? (
+              <div className="invisible group-hover/my-list:visible absolute left-[-47px] lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                <p className="text-lg font-semibold">Remove From List</p>
+                <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+              </div>
+            ) : (
+              <div className="invisible group-hover/my-list:visible absolute left-[-47px] lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                <p className="text-lg font-semibold">Add to My List</p>
+                <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+              </div>
+            )}
+          </div>
+          <button className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+            <BsHandThumbsUp className="text-xl text-gray-200" />
+          </button>
         </div>
 
         <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-10 p-5 lg:p-10 text-white">
