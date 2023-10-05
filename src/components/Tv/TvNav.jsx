@@ -23,6 +23,7 @@ const TvNav = () => {
     search,
     setSearch,
     showInput,
+    setShowInput,
     handleInput,
     inputRef,
     handleGetGenreId,
@@ -67,6 +68,21 @@ const TvNav = () => {
       window.removeEventListener("scroll", scrollFunc);
     };
   }, []);
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRef.current.contains(e.target)) {
+        setShowInput(false);
+        console.log(inputRef.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   return (
     <div className="pb-0 lg:pb-5">
@@ -142,11 +158,7 @@ const TvNav = () => {
               </div>
             </div>
             <div className="hidden lg:block ">
-              <div className="flex items-center gap-5">
-                <div
-                  onClick={handleInput}
-                  className={showInput ? "inset-0 fixed mt-[50px]" : null}
-                ></div>
+              <div className="flex items-center gap-5">                
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"

@@ -56,6 +56,23 @@ const HomeNav = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let handler = (e)=>{
+      if(!inputRef.current.contains(e.target)){
+        setShowInput(false);
+        console.log(inputRef.current);
+      }      
+    };
+
+    document.addEventListener("mousedown", handler);
+    
+
+    return() =>{
+      document.removeEventListener("mousedown", handler);
+    }
+
+  });
+
   return (
     <div className="">
       <div className="fixed top-0 w-full z-50">
@@ -136,15 +153,7 @@ const HomeNav = () => {
               </div>
             </div>
             <div className="hidden lg:block ">
-              <div className="flex items-center gap-5">
-                {/* <div
-                  onClick={handleInput}
-                  className={
-                    showInput
-                      ? "inset-0 fixed mb-[200px] mt-[50px]"
-                      : null
-                  }
-                ></div> */}
+              <div className="flex items-center gap-5">                
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"
@@ -197,7 +206,7 @@ const HomeNav = () => {
                 >
                   Movies
                 </button>
-                <div className="relative">
+                <div className="relative hidden">
                   <button
                     onClick={handleShow}
                     className="flex items-center gap-2 lg:gap-4 bg-[#556263] px-2 h-6 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
