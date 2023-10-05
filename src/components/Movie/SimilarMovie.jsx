@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { HiOutlinePlus } from "react-icons/hi";
+import { HiOutlinePlus , HiOutlineCheck } from "react-icons/hi";
 import { IoPlaySharp } from "react-icons/io5";
 import { VscTriangleDown } from "react-icons/vsc";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { HiOutlineCheck } from "react-icons/hi2";
+
 
 const SimilarMovie = ({ result }) => {
   const { toggleModal, togglePlayMovieModal, handleGetId } =

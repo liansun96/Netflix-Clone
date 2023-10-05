@@ -21,8 +21,7 @@ const MobileTvHeader = ({movie}) => {
   const dispatch = useDispatch();
 
   const isMovieInList = favMovies?.find((m) => m.id === movie?.id);
-  console.log(isMovieInList);
-
+  
   const handleAddFav = () => {
     if (isMovieInList) {
       dispatch(removeMovie(movie));

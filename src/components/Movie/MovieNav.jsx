@@ -35,7 +35,7 @@ const MovieNav = () => {
 
   const { data: movieGenres } = useGetMovieGenresQuery();
   console.log(movieGenres?.genres);
-  console.log(grnreId);
+  // console.log(grnreId);
 
   const navigate = useNavigate();
 
