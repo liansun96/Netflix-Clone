@@ -181,7 +181,7 @@ const MovieDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl touch-auto overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
+        className="group/item w-[97%] lg:w-[880px] rounded-xl touch-auto overflow-hidden bg-[#181818] fixed top-14 lg:top-10"
       >
         <div className="relative">
           <YouTube

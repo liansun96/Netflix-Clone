@@ -50,7 +50,7 @@ const UpComing = () => {
         <div className="flex items-center lg:items-end justify-between w-full">
           <div className="flex items-center gap-1  group/exp cursor-pointer">
             <h1 className="text-lg lg:text-xl font-semibold text-gray-50">
-              Popular
+              Upcoming
             </h1>
             <div className="flex items-center lg:mt-1.5">
               <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
@@ -61,7 +61,7 @@ const UpComing = () => {
               <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
             </div>
           </div>
-          <div className="dots opacity-0 group-hover:opacity-100 hidden lg:block">
+          <div className="dots invisible lg:visible opacity-0 group-hover:opacity-100">
             {[...Array(6)].map((_, index) => (
               <span
                 key={index}
@@ -93,7 +93,7 @@ const UpComing = () => {
                 const isMovieInList = favMovies?.find(
                   (m) => m.id === result?.id
                 );
-                
+
                 const handleAddFav = () => {
                   if (isMovieInList) {
                     dispatch(removeMovie(result));
@@ -194,11 +194,11 @@ const UpComing = () => {
               })}
             </div>
             <MdOutlineArrowBackIos
-              className="absolute -left-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
+              className="absolute -left-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300 hover:scale-150"
               onClick={handlePrevSlide}
             />
             <MdOutlineArrowForwardIos
-              className="absolute -right-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
+              className="absolute -right-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300 hover:scale-150"
               onClick={handleNextSlide}
             />
           </div>

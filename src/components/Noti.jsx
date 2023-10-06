@@ -22,7 +22,7 @@ const Noti = () => {
     >
       <div className="relative flex">
         <IoMdNotificationsOutline className="text-white text-2xl" />
-        <div className="flex items-center justify-center absolute w-[14px] h-[14px] bg-red-500 rounded-full -right-[4px]">
+        <div className="flex items-center justify-center absolute w-[18px] h-[18px] bg-[#e50914] rounded-full -right-[8px] -top-[5px]">
             <p className="text-[8px] text-gray-50 font-bold">20</p>
         </div>
       </div>

@@ -8,6 +8,7 @@ import {
 import { RiUser3Line } from "react-icons/ri";
 import { VscSignOut } from "react-icons/vsc";
 import {RxCross2} from 'react-icons/rx'
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const { handleGetGenreId } = useContext(ToggleContext);
@@ -48,10 +49,10 @@ const SideBar = () => {
             <MdOutlineHelpOutline className="text-3xl" />
             <p className="font-semibold">Help</p>
           </div>
-          <div className="flex items-center gap-2 text-white">
+          <Link to={'/signin'} onClick={toggleSideBar} className="flex items-center gap-2 text-white">
             <VscSignOut className="text-3xl" />
             <p className="font-semibold">Sign Out</p>
-          </div>
+          </Link>
           <p className="text-gray-500 text-sm">Version: 16.1.0 (4535) 5.0.1-0011</p>
           <div onClick={toggleSideBar} className="w-8 h-8 rounded-full flex items-center justify-center bg-black bg-opacity-30 absolute top-2 right-2">
             <RxCross2 className="text-white text-xl"/>

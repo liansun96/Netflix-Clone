@@ -20,6 +20,7 @@ const MyNetflix = () => {
     toggleSideBar,
     toggleModal,
     togglePlayMovieModal,
+    handleGetId,
     tvModal,
     playTvModal,
     modal,
