@@ -118,7 +118,7 @@ const SimilarMovie = ({ result }) => {
             </p>
             <p className="text-sm font-semibold text-[#747474]">
               Release :{" "}
-              <span className="text-base text-white">
+              <span className="text-sm lg:text-base text-white">
                 {result?.release_date}
               </span>
             </p>
