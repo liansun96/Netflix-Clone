@@ -181,7 +181,7 @@ const MovieDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[97%] lg:w-[880px] rounded-xl touch-auto overflow-hidden bg-[#181818] fixed top-14 lg:top-10"
+        className="group/item w-[97%] h-screen lg:h-auto lg:w-[880px] no-scrollbar rounded-xl touch-auto overflow-y-scroll overflow-hidden bg-[#181818] fixed top-0 lg:top-10"
       >
         <div className="relative">
           <YouTube
@@ -243,12 +243,9 @@ const MovieDetail = () => {
         >
           <button
             onClick={handelPlay}
-            className="flex items-center px-6 h-10 bg-gray-50 hover:bg-gray-400 duration-300 rounded text-lg text-black font-semibold custom-btn-bg"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300"
           >
-            <span className="">
-              <BsPlayFill className="text-4xl" />
-            </span>
-            Play
+            <BsPlayFill className="text-white text-4xl" />
           </button>
           <div
             onClick={() => handleAddFav(data)}
@@ -273,6 +270,12 @@ const MovieDetail = () => {
           </div>
           <button className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
             <BsHandThumbsUp className="text-xl text-gray-200" />
+          </button>
+          <button
+            onClick={toggleModal}
+            className="ms-auto me-8 w-10 h-10 rounded-full flex justify-center items-center text-center bg-white bg-opacity-50 hover:bg-opacity-80 duration-150"
+          >
+            <RxCross1 className="text-white font-bold scale-150" />
           </button>
         </div>
 
@@ -479,7 +482,7 @@ const MovieDetail = () => {
 
         <button
           onClick={toggleModal}
-          className="-top-10 group-hover/item:top-5 w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
+          className="invisible lg:visible -top-10 group-hover/item:top-5 w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
         >
           <RxCross1 className="text-white font-bold scale-150" />
         </button>
