@@ -76,8 +76,8 @@ const SimilarTv = ({ result }) => {
       <div className="p-1 lg:p-3 flex flex-col gap-1 lg:gap-3">
         <div className="flex justify-between items-center gap-1">
           <p className="text-sm text-white font-bold block lg:hidden">
-            {result?.original_name?.length > 12
-              ? `${result?.original_name?.substring(0, 12)} . . .`
+            {result?.original_name?.length > 10
+              ? `${result?.original_name?.substring(0, 10)} . . .`
               : result?.original_name}
           </p>
           <p className="text-sm text-white font-bold hidden lg:block">
@@ -114,12 +114,12 @@ const SimilarTv = ({ result }) => {
           <div className="">
             <p className="font-bold text-green-500">
               <span>{result?.vote_average?.toFixed(1) * 10}%</span> Match
-            </p>
-            <p className="text-white">
-              <span className="text-sm font-semibold text-gray-500">
-                Released
-              </span>{" "}
-              : {result?.first_air_date}
+            </p>            
+            <p className="text-sm font-semibold text-[#747474]">
+              Release :{" "}
+              <span className="text-sm lg:text-base text-white">
+              {result?.first_air_date}
+              </span>
             </p>
           </div>
           <div onClick={(e) => e.stopPropagation()} className="hidden lg:block">
