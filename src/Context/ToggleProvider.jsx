@@ -14,9 +14,11 @@ const ToggleProvider = ({ children }) => {
 
   const [tvShow, setTvShow] = useState(false);
 
-  const inputRef = useRef(null);
-
+  
   const [noti, setNoti] = useState(false);
+  
+  const inputRef = useRef();
+  
 
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {

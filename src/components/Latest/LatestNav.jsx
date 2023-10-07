@@ -8,8 +8,15 @@ import Noti from "../Noti";
 
 const LatestNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
-  const { toggleSideBar, search, setSearch, showInput, setShowInput, handleInput, inputRef } =
-    useContext(ToggleContext);
+  const {
+    toggleSideBar,
+    search,
+    setSearch,
+    showInput,
+    setShowInput,
+    handleInput,
+    inputRef,
+  } = useContext(ToggleContext);
 
   const navigate = useNavigate();
 
@@ -45,6 +52,14 @@ const LatestNav = () => {
       document.removeEventListener("mousedown", handler);
     };
   });
+
+  useEffect(()=>{
+    if (search !== "") {
+      setShowInput(true);
+      inputRef.current.focus();
+    }
+  },[search])
+
 
   return (
     <div className="pb-0 lg:pb-5">
@@ -103,38 +118,21 @@ const LatestNav = () => {
               </div>
             </div>
             <div className="block lg:hidden">
-              <div
-                className={`flex gap-3 items-center rounded ${
-                  showInput && "border px-3"
-                } border-white cursor-pointer`}
-              >
-                <BiSearch
-                  onClick={handleInput}
-                  className="text-white text-2xl"
-                />
+              <div className="flex gap-3 items-center rounded-full border px-3 border-white cursor-pointer">
+                <BiSearch className="text-white text-2xl" />
                 <input
                   onClick={(e) => e.stopPropagation()}
                   ref={inputRef}
                   value={search}
                   onChange={handleInputChange}
                   type="text"
-                  className={`${
-                    showInput ? "w-[120px]" : "w-0"
-                  } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
+                  className="w-[120px] duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs"
                   placeholder="Search by name"
                 />
               </div>
             </div>
             <div className="hidden lg:block ">
               <div className="flex items-center gap-5">
-                {/* <div
-                  onClick={handleInput}
-                  className={
-                    showInput
-                      ? "inset-0 fixed mb-[200px] mt-[50px]"
-                      : null
-                  }
-                ></div> */}
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"

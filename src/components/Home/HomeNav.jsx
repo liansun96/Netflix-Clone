@@ -11,6 +11,7 @@ import Noti from "../Noti";
 const HomeNav = () => {
   const {
     search,
+    inputRef,
     setSearch,
     showInput,
     setShowInput,
@@ -22,7 +23,6 @@ const HomeNav = () => {
 
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
-  const { toggleSideBar } = useContext(ToggleContext);
 
   const { data: movieGenres } = useGetMovieGenresQuery();
 
@@ -32,8 +32,6 @@ const HomeNav = () => {
     setSearch(e.target.value);
     navigate("/search");
   };
-
-  const inputRef = useRef(null);
 
   useEffect(() => {
     // When the component mounts, focus the input element
@@ -57,20 +55,17 @@ const HomeNav = () => {
   }, []);
 
   useEffect(() => {
-    let handler = (e)=>{
-      if(!inputRef.current.contains(e.target)){
+    let handler = (e) => {
+      if (!inputRef.current.contains(e.target)) {
         setShowInput(false);
-        console.log(inputRef.current);
-      }      
+      }
     };
 
     document.addEventListener("mousedown", handler);
-    
 
-    return() =>{
+    return () => {
       document.removeEventListener("mousedown", handler);
-    }
-
+    };
   });
 
   return (
@@ -153,7 +148,7 @@ const HomeNav = () => {
               </div>
             </div>
             <div className="hidden lg:block ">
-              <div className="flex items-center gap-5">                
+              <div className="flex items-center gap-5">
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"

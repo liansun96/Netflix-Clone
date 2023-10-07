@@ -48,9 +48,10 @@ const Search = () => {
     navigate(-1);
   }
 
-  if (search !== "") {
-    setShowInput(true);
-  }
+  // if (search !== "") {
+  //   setShowInput(true);
+  //   inputRef.current.focus();
+  // }
 
   if (modal) {
     document.body.classList.add("overflow-y-hidden");
