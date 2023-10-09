@@ -98,18 +98,32 @@ const BrowseByLanguages = () => {
         const timeB = parseInt(b[property].split(" ")[0]);
         result = timeA - timeB;
       }
-
       // Reverse the result if sorting order is descending
       if (sortOrder === "desc") {
         result *= -1;
       }
-
       return result;
     });
-
     setSortedData(sortedData);
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
+
+  // const sortByProperty = (property) => {
+  //   const sortedData = [...data?.results].sort((a, b) => {
+  //     if (key === 'title') {
+  //       return a.title.localeCompare(b.title);
+  //     } else if (key === 'release_date') {
+  //       return new Date(a.release_date) - new Date(b.release_date);
+  //     } else if (key === 'popularity') {
+  //       return b.popularity - a.popularity;
+  //     } else {
+  //       // Default to no sorting
+  //       return 0;
+  //     }
+  //   });
+
+  //   setSortedData(sortedData);
+  // };
 
   return (
     <div className="bg-[#171818] min-h-screen">
@@ -213,7 +227,7 @@ const BrowseByLanguages = () => {
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">
             <div className="flex flex-wrap justify-between px-2 relative last:mr-auto">
-              {data?.results?.map((result, index) => {
+              {sortedData?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
                   handleGetId(result?.id);

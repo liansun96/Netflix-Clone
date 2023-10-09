@@ -15,7 +15,7 @@ import MobileMovieDetail from "./components/Movie/MobileMovieDetail";
 
 const App = () => {
   return (
-    <div className="relative bg-[#141414]">
+    <div className="relative bg-[#141414] select-none">
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

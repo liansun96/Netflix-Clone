@@ -13,6 +13,7 @@ import LatestNav from "../components/Latest/LatestNav";
 import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 import { addMovie, removeMovie } from "../redux/services/favoritMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
+import LatestLoader from "../components/Loader/LatestLoader";
 
 const Search = () => {
   const {
@@ -44,13 +45,14 @@ const Search = () => {
   }, []);
 
   const navigate = useNavigate();
-  if (search == "") {
+  if (search === "") {
     navigate(-1);
   }
 
-  if (search !== "") {
-    setShowInput(true);
-  }
+  // if (search !== "") {
+  //   setShowInput(true);
+  //   inputRef.current.focus();
+  // }
 
   if (modal) {
     document.body.classList.add("overflow-y-hidden");
@@ -64,7 +66,7 @@ const Search = () => {
     <div className="bg-[#141414] min-h-screen">
       <LatestNav />
       {isLoading ? (
-        <Loader />
+        <LatestLoader/>
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">

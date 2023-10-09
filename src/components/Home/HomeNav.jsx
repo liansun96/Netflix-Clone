@@ -11,6 +11,11 @@ import Noti from "../Noti";
 const HomeNav = () => {
   const {
     search,
+    inputRefSm,
+    showInputSm,
+    setShowInputSm,
+    handleInputSm,
+    inputRef,     
     setSearch,
     showInput,
     setShowInput,
@@ -22,18 +27,15 @@ const HomeNav = () => {
 
   const [scrollHeight, setScrollHeight] = useState(0);
   const [show, setShow] = useState(false);
-  const { toggleSideBar } = useContext(ToggleContext);
 
   const { data: movieGenres } = useGetMovieGenresQuery();
 
-  const navigate = useNavigate();
-
+  const navigate = useNavigate();  
+  
   const handleInputChange = (e) => {
     setSearch(e.target.value);
     navigate("/search");
   };
-
-  const inputRef = useRef(null);
 
   useEffect(() => {
     // When the component mounts, focus the input element
@@ -57,20 +59,31 @@ const HomeNav = () => {
   }, []);
 
   useEffect(() => {
-    let handler = (e)=>{
-      if(!inputRef.current.contains(e.target)){
+    let handler = (e) => {
+      if (!inputRef.current.contains(e.target)) {
         setShowInput(false);
-        console.log(inputRef.current);
-      }      
+      }
     };
 
     document.addEventListener("mousedown", handler);
-    
 
-    return() =>{
+    return () => {
       document.removeEventListener("mousedown", handler);
-    }
+    };
+  });
 
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRefSm.current.contains(e.target)) {
+        setShowInputSm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
   });
 
   return (
@@ -129,31 +142,30 @@ const HomeNav = () => {
                 </div>
               </div>
             </div>
-            <div className="block lg:hidden">
+            <div className="block lg:hidden">              
               <div
-                className={`flex gap-3 items-center rounded ${
-                  showInput && "border px-3"
+                className={`flex gap-1 items-center rounded ${
+                  showInputSm && "border px-2"
                 } border-white cursor-pointer`}
               >
                 <BiSearch
-                  onClick={handleInput}
-                  className="text-white text-2xl"
+                  onClick={handleInputSm}
+                  className="text-white text-xl mt-1"
                 />
                 <input
-                  onClick={(e) => e.stopPropagation()}
-                  ref={inputRef}
+                  ref={inputRefSm}
                   value={search}
                   onChange={handleInputChange}
                   type="text"
                   className={`${
-                    showInput ? "w-[120px]" : "w-0"
+                    showInputSm ? "w-[120px]" : "w-0"
                   } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                   placeholder="Search by name"
                 />
               </div>
             </div>
             <div className="hidden lg:block ">
-              <div className="flex items-center gap-5">                
+              <div className="flex items-center gap-5">
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"
