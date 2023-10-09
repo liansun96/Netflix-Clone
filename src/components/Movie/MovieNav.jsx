@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { RxCross1 } from "react-icons/rx";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -43,6 +43,8 @@ const MovieNav = () => {
   // console.log(grnreId);
 
   const navigate = useNavigate();
+
+  const categoryRef = useRef();
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
@@ -96,6 +98,20 @@ const MovieNav = () => {
     let handler = (e) => {
       if (!inputRefSm.current.contains(e.target)) {
         setShowInputSm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!categoryRef.current.contains(e.target)) {
+        setShow(false);
       }
     };
 
@@ -216,6 +232,7 @@ const MovieNav = () => {
                 <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
                 <div className="relative">
                   <button
+                    ref={categoryRef}
                     onClick={handleShow}
                     className="flex items-center gap-4 bg-black px-3 lg:px-2 lg:rounded-none text-sm border border-l rounded-full p-1 lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
                   >
@@ -226,11 +243,11 @@ const MovieNav = () => {
                   </button>
                   <div
                     className={`${
-                      show ? "block" : "hidden"
-                    } w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
+                      show ? "opacity-100" : "opacity-0"
+                    } duration-300 w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
-                      <div className="flex flex-wrap gap-3">
+                      <div ref={categoryRef} className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
                             <p
