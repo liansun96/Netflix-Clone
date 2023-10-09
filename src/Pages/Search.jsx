@@ -44,7 +44,7 @@ const Search = () => {
   }, []);
 
   const navigate = useNavigate();
-  if (search == "") {
+  if (search === "") {
     navigate(-1);
   }
 

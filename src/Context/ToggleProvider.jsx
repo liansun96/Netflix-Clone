@@ -17,9 +17,17 @@ const ToggleProvider = ({ children }) => {
   
   const [noti, setNoti] = useState(false);
   
-  const inputRef = useRef();
   
-
+  
+  const inputRefSm = useRef();
+  const [showInputSm, setShowInputSm] = useState(false);
+  const handleInputSm = () => {
+    setShowInputSm(!showInputSm);
+    inputRefSm.current.focus();
+  };
+  
+  
+  const inputRef = useRef();
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {
     setShowInput(!showInput);
@@ -128,6 +136,10 @@ const ToggleProvider = ({ children }) => {
   const value = {
     search,
     setSearch,
+    showInputSm,
+    setShowInputSm,
+    handleInputSm,
+    inputRefSm,
     showInput,
     setShowInput,
     handleInput,

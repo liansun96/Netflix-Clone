@@ -12,6 +12,10 @@ const LatestNav = () => {
     toggleSideBar,
     search,
     setSearch,
+    showInputSm,
+    setShowInputSm,
+    handleInputSm,
+    inputRefSm,
     showInput,
     setShowInput,
     handleInput,
@@ -53,13 +57,26 @@ const LatestNav = () => {
     };
   });
 
-  useEffect(()=>{
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRefSm.current.contains(e.target)) {
+        setShowInputSm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  useEffect(() => {
     if (search !== "") {
       setShowInput(true);
       inputRef.current.focus();
     }
-  },[search])
-
+  }, [search]);
 
   return (
     <div className="pb-0 lg:pb-5">
@@ -118,15 +135,23 @@ const LatestNav = () => {
               </div>
             </div>
             <div className="block lg:hidden">
-              <div className="flex gap-3 items-center rounded-full border px-3 border-white cursor-pointer">
-                <BiSearch className="text-white text-2xl" />
+              <div
+                className={`flex gap-1 items-center rounded ${
+                  showInputSm && "border px-2"
+                } border-white cursor-pointer`}
+              >
+                <BiSearch
+                  onClick={handleInputSm}
+                  className="text-white text-xl mt-1"
+                />
                 <input
-                  onClick={(e) => e.stopPropagation()}
-                  ref={inputRef}
+                  ref={inputRefSm}
                   value={search}
                   onChange={handleInputChange}
                   type="text"
-                  className="w-[120px] duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs"
+                  className={`${
+                    showInputSm ? "w-[120px]" : "w-0"
+                  } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                   placeholder="Search by name"
                 />
               </div>
