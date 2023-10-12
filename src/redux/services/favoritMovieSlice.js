@@ -31,7 +31,7 @@ export const favoriteMovieSlice = createSlice({
     },
     removeMovie: (state, { payload }) => {
       state.favMovies = state.favMovies.filter((item) => item.id !== payload.id);
-      
+      Cookies.set(STORAGE_KEY, JSON.stringify(state.favMovies));      
     },
     clearMovie: (state) => {
       state.favMovies = [];
