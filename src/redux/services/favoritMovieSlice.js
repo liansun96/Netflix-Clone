@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const initialState = {
   favMovies: [],
-  searchFavMovie : ''
+  searchFavMovie: "",
 };
 
 const STORAGE_KEY = "favMovies";
@@ -11,9 +11,8 @@ const STORAGE_KEY = "favMovies";
 const storedItems = Cookies.get(STORAGE_KEY);
 
 if (storedItems) {
-  initialState.favMovies = JSON.parse(storedItems);  
+  initialState.favMovies = JSON.parse(storedItems);
 }
-
 
 export const favoriteMovieSlice = createSlice({
   name: "favoriteMovie",
@@ -24,29 +23,24 @@ export const favoriteMovieSlice = createSlice({
       if (isExisted) {
         return state;
       } else {
-        state.favMovies = [...state.favMovies, { ...payload}];
+        state.favMovies = [...state.favMovies, { ...payload }];
       }
-      
+
       Cookies.set(STORAGE_KEY, JSON.stringify(state.favMovies));
     },
     removeMovie: (state, { payload }) => {
-      state.favMovies = state.favMovies.filter((item) => item.id !== payload.id);
-      
+      state.favMovies = state.favMovies.filter(
+        (item) => item.id !== payload.id
+      );
+      Cookies.set(STORAGE_KEY, JSON.stringify(state.favMovies));
     },
     clearMovie: (state) => {
       state.favMovies = [];
       return state;
     },
-    addFavoriteMovie : (state, {payload}) => {
-        state.favMovies = payload
-    },
-    setSearchFavoriteMovie : (state , {payload}) => {
-        state.searchFavMovie = payload
-    }
   },
 });
 
-export const { addMovie, removeMovie, clearMovie ,addFavoriteMovie ,setSearchFavoriteMovie } =
-  favoriteMovieSlice.actions;
+export const { addMovie, removeMovie, clearMovie } = favoriteMovieSlice.actions;
 
 export default favoriteMovieSlice.reducer;

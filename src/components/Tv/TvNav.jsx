@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
@@ -39,6 +39,8 @@ const TvNav = () => {
   console.log(TvGenres?.genres);
 
   const navigate = useNavigate();
+
+  const categoryRef = useRef();
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
@@ -92,6 +94,20 @@ const TvNav = () => {
     let handler = (e) => {
       if (!inputRefSm.current.contains(e.target)) {
         setShowInputSm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!categoryRef.current.contains(e.target)) {
+        setShow(false);
       }
     };
 
@@ -175,7 +191,7 @@ const TvNav = () => {
               </div>
             </div>
             <div className="hidden lg:block ">
-              <div className="flex items-center gap-5">                
+              <div className="flex items-center gap-5">
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"
@@ -212,7 +228,7 @@ const TvNav = () => {
                 <h1 className="text-3xl text-gray-50 font-semibold">
                   Tv Shows
                 </h1>
-                <div className="relative">
+                <div ref={categoryRef} className="relative">
                   <button
                     onClick={handleShow}
                     className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1"
@@ -228,7 +244,7 @@ const TvNav = () => {
                     } w-[450px] h-[200px] absolute bg-black bg-opacity-80`}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
-                      <div className="flex flex-wrap gap-3">
+                      <div ref={categoryRef} className="flex flex-wrap gap-3">
                         {TvGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
                             <p
