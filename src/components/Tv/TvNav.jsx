@@ -191,7 +191,7 @@ const TvNav = () => {
               </div>
             </div>
             <div className="hidden lg:block ">
-              <div className="flex items-center gap-5">                
+              <div className="flex items-center gap-5">
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"
@@ -228,9 +228,8 @@ const TvNav = () => {
                 <h1 className="text-3xl text-gray-50 font-semibold">
                   Tv Shows
                 </h1>
-                <div className="relative">
+                <div ref={categoryRef} className="relative">
                   <button
-                    ref={categoryRef}
                     onClick={handleShow}
                     className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1"
                   >

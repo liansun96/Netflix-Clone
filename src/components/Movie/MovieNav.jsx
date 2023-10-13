@@ -230,9 +230,8 @@ const MovieNav = () => {
             >
               <div className="flex items-center gap-10 relative">
                 <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
-                <div className="relative">
+                <div ref={categoryRef} className="relative">
                   <button
-                    ref={categoryRef}
                     onClick={handleShow}
                     className="flex items-center gap-4 bg-black px-3 lg:px-2 lg:rounded-none text-sm border border-l rounded-full p-1 lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
                   >

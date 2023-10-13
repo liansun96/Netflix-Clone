@@ -19,8 +19,8 @@ const NowPlayingTv = () => {
   const {
     handleGetId,
     tvModal,
-    toggleTvModal,
-    togglePlayTvMovieModal,
+    toggleTvModal, 
+    togglePlayTvModal,   
     genreId,
   } = useContext(ToggleContext);
 
