@@ -7,14 +7,9 @@ export const ToggleContext = createContext();
 const ToggleProvider = ({ children }) => {
   //search input
   const [search, setSearch] = useState("");
-
   const [token, setToken] = useState(false);
-
   const [movieShow, setMovieShow] = useState(false);
-
-  const [tvShow, setTvShow] = useState(false);
-
-  
+  const [tvShow, setTvShow] = useState(false);  
   const [noti, setNoti] = useState(false);
   
   
@@ -32,6 +27,18 @@ const ToggleProvider = ({ children }) => {
   const handleInput = () => {
     setShowInput(!showInput);
     inputRef.current.focus();
+  };
+
+  const languageRef = useRef();
+  const [showLanguage, setShowLanguage] = useState(false);
+  const handleShowLanguage = () => {
+    setShowLanguage(!showLanguage);
+  };
+  
+  const sortRef = useRef();
+  const [showSort, setShowSort] = useState(false);
+  const handleShowSort = () => {
+    setShowSort(!showSort);
   };
 
   //Sidebar
@@ -140,6 +147,14 @@ const ToggleProvider = ({ children }) => {
     setShowInputSm,
     handleInputSm,
     inputRefSm,
+    languageRef,
+    showLanguage,
+    setShowLanguage,
+    handleShowLanguage,
+    sortRef,
+    showSort,
+    setShowSort,
+    handleShowSort,
     showInput,
     setShowInput,
     handleInput,

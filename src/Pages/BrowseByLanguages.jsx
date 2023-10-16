@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import HomeNav from "../components/Home/HomeNav";
 import Footer from "../components/Footer/Footer";
 import { ToggleContext } from "../Context/ToggleProvider";
@@ -39,6 +39,14 @@ const BrowseByLanguages = () => {
     handleGetlanguageName,
     sortName,
     handleGetSortName,
+    languageRef,
+    showLanguage,
+    setShowLanguage,
+    handleShowLanguage,
+    sortRef,
+    showSort,
+    setShowSort,
+    handleShowSort,
     page,
     handlePageNumber,
   } = useContext(ToggleContext);
@@ -46,14 +54,12 @@ const BrowseByLanguages = () => {
   const { data, isLoading } = useGetMovieByCountryQuery({ iosName });
   const { data: data2 } = useGetMovieByCountryTwoQuery({ iosName });
   const { data: data3 } = useGetMovieByCountryThreeQuery({ iosName });
-  console.log(data);
+  // console.log(data);
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
   // console.log(favMovies);
   const dispatch = useDispatch();
 
   const [scrollHeight, setScrollHeight] = useState(0);
-  const [show, setShow] = useState(false);
-  const [show1, setShow1] = useState(false);
   const [sortedData, setSortedData] = useState();
   const [sortOrder, setSortOrder] = useState("asc");
 
@@ -71,6 +77,24 @@ const BrowseByLanguages = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!languageRef.current.contains(e.target)) {
+        setShowLanguage(false);
+      }
+  
+      if (!sortRef.current.contains(e.target)) {
+        setShowSort(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   if (modal) {
     document.body.classList.add("overflow-y-hidden");
     document.body.classList.add("modal-open");
@@ -78,13 +102,6 @@ const BrowseByLanguages = () => {
     document.body.classList.remove("overflow-y-hidden");
     document.body.classList.remove("modal-open");
   }
-
-  const handleShow = () => {
-    setShow(!show);
-  };
-  const handleShow1 = () => {
-    setShow1(!show1);
-  };
 
   const sortByProperty = (property) => {
     const sortedData = [...data?.results].sort((a, b) => {
@@ -141,11 +158,11 @@ const BrowseByLanguages = () => {
               Browse By Languages
             </h1>
             <div className="w-full lg:w-auto flex justify-start lg:justify-end gap-5">
-              <div className="relative">
+              <div ref={languageRef} className="relative">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-2">
                   <p className="text-xs lg:text-sm">Select Your Preferences</p>
                   <button
-                    onClick={handleShow}
+                    onClick={handleShowLanguage}
                     className="flex items-center justify-between w-[160px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {languageName}
@@ -156,16 +173,19 @@ const BrowseByLanguages = () => {
                 </div>
                 <div
                   className={`${
-                    show ? "block" : "hidden"
+                    showLanguage ? "block" : "hidden"
                   } w-[150px] lg:w-[250px] h-[360px] lg:h-[500px] absolute left-2 lg:left-[150px] bg-black bg-opacity-80 z-[1006]`}
                 >
-                  <div className="py-1 px-2 flex gap-5 items-start">
+                  <div
+                    ref={languageRef}
+                    className="py-1 px-2 flex gap-5 items-start"
+                  >
                     <div className="flex flex-col gap-3 h-[350px] lg:h-[490px] overflow-y-scroll language-dropdown">
                       {countryCodes?.map((countryCode) => (
                         <div key={countryCode.id}>
                           <p
                             onClick={() => (
-                              handleShow(),
+                              handleShowLanguage(),
                               handleGetIosName(countryCode?.original_language),
                               handleGetlanguageName(countryCode?.language_name)
                             )}
@@ -179,11 +199,11 @@ const BrowseByLanguages = () => {
                   </div>
                 </div>
               </div>
-              <div className="relative">
+              <div ref={sortRef} className="relative">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-2">
                   <p className="text-xs lg:text-sm">Sort by</p>
                   <button
-                    onClick={handleShow1}
+                    onClick={handleShowSort}
                     className="flex items-center justify-between w-[160px] lg:w-[250px] text-xs px-2 lg:text-base rounded-full lg:rounded-none bg-[#556263] lg:bg-black  p-1 border hover:bg-transparent hover:bg-opacity-50 "
                   >
                     {sortName}
@@ -194,7 +214,7 @@ const BrowseByLanguages = () => {
                 </div>
                 <div
                   className={`${
-                    show1 ? "block" : "hidden"
+                    showSort ? "block" : "hidden"
                   } w-[150px] lg:w-[250px] h-[130px] absolute left-2 lg:left-[50px] bg-black bg-opacity-80 z-[1006]`}
                 >
                   <div className="py-1 px-2 flex gap-5 items-start">
@@ -203,7 +223,7 @@ const BrowseByLanguages = () => {
                         <div key={sortData.id}>
                           <p
                             onClick={() => (
-                              handleShow1(),
+                              handleShowSort(),
                               sortByProperty(`${sortData.sort}`),
                               handleGetSortName(sortData?.name)
                             )}

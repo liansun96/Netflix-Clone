@@ -45,8 +45,7 @@ const LatestNav = () => {
   useEffect(() => {
     let handler = (e) => {
       if (!inputRef.current.contains(e.target)) {
-        setShowInput(false);
-        console.log(inputRef.current);
+        setShowInput(false);        
       }
     };
 
