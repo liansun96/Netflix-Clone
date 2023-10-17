@@ -63,14 +63,10 @@ const Search = () => {
   }
 
   return (
-<<<<<<< HEAD
-    <div className="bg-[#141414] h-full">
-=======
     <div className="bg-[#141414] min-h-screen">
->>>>>>> 690d7bc43c801e0636ca8274d8a180101c8f9b83
       <LatestNav />
       {isLoading ? (
-        <LatestLoader/>
+        <LatestLoader />
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">
