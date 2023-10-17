@@ -7,14 +7,8 @@ import { ClapSpinner } from "react-spinners-kit";
 import { BiHide, BiShow } from "react-icons/bi";
 
 const SignIn = () => {
-
-  const { token, setToken } = useContext(ToggleContext);
-
-
   const [email, setEmail] = useState("marcusjude.lian");
-  const getEmail =localStorage.getItem("emailData");
   const [password, setPassword] = useState("jokerxbox");
-  const getPassword = localStorage.getItem("passwordData")
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -23,8 +17,9 @@ const SignIn = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     if (email == "marcusjude.lian" && password == "jokerxbox") {
-      localStorage.setItem("emailData","marcusjude.lian")
-      localStorage.setItem("emailPassword","jokerxbox")
+      localStorage.setItem("emailData", "marcusjude.lian");
+      localStorage.setItem("emailPassword", "jokerxbox");
+      localStorage.setItem("tokenData", "token");
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);

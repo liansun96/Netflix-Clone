@@ -14,19 +14,19 @@ const ToggleProvider = ({ children }) => {
 
   const [tvShow, setTvShow] = useState(false);
 
-  
+  const getEmail = localStorage.getItem("emailData");
+  const getPassword = localStorage.getItem("passwordData");
+  const getToken = localStorage.getItem("tokenData");
+
   const [noti, setNoti] = useState(false);
-  
-  
-  
+
   const inputRefSm = useRef();
   const [showInputSm, setShowInputSm] = useState(false);
   const handleInputSm = () => {
     setShowInputSm(!showInputSm);
     inputRefSm.current.focus();
   };
-  
-  
+
   const inputRef = useRef();
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {
@@ -179,6 +179,9 @@ const ToggleProvider = ({ children }) => {
     handlePrevPage,
     noti,
     setNoti,
+    getEmail,
+    getPassword,
+    getToken
   };
 
   return (

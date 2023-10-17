@@ -23,8 +23,9 @@ import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 import TopRated from "../components/Home/TopRated";
 
 const Home = () => {
+  const nav = useNavigate();
 
-  const {  tvModal, playTvModal, modal, playMovieModal, genreId } =
+  const { token, tvModal, playTvModal, modal, playMovieModal, genreId } =
     useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
@@ -46,11 +47,15 @@ const Home = () => {
     document.body.classList.remove("modal-open");
   }
 
-
+  useEffect(() => {
+    if (!localStorage.getItem("tokenData", "token")) {
+      nav("signin");
+    }
+  }, []);
   return (
     <>
       <HomeNav />
-      <MobileBottomMenuBar/>
+      <MobileBottomMenuBar />
       <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
@@ -72,7 +77,7 @@ const Home = () => {
               </div>
             </div>
             <Footer />
-            <MobileBottomMenuBar/>
+            <MobileBottomMenuBar />
           </div>
         )}
         {modal && <MovieDetail />}
