@@ -190,10 +190,7 @@ const ToggleProvider = ({ children }) => {
     handleNextPage,
     handlePrevPage,
     noti,
-    setNoti,
-    getEmail,
-    getPassword,
-    getToken
+    setNoti,    
   };
 
   return (
