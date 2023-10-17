@@ -28,7 +28,8 @@ const SignIn = () => {
     }
   };
 
-  if (isLoading) {
+  if
+   (isLoading) {
     return (
       <div className="h-screen w-full bg-black flex items-center justify-center">
         <ClapSpinner size={30} backColor="#C30010" frontColor="#C30010" />
