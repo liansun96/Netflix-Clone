@@ -5,13 +5,19 @@ import { BsBoxArrowUpRight } from "react-icons/bs";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { FaRegFaceSmileWink } from "react-icons/fa6";
 import { AiFillQuestionCircle } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const nav = useNavigate();
   const [hovered, setHovered] = useState(false);
 
   const handleHover = () => {
     setHovered(!hovered);
+  };
+
+  const handleClick = () => {
+    localStorage.clear();
+    nav("/signin");
   };
 
   return (
@@ -92,11 +98,12 @@ const Profile = () => {
               </h1>
             </div>
             <p className="border border-x-0 border-t-0 border-gray-300"></p>
-            <Link to={"/signin"}>
-              <p className="text-xs text-gray-50 hover:text-gray-300 font-semibold text-center cursor-pointer">
-                Sign out of Netflix
-              </p>
-            </Link>
+            <p
+              onClick={handleClick}
+              className="text-xs text-gray-50 hover:text-gray-300 font-semibold text-center cursor-pointer"
+            >
+              Sign out of Netflix
+            </p>
           </div>
         </div>
       </div>
