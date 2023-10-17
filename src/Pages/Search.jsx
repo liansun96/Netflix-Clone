@@ -55,7 +55,7 @@ const Search = () => {
   }
 
   return (
-    <div className="bg-[#141414] h-screen">
+    <div className="bg-[#141414] h-full">
       <LatestNav />
       {isLoading ? (
         <Loader />

@@ -12,7 +12,9 @@ const SignIn = () => {
 
 
   const [email, setEmail] = useState("marcusjude.lian");
+  const getEmail =localStorage.getItem("emailData");
   const [password, setPassword] = useState("jokerxbox");
+  const getPassword = localStorage.getItem("passwordData")
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -20,9 +22,10 @@ const SignIn = () => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    if (email === "marcusjude.lian" && password === "jokerxbox") {
+    if (email == "marcusjude.lian" && password == "jokerxbox") {
+      localStorage.setItem("emailData","marcusjude.lian")
+      localStorage.setItem("emailPassword","jokerxbox")
       setIsLoading(true);
-      setToken(!token);
       setTimeout(() => {
         setIsLoading(false);
         nav("/");

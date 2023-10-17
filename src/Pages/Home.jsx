@@ -47,9 +47,7 @@ const Home = () => {
     document.body.classList.remove("modal-open");
   }
 
-  useEffect(() => {
-    !token && nav("signin");
-  }, []);
+
   return (
     <>
       <HomeNav />
