@@ -7,38 +7,31 @@ export const ToggleContext = createContext();
 const ToggleProvider = ({ children }) => {
   //search input
   const [search, setSearch] = useState("");
+
   const [token, setToken] = useState(false);
+
   const [movieShow, setMovieShow] = useState(false);
-  const [tvShow, setTvShow] = useState(false);  
+
+  const [tvShow, setTvShow] = useState(false);
+
+  const getEmail = localStorage.getItem("emailData");
+  const getPassword = localStorage.getItem("passwordData");
+  const getToken = localStorage.getItem("tokenData");
+
   const [noti, setNoti] = useState(false);
-  
-  
-  
+
   const inputRefSm = useRef();
   const [showInputSm, setShowInputSm] = useState(false);
   const handleInputSm = () => {
     setShowInputSm(!showInputSm);
     inputRefSm.current.focus();
   };
-  
-  
+
   const inputRef = useRef();
   const [showInput, setShowInput] = useState(false);
   const handleInput = () => {
     setShowInput(!showInput);
     inputRef.current.focus();
-  };
-
-  const languageRef = useRef();
-  const [showLanguage, setShowLanguage] = useState(false);
-  const handleShowLanguage = () => {
-    setShowLanguage(!showLanguage);
-  };
-  
-  const sortRef = useRef();
-  const [showSort, setShowSort] = useState(false);
-  const handleShowSort = () => {
-    setShowSort(!showSort);
   };
 
   //Sidebar
@@ -147,14 +140,6 @@ const ToggleProvider = ({ children }) => {
     setShowInputSm,
     handleInputSm,
     inputRefSm,
-    languageRef,
-    showLanguage,
-    setShowLanguage,
-    handleShowLanguage,
-    sortRef,
-    showSort,
-    setShowSort,
-    handleShowSort,
     showInput,
     setShowInput,
     handleInput,
@@ -194,6 +179,9 @@ const ToggleProvider = ({ children }) => {
     handlePrevPage,
     noti,
     setNoti,
+    getEmail,
+    getPassword,
+    getToken
   };
 
   return (
