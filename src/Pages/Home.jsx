@@ -48,12 +48,14 @@ const Home = () => {
   }
 
   useEffect(() => {
-    !token && nav("signin");
+    if (!localStorage.getItem("tokenData", "token")) {
+      nav("signin");
+    }
   }, []);
   return (
     <>
       <HomeNav />
-      <MobileBottomMenuBar/>
+      <MobileBottomMenuBar />
       <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
@@ -75,7 +77,7 @@ const Home = () => {
               </div>
             </div>
             <Footer />
-            <MobileBottomMenuBar/>
+            <MobileBottomMenuBar />
           </div>
         )}
         {modal && <MovieDetail />}
