@@ -3,15 +3,34 @@ import { HiOutlinePlus } from "react-icons/hi";
 import { IoPlaySharp } from "react-icons/io5";
 import { VscTriangleDown } from "react-icons/vsc";
 import { ToggleContext } from "../../Context/ToggleProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
+import { HiOutlineCheck } from "react-icons/hi2";
 
 const SimilarTv = ({ result }) => {
   const { toggleTvModal, togglePlayTvModal, handleGetId } =
     useContext(ToggleContext);
 
+  const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
+  // console.log(favMovies);
+  const dispatch = useDispatch();
+
   const handelPlay = () => {
     togglePlayTvModal();
     toggleTvModal();
     handleGetId(result?.id);
+  };
+
+  const isMovieInList = favMovies?.find((m) => m.id === result?.id);
+  console.log(isMovieInList);
+
+  const handleAddFav = () => {
+    if (isMovieInList) {
+      dispatch(removeMovie(result));
+    } else {
+      // Movie is not in the list, dispatch addMovie action
+      dispatch(addMovie(result));
+    }
   };
 
   return (
@@ -57,8 +76,8 @@ const SimilarTv = ({ result }) => {
       <div className="p-1 lg:p-3 flex flex-col gap-1 lg:gap-3">
         <div className="flex justify-between items-center gap-1">
           <p className="text-sm text-white font-bold block lg:hidden">
-            {result?.original_name?.length > 12
-              ? `${result?.original_name?.substring(0, 12)} . . .`
+            {result?.original_name?.length > 10
+              ? `${result?.original_name?.substring(0, 10)} . . .`
               : result?.original_name}
           </p>
           <p className="text-sm text-white font-bold hidden lg:block">
@@ -66,11 +85,28 @@ const SimilarTv = ({ result }) => {
               ? `${result?.original_name?.substring(0, 28)} . . .`
               : result?.original_name}
           </p>
-          <div className="visible lg:invisible group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
-            <HiOutlinePlus className="text-2xl text-gray-200" />
-            <div className="invisible group-hover/my-list:visible absolute -top-[55px] right-[-15px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-              <p className="text-lg font-semibold">Add to My List</p>
-              <VscTriangleDown className="text-white text-3xl translate-x-[80px] lg:translate-x-[45px] -translate-y-2 absolute" />
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="visible lg:invisible group/my-list flex items-center justify-center h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
+          >
+            <div onClick={() => handleAddFav(result)}>
+              {isMovieInList ? (
+                <HiOutlineCheck className="text-2xl text-gray-200" />
+              ) : (
+                <HiOutlinePlus className="text-2xl text-gray-200" />
+              )}
+
+              {isMovieInList ? (
+                <div className="invisible group-hover/my-list:visible absolute -top-[55px] right-[-15px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Remove From List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[105px] lg:translate-x-[45px] -translate-y-2 absolute" />
+                </div>
+              ) : (
+                <div className="invisible group-hover/my-list:visible absolute -top-[55px] right-[-15px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Add to My List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[80px] lg:translate-x-[45px] -translate-y-2 absolute" />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -78,19 +114,35 @@ const SimilarTv = ({ result }) => {
           <div className="">
             <p className="font-bold text-green-500">
               <span>{result?.vote_average?.toFixed(1) * 10}%</span> Match
-            </p>
-            <p className="text-white">
-              <span className="text-sm font-semibold text-gray-500">
-                Released
-              </span>{" "}
-              : {result?.first_air_date}
+            </p>            
+            <p className="text-sm font-semibold text-[#747474]">
+              Release :{" "}
+              <span className="text-sm lg:text-base text-white">
+              {result?.first_air_date}
+              </span>
             </p>
           </div>
-          <div className="hidden lg:block group/my-list relative h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer">
-            <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
-            <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-              <p className="text-lg font-semibold">Add to My List</p>
-              <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+          <div onClick={(e) => e.stopPropagation()} className="hidden lg:block">
+            <div
+              onClick={() => handleAddFav(result)}
+              className="group/my-list relative h-[35px] w-[35px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/edit cursor-pointer"
+            >
+              {isMovieInList ? (
+                <HiOutlineCheck className="text-xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              ) : (
+                <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              )}
+              {isMovieInList ? (
+                <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Remove From List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[71px] -translate-y-2 absolute" />
+                </div>
+              ) : (
+                <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Add to My List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+                </div>
+              )}
             </div>
           </div>
         </div>

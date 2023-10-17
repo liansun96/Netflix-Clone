@@ -20,7 +20,7 @@ const Header = () => {
   const movieId = movie?.id;
 
   const { data: detailImage, isLoading } = useGetMovieImageQuery({ movieId });
-  console.log(detailImage?.logos[0]?.file_path);
+  // console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
     setMovie(data?.results[Math.floor(Math.random() * data?.results?.length)]);
@@ -60,8 +60,8 @@ const Header = () => {
           alt=""
         />
         <h1 className="w-[600px] text-white drop-shadow-2xl font-semibold">
-          {movie?.overview?.length > 100
-            ? movie?.overview?.slice(0, movie?.overview?.indexOf(".", 100) + 1)
+          {movie?.overview?.length > 150
+            ? movie?.overview?.slice(0, movie?.overview?.indexOf(".", 150) + 1)
             : movie?.overview}
         </h1>
         <div className="flex items-center gap-3">

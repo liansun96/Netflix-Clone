@@ -19,8 +19,8 @@ const NowPlayingTv = () => {
   const {
     handleGetId,
     tvModal,
-    toggleTvModal,
-    togglePlayTvMovieModal,
+    toggleTvModal, 
+    togglePlayTvModal,   
     genreId,
   } = useContext(ToggleContext);
 
@@ -66,7 +66,7 @@ const NowPlayingTv = () => {
               <RiArrowDropRightLine className="text-2xl -translate-x-[60px] text-blue-300 group-hover/exp:translate-x-0 group-hover/exp:delay-0 duration-500 delay-200" />
             </div>
           </div>
-          <div className="dots opacity-0 group-hover:opacity-100 hidden lg:block">
+          <div className="dots invisible lg:visible opacity-0 group-hover:opacity-100">
             {[...Array(6)].map((_, index) => (
               <span
                 key={index}
@@ -98,7 +98,6 @@ const NowPlayingTv = () => {
                 const isMovieInList = favMovies?.find(
                   (m) => m.id === result?.id
                 );
-                console.log(isMovieInList);
 
                 const handleAddFav = () => {
                   if (isMovieInList) {
@@ -199,11 +198,11 @@ const NowPlayingTv = () => {
               })}
             </div>
             <MdOutlineArrowBackIos
-              className="absolute -left-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
+              className="absolute -left-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300 hover:scale-150"
               onClick={handlePrevSlide}
             />
             <MdOutlineArrowForwardIos
-              className="absolute -right-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300"
+              className="absolute -right-5  top-[80px] lg:top-[50px] text-2xl text-gray-100 opacity-0 group-hover:opacity-100 duration-300 hover:scale-150"
               onClick={handleNextSlide}
             />
           </div>

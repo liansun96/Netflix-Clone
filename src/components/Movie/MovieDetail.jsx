@@ -6,15 +6,20 @@ import {
   useGetMovieDetailQuery,
 } from "../../redux/api/movieApi";
 import { RxCross1 } from "react-icons/rx";
+import { HiOutlinePlus, HiOutlineCheck } from "react-icons/hi";
 import YouTube from "react-youtube";
 import "./MovieDetail.css";
 import SimilarMovie from "./SimilarMovie";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { VscTriangleDown } from "react-icons/vsc";
+import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
+import { BsHandThumbsUp, BsPlayFill } from "react-icons/bs";
 
 const MovieDetail = () => {
   const [trailer, setTrailer] = useState([]);
 
-  const { toggleModal, id } = useContext(ToggleContext);
+  const { toggleModal, id, togglePlayMovieModal } = useContext(ToggleContext);
   const { data } = useGetMovieDetailQuery({ id });
   const { data: recData } = useGetDetailRecommendationsQuery({ id });
   const { data: video } = useGetDetailVideoQuery({ id });
@@ -47,7 +52,7 @@ const MovieDetail = () => {
     },
   };
   const opts_sm = {
-    height: "300" ,
+    height: "300",
     width: `${parentRef?.current?.offsetWidth}`,
     playerVars: {
       autoplay: 0,
@@ -147,6 +152,28 @@ const MovieDetail = () => {
   };
   const castRef = useRef(null);
 
+  const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
+  // console.log(favMovies);
+  const dispatch = useDispatch();
+
+  const handelPlay = () => {
+    togglePlayMovieModal();
+    toggleModal();
+    handleGetId(data);
+  };
+
+  const handleAddFav = () => {
+    if (isMovieInList) {
+      dispatch(removeMovie(data));
+    } else {
+      // Movie is not in the list, dispatch addMovie action
+      dispatch(addMovie(data));
+    }
+  };
+
+  const isMovieInList = favMovies?.find((m) => m.id === data?.id);
+  console.log(isMovieInList);
+
   return (
     <div
       onClick={toggleModal}
@@ -154,14 +181,49 @@ const MovieDetail = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="group/item w-[97%] lg:w-[880px] h-min rounded-xl overflow-hidden bg-[#181818] fixed top-20 lg:top-10"
+        className="group/item w-[97%] h-[97%] mt-3 lg:h-auto lg:w-[880px] no-scrollbar rounded-xl touch-auto overflow-y-scroll overflow-hidden bg-[#181818] fixed top-0 lg:top-10"
       >
-        <div className="">
+        <div className="relative">
           <YouTube
             className="z-[1006] hidden lg:block"
             videoId={trailer}
             opts={opts}
           />
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex gap-2 absolute bottom-4  right-4 z-[1007] invisible lg:visible"
+          >
+            <button
+              onClick={handelPlay}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300"
+            >
+              <BsPlayFill className="text-white text-3xl" />
+            </button>
+            <div
+              onClick={() => handleAddFav(data)}
+              className="group/my-list relative h-10 w-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/edit cursor-pointer"
+            >
+              {isMovieInList ? (
+                <HiOutlineCheck className="text-xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              ) : (
+                <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              )}
+              {isMovieInList ? (
+                <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Remove From List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[71px] -translate-y-2 absolute" />
+                </div>
+              ) : (
+                <div className="invisible group-hover/my-list:visible absolute lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Add to My List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+                </div>
+              )}
+            </div>
+            <button className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+              <BsHandThumbsUp className="text-xl text-gray-200" />
+            </button>
+          </div>
         </div>
 
         <div ref={parentRef} className="">
@@ -172,9 +234,53 @@ const MovieDetail = () => {
           />
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-10 p-5 lg:p-10 text-white">
+        <div className="block lg:hidden">
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex gap-2 z-[1007] p-2"
+          >
+            <button
+              onClick={handelPlay}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300"
+            >
+              <BsPlayFill className="text-white text-4xl" />
+            </button>
+            <div
+              onClick={() => handleAddFav(data)}
+              className="group/my-list relative h-10 w-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300 group/edit cursor-pointer"
+            >
+              {isMovieInList ? (
+                <HiOutlineCheck className="text-xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              ) : (
+                <HiOutlinePlus className="text-2xl text-gray-200 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+              )}
+              {isMovieInList ? (
+                <div className="invisible group-hover/my-list:visible absolute left-[-47px] lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Remove From List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+                </div>
+              ) : (
+                <div className="invisible group-hover/my-list:visible absolute left-[-47px] lg:-right-[50px] -top-[55px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                  <p className="text-lg font-semibold">Add to My List</p>
+                  <VscTriangleDown className="text-white text-3xl translate-x-[45px] -translate-y-2 absolute" />
+                </div>
+              )}
+            </div>
+            <button className="flex items-center justify-center w-10 h-10 rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+              <BsHandThumbsUp className="text-xl text-gray-200" />
+            </button>
+            <button
+              onClick={toggleModal}
+              className="ms-auto w-10 h-10 rounded-full flex justify-center items-center text-center bg-white bg-opacity-50 hover:bg-opacity-80 duration-150"
+            >
+              <RxCross1 className="text-white font-bold scale-150" />
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-10 p-2 lg:p-10 text-white">
           <div className="w-full lg:w-[65%]">
-            <div className="flex gap-5">
+            <div className="flex justify-between gap-5">
               <p className="font-bold text-green-500">
                 <span>{data?.vote_average?.toFixed(1) * 10}%</span> Match
               </p>
@@ -186,7 +292,7 @@ const MovieDetail = () => {
               </p>
             </div>
             <br />
-            <p>{data?.overview}</p>
+            <p className="text-justify">{data?.overview}</p>
           </div>
           <div className="w-full lg:w-[50%]">
             <div className="">
@@ -254,22 +360,22 @@ const MovieDetail = () => {
           </div>
         </div>
 
-        <h1 className="text-2xl text-white font-semibold p-5 lg:p-10">
+        <h1 className="text-2xl text-white font-semibold p-2 lg:p-10">
           More Like This
         </h1>
 
-        <div className="flex gap-2 lg:gap-6 justify-between flex-wrap px-5 lg:px-10">
+        <div className="flex gap-2 lg:gap-6 justify-between flex-wrap px-2 lg:px-10">
           {recData?.results.map((result, index) => (
             <SimilarMovie key={index} result={result} />
           ))}
         </div>
 
-        <div className="p-5 lg:p-10 space-y-3" ref={castRef}>
+        <div className="p-2 lg:p-10 space-y-3" ref={castRef}>
           <h1 className="text-2xl text-white font-semibold ">
             About{" "}
             <span className="text-3xl font-bold">{data?.original_title}</span>
           </h1>
-          <div className="">
+          <div className="text-justify">
             <span className="text-sm font-semibold text-[#747474]">
               Cast :{" "}
             </span>
@@ -284,7 +390,7 @@ const MovieDetail = () => {
               </>
             ))}
           </div>
-          <div className="">
+          <div className="text-justify">
             <span className="text-sm font-semibold text-[#747474]">
               Crew :{" "}
             </span>
@@ -375,7 +481,7 @@ const MovieDetail = () => {
 
         <button
           onClick={toggleModal}
-          className="-top-10 group-hover/item:top-5 w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
+          className="invisible lg:visible -top-10 group-hover/item:top-5 w-10 h-10 rounded-full flex justify-center items-center absolute left-[48%] text-center bg-black bg-opacity-70 hover:bg-opacity-80 duration-150"
         >
           <RxCross1 className="text-white font-bold scale-150" />
         </button>

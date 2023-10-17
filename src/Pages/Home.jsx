@@ -23,9 +23,8 @@ import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 import TopRated from "../components/Home/TopRated";
 
 const Home = () => {
-  const nav = useNavigate();
 
-  const { token, tvModal, playTvModal, modal, playMovieModal, genreId } =
+  const {  tvModal, playTvModal, modal, playMovieModal, genreId } =
     useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { RxCross1 } from "react-icons/rx";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -22,7 +22,12 @@ const MovieNav = () => {
     toggleSideBar,
     search,
     setSearch,
+    showInputSm,
+    setShowInputSm,
+    handleInputSm,
+    inputRefSm,
     showInput,
+    setShowInput,
     handleInput,
     inputRef,
     grnreId,
@@ -35,9 +40,11 @@ const MovieNav = () => {
 
   const { data: movieGenres } = useGetMovieGenresQuery();
   console.log(movieGenres?.genres);
-  console.log(grnreId);
+  // console.log(grnreId);
 
   const navigate = useNavigate();
+
+  const categoryRef = useRef();
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
@@ -71,6 +78,49 @@ const MovieNav = () => {
       window.removeEventListener("scroll", scrollFunc);
     };
   }, []);
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRef.current.contains(e.target)) {
+        setShowInput(false);
+        console.log(inputRef.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRefSm.current.contains(e.target)) {
+        setShowInputSm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!categoryRef.current.contains(e.target)) {
+        setShow(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   return (
     <div className="pb-0 lg:pb-5">
@@ -124,22 +174,21 @@ const MovieNav = () => {
             </div>
             <div className="block lg:hidden">
               <div
-                className={`flex gap-3 items-center rounded ${
-                  showInput && "border px-3"
+                className={`flex gap-1 items-center rounded ${
+                  showInputSm && "border px-2"
                 } border-white cursor-pointer`}
               >
                 <BiSearch
-                  onClick={handleInput}
-                  className="text-white text-2xl"
+                  onClick={handleInputSm}
+                  className="text-white text-xl mt-1"
                 />
                 <input
-                  onClick={(e) => e.stopPropagation()}
-                  ref={inputRef}
+                  ref={inputRefSm}
                   value={search}
                   onChange={handleInputChange}
                   type="text"
                   className={`${
-                    showInput ? "w-[120px]" : "w-0"
+                    showInputSm ? "w-[120px]" : "w-0"
                   } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                   placeholder="Search by name"
                 />
@@ -147,10 +196,6 @@ const MovieNav = () => {
             </div>
             <div className="hidden lg:block">
               <div className="flex items-center gap-5">
-                <div
-                  onClick={handleInput}
-                  className={showInput ? "inset-0 fixed mt-[50px]" : null}
-                ></div>
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"
@@ -185,7 +230,7 @@ const MovieNav = () => {
             >
               <div className="flex items-center gap-10 relative">
                 <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
-                <div className="relative">
+                <div ref={categoryRef} className="relative">
                   <button
                     onClick={handleShow}
                     className="flex items-center gap-4 bg-black px-3 lg:px-2 lg:rounded-none text-sm border border-l rounded-full p-1 lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
@@ -197,11 +242,11 @@ const MovieNav = () => {
                   </button>
                   <div
                     className={`${
-                      show ? "block" : "hidden"
-                    } w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
+                      show ? "opacity-100" : "opacity-0"
+                    } duration-300 w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
-                      <div className="flex flex-wrap gap-3">
+                      <div ref={categoryRef} className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
                             <p

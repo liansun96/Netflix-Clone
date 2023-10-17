@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
@@ -22,7 +22,12 @@ const TvNav = () => {
     toggleSideBar,
     search,
     setSearch,
+    showInputSm,
+    setShowInputSm,
+    handleInputSm,
+    inputRefSm,
     showInput,
+    setShowInput,
     handleInput,
     inputRef,
     handleGetGenreId,
@@ -34,6 +39,8 @@ const TvNav = () => {
   console.log(TvGenres?.genres);
 
   const navigate = useNavigate();
+
+  const categoryRef = useRef();
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
@@ -67,6 +74,49 @@ const TvNav = () => {
       window.removeEventListener("scroll", scrollFunc);
     };
   }, []);
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRef.current.contains(e.target)) {
+        setShowInput(false);
+        console.log(inputRef.current);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRefSm.current.contains(e.target)) {
+        setShowInputSm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!categoryRef.current.contains(e.target)) {
+        setShow(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   return (
     <div className="pb-0 lg:pb-5">
@@ -120,22 +170,21 @@ const TvNav = () => {
             </div>
             <div className="block lg:hidden">
               <div
-                className={`flex gap-3 items-center rounded ${
-                  showInput && "border px-3"
+                className={`flex gap-1 items-center rounded ${
+                  showInputSm && "border px-2"
                 } border-white cursor-pointer`}
               >
                 <BiSearch
-                  onClick={handleInput}
-                  className="text-white text-2xl"
+                  onClick={handleInputSm}
+                  className="text-white text-xl mt-1"
                 />
                 <input
-                  onClick={(e) => e.stopPropagation()}
-                  ref={inputRef}
+                  ref={inputRefSm}
                   value={search}
                   onChange={handleInputChange}
                   type="text"
                   className={`${
-                    showInput ? "w-[120px]" : "w-0"
+                    showInputSm ? "w-[120px]" : "w-0"
                   } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                   placeholder="Search by name"
                 />
@@ -143,10 +192,6 @@ const TvNav = () => {
             </div>
             <div className="hidden lg:block ">
               <div className="flex items-center gap-5">
-                <div
-                  onClick={handleInput}
-                  className={showInput ? "inset-0 fixed mt-[50px]" : null}
-                ></div>
                 <div
                   className={`flex gap-3 items-center ${
                     showInput && "border px-3"
@@ -183,7 +228,7 @@ const TvNav = () => {
                 <h1 className="text-3xl text-gray-50 font-semibold">
                   Tv Shows
                 </h1>
-                <div className="relative">
+                <div ref={categoryRef} className="relative">
                   <button
                     onClick={handleShow}
                     className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1"
@@ -199,7 +244,7 @@ const TvNav = () => {
                     } w-[450px] h-[200px] absolute bg-black bg-opacity-80`}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
-                      <div className="flex flex-wrap gap-3">
+                      <div ref={categoryRef} className="flex flex-wrap gap-3">
                         {TvGenres?.genres?.map((genre) => (
                           <div key={genre.id}>
                             <p

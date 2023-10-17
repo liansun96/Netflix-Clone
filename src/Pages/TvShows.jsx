@@ -32,7 +32,7 @@ const TvShows = () => {
   const movieId = movie?.id;
 
   const { data: detailImage, isLoading } = useGetTvImageQuery({ movieId });
-  console.log(detailImage?.logos[0]?.file_path);
+  // console.log(detailImage?.logos[0]?.file_path);
 
   useEffect(() => {
     setMovie(
@@ -80,10 +80,10 @@ const TvShows = () => {
                   alt=""
                 />
                 <h1 className="w-[600px] text-gray-200 font-semibold">
-                  {movie?.overview?.length > 200
+                  {movie?.overview?.length > 150
                     ? movie?.overview?.slice(
                         0,
-                        movie?.overview?.indexOf(".", 200) + 1
+                        movie?.overview?.indexOf(".", 150) + 1
                       )
                     : movie?.overview}
                 </h1>
