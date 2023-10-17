@@ -7,14 +7,22 @@ import { Link } from "react-router-dom";
 
 const MyNetflixNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
-  const {sBar, toggleSideBar, search, setSearch, showInput, handleInput, inputRef } =
-    useContext(ToggleContext);
+  const {
+    sBar,
+    toggleSideBar,
+    search,
+    setSearch,
+    inputRefSm,
+    showInputSm,
+    setShowInputSm,
+    handleInputSm,
+  } = useContext(ToggleContext);
 
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
-    inputRef.current.focus();
+    inputRefSm.current.focus();
     navigate("/search");
   };
 
@@ -30,6 +38,20 @@ const MyNetflixNav = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let handler = (e) => {
+      if (!inputRefSm.current.contains(e.target)) {
+        setShowInputSm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   return (
     <div className="pb-0 lg:pb-5">
       <div className="fixed top-0 w-full z-50">
@@ -38,7 +60,9 @@ const MyNetflixNav = () => {
             scrollHeight > 100
               ? "lg:bg-[#141414] lg:bg-opacity-90"
               : "bg-transparent"
-          } absolute w-full px-3 lg:px-10 py-2 duration-500 ${sBar ? "" : "home-nav-bg"}`}
+          } absolute w-full px-3 lg:px-10 py-2 duration-500 ${
+            sBar ? "" : "home-nav-bg"
+          }`}
         >
           <div className="flex items-center lg:items-center justify-between">
             <div className="flex items-center gap-1 lg:gap-5">
@@ -55,22 +79,21 @@ const MyNetflixNav = () => {
             <div className="flex items-center">
               <div className="block lg:hidden">
                 <div
-                  className={`flex gap-3 items-center rounded ${
-                    showInput && "border px-3"
+                  className={`flex gap-1 items-center rounded ${
+                    showInputSm && "border px-2"
                   } border-white cursor-pointer`}
                 >
                   <BiSearch
-                    onClick={handleInput}
-                    className="text-white text-2xl"
+                    onClick={handleInputSm}
+                    className="text-white text-xl mt-1"
                   />
                   <input
-                    onClick={(e) => e.stopPropagation()}
-                    ref={inputRef}
+                    ref={inputRefSm}
                     value={search}
                     onChange={handleInputChange}
                     type="text"
                     className={`${
-                      showInput ? "w-[120px]" : "w-0"
+                      showInputSm ? "w-[120px]" : "w-0"
                     } duration-150 py-1 focus:outline-none bg-transparent text-white placeholder:text-xs`}
                     placeholder="Search by name"
                   />
