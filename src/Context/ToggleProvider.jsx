@@ -9,12 +9,7 @@ const ToggleProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [token, setToken] = useState(false);
   const [movieShow, setMovieShow] = useState(false);
-  const [tvShow, setTvShow] = useState(false);
-
-  const getEmail = localStorage.getItem("emailData");
-  const getPassword = localStorage.getItem("passwordData");
-  const getToken = localStorage.getItem("tokenData");
-
+  const [tvShow, setTvShow] = useState(false);  
   const [noti, setNoti] = useState(false);
 
   const inputRefSm = useRef();
@@ -36,7 +31,7 @@ const ToggleProvider = ({ children }) => {
   const handleShowLanguage = () => {
     setShowLanguage(!showLanguage);
   };
-  
+
   const sortRef = useRef();
   const [showSort, setShowSort] = useState(false);
   const handleShowSort = () => {
@@ -149,6 +144,10 @@ const ToggleProvider = ({ children }) => {
     setShowInputSm,
     handleInputSm,
     inputRefSm,
+    showInput,
+    setShowInput,
+    handleInput,
+    inputRef,
     languageRef,
     showLanguage,
     setShowLanguage,
@@ -157,10 +156,6 @@ const ToggleProvider = ({ children }) => {
     showSort,
     setShowSort,
     handleShowSort,
-    showInput,
-    setShowInput,
-    handleInput,
-    inputRef,
     modal,
     toggleModal,
     tvModal,
