@@ -14,8 +14,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Noti from "../Noti";
 
 const TvNav = () => {
-  const [scrollHeight, setScrollHeight] = useState(0);
-  const [show, setShow] = useState(false);
+  const [scrollHeight, setScrollHeight] = useState(0);  
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
   const {
@@ -30,6 +29,14 @@ const TvNav = () => {
     setShowInput,
     handleInput,
     inputRef,
+    categoryRef,
+    showCategory,
+    setShowCategory,
+    handleShowCategory,
+    categoryRefSm,
+    showCategorySm,
+    setShowCategorySm,
+    handleShowCategorySm,
     handleGetGenreId,
     tvGenreName,
     handleGetTvGenreName,
@@ -38,9 +45,7 @@ const TvNav = () => {
   const { data: TvGenres } = useGetTvGenresQuery();
   console.log(TvGenres?.genres);
 
-  const navigate = useNavigate();
-
-  const categoryRef = useRef();
+  const navigate = useNavigate(); 
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
@@ -49,11 +54,7 @@ const TvNav = () => {
 
   const handleShowSuggest = () => {
     setShowSuggest(!showSuggest);
-  };
-
-  const handleShow = () => {
-    setShow(!show);
-  };
+  };  
 
   const handleShowMenuOpen = () => {
     setShowMenu(true);
@@ -76,47 +77,28 @@ const TvNav = () => {
   }, []);
 
   useEffect(() => {
-    let handler = (e) => {
+    const handleDocumentClick = (e) => {
       if (!inputRef.current.contains(e.target)) {
         setShowInput(false);
-        console.log(inputRef.current);
       }
-    };
-
-    document.addEventListener("mousedown", handler);
-
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  });
-
-  useEffect(() => {
-    let handler = (e) => {
       if (!inputRefSm.current.contains(e.target)) {
         setShowInputSm(false);
       }
-    };
-
-    document.addEventListener("mousedown", handler);
-
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  });
-
-  useEffect(() => {
-    let handler = (e) => {
       if (!categoryRef.current.contains(e.target)) {
-        setShow(false);
+        setShowCategory(false);
+      }
+      if (!categoryRefSm.current.contains(e.target)) {
+        setShowCategorySm(false);
       }
     };
-
-    document.addEventListener("mousedown", handler);
-
+  
+    document.addEventListener("mousedown", handleDocumentClick);
+  
     return () => {
-      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("mousedown", handleDocumentClick);
     };
-  });
+  }, [inputRef, inputRefSm, categoryRef, categoryRefSm, setShowInput, setShowInputSm, setShowCategory, setShowCategorySm]);
+  
 
   return (
     <div className="pb-0 lg:pb-5">
@@ -230,7 +212,7 @@ const TvNav = () => {
                 </h1>
                 <div ref={categoryRef} className="relative">
                   <button
-                    onClick={handleShow}
+                    onClick={handleShowCategory}
                     className="flex items-center gap-5 bg-black px-2 text-sm border hover:bg-transparent hover:bg-opacity-50 mt-1"
                   >
                     {tvGenreName}
@@ -240,7 +222,7 @@ const TvNav = () => {
                   </button>
                   <div
                     className={`${
-                      show ? "block" : "hidden"
+                      showCategory ? "block" : "hidden"
                     } w-[450px] h-[200px] absolute bg-black bg-opacity-80`}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
@@ -249,9 +231,9 @@ const TvNav = () => {
                           <div key={genre.id}>
                             <p
                               onClick={() => (
+                                handleShowCategory(),
                                 handleGetGenreId(genre?.id),
-                                handleGetTvGenreName(genre?.name),
-                                handleShow()
+                                handleGetTvGenreName(genre?.name)
                               )}
                               className="text-sm w-[135px] cursor-pointer"
                             >
@@ -337,9 +319,9 @@ const TvNav = () => {
                   <div className="flex items-center gap-2 lg:gap-4 px-3 h-6 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1">
                     TV Shows
                   </div>
-                  <div className="relative">
+                  <div ref={categoryRefSm} className="relative">
                     <button
-                      onClick={handleShow}
+                      onClick={handleShowCategorySm}
                       className="flex items-center gap-2 lg:gap-4 bg-[#556263] px-2 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
                     >
                       {tvGenreName}
@@ -349,18 +331,18 @@ const TvNav = () => {
                     </button>
                     <div
                       className={`${
-                        show ? "block" : "hidden"
+                        showCategorySm ? "block" : "hidden"
                       }  w-[300px] h-[255px] lg:w-[400px] lg:h-[220px] absolute -right-24 lg:left-0  bg-black bg-opacity-80`}
                     >
                       <div className="py-1 px-2 flex gap-5 items-start">
-                        <div className="flex flex-wrap gap-3">
+                        <div ref={categoryRefSm} className="flex flex-wrap gap-3">
                           {TvGenres?.genres?.map((genre) => (
                             <div key={genre.id}>
                               <p
                                 onClick={() => (
+                                  handleShowCategorySm(),
                                   handleGetGenreId(genre?.id),
-                                  handleGetTvGenreName(genre?.name),
-                                  handleShow()
+                                  handleGetTvGenreName(genre?.name)
                                 )}
                                 className="text-sm w-[135px] cursor-pointer"
                               >

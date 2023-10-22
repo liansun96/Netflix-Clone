@@ -38,6 +38,18 @@ const ToggleProvider = ({ children }) => {
     setShowSort(!showSort);
   };
 
+  const categoryRef = useRef();
+  const [showCategory, setShowCategory] = useState(false);
+  const handleShowCategory = () => {
+    setShowCategory(!showCategory);
+  };
+  
+  const categoryRefSm = useRef();
+  const [showCategorySm, setShowCategorySm] = useState(false);
+  const handleShowCategorySm = () => {
+    setShowCategorySm(!showCategorySm);
+  };
+
   //Sidebar
   const [sBar, setSBar] = useState(false);
   const toggleSideBar = () => {
@@ -148,6 +160,14 @@ const ToggleProvider = ({ children }) => {
     setShowInput,
     handleInput,
     inputRef,
+    categoryRef,
+    showCategory,
+    setShowCategory,
+    handleShowCategory,
+    categoryRefSm,
+    showCategorySm,
+    setShowCategorySm,
+    handleShowCategorySm,
     languageRef,
     showLanguage,
     setShowLanguage,
