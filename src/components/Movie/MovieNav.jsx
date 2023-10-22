@@ -15,7 +15,7 @@ import Noti from "../Noti";
 
 const MovieNav = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
-  const [show, setShow] = useState(false);
+
   const [showMenu, setShowMenu] = useState(false);
   const [showSuggest, setShowSuggest] = useState(false);
   const {
@@ -30,6 +30,14 @@ const MovieNav = () => {
     setShowInput,
     handleInput,
     inputRef,
+    categoryRef,
+    showCategory,
+    setShowCategory,
+    handleShowCategory,
+    categoryRefSm,
+    showCategorySm,
+    setShowCategorySm,
+    handleShowCategorySm,
     grnreId,
     handleGetGenreId,
     genreName,
@@ -44,8 +52,6 @@ const MovieNav = () => {
 
   const navigate = useNavigate();
 
-  const categoryRef = useRef();
-
   const handleInputChange = (e) => {
     setSearch(e.target.value);
     navigate("/search");
@@ -53,10 +59,6 @@ const MovieNav = () => {
 
   const handleShowSuggest = () => {
     setShowSuggest(!showSuggest);
-  };
-
-  const handleShow = () => {
-    setShow(!show);
   };
 
   const handleShowMenuOpen = () => {
@@ -80,47 +82,28 @@ const MovieNav = () => {
   }, []);
 
   useEffect(() => {
-    let handler = (e) => {
+    const handleDocumentClick = (e) => {
       if (!inputRef.current.contains(e.target)) {
         setShowInput(false);
-        console.log(inputRef.current);
       }
-    };
-
-    document.addEventListener("mousedown", handler);
-
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  });
-
-  useEffect(() => {
-    let handler = (e) => {
       if (!inputRefSm.current.contains(e.target)) {
         setShowInputSm(false);
       }
-    };
-
-    document.addEventListener("mousedown", handler);
-
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  });
-
-  useEffect(() => {
-    let handler = (e) => {
       if (!categoryRef.current.contains(e.target)) {
-        setShow(false);
+        setShowCategory(false);
+      }
+      if (!categoryRefSm.current.contains(e.target)) {
+        setShowCategorySm(false);
       }
     };
-
-    document.addEventListener("mousedown", handler);
-
+  
+    document.addEventListener("mousedown", handleDocumentClick);
+  
     return () => {
-      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("mousedown", handleDocumentClick);
     };
-  });
+  }, [inputRef, inputRefSm, categoryRef, categoryRefSm, setShowInput, setShowInputSm, setShowCategory, setShowCategorySm]);
+  
 
   return (
     <div className="pb-0 lg:pb-5">
@@ -232,7 +215,7 @@ const MovieNav = () => {
                 <h1 className="text-3xl text-gray-50 font-semibold">Movies</h1>
                 <div ref={categoryRef} className="relative">
                   <button
-                    onClick={handleShow}
+                    onClick={handleShowCategory}
                     className="flex items-center gap-4 bg-black px-3 lg:px-2 lg:rounded-none text-sm border border-l rounded-full p-1 lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
                   >
                     {genreName}
@@ -242,7 +225,7 @@ const MovieNav = () => {
                   </button>
                   <div
                     className={`${
-                      show ? "opacity-100" : "opacity-0"
+                      showCategory ? "opacity-100" : "opacity-0"
                     } duration-300 w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
@@ -251,9 +234,9 @@ const MovieNav = () => {
                           <div key={genre.id}>
                             <p
                               onClick={() => (
+                                handleShowCategory(),
                                 handleGetGenreId(genre?.id),
-                                handleGetGenreName(genre?.name),
-                                handleShow()
+                                handleGetGenreName(genre?.name)
                               )}
                               className="text-sm w-[110px] cursor-pointer"
                             >
@@ -339,9 +322,9 @@ const MovieNav = () => {
                   <div className="flex items-center gap-2 lg:gap-4 px-3 h-6 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1">
                     Movies
                   </div>
-                  <div className="relative">
+                  <div ref={categoryRefSm} className="relative">
                     <button
-                      onClick={handleShow}
+                      onClick={handleShowCategorySm}
                       className="flex items-center gap-2 lg:gap-4 bg-[#556263] px-2 h-6 lg:rounded-none text-xs border border-l rounded-full lg:p-0 hover:bg-transparent hover:bg-opacity-50 mt-1"
                     >
                       {genreName}
@@ -351,18 +334,21 @@ const MovieNav = () => {
                     </button>
                     <div
                       className={`${
-                        show ? "block" : "hidden"
+                        showCategorySm ? "block" : "hidden"
                       } w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
                     >
                       <div className="py-1 px-2 flex gap-5 items-start">
-                        <div className="flex flex-wrap gap-3">
+                        <div
+                          ref={categoryRefSm}
+                          className="flex flex-wrap gap-3"
+                        >
                           {movieGenres?.genres?.map((genre) => (
                             <div key={genre.id}>
                               <p
                                 onClick={() => (
+                                  handleShowCategorySm(),
                                   handleGetGenreId(genre?.id),
-                                  handleGetGenreName(genre?.name),
-                                  handleShow()
+                                  handleGetGenreName(genre?.name)
                                 )}
                                 className="text-sm w-[110px] cursor-pointer"
                               >
