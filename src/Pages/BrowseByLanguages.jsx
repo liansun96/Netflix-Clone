@@ -23,6 +23,8 @@ import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineCheck } from "react-icons/hi2";
 import { addMovie, removeMovie } from "../redux/services/favoritMovieSlice";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const BrowseByLanguages = () => {
   const {
@@ -82,14 +84,14 @@ const BrowseByLanguages = () => {
       if (!languageRef.current.contains(e.target)) {
         setShowLanguage(false);
       }
-  
+
       if (!sortRef.current.contains(e.target)) {
         setShowSort(false);
       }
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
-  
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -130,7 +132,7 @@ const BrowseByLanguages = () => {
   //     if (key === 'title') {
   //       return a.title.localeCompare(b.title);
   //     } else if (key === 'release_date') {
-  
+
   //       return new Date(a.release_date) - new Date(b.release_date);
   //     } else if (key === 'popularity') {
   //       return b.popularity - a.popularity;
@@ -247,7 +249,7 @@ const BrowseByLanguages = () => {
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">
-            <div className="flex flex-wrap justify-between px-2 relative last:mr-auto">
+            <div className="flex flex-wrap justify-between px-2 relative">
               {sortedData?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -274,13 +276,13 @@ const BrowseByLanguages = () => {
                 return (
                   <div
                     key={result?.id}
-                    className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
+                    className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto xl:last:ms-8 2xl:last:ms-3"
                   >
-                    <div className="lg:hover:absolute hover:duration-300 lg:hover:scale-150 hover:delay-500 rounded-lg">
-                      <div className="group/item flex flex-col mb-5 lg:mb-20 3xl:mb-24 4xl:mb-28">
+                    <div className="lg:hover:absolute lg:hover:z-[1010] hover:duration-300 lg:hover:scale-150 hover:delay-500 rounded-lg ">
+                      <div className="group/item flex flex-col mb-5 lg:mb-20 3xl:mb-24 4xl:mb-28 lg:hover:custom-shodow-lg">
                         <div className="hidden lg:block">
                           {result?.backdrop_path == null ? (
-                            <img
+                            <LazyLoadImage
                               onClick={handelDetail}
                               src={
                                 "https://image.tmdb.org/t/p/w300" +
@@ -288,9 +290,13 @@ const BrowseByLanguages = () => {
                               }
                               className="object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
                               alt=""
+                              effect="blur"
+                              wrapperProps={{
+                                style: { transitionDelay: ".5s" },
+                              }}
                             />
                           ) : (
-                            <img
+                            <LazyLoadImage
                               onClick={handelDetail}
                               src={
                                 "https://image.tmdb.org/t/p/w300" +
@@ -298,10 +304,14 @@ const BrowseByLanguages = () => {
                               }
                               className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-500"
                               alt=""
+                              effect="blur"
+                              wrapperProps={{
+                                style: { transitionDelay: ".5s" },
+                              }}
                             />
                           )}
                         </div>
-                        <img
+                        <LazyLoadImage
                           onClick={handelDetail}
                           src={
                             "https://image.tmdb.org/t/p/w300" +
@@ -309,8 +319,12 @@ const BrowseByLanguages = () => {
                           }
                           className="block lg:hidden rounded object-cover object-top cursor-pointer"
                           alt=""
+                          effect="blur"
+                          wrapperProps={{
+                            style: { transitionDelay: ".5s" },
+                          }}
                         />
-                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full p-3 rounded group-hover/item:rounded-t-none bg-[#181818] h-[0px]">
+                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full p-3 rounded group-hover/item:rounded-t-none bg-[#242424] h-[0px]">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
                               <div className="flex items-center justify-start gap-1 lg:gap-2">

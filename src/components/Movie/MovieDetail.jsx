@@ -26,6 +26,7 @@ const MovieDetail = () => {
   // console.log(id);
   // console.log(data);
   // console.log(recData?.results);
+  console.log(video);
   const parentRef = useRef(null);
   // console.log(parentRef?.current?.offsetWidth);
 
