@@ -66,7 +66,7 @@ const Header = () => {
       <div className="absolute bottom-10">
         <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-40 pl-12 ">
           <LazyLoadImage
-            className="w-[350px]"
+            className="w-[300px]"
             src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
             effect="blur"
             wrapperProps={{

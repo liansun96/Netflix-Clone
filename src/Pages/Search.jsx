@@ -112,7 +112,7 @@ const Search = () => {
                                 result?.poster_path
                               }
                               className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
-                              alt=""
+                              alt="image"
                               effect="blur"
                               wrapperProps={{
                                 style: { transitionDelay: ".5s" },
@@ -126,7 +126,7 @@ const Search = () => {
                                 result?.backdrop_path
                               }
                               className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-500"
-                              alt=""
+                              alt="image"
                               effect="blur"
                               wrapperProps={{
                                 style: { transitionDelay: ".5s" },
@@ -141,7 +141,7 @@ const Search = () => {
                             result?.poster_path
                           }
                           className="block lg:hidden rounded object-cover object-top cursor-pointer"
-                          alt=""
+                          alt="image"
                           effect="blur"
                           wrapperProps={{
                             style: { transitionDelay: ".5s" },
@@ -218,13 +218,13 @@ const Search = () => {
               <div className="flex gap-4 mt-10">
                 <button
                   onClick={handlePrevPage}
-                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                  className="h-10 px-6 py-1 rounded-lg bg-[#C90912] text-white"
                 >
                   Prev
                 </button>
                 <button
                   onClick={handleNextPage}
-                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                  className="h-10 px-6 py-1 rounded-lg bg-[#C90912] text-white"
                 >
                   Next
                 </button>
