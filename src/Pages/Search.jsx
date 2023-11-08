@@ -14,6 +14,8 @@ import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
 import { addMovie, removeMovie } from "../redux/services/favoritMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 import LatestLoader from "../components/Loader/LatestLoader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Search = () => {
   const {
@@ -31,7 +33,7 @@ const Search = () => {
   } = useContext(ToggleContext);
 
   const { data, isLoading } = useGetSearchQuery({ search, page });
-  // console.log(data);
+  console.log(data);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
   // console.log(favMovies);
@@ -70,7 +72,7 @@ const Search = () => {
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">
-            <div className="flex flex-wrap justify-between px-2 relative lg:pt-11 lg:last:mr-auto">
+            <div className="flex flex-wrap justify-between px-2 relative lg:pt-11">
               {data?.results?.map((result, index) => {
                 const handelPlay = () => {
                   togglePlayMovieModal();
@@ -97,43 +99,55 @@ const Search = () => {
                 return (
                   <div
                     key={result?.id}
-                    className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto last:ms-3"
+                    className="w-[30%] xl:w-[210px] 2xl:w-[230px] 3xl:w-[300px] 4xl:w-[390px] last:mr-auto xl:last:ms-8 2xl:last:ms-3"
                   >
-                    <div className="lg:hover:absolute hover:duration-300 lg:hover:scale-150 hover:delay-500 rounded-lg">
+                    <div className="lg:hover:absolute lg:hover:z-[1010] hover:duration-300 lg:hover:scale-150 hover:delay-500 rounded-lg">
                       <div className="group/item flex flex-col mb-5 lg:mb-20 3xl:mb-24 4xl:mb-28">
                         <div className="hidden lg:block">
                           {result?.backdrop_path == null ? (
-                            <img
+                            <LazyLoadImage
                               onClick={handelDetail}
                               src={
                                 "https://image.tmdb.org/t/p/w300" +
                                 result?.poster_path
                               }
                               className="rounded object-cover object-top h-[124px] xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-300"
-                              alt=""
+                              alt="image"
+                              effect="blur"
+                              wrapperProps={{
+                                style: { transitionDelay: ".5s" },
+                              }}
                             />
                           ) : (
-                            <img
+                            <LazyLoadImage
                               onClick={handelDetail}
                               src={
                                 "https://image.tmdb.org/t/p/w300" +
                                 result?.backdrop_path
                               }
                               className="xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] rounded cursor-pointer group/edit group-hover/item:rounded-b-none group-hover/item:delay-300 group-hover/item:duration-500"
-                              alt=""
+                              alt="image"
+                              effect="blur"
+                              wrapperProps={{
+                                style: { transitionDelay: ".5s" },
+                              }}
                             />
                           )}
                         </div>
-                        <img
+                        <LazyLoadImage
                           onClick={handelDetail}
                           src={
                             "https://image.tmdb.org/t/p/w300" +
                             result?.poster_path
                           }
                           className="block lg:hidden rounded object-cover object-top cursor-pointer"
-                          alt=""
+                          alt="image"
+                          effect="blur"
+                          wrapperProps={{
+                            style: { transitionDelay: ".5s" },
+                          }}
                         />
-                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full group-hover/item:p-3 bg-[#181818] h-[0px] rounded group-hover/item:roudned-t-none">
+                        <div className="relative xl:w-[210px] 2xl:w-[230px] 3xl:w-[290px] 4xl:w-[390px] group/edit invisible lg:group-hover/item:visible lg:group-hover/item:delay-500 lg:group-hover/item:duration-500 lg:group-hover/item:h-full group-hover/item:p-3 bg-[#242424] h-[0px] rounded group-hover/item:roudned-t-none">
                           <div className="flex flex-col gap-3 items-start">
                             <div className="flex justify-between items-center w-full">
                               <div className="flex items-center justify-start gap-1 lg:gap-2">
@@ -200,21 +214,21 @@ const Search = () => {
                   </div>
                 );
               })}
+            </div>
               <div className="flex gap-4 mt-10">
                 <button
                   onClick={handlePrevPage}
-                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                  className="h-10 px-6 py-1 rounded-lg bg-[#C90912] text-white"
                 >
                   Prev
                 </button>
                 <button
                   onClick={handleNextPage}
-                  className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
+                  className="h-10 px-6 py-1 rounded-lg bg-[#C90912] text-white"
                 >
                   Next
                 </button>
               </div>
-            </div>
           </div>
         </div>
       )}

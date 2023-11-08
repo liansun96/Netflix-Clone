@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+
+  .headar-bg{
+    background-image: url(path_to_image);
+  }
+
   .home-bg {
     background-color: rgba(0, 0, 0, 0.8);
   }

@@ -22,9 +22,7 @@ const MyList = () => {
     tvModal,
     playTvModal,
     modal,
-    playMovieModal,
-    page,
-    handlePageNumber,
+    playMovieModal,    
   } = useContext(ToggleContext);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
@@ -42,8 +40,8 @@ const MyList = () => {
     <div className="bg-[#141414]">
       <LatestNav />
       <MobileBottomMenuBar />
-      <div className="hidden lg:block">
-        <div className="overflow-hidden lg:h-[260vh]">
+      {favMovies?.length ? (<div className="hidden lg:block">
+        <div className="overflow-hidden lg:min-h-[100vh]">
           <div className="w-[95%] mx-auto pt-24 pb-28">
             <div className="flex flex-wrap justify-start gap-3 lg:gap-7 last:mr-auto px-2 relative lg:pt-2">
               {favMovies?.map((result, index) => {
@@ -174,25 +172,15 @@ const MyList = () => {
                     </div>
                   </div>
                 );
-              })}
-              {/* <div className="flex gap-4 mt-10">
-                  <button
-                    onClick={handlePrevPage}
-                    className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
-                  >
-                    Prev
-                  </button>
-                  <button
-                    onClick={handleNextPage}
-                    className="h-10 px-6 py-1 rounded-lg bg-[#E50914] text-white"
-                  >
-                    Next
-                  </button>
-                </div> */}
+              })}              
             </div>
           </div>
         </div>
-      </div>     
+      </div>  ):(
+        <div className="h-screen flex justify-center items-center">
+          <h1 className="text-white text-3xl font-semibold">You don't have movie in your list!</h1>
+        </div>
+      )}   
       <Footer />
       {modal && <MovieDetail />}
       {playMovieModal && <PlayMovie />}

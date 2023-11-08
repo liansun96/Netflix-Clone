@@ -14,6 +14,8 @@ import TopRatedTv from "../components/Tv/TopRatedTv";
 import Loader from "../components/Loader/Loader";
 import MobileTvHeader from "../components/Tv/MobileTvHeader";
 import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const TvShows = () => {
   const {
@@ -59,53 +61,66 @@ const TvShows = () => {
 
   return (
     <div className="">
-      <TvNav />      
+      <TvNav />
       <div className="bg-gradient-to-b from-[#183439] via-[#110808] to-[#171818]">
         {isLoading ? (
           <Loader />
         ) : (
           <div className="overflow-hidden">
             <header
-              className="h-screen w-full hidden lg:block"
-              style={{
-                backgroundSize: "cover",
-                backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
-                backgroundPosition: "center center",
-              }}
+              className="h-screen w-full hidden lg:block relative"
+              // style={{
+              //   backgroundSize: "cover",
+              //   backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
+              //   backgroundPosition: "center center",
+              // }}
             >
-              <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-40 pl-12">
-                <img
-                  className="w-[350px]"
-                  src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[0]?.file_path}`}
-                  alt=""
-                />
-                <h1 className="w-[600px] text-gray-200 font-semibold">
-                  {movie?.overview?.length > 150
-                    ? movie?.overview?.slice(
-                        0,
-                        movie?.overview?.indexOf(".", 150) + 1
-                      )
-                    : movie?.overview}
-                </h1>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={handelPlay}
-                    className="flex items-center px-6 h-12 bg-slate-50 hover:bg-slate-200 duration-300 rounded text-lg text-black font-semibold custom-btn-bg"
-                  >
-                    <span className="">
-                      <BsPlayFill className="text-4xl" />
-                    </span>
-                    Play
-                  </button>
-                  <button
-                    onClick={handelDetail}
-                    className="flex items-center gap-2 px-6 h-12 bg-opacity-60 bg-gray-500 hover:bg-opacity-60 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold custom-btn-bg"
-                  >
-                    <span className="">
-                      <BiInfoCircle className="text-4xl" />
-                    </span>
-                    More Info
-                  </button>
+              <LazyLoadImage
+                className="h-screen w-full shadow-inner hidden lg:block"
+                src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+                effect="black-and-white"
+                wrapperProps={{
+                  style: { transitionDelay: ".5s" },
+                }}
+              />
+              <div className="absolute bottom-10">
+                <div className="flex flex-col gap-5 items-start justify-end w-full h-full pb-40 pl-12">
+                <LazyLoadImage
+                    className="w-[300px]"
+                    src={`https://www.themoviedb.org/t/p/original/${detailImage?.logos[1]?.file_path}`}
+                    effect="blur"
+                    wrapperProps={{
+                      style: { transitionDelay: ".5s" },
+                    }}
+                  />
+                  <h1 className="w-[600px] text-gray-200 font-semibold">
+                    {movie?.overview?.length > 150
+                      ? movie?.overview?.slice(
+                          0,
+                          movie?.overview?.indexOf(".", 150) + 1
+                        )
+                      : movie?.overview}
+                  </h1>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handelPlay}
+                      className="flex items-center px-6 h-12 bg-slate-50 hover:bg-slate-200 duration-300 rounded text-lg text-black font-semibold custom-btn-bg"
+                    >
+                      <span className="">
+                        <BsPlayFill className="text-4xl" />
+                      </span>
+                      Play
+                    </button>
+                    <button
+                      onClick={handelDetail}
+                      className="flex items-center gap-2 px-6 h-12 bg-opacity-60 bg-gray-500 hover:bg-opacity-60 hover:bg-gray-700 duration-300 rounded text-lg text-gray-100 font-semibold custom-btn-bg"
+                    >
+                      <span className="">
+                        <BiInfoCircle className="text-4xl" />
+                      </span>
+                      More Info
+                    </button>
+                  </div>
                 </div>
               </div>
             </header>
@@ -119,7 +134,7 @@ const TvShows = () => {
               </div>
             </div>
             <Footer />
-            <MobileBottomMenuBar/>
+            <MobileBottomMenuBar />
           </div>
         )}
         {tvModal && <TvDetail />}
