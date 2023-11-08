@@ -58,7 +58,7 @@ const Header = () => {
       <LazyLoadImage
         className="h-screen w-full shadow-inner hidden lg:block"
         src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-        effect="opacity"
+        effect="black-and-white"
         wrapperProps={{
           style: { transitionDelay: ".5s" },
         }}
