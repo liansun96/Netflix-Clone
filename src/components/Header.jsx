@@ -74,10 +74,10 @@ const Header = () => {
             }}
           />
           <h1 className="w-[600px] text-white drop-shadow-2xl font-semibold">
-            {movie?.overview?.length > 250
+            {movie?.overview?.length > 150
               ? movie?.overview?.slice(
                   0,
-                  movie?.overview?.indexOf(".", 250) + 1
+                  movie?.overview?.indexOf(".", 150) + 1
                 )
               : movie?.overview}
           </h1>

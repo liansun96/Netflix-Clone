@@ -236,7 +236,7 @@ const HomeNav = () => {
                     <div className="py-1 px-2 flex gap-5 items-start">
                       <div className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
-                          <div key={genre.id}>
+                          <div key={genre?.id}>
                             <p
                               onClick={() => (
                                 handleGetGenreId(genre?.id),

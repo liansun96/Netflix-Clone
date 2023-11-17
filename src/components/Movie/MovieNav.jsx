@@ -231,7 +231,7 @@ const MovieNav = () => {
                     <div className="py-1 px-2 flex gap-5 items-start">
                       <div ref={categoryRef} className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
-                          <div key={genre.id}>
+                          <div key={genre?.id}>
                             <p
                               onClick={() => (
                                 handleShowCategory(),
@@ -343,7 +343,7 @@ const MovieNav = () => {
                           className="flex flex-wrap gap-3"
                         >
                           {movieGenres?.genres?.map((genre) => (
-                            <div key={genre.id}>
+                            <div key={genre?.id}>
                               <p
                                 onClick={() => (
                                   handleShowCategorySm(),
