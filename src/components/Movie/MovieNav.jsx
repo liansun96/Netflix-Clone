@@ -225,7 +225,7 @@ const MovieNav = () => {
                   </button>
                   <div
                     className={`${
-                      showCategory ? "opacity-100" : "opacity-0"
+                      showCategory ? "block" : "hidden"
                     } duration-300 w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">

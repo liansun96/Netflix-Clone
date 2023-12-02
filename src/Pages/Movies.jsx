@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import {
   useGetMovieImageQuery,
-  useGetMovieQuery,
-  useGetTvQuery,
+  useGetMovieQuery,  
 } from "../redux/api/movieApi";
 import { BsPlayFill } from "react-icons/bs";
 import { BiInfoCircle } from "react-icons/bi";
@@ -18,7 +17,6 @@ import PlayMovie from "../components/Movie/PlayMovie";
 import Loader from "../components/Loader/Loader";
 import MobileMovieHeader from "../components/Movie/MobileMovieHeader";
 import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
-import TopRated from "../components/Home/TopRated";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -132,7 +130,7 @@ const Movies = () => {
                 <Movie />
                 <PopularMovie />
                 <NowPlayingMovie />
-                <TopRated />
+                <TopRatedMovie />
               </div>
             </div>
             <Footer />
