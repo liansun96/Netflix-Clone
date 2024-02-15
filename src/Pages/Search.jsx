@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LatestLoader from "../components/Loader/LatestLoader";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import useDebounce from "../hooks/useDebounce";
 
 const Search = () => {
   const {
@@ -38,6 +39,9 @@ const Search = () => {
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
   // console.log(favMovies);
   const dispatch = useDispatch();
+
+  const debouncedSearchValue = useDebounce(search, 5000)
+  console.log(debouncedSearchValue);
 
   useEffect(() => {
     setShowInput(true);
@@ -68,7 +72,7 @@ const Search = () => {
     <div className="bg-[#141414] min-h-screen">
       <LatestNav />
       {isLoading ? (
-        <LatestLoader />
+        <Loader />
       ) : (
         <div className="overflow-hidden">
           <div className="w-[95%] mx-auto pt-24 pb-28">

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import {
+  useGetMovieByIdQuery,
   useGetMovieImageQuery,
-  useGetMovieQuery,  
 } from "../redux/api/movieApi";
 import { BsPlayFill } from "react-icons/bs";
 import { BiInfoCircle } from "react-icons/bi";
@@ -27,10 +27,10 @@ const Movies = () => {
     toggleModal,
     playMovieModal,
     togglePlayMovieModal,
-    genreId,
+    movieGenreId,
   } = useContext(ToggleContext);
   const [movie, setMovie] = useState([]);
-  const { data } = useGetMovieQuery({ genreId });
+  const { data } = useGetMovieByIdQuery({ movieGenreId });
   console.log(data?.results);
 
   const movieId = movie?.id;

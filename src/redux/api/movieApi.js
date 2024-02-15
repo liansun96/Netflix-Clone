@@ -7,22 +7,27 @@ export const movieApi = createApi({
   tagTypes: ["movieApi"],
   endpoints: (builder) => ({
     getMovie: builder.query({
-      query: ({genreId}) =>
-        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
+      query: () =>
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1`,
+      providesTags: ["movieApi"],
+    }),
+    getMovieById: builder.query({
+      query: ({ movieGenreId }) =>
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${movieGenreId}`,
       providesTags: ["movieApi"],
     }),
     getMovieByCountry: builder.query({
-      query: ({iosName}) =>
+      query: ({ iosName }) =>
         `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&primary_release_year=2022&with_original_language=${iosName}`,
       providesTags: ["movieApi"],
     }),
     getMovieByCountryTwo: builder.query({
-      query: ({iosName}) =>
+      query: ({ iosName }) =>
         `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&primary_release_year=2022&with_original_language=${iosName}`,
       providesTags: ["movieApi"],
     }),
     getMovieByCountryThree: builder.query({
-      query: ({iosName}) =>
+      query: ({ iosName }) =>
         `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&primary_release_year=2022&with_original_language=${iosName}`,
       providesTags: ["movieApi"],
     }),
@@ -31,57 +36,61 @@ export const movieApi = createApi({
       providesTags: ["movieApi"],
     }),
     getTv: builder.query({
-      query: ({genreId}) =>
-        `/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=5&with_genres=${genreId}`,
+      query: () =>
+        `/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1`,
+      providesTags: ["movieApi"],
+    }),
+    getTvById: builder.query({
+      query: ({ tvGenreId }) =>
+        `/discover/tv?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${tvGenreId}`,
       providesTags: ["movieApi"],
     }),
     getTvGenres: builder.query({
-      query: () =>
-        "genre/tv/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
+      query: () => "genre/tv/list?api_key=7fe0fbe72550cf27a1a5a738cabda3db",
       providesTags: ["movieApi"],
     }),
     getNowPlaying: builder.query({
-      query: ({genreId}) =>
-        `/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
+      query: ({ movieGenreId }) =>
+        `/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${movieGenreId}`,
       providesTags: ["movieApi"],
     }),
     getNowPlayingTwo: builder.query({
-      query: ({genreId}) =>
-        `/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${genreId}`,
+      query: ({ movieGenreId }) =>
+        `/movie/now_playing?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${movieGenreId}`,
       providesTags: ["movieApi"],
     }),
     getNowPlayingTv: builder.query({
-      query: ({genreId}) =>
+      query: ({ genreId }) =>
         `/tv/on_the_air?api_key=7fe0fbe72550cf27a1a5a738cabda3db&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getPopular: builder.query({
-      query: ({genreId}) =>
-        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
+      query: ({ movieGenreId }) =>
+        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${movieGenreId}`,
       providesTags: ["movieApi"],
     }),
     getPopularTwo: builder.query({
-      query: ({genreId}) =>
-        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${genreId}`,
+      query: ({ movieGenreId }) =>
+        `/movie/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${movieGenreId}`,
       providesTags: ["movieApi"],
     }),
     getPopularTv: builder.query({
-      query: ({genreId}) =>
+      query: ({ genreId }) =>
         `/tv/popular?api_key=7fe0fbe72550cf27a1a5a738cabda3db&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
     getTopRated: builder.query({
-      query: ({genreId}) =>
-        `/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${genreId}`,
+      query: ({ movieGenreId }) =>
+        `/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=1&with_genres=${movieGenreId}`,
       providesTags: ["movieApi"],
     }),
     getTopRatedTwo: builder.query({
-      query: ({genreId}) =>
-        `/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${genreId}`,
+      query: ({ movieGenreId }) =>
+        `/movie/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&page=2&with_genres=${movieGenreId}`,
       providesTags: ["movieApi"],
     }),
     getTopRatedTv: builder.query({
-      query: ({genreId}) =>
+      query: ({ genreId }) =>
         `/tv/top_rated?api_key=7fe0fbe72550cf27a1a5a738cabda3db&with_genres=${genreId}`,
       providesTags: ["movieApi"],
     }),
@@ -145,32 +154,38 @@ export const movieApi = createApi({
         `tv/${id}/similar?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
       providesTags: ["movieApi"],
     }),
-    getSearch : builder.query({
-      query: ({search,page}) => `/search/multi?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_adult=false&page=${page}&query=${search}}`,
-      providesTags: ["movieApi"]
-    }),
-    getGenreSearch : builder.query({
-      query: ({id}) => `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&sort_by=release_date.desc&page=1&with_genres=${id}`,
+    getSearch: builder.query({
+      query: ({ search, page }) =>
+        `/search/multi?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&include_adult=false&page=${page}&query=${search}}`,
       providesTags: ["movieApi"],
     }),
-    getLanguage : builder.query({
-      query: () => `/configuration/languages?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
-      providesTags: ["movieApi"]
+    getGenreSearch: builder.query({
+      query: ({ id }) =>
+        `/discover/movie?api_key=7fe0fbe72550cf27a1a5a738cabda3db&language=en-US&sort_by=release_date.desc&page=1&with_genres=${id}`,
+      providesTags: ["movieApi"],
     }),
-    getCountry : builder.query({
-      query: () => `/configuration/countries?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
-      providesTags: ["movieApi"]
+    getLanguage: builder.query({
+      query: () =>
+        `/configuration/languages?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"],
+    }),
+    getCountry: builder.query({
+      query: () =>
+        `/configuration/countries?api_key=7fe0fbe72550cf27a1a5a738cabda3db`,
+      providesTags: ["movieApi"],
     }),
   }),
 });
 
 export const {
   useGetMovieQuery,
+  useGetMovieByIdQuery,
   useGetMovieByCountryQuery,
   useGetMovieByCountryTwoQuery,
   useGetMovieByCountryThreeQuery,
   useGetMovieGenresQuery,
   useGetTvQuery,
+  useGetTvByIdQuery,
   useGetTvGenresQuery,
   useGetNowPlayingQuery,
   useGetNowPlayingTvQuery,

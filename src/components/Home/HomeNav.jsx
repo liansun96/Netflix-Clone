@@ -15,7 +15,7 @@ const HomeNav = () => {
     showInputSm,
     setShowInputSm,
     handleInputSm,
-    inputRef,     
+    inputRef,
     setSearch,
     showInput,
     setShowInput,
@@ -30,12 +30,35 @@ const HomeNav = () => {
 
   const { data: movieGenres } = useGetMovieGenresQuery();
 
-  const navigate = useNavigate();  
-  
-  const handleInputChange = (e) => {
+  const navigate = useNavigate();
+
+   const handleInputChange = (e) => {
     setSearch(e.target.value);
+    inputRef.current.focus();
     navigate("/search");
   };
+
+  // const myDebounce = (cb, d) => {
+  //   let timer;
+
+  //   return function (...args) {
+  //     if (timer) clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       cb(...args);
+  //     }, d);
+  //   };
+  // };
+
+  // const debounceSearch = myDebounce((searchValue) => {
+  //   setSearch(searchValue);
+  // },700);
+  
+  // const handleInputChange = (e) => {
+  //   let searchValue = e.target.value;
+  //   debounceSearch(searchValue);
+  //   inputRef.current.focus();
+  //   navigate("/search");
+  // };
 
   useEffect(() => {
     // When the component mounts, focus the input element
@@ -142,7 +165,7 @@ const HomeNav = () => {
                 </div>
               </div>
             </div>
-            <div className="block lg:hidden">              
+            <div className="block lg:hidden">
               <div
                 className={`flex gap-1 items-center rounded ${
                   showInputSm && "border px-2"

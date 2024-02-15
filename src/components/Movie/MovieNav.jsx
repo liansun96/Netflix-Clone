@@ -38,8 +38,8 @@ const MovieNav = () => {
     showCategorySm,
     setShowCategorySm,
     handleShowCategorySm,
-    grnreId,
-    handleGetGenreId,
+    movieGenreId,
+    handleGetMovieGenreId,
     genreName,
     handleGetGenreName,
     noti,
@@ -48,7 +48,7 @@ const MovieNav = () => {
 
   const { data: movieGenres } = useGetMovieGenresQuery();
   console.log(movieGenres?.genres);
-  // console.log(grnreId);
+  console.log(movieGenreId);
 
   const navigate = useNavigate();
 
@@ -233,10 +233,11 @@ const MovieNav = () => {
                         {movieGenres?.genres?.map((genre) => (
                           <div key={genre?.id}>
                             <p
-                              onClick={() => (
+                              onClick={(e) => (
                                 handleShowCategory(),
-                                handleGetGenreId(genre?.id),
-                                handleGetGenreName(genre?.name)
+                                handleGetMovieGenreId(genre?.id),
+                                handleGetGenreName(genre?.name),
+                                console.log(genre?.id)
                               )}
                               className="text-sm w-[110px] cursor-pointer"
                             >
@@ -347,7 +348,7 @@ const MovieNav = () => {
                               <p
                                 onClick={() => (
                                   handleShowCategorySm(),
-                                  handleGetGenreId(genre?.id),
+                                  handleGetMovieGenreId(genre?.id),
                                   handleGetGenreName(genre?.name)
                                 )}
                                 className="text-sm w-[110px] cursor-pointer"

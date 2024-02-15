@@ -37,7 +37,7 @@ const TvNav = () => {
     showCategorySm,
     setShowCategorySm,
     handleShowCategorySm,
-    handleGetGenreId,
+    handleGetTvGenreId,
     tvGenreName,
     handleGetTvGenreName,
   } = useContext(ToggleContext);
@@ -232,7 +232,7 @@ const TvNav = () => {
                             <p
                               onClick={() => (
                                 handleShowCategory(),
-                                handleGetGenreId(genre?.id),
+                                handleGetTvGenreId(genre?.id),
                                 handleGetTvGenreName(genre?.name)
                               )}
                               className="text-sm w-[135px] cursor-pointer"
@@ -341,7 +341,7 @@ const TvNav = () => {
                               <p
                                 onClick={() => (
                                   handleShowCategorySm(),
-                                  handleGetGenreId(genre?.id),
+                                  handleGetTvGenreId(genre?.id),
                                   handleGetTvGenreName(genre?.name)
                                 )}
                                 className="text-sm w-[135px] cursor-pointer"
