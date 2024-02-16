@@ -43,7 +43,7 @@ const TvNav = () => {
   } = useContext(ToggleContext);
 
   const { data: TvGenres } = useGetTvGenresQuery();
-  console.log(TvGenres?.genres);
+  // console.log(TvGenres?.genres);
 
   const navigate = useNavigate(); 
 

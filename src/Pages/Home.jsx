@@ -25,7 +25,7 @@ import TopRated from "../components/Home/TopRated";
 const Home = () => {
   const nav = useNavigate();
 
-  const { token, tvModal, playTvModal, modal, playMovieModal, genreId } =
+  const { token, tvModal, playTvModal, modal, playMovieModal, movieGenreId } =
     useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);

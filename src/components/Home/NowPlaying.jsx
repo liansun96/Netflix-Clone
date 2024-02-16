@@ -50,7 +50,7 @@ const NowPlaying = () => {
         <div className="flex items-center lg:items-end justify-between w-full">
           <div className="flex items-center gap-1  group/exp cursor-pointer">
             <h1 className="text-lg lg:text-xl font-semibold text-gray-50">
-              Now Playing
+              Now xPlaying
             </h1>
             <div className="flex items-center lg:mt-1.5">
               <div className="opacity-0 group-hover/exp:opacity-100 duration-300 group-hover/exp:delay-200">
