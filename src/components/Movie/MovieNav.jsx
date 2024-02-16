@@ -38,8 +38,8 @@ const MovieNav = () => {
     showCategorySm,
     setShowCategorySm,
     handleShowCategorySm,
-    grnreId,
-    handleGetGenreId,
+    movieGenreId,
+    handleGetMovieGenreId,
     genreName,
     handleGetGenreName,
     noti,
@@ -48,7 +48,7 @@ const MovieNav = () => {
 
   const { data: movieGenres } = useGetMovieGenresQuery();
   console.log(movieGenres?.genres);
-  // console.log(grnreId);
+  console.log(movieGenreId);
 
   const navigate = useNavigate();
 
@@ -225,18 +225,19 @@ const MovieNav = () => {
                   </button>
                   <div
                     className={`${
-                      showCategory ? "opacity-100" : "opacity-0"
+                      showCategory ? "block" : "hidden"
                     } duration-300 w-[260px] h-[320px] lg:w-[400px] lg:h-[220px] absolute -right-16 lg:left-0  bg-black bg-opacity-80 `}
                   >
                     <div className="py-1 px-2 flex gap-5 items-start">
                       <div ref={categoryRef} className="flex flex-wrap gap-3">
                         {movieGenres?.genres?.map((genre) => (
-                          <div key={genre.id}>
+                          <div key={genre?.id}>
                             <p
-                              onClick={() => (
+                              onClick={(e) => (
                                 handleShowCategory(),
-                                handleGetGenreId(genre?.id),
-                                handleGetGenreName(genre?.name)
+                                handleGetMovieGenreId(genre?.id),
+                                handleGetGenreName(genre?.name),
+                                console.log(genre?.id)
                               )}
                               className="text-sm w-[110px] cursor-pointer"
                             >
@@ -343,11 +344,11 @@ const MovieNav = () => {
                           className="flex flex-wrap gap-3"
                         >
                           {movieGenres?.genres?.map((genre) => (
-                            <div key={genre.id}>
+                            <div key={genre?.id}>
                               <p
                                 onClick={() => (
                                   handleShowCategorySm(),
-                                  handleGetGenreId(genre?.id),
+                                  handleGetMovieGenreId(genre?.id),
                                   handleGetGenreName(genre?.name)
                                 )}
                                 className="text-sm w-[110px] cursor-pointer"

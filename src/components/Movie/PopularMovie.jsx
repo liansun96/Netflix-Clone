@@ -9,17 +9,17 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetPopularTwoQuery } from "../../redux/api/movieApi";
+import { useGetPopularQuery, useGetPopularTwoQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
 import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const PopularMovie = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, movieGenreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetPopularTwoQuery({ genreId });
+  const { data } = useGetPopularQuery({ movieGenreId });
   // console.log(data?.results);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
@@ -107,6 +107,8 @@ const PopularMovie = () => {
                     }
                   };
 
+                  const match = result?.vote_average * 10
+
                   return (
                     <div key={result?.id} className="w-[120px] lg:w-[220px]">
                       <div>
@@ -186,7 +188,7 @@ const PopularMovie = () => {
                                   {result?.title}
                                 </h1>
                                 <h1 className="text-[10px] text-green-500 font-semibold">
-                                  {result?.vote_average * 10}% Match
+                                  {match.toFixed(0)} % Match
                                 </h1>
                               </div>
                             </div>

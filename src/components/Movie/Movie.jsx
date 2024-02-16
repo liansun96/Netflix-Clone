@@ -9,7 +9,7 @@ import {
   MdOutlineArrowBackIos,
 } from "react-icons/md";
 import { BsPlayFill, BsHandThumbsUp, BsChevronDown } from "react-icons/bs";
-import { useGetMovieQuery } from "../../redux/api/movieApi";
+import { useGetMovieByIdQuery, useGetMovieQuery } from "../../redux/api/movieApi";
 import { RiArrowDropRightLine } from "react-icons/ri";
 import MovieDetail from "./MovieDetail";
 import { ToggleContext } from "../../Context/ToggleProvider";
@@ -17,10 +17,10 @@ import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Movie = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, movieGenreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetMovieQuery({ genreId });
+  const { data } = useGetMovieByIdQuery({ movieGenreId });
   // console.log(data?.results);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);

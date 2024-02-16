@@ -9,7 +9,7 @@ const ToggleProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [token, setToken] = useState(false);
   const [movieShow, setMovieShow] = useState(false);
-  const [tvShow, setTvShow] = useState(false);  
+  const [tvShow, setTvShow] = useState(false);
   const [noti, setNoti] = useState(false);
 
   const inputRefSm = useRef();
@@ -43,7 +43,7 @@ const ToggleProvider = ({ children }) => {
   const handleShowCategory = () => {
     setShowCategory(!showCategory);
   };
-  
+
   const categoryRefSm = useRef();
   const [showCategorySm, setShowCategorySm] = useState(false);
   const handleShowCategorySm = () => {
@@ -98,11 +98,11 @@ const ToggleProvider = ({ children }) => {
     setClickedId(id);
   };
 
-  //Get Genres Id
-  const [genreId, setGenreId] = useState(null);
-  const handleGetGenreId = (genreId) => {
+  //Get Movie Genres Id
+  const [movieGenreId, setMovieGenreId] = useState(878);
+  const handleGetMovieGenreId = (movieGenreId) => {
     // Set the clicked ID in the state
-    setGenreId(genreId);
+    setMovieGenreId(movieGenreId);
   };
 
   //Get Genres Name
@@ -110,6 +110,13 @@ const ToggleProvider = ({ children }) => {
   const handleGetGenreName = (genreName) => {
     // Set the clicked ID in the state
     setGenreName(genreName);
+  };
+
+  //Get Tv Genres Id
+  const [tvGenreId, setTvGenreId] = useState(10759);
+  const handleGetTvGenreId = (tvGenreId) => {
+    // Set the clicked ID in the state
+    setTvGenreId(tvGenreId);
   };
 
   //Get Genres Name
@@ -184,10 +191,12 @@ const ToggleProvider = ({ children }) => {
     togglePlayMovieModal,
     playTvModal,
     togglePlayTvModal,
-    genreId,
-    handleGetGenreId,
+    movieGenreId,
+    handleGetMovieGenreId,
     genreName,
     handleGetGenreName,
+    tvGenreId,
+    handleGetTvGenreId,
     tvGenreName,
     handleGetTvGenreName,
     id,
@@ -210,7 +219,7 @@ const ToggleProvider = ({ children }) => {
     handleNextPage,
     handlePrevPage,
     noti,
-    setNoti,    
+    setNoti,
   };
 
   return (

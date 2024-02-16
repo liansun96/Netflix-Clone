@@ -16,10 +16,10 @@ import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Popular = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, movieGenreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetPopularQuery({ genreId });
+  const { data } = useGetPopularQuery({ movieGenreId });
   // console.log(data?.results);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);

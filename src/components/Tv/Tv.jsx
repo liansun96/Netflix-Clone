@@ -2,7 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useContext, useState } from "react";
-import { HiOutlinePlus ,HiOutlineCheck } from "react-icons/hi";
+import { HiOutlinePlus, HiOutlineCheck } from "react-icons/hi";
 import { VscTriangleDown } from "react-icons/vsc";
 import {
   MdOutlineArrowForwardIos,
@@ -22,10 +22,10 @@ const Tv = () => {
     toggleTvModal,
     playTvModal,
     togglePlayTvModal,
-    genreId,
+    tvGenreId,
   } = useContext(ToggleContext);
 
-  const { data } = useGetTvQuery({ genreId });
+  const { data } = useGetTvQuery({ tvGenreId });
   // console.log(data?.results);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
@@ -102,7 +102,7 @@ const Tv = () => {
                   const isMovieInList = favMovies?.find(
                     (m) => m.id === result?.id
                   );
-                   
+
                   const handleAddFav = () => {
                     if (isMovieInList) {
                       dispatch(removeMovie(result));
@@ -134,67 +134,67 @@ const Tv = () => {
                             alt=""
                           />
                           <div className="relative group/edit invisible group-hover/item:visible group-hover/item:rounded-b group-hover/item:delay-500 group-hover/item:duration-500 group-hover/item:h-full lg:group-hover/item:p-3 bg-[#181818] h-[0px]">
-                          <div className="flex flex-col gap-1 lg:gap-3 items-start">
-                            <div className="flex justify-between items-center w-full scale-90 mt-2 lg:scale-100">
-                              <div className="flex items-center justify-start gap-1 lg:gap-2">
+                            <div className="flex flex-col gap-1 lg:gap-3 items-start">
+                              <div className="flex justify-between items-center w-full scale-90 mt-2 lg:scale-100">
+                                <div className="flex items-center justify-start gap-1 lg:gap-2">
+                                  <button
+                                    onClick={handelPlay}
+                                    className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300"
+                                  >
+                                    <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
+                                  </button>
+                                  <button
+                                    onClick={() => handleAddFav(result)}
+                                    className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
+                                  >
+                                    {isMovieInList ? (
+                                      <HiOutlineCheck className="text-sm text-gray-200" />
+                                    ) : (
+                                      <HiOutlinePlus className="text-sm text-gray-200" />
+                                    )}
+                                    {isMovieInList ? (
+                                      <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                        <p className="text-xs font-semibold">
+                                          Remove from List
+                                        </p>
+                                        <VscTriangleDown className="text-white text-2xl translate-x-[36px] -translate-y-2 absolute" />
+                                      </div>
+                                    ) : (
+                                      <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                        <p className="text-xs font-semibold">
+                                          Add to My List
+                                        </p>
+                                        <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
+                                      </div>
+                                    )}
+                                  </button>
+                                  <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
+                                    <BsHandThumbsUp className="text-sm text-gray-200" />
+                                  </button>
+                                </div>
                                 <button
-                                  onClick={handelPlay}
-                                  className="flex items-center justify-center h-[25px] w-[25px] rounded-full bg-white hover:bg-gray-200 hover:duration-300"
+                                  onClick={handelDetail}
+                                  className="lg:self-end group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
                                 >
-                                  <BsPlayFill className="text-xl text-gray-700 ms-0.5" />
-                                </button>
-                                <button
-                                  onClick={() => handleAddFav(result)}
-                                  className="group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
-                                >
-                                  {isMovieInList ? (
-                                    <HiOutlineCheck className="text-sm text-gray-200" />
-                                  ) : (
-                                    <HiOutlinePlus className="text-sm text-gray-200" />
-                                  )}
-                                  {isMovieInList ? (
-                                    <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-                                      <p className="text-xs font-semibold">
-                                        Remove from List
-                                      </p>
-                                      <VscTriangleDown className="text-white text-2xl translate-x-[36px] -translate-y-2 absolute" />
-                                    </div>
-                                  ) : (
-                                    <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-                                      <p className="text-xs font-semibold">
-                                        Add to My List
-                                      </p>
-                                      <VscTriangleDown className="text-white text-2xl translate-x-[28px] -translate-y-2 absolute" />
-                                    </div>
-                                  )}
-                                </button>
-                                <button className="flex items-center justify-center h-[24px] w-[24px] rounded-full bg-transparent ring-1 ring-gray-400 hover:ring-white hover:duration-300">
-                                  <BsHandThumbsUp className="text-sm text-gray-200" />
+                                  <BsChevronDown className="text-sm text-gray-200" />
+                                  <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
+                                    <p className="text-xs font-semibold">
+                                      More info
+                                    </p>
+                                    <VscTriangleDown className="text-white text-2xl translate-x-[15px] -translate-y-2 absolute" />
+                                  </div>
                                 </button>
                               </div>
-                              <button
-                                onClick={handelDetail}
-                                className="lg:self-end group/my-list flex items-center justify-center h-[25px] w-[25px] rounded-full bg-transparent ring-1 ring-gray-400 relative hover:ring-white hover:duration-300 group/edit cursor-pointer"
-                              >
-                                <BsChevronDown className="text-sm text-gray-200" />
-                                <div className="invisible group-hover/my-list:visible absolute -top-[37px] z-[1008] w-max px-2 py-1 bg-white rounded text-cneter">
-                                  <p className="text-xs font-semibold">
-                                    More info
-                                  </p>
-                                  <VscTriangleDown className="text-white text-2xl translate-x-[15px] -translate-y-2 absolute" />
-                                </div>
-                              </button>
-                            </div>
-                            <div className="p-2 lg:p-0">
-                              <h1 className="text-xs text-white mb-2">
-                                {result?.title}
-                              </h1>
-                              <h1 className="text-[10px] text-green-500 font-semibold">
-                                {result?.vote_average * 10}% Match
-                              </h1>
+                              <div className="p-2 lg:p-0">
+                                <h1 className="text-xs text-white mb-2">
+                                  {result?.title}
+                                </h1>
+                                <h1 className="text-[10px] text-green-500 font-semibold">
+                                  {result?.vote_average * 10}% Match
+                                </h1>
+                              </div>
                             </div>
                           </div>
-                        </div>
                         </div>
                       </div>
                     </div>

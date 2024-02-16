@@ -14,10 +14,10 @@ import { RiArrowDropRightLine } from "react-icons/ri";
 import { ToggleContext } from "../../Context/ToggleProvider";
 
 const TopRatedMovie = () => {
-  const { handleGetId, toggleModal, togglePlayMovieModal, genreId } =
+  const { handleGetId, toggleModal, togglePlayMovieModal, movieGenreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetTopRatedQuery({ genreId });
+  const { data } = useGetTopRatedQuery({ movieGenreId });
   console.log(data?.results);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -80,6 +80,8 @@ const TopRatedMovie = () => {
                     toggleModal();
                     handleGetId(result?.id);
                   };
+                  const match = result?.vote_average * 10
+
                   return (
                     <div key={result?.id} className="w-[120px] lg:w-[220px]">
                       <div>
@@ -143,7 +145,7 @@ const TopRatedMovie = () => {
                                   {result?.title}
                                 </h1>
                                 <h1 className="text-[10px] text-green-500 font-semibold">
-                                  {result?.vote_average * 10}% Match
+                                  {match.toFixed(0)}% Match
                                 </h1>
                               </div>
                             </div>
@@ -181,6 +183,7 @@ const TopRatedMovie = () => {
                   toggleModal();
                   handleGetId(result?.id);
                 };
+                
                 return (
                   <SwiperSlide key={result?.id} className="w-[120px]">
                     <div>

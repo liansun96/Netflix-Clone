@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
-import { useGetTvImageQuery, useGetTvQuery } from "../redux/api/movieApi";
+import { useGetTvByIdQuery, useGetTvImageQuery, useGetTvQuery } from "../redux/api/movieApi";
 import { BsPlayFill } from "react-icons/bs";
 import { BiInfoCircle } from "react-icons/bi";
-import Tv from "../components/Tv/Tv";
 import { ToggleContext } from "../Context/ToggleProvider";
 import TvDetail from "../components/Tv/TvDetail";
 import PlayTv from "../components/Tv/PlayTv";
 import TvNav from "../components/Tv/TvNav";
-import PopularTv from "../components/Tv/PopularTv";
+import Tv from "../components/Tv/Tv";
 import NowPlayingTv from "../components/Tv/NowPlayingTv";
 import TopRatedTv from "../components/Tv/TopRatedTv";
+import PopularTv from "../components/Tv/PopularTv";
 import Loader from "../components/Loader/Loader";
 import MobileTvHeader from "../components/Tv/MobileTvHeader";
 import MobileBottomMenuBar from "../components/SideBar/MobileBottomMenuBar";
@@ -19,7 +19,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 const TvShows = () => {
   const {
-    genreId,
+    tvGenreId,
     handleGetId,
     tvModal,
     toggleTvModal,
@@ -28,7 +28,7 @@ const TvShows = () => {
   } = useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
-  const { data } = useGetTvQuery({ genreId });
+  const { data } = useGetTvByIdQuery({ tvGenreId });
   console.log(data?.results);
 
   const movieId = movie?.id;
@@ -40,8 +40,8 @@ const TvShows = () => {
     setMovie(
       data?.results[Math.floor(Math.random() * data?.results?.length - 1)]
     );
-  }, [genreId]);
-  console.log(Math.floor(Math.random() * data?.results?.length));
+  }, [data]);
+  // console.log(Math.floor(Math.random() * data?.results?.length));
 
   const handelPlay = () => {
     togglePlayTvModal();

@@ -26,17 +26,9 @@ const MovieDetail = () => {
   // console.log(id);
   // console.log(data);
   // console.log(recData?.results);
-  console.log(video);
+  // console.log(video);
   const parentRef = useRef(null);
   // console.log(parentRef?.current?.offsetWidth);
-
-  useEffect(() => {
-    // Access the parent div's width after the component has mounted
-    if (parentRef.current) {
-      const parentWidth = parentRef.current.offsetWidth;
-      // console.log('Parent div width:', parentWidth);
-    }
-  }, []);
 
   const lastRoom = video?.results[video?.results?.length - 1]?.key;
 
@@ -60,10 +52,8 @@ const MovieDetail = () => {
     },
   };
 
-  const castLength = data?.credits?.cast.length - 1;
-  // console.log(castLength);
   const castNameSm = [];
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i < 5; i++) {
     if (data?.credits?.cast) {
       castNameSm.push(data?.credits?.cast[`${i}`]?.name);
     } else {
@@ -71,81 +61,29 @@ const MovieDetail = () => {
     }
   }
 
-  const castName = [];
-  for (let i = 0; i <= castLength; i++) {
-    if (data?.credits?.cast) {
-      castName.push(data?.credits?.cast[`${i}`]?.name);
-    } else {
-      break;
-    }
-  }
+  const castName = data?.credits?.cast?.map((cast) => cast.name) || [];
   // console.log(castName);
 
-  const genresLength = data?.genres.length - 1;
-  const genresName = [];
-  for (let i = 0; i <= genresLength; i++) {
-    if (data?.genres) {
-      genresName.push(data?.genres[`${i}`]?.name);
-    } else {
-      break;
-    }
-  }
+  const genresName = data?.genres?.map((genre) => genre.name) || [];
   // console.log(genresName);
 
-  const crewLength = data?.credits?.crew.length - 1;
-  // console.log(crewLength);
-  const crewName = [];
-  for (let i = 0; i <= crewLength; i++) {
-    if (data?.credits?.crew) {
-      crewName.push(data?.credits?.crew[`${i}`]?.name);
-    } else {
-      break;
-    }
-  }
+  const crewName = data?.credits?.crew?.map((crew) => crew.name) || [];
   // console.log(crewName);
 
-  const productionLength = data?.production_companies?.length - 1;
-  // console.log(productionLength);
-  const productionName = [];
-  for (let i = 0; i <= productionLength; i++) {
-    if (data?.production_companies) {
-      productionName.push(data?.production_companies[`${i}`]?.name);
-    } else {
-      break;
-    }
-  }
-  // console.log(productionName);
+  const productionCompanyName =
+    data?.production_companies?.map((company) => company.name) || [];
+  // console.log(productionCompanyName);
 
-  const countryLength = data?.production_countries?.length - 1;
-  // console.log(countryLength);
-  const countryName = [];
-  for (let i = 0; i <= countryLength; i++) {
-    if (data?.production_countries) {
-      countryName.push(data?.production_countries[`${i}`]?.name);
-    } else {
-      break;
-    }
-  }
-  // console.log(countryName);
+  const productionCountryName =
+    data?.production_countries?.map((country) => country.name) || [];
+  // console.log(productionCountryName);
 
-  const languageLength = data?.spoken_languages?.length - 1;
-  // console.log(languageLength);
-  const languageName = [];
-  for (let i = 0; i <= languageLength; i++) {
-    if (data?.spoken_languages) {
-      languageName.push(data?.spoken_languages[`${i}`]?.name);
-    } else {
-      break;
-    }
-  }
-  const languageEngName = [];
-  for (let i = 0; i <= languageLength; i++) {
-    if (data?.spoken_languages) {
-      languageEngName.push(data?.spoken_languages[`${i}`]?.english_name);
-    } else {
-      break;
-    }
-  }
+  const languageName =
+    data?.spoken_languages?.map((language) => language.name) || [];
+  // console.log(languageName);
+
+  const languageEngName =
+    data?.spoken_languages?.map((language) => language.english_name) || [];
   // console.log(languageEngName);
 
   const scrollToRef = (ref) => {
@@ -173,7 +111,7 @@ const MovieDetail = () => {
   };
 
   const isMovieInList = favMovies?.find((m) => m.id === data?.id);
-  console.log(isMovieInList);
+  // console.log(isMovieInList);
 
   return (
     <div
@@ -452,12 +390,12 @@ const MovieDetail = () => {
             <span className="text-sm font-semibold text-[#747474]">
               Production Companies :
             </span>
-            {productionName.map((name, index) => (
+            {productionCompanyName.map((name, index) => (
               <>
                 <p key={index} className="inline text-sm text-white">
                   {name}
                 </p>
-                {index !== productionName.length - 1 && (
+                {index !== productionCompanyName.length - 1 && (
                   <span className="text-white">, </span>
                 )}
               </>
@@ -467,12 +405,12 @@ const MovieDetail = () => {
             <span className="text-sm font-semibold text-[#747474]">
               Production Countries :
             </span>
-            {countryName.map((name, index) => (
+            {productionCountryName.map((name, index) => (
               <>
                 <p key={index} className="inline text-sm text-white">
                   {name}
                 </p>
-                {index !== countryName.length - 1 && (
+                {index !== productionCountryName.length - 1 && (
                   <span className="text-white">, </span>
                 )}
               </>

@@ -21,10 +21,10 @@ const NowPlayingTv = () => {
     tvModal,
     toggleTvModal, 
     togglePlayTvModal,   
-    genreId,
+    tvGenreId,
   } = useContext(ToggleContext);
 
-  const { data } = useGetNowPlayingTvQuery({ genreId });
+  const { data } = useGetNowPlayingTvQuery({ tvGenreId });
   // console.log(data?.results);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);

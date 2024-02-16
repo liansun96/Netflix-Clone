@@ -37,13 +37,13 @@ const TvNav = () => {
     showCategorySm,
     setShowCategorySm,
     handleShowCategorySm,
-    handleGetGenreId,
+    handleGetTvGenreId,
     tvGenreName,
     handleGetTvGenreName,
   } = useContext(ToggleContext);
 
   const { data: TvGenres } = useGetTvGenresQuery();
-  console.log(TvGenres?.genres);
+  // console.log(TvGenres?.genres);
 
   const navigate = useNavigate(); 
 
@@ -228,11 +228,11 @@ const TvNav = () => {
                     <div className="py-1 px-2 flex gap-5 items-start">
                       <div ref={categoryRef} className="flex flex-wrap gap-3">
                         {TvGenres?.genres?.map((genre) => (
-                          <div key={genre.id}>
+                          <div key={genre?.id}>
                             <p
                               onClick={() => (
                                 handleShowCategory(),
-                                handleGetGenreId(genre?.id),
+                                handleGetTvGenreId(genre?.id),
                                 handleGetTvGenreName(genre?.name)
                               )}
                               className="text-sm w-[135px] cursor-pointer"
@@ -337,11 +337,11 @@ const TvNav = () => {
                       <div className="py-1 px-2 flex gap-5 items-start">
                         <div ref={categoryRefSm} className="flex flex-wrap gap-3">
                           {TvGenres?.genres?.map((genre) => (
-                            <div key={genre.id}>
+                            <div key={genre?.id}>
                               <p
                                 onClick={() => (
                                   handleShowCategorySm(),
-                                  handleGetGenreId(genre?.id),
+                                  handleGetTvGenreId(genre?.id),
                                   handleGetTvGenreName(genre?.name)
                                 )}
                                 className="text-sm w-[135px] cursor-pointer"
