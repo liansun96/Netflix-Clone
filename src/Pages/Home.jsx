@@ -25,12 +25,12 @@ import TopRated from "../components/Home/TopRated";
 const Home = () => {
   const nav = useNavigate();
 
-  const { token, tvModal, playTvModal, modal, playMovieModal, genreId } =
+  const { token, tvModal, playTvModal, modal, playMovieModal, movieGenreId } =
     useContext(ToggleContext);
 
   const [movie, setMovie] = useState([]);
 
-  const { data, isLoading } = useGetMovieQuery({ genreId });
+  const { data, isLoading } = useGetMovieQuery();
   console.log(data?.results);
 
   useEffect(() => {

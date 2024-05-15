@@ -17,10 +17,10 @@ import { addMovie, removeMovie } from "../../redux/services/favoritMovieSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const NowPlayingMovie = () => {
-  const { handleGetId, modal, toggleModal, togglePlayMovieModal, genreId } =
+  const { handleGetId, modal, toggleModal, togglePlayMovieModal, movieGenreId } =
     useContext(ToggleContext);
 
-  const { data } = useGetNowPlayingTwoQuery({ genreId });
+  const { data } = useGetNowPlayingTwoQuery({ movieGenreId });
   // console.log(data?.results);
 
   const favMovies = useSelector((state) => state.favoriteMovieSlice.favMovies);
@@ -107,6 +107,8 @@ const NowPlayingMovie = () => {
                     }
                   };
 
+                  const match = result?.vote_average * 10
+
                   return (
                     <div key={result?.id} className="w-[120px] lg:w-[220px]">
                       <div>
@@ -186,7 +188,7 @@ const NowPlayingMovie = () => {
                                   {result?.title}
                                 </h1>
                                 <h1 className="text-[10px] text-green-500 font-semibold">
-                                  {result?.vote_average * 10}% Match
+                                  {match.toFixed(0)}% Match
                                 </h1>
                               </div>
                             </div>

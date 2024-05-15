@@ -30,6 +30,27 @@ const LatestNav = () => {
     navigate("/search");
   };
 
+  // const myDebounce = (cb, d) => {
+  //   let timer;
+
+  //   return function (...args) {
+  //     if (timer) clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       cb(...args);
+  //     }, d);
+  //   };
+  // };
+
+  // const debounceSearch = myDebounce((searchValue) => {
+  //   setSearch(searchValue);
+  //   navigate("/search");
+  // }, 700);
+
+  // const handleInputChange = (e) => {
+  //   const searchValue = e.target.value;
+  //   debounceSearch(searchValue);
+  // };
+
   useEffect(() => {
     const scrollFunc = () => {
       setScrollHeight(parseInt(window.scrollY));
@@ -45,7 +66,7 @@ const LatestNav = () => {
   useEffect(() => {
     let handler = (e) => {
       if (!inputRef.current.contains(e.target)) {
-        setShowInput(false);        
+        setShowInput(false);
       }
     };
 
