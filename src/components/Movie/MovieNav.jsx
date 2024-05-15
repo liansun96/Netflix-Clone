@@ -43,7 +43,7 @@ const MovieNav = () => {
     genreName,
     handleGetGenreName,
     noti,
-    setNoti,
+    setNoti,set
   } = useContext(ToggleContext);
 
   const { data: movieGenres } = useGetMovieGenresQuery();

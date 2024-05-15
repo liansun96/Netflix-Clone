@@ -23,7 +23,7 @@ const MovieDetail = () => {
   const { data } = useGetMovieDetailQuery({ id });
   const { data: recData } = useGetDetailRecommendationsQuery({ id });
   const { data: video } = useGetDetailVideoQuery({ id });
-  // console.log(id);
+  // console.log(id); 
   // console.log(data);
   // console.log(recData?.results);
   const parentRef = useRef(null);
